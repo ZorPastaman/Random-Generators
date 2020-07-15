@@ -1,0 +1,20 @@
+# Changelog
+
+All notable changes to this package will be documented in this file.
+
+The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
+and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+### Added
+- Random generators infrastructure.
+- Random generator providers infrastructure.
+- Bates distribution.
+- Box-Muller distribution.
+- Irwin-Hall distribution.
+- Marsaglia distribution.
+- Unity random generator wrapper.
+- Weighted distribution.
+
+[unreleased]: https://github.com/ZorPastaman/Random-Generators

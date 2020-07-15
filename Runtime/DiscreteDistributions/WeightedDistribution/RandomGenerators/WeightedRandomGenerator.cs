@@ -1,0 +1,51 @@
+// Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
+
+using JetBrains.Annotations;
+
+namespace Zor.RandomGenerators.DiscreteDistributions
+{
+	/// <summary>
+	/// Weighted random generator using <see cref="WeightedDistribution.Generate(uint[],uint,int)"/>.
+	/// </summary>
+	/// <typeparam name="T">Value type.</typeparam>
+	public sealed class WeightedRandomGenerator<T> : IWeightedRandomGenerator<T>
+	{
+		private readonly T[] m_values;
+		private readonly uint[] m_weights;
+		private readonly uint m_sum;
+		private readonly int m_count;
+
+		/// <summary>
+		/// Creates a new <see cref="WeightedRandomGenerator{T}"/> with the specified parameters.
+		/// </summary>
+		/// <remarks>
+		/// Counts of <paramref name="values"/> and <paramref name="weights"/> must be the same.
+		/// </remarks>
+		public WeightedRandomGenerator([NotNull] T[] values, [NotNull] uint[] weights)
+		{
+			m_values = values;
+			m_weights = weights;
+			m_count = weights.Length;
+			m_sum = WeightedDistribution.ComputeSum(weights, m_count);
+		}
+
+		public int weightsCount => m_count;
+
+		public uint GetWeight(int index)
+		{
+			return m_weights[index];
+		}
+
+		public T GetValue(int index)
+		{
+			return m_values[index];
+		}
+
+		/// <inheritdoc/>
+		public T Generate()
+		{
+			int index = WeightedDistribution.Generate(m_weights, m_sum, m_count);
+			return m_values[index];
+		}
+	}
+}

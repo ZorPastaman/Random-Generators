@@ -1,0 +1,16 @@
+{
+    "name": "Zor.RandomGenerators.Tests",
+    "references": [
+        "Zor.RandomGenerators"
+    ],
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
+}

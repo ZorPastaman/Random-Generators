@@ -1,0 +1,17 @@
+{
+  "name": "com.zor.random-generators",
+  "version": "0.1.0",
+  "displayName": "Random Generators",
+  "description": "A collection of random generators and distributions.",
+  "unity": "2018.4",
+  "keywords": [
+    "random",
+    "generator",
+    "distribution"
+  ],
+  "author": {
+    "name": "Vladimir Popov",
+    "email": "zor1994@gmail.com",
+    "url": "https://github.com/ZorPastaman"
+  }
+}

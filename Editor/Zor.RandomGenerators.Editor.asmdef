@@ -1,0 +1,16 @@
+{
+    "name": "Zor.RandomGenerators.Editor",
+    "references": [
+        "Zor.RandomGenerators"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
+}

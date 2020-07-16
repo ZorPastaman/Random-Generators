@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 {
+	/// <summary>
+	/// Provides <see cref="MarsagliaRandomGeneratorRandomGeneratorDependentSimple{IContinuousRandomGenerator}"/>.
+	/// </summary>
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.MarsagliaDistributionFolder + "Marsaglia Random Generator Random Generator Depended Simple Provider",
 		fileName = "Marsaglia Random Generator Random Generator Depended Simple Provider",
@@ -18,10 +21,20 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		private MarsagliaRandomGeneratorRandomGeneratorDependentSimple<IContinuousRandomGenerator>
 			m_sharedRandomGenerator;
 
+		/// <summary>
+		/// Creates a new
+		/// <see cref="MarsagliaRandomGeneratorRandomGeneratorDependentSimple{IContinuousRandomGenerator}"/>
+		/// and returns it as <see cref="IContinuousRandomGenerator"/>.
+		/// </summary>
 		public override IContinuousRandomGenerator randomGenerator =>
 			new MarsagliaRandomGeneratorRandomGeneratorDependentSimple<IContinuousRandomGenerator>(
 				m_DependedRandomGenerator.randomGenerator);
 
+		/// <summary>
+		/// Returns a shared
+		/// <see cref="MarsagliaRandomGeneratorRandomGeneratorDependentSimple{IContinuousRandomGenerator}"/>
+		/// as <see cref="IContinuousRandomGenerator"/>.
+		/// </summary>
 		public override IContinuousRandomGenerator sharedRandomGenerator
 		{
 			get
@@ -35,11 +48,20 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 			}
 		}
 
+		/// <summary>
+		/// Creates a new
+		/// <see cref="MarsagliaRandomGeneratorRandomGeneratorDependentSimple{IContinuousRandomGenerator}"/>
+		/// and returns it.
+		/// </summary>
 		public MarsagliaRandomGeneratorRandomGeneratorDependentSimple<IContinuousRandomGenerator>
 			marsagliaRandomGenerator =>
 			new MarsagliaRandomGeneratorRandomGeneratorDependentSimple<IContinuousRandomGenerator>(
 				m_DependedRandomGenerator.randomGenerator);
 
+		/// <summary>
+		/// Returns a shared
+		/// <see cref="MarsagliaRandomGeneratorRandomGeneratorDependentSimple{IContinuousRandomGenerator}"/>.
+		/// </summary>
 		public MarsagliaRandomGeneratorRandomGeneratorDependentSimple<IContinuousRandomGenerator>
 			sharedMarsagliaRandomGenerator
 		{

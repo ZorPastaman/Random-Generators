@@ -4,6 +4,9 @@ using System;
 
 namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 {
+	/// <summary>
+	/// Marsaglia Random Generator using <see cref="MarsagliaDistribution.Generate()"/>.
+	/// </summary>
 	[Serializable]
 	public sealed class MarsagliaRandomGeneratorSimple : IMarsagliaRandomGenerator
 	{
@@ -14,6 +17,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 
 		public float deviation => MarsagliaDistribution.DefaultDeviation;
 
+		/// <inheritdoc/>
 		public float Generate()
 		{
 			if (m_hasSpared)

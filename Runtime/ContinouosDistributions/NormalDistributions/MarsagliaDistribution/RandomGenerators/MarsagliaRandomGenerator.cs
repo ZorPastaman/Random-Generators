@@ -6,6 +6,9 @@ using UnityEngine;
 
 namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 {
+	/// <summary>
+	/// Marsaglia Random Generator using <see cref="MarsagliaDistribution.Generate(float,float)"/>.
+	/// </summary>
 	[Serializable]
 	public sealed class MarsagliaRandomGenerator : IMarsagliaRandomGenerator
 	{
@@ -17,16 +20,25 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		private float m_spared;
 		private bool m_hasSpared;
 
+		/// <summary>
+		/// Creates a <see cref="MarsagliaRandomGenerator"/> with the default parameters.
+		/// </summary>
 		public MarsagliaRandomGenerator()
 		{
 		}
 
+		/// <summary>
+		/// Creates a <see cref="MarsagliaRandomGenerator"/> with the specified parameters.
+		/// </summary>
 		public MarsagliaRandomGenerator(float mean, float deviation)
 		{
 			m_Mean = mean;
 			m_Deviation = deviation;
 		}
 
+		/// <summary>
+		/// Copy constructor.
+		/// </summary>
 		public MarsagliaRandomGenerator([NotNull] MarsagliaRandomGenerator other)
 		{
 			m_Mean = other.m_Mean;
@@ -53,6 +65,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 			}
 		}
 
+		/// <inheritdoc/>
 		public float Generate()
 		{
 			if (m_hasSpared)

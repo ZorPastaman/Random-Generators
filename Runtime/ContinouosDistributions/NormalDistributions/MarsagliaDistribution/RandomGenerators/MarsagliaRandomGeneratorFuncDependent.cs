@@ -5,6 +5,9 @@ using JetBrains.Annotations;
 
 namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 {
+	/// <summary>
+	/// Marsaglia Random Generator using <see cref="MarsagliaDistribution.Generate(Func{float},float,float)"/>.
+	/// </summary>
 	public sealed class MarsagliaRandomGeneratorFuncDependent : IMarsagliaRandomGenerator
 	{
 		[NotNull] private Func<float> m_iidFunc;
@@ -14,6 +17,12 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		private float m_spared;
 		private bool m_hasSpared;
 
+		/// <summary>
+		/// Creates a <see cref="MarsagliaRandomGeneratorFuncDependent"/> with the specified parameters.
+		/// </summary>
+		/// <param name="iidFunc">
+		/// Function that returns independent and identically distributed random variable in range [0, 1].
+		/// </param>
 		public MarsagliaRandomGeneratorFuncDependent([NotNull] Func<float> iidFunc, float mean, float deviation)
 		{
 			m_iidFunc = iidFunc;
@@ -21,6 +30,9 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 			m_deviation = deviation;
 		}
 
+		/// <summary>
+		/// Copy constructor.
+		/// </summary>
 		public MarsagliaRandomGeneratorFuncDependent([NotNull] MarsagliaRandomGeneratorFuncDependent other)
 		{
 			m_iidFunc = other.m_iidFunc;
@@ -28,6 +40,9 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 			m_deviation = other.m_deviation;
 		}
 
+		/// <summary>
+		/// Function that returns independent and identically distributed random variable in range [0, 1].
+		/// </summary>
 		[NotNull]
 		public Func<float> iidFunc
 		{
@@ -59,6 +74,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 			}
 		}
 
+		/// <inheritdoc/>
 		public float Generate()
 		{
 			if (m_hasSpared)

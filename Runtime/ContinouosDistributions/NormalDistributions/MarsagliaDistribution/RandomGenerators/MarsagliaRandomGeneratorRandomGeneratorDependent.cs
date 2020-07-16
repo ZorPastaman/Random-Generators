@@ -4,6 +4,9 @@ using JetBrains.Annotations;
 
 namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 {
+	/// <summary>
+	/// Marsaglia Random Generator using <see cref="MarsagliaDistribution.Generate{T}(T,float,float)"/>.
+	/// </summary>
 	public sealed class MarsagliaRandomGeneratorRandomGeneratorDependent<T> : IMarsagliaRandomGenerator
 		where T : IContinuousRandomGenerator
 	{
@@ -14,6 +17,12 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		private float m_spared;
 		private bool m_hasSpared;
 
+		/// <summary>
+		/// Creates a <see cref="MarsagliaRandomGeneratorRandomGeneratorDependent{T}"/> with the specified parameters.
+		/// </summary>
+		/// <param name="dependedRandomGenerator">
+		/// Random generator that returns independent and identically distributed random variable in range [0, 1].
+		/// </param>
 		public MarsagliaRandomGeneratorRandomGeneratorDependent([NotNull] T dependedRandomGenerator,
 			float mean, float deviation)
 		{
@@ -22,6 +31,9 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 			m_deviation = deviation;
 		}
 
+		/// <summary>
+		/// Copy constructor.
+		/// </summary>
 		public MarsagliaRandomGeneratorRandomGeneratorDependent(
 			[NotNull] MarsagliaRandomGeneratorRandomGeneratorDependent<T> other)
 		{
@@ -30,6 +42,9 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 			m_deviation = other.m_deviation;
 		}
 
+		/// <summary>
+		/// Random generator that returns independent and identically distributed random variable in range [0, 1].
+		/// </summary>
 		[NotNull]
 		public T dependedRandomGenerator
 		{
@@ -61,6 +76,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 			}
 		}
 
+		/// <inheritdoc/>
 		public float Generate()
 		{
 			if (m_hasSpared)

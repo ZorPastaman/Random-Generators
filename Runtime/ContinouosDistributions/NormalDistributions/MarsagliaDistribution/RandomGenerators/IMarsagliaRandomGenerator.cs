@@ -2,6 +2,9 @@
 
 namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 {
+	/// <summary>
+	/// A <see cref="IContinuousRandomGenerator"/> using functions from <see cref="MarsagliaDistribution"/>.
+	/// </summary>
 	public interface IMarsagliaRandomGenerator : IContinuousRandomGenerator
 	{
 		float mean { get; }

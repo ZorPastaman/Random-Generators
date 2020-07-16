@@ -6,7 +6,7 @@ namespace Zor.RandomGenerators
 	{
 		public const string RandomGeneratorProvidersFolder = "Random Generator Providers/";
 
-		public const string ContinuousDistributionsFolder = RandomGeneratorProvidersFolder + "Continous Distributions/";
+		public const string ContinuousDistributionsFolder = RandomGeneratorProvidersFolder + "Continuous Distributions/";
 
 		public const string NormalDistributionsFolder = ContinuousDistributionsFolder + "Normal Distributions/";
 		public const string BatesDistributionFolder = NormalDistributionsFolder + "Bates Distribution/";

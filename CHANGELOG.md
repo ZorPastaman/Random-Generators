@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Random generators infrastructure.
 - Random generator providers infrastructure.
+- Acceptance-Rejection distribution.
 - Bates distribution.
 - Box-Muller distribution.
 - Irwin-Hall distribution.

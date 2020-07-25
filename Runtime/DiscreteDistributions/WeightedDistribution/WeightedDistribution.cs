@@ -34,6 +34,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="sum">Sum of weights in <paramref name="weights"/>.</param>
 		/// <param name="count">Count of <paramref name="weights"/>.</param>
 		/// <returns>Index of a gotten value from <paramref name="weights"/>.</returns>
+		/// <remarks>
+		/// <paramref name="count"/> must be greater than 0.
+		/// </remarks>
 		[Pure]
 		public static int Generate([NotNull] uint[] weights, uint sum, int count)
 		{
@@ -63,6 +66,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="sum">Sum of weights in <paramref name="weights"/>.</param>
 		/// <param name="count">Count of <paramref name="weights"/>.</param>
 		/// <returns>Index of a gotten value from <paramref name="weights"/>.</returns>
+		/// <remarks>
+		/// <paramref name="count"/> must be greater than 0.
+		/// </remarks>
 		[Pure]
 		public static int Generate([NotNull] Func<float> iidFunc, [NotNull] uint[] weights, uint sum, int count)
 		{
@@ -93,6 +99,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="sum">Sum of weights in <paramref name="weights"/>.</param>
 		/// <param name="count">Count of <paramref name="weights"/>.</param>
 		/// <returns>Index of a gotten value from <paramref name="weights"/>.</returns>
+		/// <remarks>
+		/// <paramref name="count"/> must be greater than 0.
+		/// </remarks>
 		[Pure]
 		public static int Generate<T>([NotNull] T iidGenerator, [NotNull] uint[] weights, uint sum, int count)
 			where T : IContinuousRandomGenerator
@@ -127,23 +136,22 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="count">Count of <paramref name="weights"/>.</param>
 		/// <param name="iid">Iid in range [0, 1].</param>
 		/// <returns>Index of popped value.</returns>
+		/// <remarks>
+		/// <paramref name="count"/> must be greater than 0.
+		/// </remarks>
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		private static int Pop([NotNull] uint[] weights, uint sum, int count, float iid)
 		{
 			uint random = (uint)(iid * sum);
 			sum = 0;
+			int i = 0;
 
-			for (int i = 0; i < count; ++i)
+			for (; i < count && sum <= random; ++i)
 			{
 				sum += weights[i];
-
-				if (sum > random)
-				{
-					return i;
-				}
 			}
 
-			return count - 1;
+			return i - 1;
 		}
 	}
 }

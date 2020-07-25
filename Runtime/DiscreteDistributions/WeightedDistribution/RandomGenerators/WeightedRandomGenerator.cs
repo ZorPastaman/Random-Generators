@@ -19,7 +19,8 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// Creates a new <see cref="WeightedRandomGenerator{T}"/> with the specified parameters.
 		/// </summary>
 		/// <remarks>
-		/// Counts of <paramref name="values"/> and <paramref name="weights"/> must be the same.
+		/// Counts of <paramref name="values"/> and <paramref name="weights"/> must be the same
+		/// and greater than 0.
 		/// </remarks>
 		public WeightedRandomGenerator([NotNull] T[] values, [NotNull] uint[] weights)
 		{

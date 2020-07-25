@@ -15,7 +15,7 @@ namespace Zor.RandomGenerators.Tests
 #pragma warning disable CS0649
 		[SerializeField, RequireDiscreteRandomGenerator(typeof(int))]
 		private DiscreteRandomGeneratorProviderReference m_GeneratorProviderReference;
-		[SerializeField] private uint m_GenerationsPerFrame;
+		[SerializeField] private uint m_GenerationsPerFrame = 100;
 		[SerializeField] private List<ResultEntry> m_Results = new List<ResultEntry>();
 		[SerializeField] private uint m_PerformanceTestsCount = 10000;
 #pragma warning restore CS0649
@@ -32,7 +32,7 @@ namespace Zor.RandomGenerators.Tests
 				m_randomGenerator.Generate();
 			}
 			stopWatch.Stop();
-			Debug.Log($"[ContinuousDistributionTest] Performance test. Ticks: {stopWatch.ElapsedTicks}, Milliseconds: {stopWatch.ElapsedMilliseconds}");
+			Debug.Log($"[DiscreteDistributionTest] Performance test. Ticks: {stopWatch.ElapsedTicks}, Milliseconds: {stopWatch.ElapsedMilliseconds}");
 		}
 
 		private void Update()

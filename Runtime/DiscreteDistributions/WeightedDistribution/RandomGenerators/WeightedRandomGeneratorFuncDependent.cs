@@ -24,7 +24,8 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// Function that returns independent and identically distributed random variable in range [0, 1].
 		/// </param>
 		/// <remarks>
-		/// Counts of <paramref name="values"/> and <paramref name="weights"/> must be the same.
+		/// Counts of <paramref name="values"/> and <paramref name="weights"/> must be the same
+		/// and greater than 0.
 		/// </remarks>
 		public WeightedRandomGeneratorFuncDependent([NotNull] Func<float> iidFunc,
 			[NotNull] T[] values, [NotNull] uint[] weights)

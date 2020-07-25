@@ -40,6 +40,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		[NotNull]
 		public T dependedRandomGenerator
 		{
+			[Pure]
 			get => m_dependedRandomGenerator;
 			set
 			{
@@ -48,11 +49,20 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 			}
 		}
 
-		public float mean => MarsagliaDistribution.DefaultMean;
+		public float mean
+		{
+			[Pure]
+			get => MarsagliaDistribution.DefaultMean;
+		}
 
-		public float deviation => MarsagliaDistribution.DefaultDeviation;
+		public float deviation
+		{
+			[Pure]
+			get => MarsagliaDistribution.DefaultDeviation;
+		}
 
 		/// <inheritdoc/>
+		[Pure]
 		public float Generate()
 		{
 			if (m_hasSpared)

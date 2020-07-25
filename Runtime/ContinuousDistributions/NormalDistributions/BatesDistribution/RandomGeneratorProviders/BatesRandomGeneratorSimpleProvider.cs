@@ -23,24 +23,39 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// Creates a new <see cref="BatesRandomGeneratorSimple"/> and returns it
 		/// as <see cref="IContinuousRandomGenerator"/>.
 		/// </summary>
-		public override IContinuousRandomGenerator randomGenerator =>
-			new BatesRandomGeneratorSimple(m_BatesRandomGenerator);
+		public override IContinuousRandomGenerator randomGenerator
+		{
+			[Pure]
+			get => new BatesRandomGeneratorSimple(m_BatesRandomGenerator);
+		}
 
 		/// <summary>
 		/// Returns a shared <see cref="BatesRandomGeneratorSimple"/> as <see cref="IContinuousRandomGenerator"/>.
 		/// </summary>
-		public override IContinuousRandomGenerator sharedRandomGenerator => m_BatesRandomGenerator;
+		public override IContinuousRandomGenerator sharedRandomGenerator
+		{
+			[Pure]
+			get => m_BatesRandomGenerator;
+		}
 
 		/// <summary>
 		/// Creates a new <see cref="BatesRandomGeneratorSimple"/> and returns it.
 		/// </summary>
 		[NotNull]
-		public BatesRandomGeneratorSimple batesRandomGenerator => new BatesRandomGeneratorSimple(m_BatesRandomGenerator);
+		public BatesRandomGeneratorSimple batesRandomGenerator
+		{
+			[Pure]
+			get => new BatesRandomGeneratorSimple(m_BatesRandomGenerator);
+		}
 
 		/// <summary>
 		/// Returns a shared <see cref="BatesRandomGeneratorSimple"/>.
 		/// </summary>
 		[NotNull]
-		public BatesRandomGeneratorSimple sharedBatesRandomGenerator => m_BatesRandomGenerator;
+		public BatesRandomGeneratorSimple sharedBatesRandomGenerator
+		{
+			[Pure]
+			get => m_BatesRandomGenerator;
+		}
 	}
 }

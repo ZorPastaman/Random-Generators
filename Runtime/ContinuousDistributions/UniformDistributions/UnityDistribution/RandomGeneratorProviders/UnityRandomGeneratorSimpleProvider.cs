@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Zor.RandomGenerators.ContinuousDistributions.UniformDistributions
@@ -22,21 +23,39 @@ namespace Zor.RandomGenerators.ContinuousDistributions.UniformDistributions
 		/// Creates a new <see cref="UnityRandomGeneratorSimple"/> and returns it
 		/// as <see cref="IContinuousRandomGenerator"/>.
 		/// </summary>
-		public override IContinuousRandomGenerator randomGenerator => new UnityRandomGeneratorSimple();
+		public override IContinuousRandomGenerator randomGenerator
+		{
+			[Pure]
+			get => new UnityRandomGeneratorSimple();
+		}
 
 		/// <summary>
 		/// Returns a shared <see cref="UnityRandomGeneratorSimple"/> as <see cref="IContinuousRandomGenerator"/>.
 		/// </summary>
-		public override IContinuousRandomGenerator sharedRandomGenerator => m_UnityRandomGenerator;
+		public override IContinuousRandomGenerator sharedRandomGenerator
+		{
+			[Pure]
+			get => m_UnityRandomGenerator;
+		}
 
 		/// <summary>
 		/// Creates a new <see cref="UnityRandomGeneratorSimple"/> and returns it.
 		/// </summary>
-		public UnityRandomGeneratorSimple unityRandomGenerator => new UnityRandomGeneratorSimple();
+		[NotNull]
+		public UnityRandomGeneratorSimple unityRandomGenerator
+		{
+			[Pure]
+			get => new UnityRandomGeneratorSimple();
+		}
 
 		/// <summary>
 		/// Returns a shared <see cref="UnityRandomGeneratorSimple"/>.
 		/// </summary>
-		public UnityRandomGeneratorSimple sharedUnityRandomGenerator => m_UnityRandomGenerator;
+		[NotNull]
+		public UnityRandomGeneratorSimple sharedUnityRandomGenerator
+		{
+			[Pure]
+			get => m_UnityRandomGenerator;
+		}
 	}
 }

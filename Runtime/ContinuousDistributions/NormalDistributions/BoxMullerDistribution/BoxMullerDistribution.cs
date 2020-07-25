@@ -26,6 +26,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// <returns>
 		/// Two generated values.
 		/// </returns>
+		[Pure]
 		public static (float, float) Generate()
 		{
 			float u1;
@@ -45,6 +46,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// <returns>
 		/// Two generated values.
 		/// </returns>
+		[Pure]
 		public static (float, float) Generate(float mean, float deviation)
 		{
 			(float z0, float z1) = Generate();
@@ -58,6 +60,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// <returns>
 		/// Two generated values.
 		/// </returns>
+		[Pure]
 		public static (float, float) Generate([NotNull] Func<float> iidFunc)
 		{
 			float u1;
@@ -78,6 +81,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// <returns>
 		/// Two generated values.
 		/// </returns>
+		[Pure]
 		public static (float, float) Generate([NotNull] Func<float> iidFunc, float mean, float deviation)
 		{
 			(float z0, float z1) = Generate(iidFunc);
@@ -91,6 +95,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// <returns>
 		/// Two generated values.
 		/// </returns>
+		[Pure]
 		public static (float, float) Generate<T>([NotNull] T iidGenerator)
 			where T : IContinuousRandomGenerator
 		{
@@ -112,6 +117,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// <returns>
 		/// Two generated values.
 		/// </returns>
+		[Pure]
 		public static (float, float) Generate<T>([NotNull] T iidGenerator, float mean, float deviation)
 			where T : IContinuousRandomGenerator
 		{
@@ -127,7 +133,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// <returns>
 		/// Two generated values.
 		/// </returns>
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		private static (float, float) Compute(float u1, float u2)
 		{
 			float sqrt = Mathf.Sqrt(-2f * Mathf.Log(u1));
@@ -147,7 +153,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// <returns>
 		/// Two modified generated values.
 		/// </returns>
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		private static (float, float) Modify(float z0, float z1, float mean, float deviation)
 		{
 			return (z0 * deviation + mean, z1 * deviation + mean);

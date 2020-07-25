@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
@@ -26,9 +27,13 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// Creates a new <see cref="BoxMullerRandomGeneratorRandomGeneratorDependent{IContinuousRandomGenerator}"/>
 		/// and returns it as <see cref="IContinuousRandomGenerator"/>.
 		/// </summary>
-		public override IContinuousRandomGenerator randomGenerator =>
-			new BoxMullerRandomGeneratorRandomGeneratorDependent<IContinuousRandomGenerator>(
-				m_DependedRandomGeneratorProvider.randomGenerator, m_Mean, m_Deviation);
+		public override IContinuousRandomGenerator randomGenerator
+		{
+			[Pure]
+			get =>
+				new BoxMullerRandomGeneratorRandomGeneratorDependent<IContinuousRandomGenerator>(
+					m_DependedRandomGeneratorProvider.randomGenerator, m_Mean, m_Deviation);
+		}
 
 		/// <summary>
 		/// Returns a shared <see cref="BoxMullerRandomGeneratorRandomGeneratorDependent{IContinuousRandomGenerator}"/>
@@ -51,13 +56,19 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// Creates a new <see cref="BoxMullerRandomGeneratorRandomGeneratorDependent{IContinuousRandomGenerator}"/>
 		/// and returns it.
 		/// </summary>
-		public BoxMullerRandomGeneratorRandomGeneratorDependent<IContinuousRandomGenerator> boxMullerRandomGenerator =>
-			new BoxMullerRandomGeneratorRandomGeneratorDependent<IContinuousRandomGenerator>(
-				m_DependedRandomGeneratorProvider.randomGenerator, m_Mean, m_Deviation);
+		[NotNull]
+		public BoxMullerRandomGeneratorRandomGeneratorDependent<IContinuousRandomGenerator> boxMullerRandomGenerator
+		{
+			[Pure]
+			get =>
+				new BoxMullerRandomGeneratorRandomGeneratorDependent<IContinuousRandomGenerator>(
+					m_DependedRandomGeneratorProvider.randomGenerator, m_Mean, m_Deviation);
+		}
 
 		/// <summary>
 		/// Returns a shared <see cref="BoxMullerRandomGeneratorRandomGeneratorDependent{IContinuousRandomGenerator}"/>.
 		/// </summary>
+		[NotNull]
 		public BoxMullerRandomGeneratorRandomGeneratorDependent<IContinuousRandomGenerator>
 			sharedBoxMullerRandomGenerator
 		{

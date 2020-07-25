@@ -40,23 +40,31 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 
 		public TRandomGenerator dependedRandomGenerator
 		{
+			[Pure]
 			get => m_dependedRandomGenerator;
 			set => m_dependedRandomGenerator = value;
 		}
 
-		public int weightsCount => m_count;
+		public int weightsCount
+		{
+			[Pure]
+			get => m_count;
+		}
 
+		[Pure]
 		public uint GetWeight(int index)
 		{
 			return m_weights[index];
 		}
 
+		[Pure]
 		public TValue GetValue(int index)
 		{
 			return m_values[index];
 		}
 
 		/// <inheritdoc/>
+		[Pure]
 		public TValue Generate()
 		{
 			int index = WeightedDistribution.Generate(m_dependedRandomGenerator, m_weights, m_sum, m_count);

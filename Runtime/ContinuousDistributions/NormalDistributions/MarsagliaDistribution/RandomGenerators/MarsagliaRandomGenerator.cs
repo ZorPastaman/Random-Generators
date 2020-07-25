@@ -47,6 +47,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 
 		public float mean
 		{
+			[Pure]
 			get => m_Mean;
 			set
 			{
@@ -57,6 +58,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 
 		public float deviation
 		{
+			[Pure]
 			get => m_Deviation;
 			set
 			{
@@ -66,6 +68,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		}
 
 		/// <inheritdoc/>
+		[Pure]
 		public float Generate()
 		{
 			if (m_hasSpared)

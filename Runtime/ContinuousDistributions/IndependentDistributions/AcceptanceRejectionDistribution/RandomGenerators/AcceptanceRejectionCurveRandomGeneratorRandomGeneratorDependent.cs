@@ -52,6 +52,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
 		[NotNull]
 		public TValue valueGenerator
 		{
+			[Pure]
 			get => m_valueGenerator;
 			set => m_valueGenerator = value;
 		}
@@ -62,6 +63,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
 		[NotNull]
 		public TCheck checkGenerator
 		{
+			[Pure]
 			get => m_checkGenerator;
 			set => m_checkGenerator = value;
 		}
@@ -75,11 +77,13 @@ namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
 		[NotNull]
 		public AnimationCurve probabilityCurve
 		{
+			[Pure]
 			get => m_probabilityCurve;
 			set => m_probabilityCurve = value;
 		}
 
 		/// <inheritdoc/>
+		[Pure]
 		public float Generate()
 		{
 			return AcceptanceRejectionDistribution.Generate(m_valueGenerator, m_checkGenerator, m_probabilityCurve);

@@ -1,6 +1,7 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
 using System;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Zor.RandomGenerators.ContinuousDistributions
@@ -24,9 +25,13 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// <remarks>
 		/// It's recommended to cache the result.
 		/// </remarks>
-		public IContinuousRandomGenerator randomGenerator =>
-			m_Shared
-				? m_ContinuousRandomGeneratorProvider.sharedRandomGenerator
-				: m_ContinuousRandomGeneratorProvider.randomGenerator;
+		public IContinuousRandomGenerator randomGenerator
+		{
+			[Pure]
+			get =>
+				m_Shared
+					? m_ContinuousRandomGeneratorProvider.sharedRandomGenerator
+					: m_ContinuousRandomGeneratorProvider.randomGenerator;
+		}
 	}
 }

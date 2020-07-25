@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
@@ -27,9 +28,13 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// Creates a new <see cref="IrwinHallRandomGeneratorRandomGeneratorDependentSimple{T}"/>
 		/// and returns it as <see cref="IContinuousRandomGenerator"/>.
 		/// </summary>
-		public override IContinuousRandomGenerator randomGenerator =>
-			new IrwinHallRandomGeneratorRandomGeneratorDependentSimple<IContinuousRandomGenerator>(
-				m_DependedRandomGenerator.randomGenerator, m_Iids);
+		public override IContinuousRandomGenerator randomGenerator
+		{
+			[Pure]
+			get =>
+				new IrwinHallRandomGeneratorRandomGeneratorDependentSimple<IContinuousRandomGenerator>(
+					m_DependedRandomGenerator.randomGenerator, m_Iids);
+		}
 
 		/// <summary>
 		/// Returns a shared <see cref="IrwinHallRandomGeneratorRandomGeneratorDependentSimple{T}"/>
@@ -51,14 +56,22 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// <summary>
 		/// Creates a new <see cref="IrwinHallRandomGeneratorRandomGeneratorDependentSimple{T}"/> and returns it.
 		/// </summary>
-		public IrwinHallRandomGeneratorRandomGeneratorDependentSimple<IContinuousRandomGenerator> irwinHallRandomGenerator =>
-			new IrwinHallRandomGeneratorRandomGeneratorDependentSimple<IContinuousRandomGenerator>(
-				m_DependedRandomGenerator.randomGenerator, m_Iids);
+		[NotNull]
+		public IrwinHallRandomGeneratorRandomGeneratorDependentSimple<IContinuousRandomGenerator>
+			irwinHallRandomGenerator
+		{
+			[Pure]
+			get =>
+				new IrwinHallRandomGeneratorRandomGeneratorDependentSimple<IContinuousRandomGenerator>(
+					m_DependedRandomGenerator.randomGenerator, m_Iids);
+		}
 
 		/// <summary>
 		/// Returns a shared <see cref="IrwinHallRandomGeneratorRandomGeneratorDependentSimple{T}"/>.
 		/// </summary>
-		public IrwinHallRandomGeneratorRandomGeneratorDependentSimple<IContinuousRandomGenerator> sharedIrwinHallRandomGenerator
+		[NotNull]
+		public IrwinHallRandomGeneratorRandomGeneratorDependentSimple<IContinuousRandomGenerator>
+			sharedIrwinHallRandomGenerator
 		{
 			get
 			{

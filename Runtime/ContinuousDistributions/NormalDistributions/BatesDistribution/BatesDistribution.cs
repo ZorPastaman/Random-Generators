@@ -29,6 +29,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// <remarks>
 		/// <paramref name="iids"/> must be greater than 0.
 		/// </remarks>
+		[Pure]
 		public static float Generate(byte iids = DefaultIids)
 		{
 			float random = 0f;
@@ -56,6 +57,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// <remarks>
 		/// <paramref name="iids"/> must be greater than 0.
 		/// </remarks>
+		[Pure]
 		public static float Generate(float mean, float deviation, byte iids = DefaultIids)
 		{
 			return Modify(Generate(iids), mean, deviation);
@@ -72,6 +74,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// <remarks>
 		/// <paramref name="iids"/> must be greater than 0.
 		/// </remarks>
+		[Pure]
 		public static float Generate([NotNull] Func<float> iidFunc, byte iids = DefaultIids)
 		{
 			float random = 0f;
@@ -99,6 +102,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// <remarks>
 		/// <paramref name="iids"/> must be greater than 0.
 		/// </remarks>
+		[Pure]
 		public static float Generate([NotNull] Func<float> iidFunc,
 			float mean, float deviation, byte iids = DefaultIids)
 		{
@@ -118,6 +122,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// <remarks>
 		/// <paramref name="iids"/> must be greater than 0.
 		/// </remarks>
+		[Pure]
 		public static float Generate<T>([NotNull] T iidGenerator, byte iids = DefaultIids)
 			where T : IContinuousRandomGenerator
 		{
@@ -146,6 +151,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// <remarks>
 		/// <paramref name="iids"/> must be greater than 0.
 		/// </remarks>
+		[Pure]
 		public static float Generate<T>([NotNull] T iidGenerator, float mean, float deviation, byte iids = DefaultIids)
 			where T : IContinuousRandomGenerator
 		{
@@ -162,7 +168,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// [<paramref name="mean"/> - <paramref name="deviation"/>,
 		/// <paramref name="mean"/> + <paramref name="deviation"/>].
 		/// </returns>
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		private static float Modify(float generated, float mean, float deviation)
 		{
 			return (generated - DefaultMean) * (deviation / DefaultDeviation) + mean;

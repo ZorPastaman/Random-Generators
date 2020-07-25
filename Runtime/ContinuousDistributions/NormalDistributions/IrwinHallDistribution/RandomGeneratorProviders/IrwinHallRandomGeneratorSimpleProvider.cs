@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
@@ -22,23 +23,39 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// Creates a new <see cref="IrwinHallRandomGeneratorSimple"/> and returns it
 		/// as <see cref="IContinuousRandomGenerator"/>.
 		/// </summary>
-		public override IContinuousRandomGenerator randomGenerator =>
-			new IrwinHallRandomGeneratorSimple(m_IrwinHallRandomGenerator);
+		public override IContinuousRandomGenerator randomGenerator
+		{
+			[Pure]
+			get => new IrwinHallRandomGeneratorSimple(m_IrwinHallRandomGenerator);
+		}
 
 		/// <summary>
 		/// Returns a shared <see cref="IrwinHallRandomGeneratorSimple"/> as <see cref="IContinuousRandomGenerator"/>.
 		/// </summary>
-		public override IContinuousRandomGenerator sharedRandomGenerator => m_IrwinHallRandomGenerator;
+		public override IContinuousRandomGenerator sharedRandomGenerator
+		{
+			[Pure]
+			get => m_IrwinHallRandomGenerator;
+		}
 
 		/// <summary>
 		/// Creates a new <see cref="IrwinHallRandomGeneratorSimple"/> and returns it.
 		/// </summary>
-		public IrwinHallRandomGeneratorSimple irwinHallRandomGenerator =>
-			new IrwinHallRandomGeneratorSimple(m_IrwinHallRandomGenerator);
+		[NotNull]
+		public IrwinHallRandomGeneratorSimple irwinHallRandomGenerator
+		{
+			[Pure]
+			get => new IrwinHallRandomGeneratorSimple(m_IrwinHallRandomGenerator);
+		}
 
 		/// <summary>
 		/// Returns a shared <see cref="IrwinHallRandomGeneratorSimple"/>.
 		/// </summary>
-		public IrwinHallRandomGeneratorSimple sharedIrwinHallRandomGenerator => m_IrwinHallRandomGenerator;
+		[NotNull]
+		public IrwinHallRandomGeneratorSimple sharedIrwinHallRandomGenerator
+		{
+			[Pure]
+			get => m_IrwinHallRandomGenerator;
+		}
 	}
 }

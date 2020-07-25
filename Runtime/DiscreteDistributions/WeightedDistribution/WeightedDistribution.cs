@@ -18,6 +18,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// </summary>
 		/// <param name="weights">Weights array.</param>
 		/// <returns>Index of a gotten value from <paramref name="weights"/>.</returns>
+		[Pure]
 		public static int Generate([NotNull] uint[] weights)
 		{
 			int count = weights.Length;
@@ -33,6 +34,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="sum">Sum of weights in <paramref name="weights"/>.</param>
 		/// <param name="count">Count of <paramref name="weights"/>.</param>
 		/// <returns>Index of a gotten value from <paramref name="weights"/>.</returns>
+		[Pure]
 		public static int Generate([NotNull] uint[] weights, uint sum, int count)
 		{
 			return Pop(weights, sum, count, Random.value);
@@ -44,6 +46,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="iidFunc">Iid in range [0, 1] source.</param>
 		/// <param name="weights">Weights array.</param>
 		/// <returns>Index of a gotten value from <paramref name="weights"/>.</returns>
+		[Pure]
 		public static int Generate([NotNull] Func<float> iidFunc, [NotNull] uint[] weights)
 		{
 			int count = weights.Length;
@@ -60,6 +63,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="sum">Sum of weights in <paramref name="weights"/>.</param>
 		/// <param name="count">Count of <paramref name="weights"/>.</param>
 		/// <returns>Index of a gotten value from <paramref name="weights"/>.</returns>
+		[Pure]
 		public static int Generate([NotNull] Func<float> iidFunc, [NotNull] uint[] weights, uint sum, int count)
 		{
 			return Pop(weights, sum, count, iidFunc());
@@ -71,6 +75,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="iidGenerator">Iid in range [0, 1] source.</param>
 		/// <param name="weights">Weights array.</param>
 		/// <returns>Index of a gotten value from <paramref name="weights"/>.</returns>
+		[Pure]
 		public static int Generate<T>([NotNull] T iidGenerator, [NotNull] uint[] weights)
 			where T : IContinuousRandomGenerator
 		{
@@ -88,6 +93,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="sum">Sum of weights in <paramref name="weights"/>.</param>
 		/// <param name="count">Count of <paramref name="weights"/>.</param>
 		/// <returns>Index of a gotten value from <paramref name="weights"/>.</returns>
+		[Pure]
 		public static int Generate<T>([NotNull] T iidGenerator, [NotNull] uint[] weights, uint sum, int count)
 			where T : IContinuousRandomGenerator
 		{
@@ -100,7 +106,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="weights">Weights array.</param>
 		/// <param name="count">How many first elements are summed.</param>
 		/// <returns>Computed sum.</returns>
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static uint ComputeSum([NotNull] uint[] weights, int count)
 		{
 			uint sum = 0;
@@ -121,7 +127,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="count">Count of <paramref name="weights"/>.</param>
 		/// <param name="iid">Iid in range [0, 1].</param>
 		/// <returns>Index of popped value.</returns>
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		private static int Pop([NotNull] uint[] weights, uint sum, int count, float iid)
 		{
 			uint random = (uint)(iid * sum);

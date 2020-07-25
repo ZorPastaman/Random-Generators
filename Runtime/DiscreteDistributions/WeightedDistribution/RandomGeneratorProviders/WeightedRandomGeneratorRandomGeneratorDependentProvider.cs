@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using JetBrains.Annotations;
 using UnityEngine;
 using Zor.RandomGenerators.ContinuousDistributions;
 
@@ -26,9 +27,13 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// Creates a new <see cref="WeightedRandomGeneratorRandomGeneratorDependent{T, IContinuousRandomGenerator}"/>
 		/// and returns it as <see cref="IDiscreteRandomGenerator{T}"/>.
 		/// </summary>
-		public override IDiscreteRandomGenerator<T> randomGenerator =>
-			new WeightedRandomGeneratorRandomGeneratorDependent<T, IContinuousRandomGenerator>(
-				m_DependedRandomGeneratorProvider.randomGenerator, m_Values, m_Weights);
+		public override IDiscreteRandomGenerator<T> randomGenerator
+		{
+			[Pure]
+			get =>
+				new WeightedRandomGeneratorRandomGeneratorDependent<T, IContinuousRandomGenerator>(
+					m_DependedRandomGeneratorProvider.randomGenerator, m_Values, m_Weights);
+		}
 
 		/// <summary>
 		/// Returns a shared
@@ -52,14 +57,20 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// Creates a new <see cref="WeightedRandomGeneratorRandomGeneratorDependent{T, IContinuousRandomGenerator}"/>
 		/// and returns it.
 		/// </summary>
-		public WeightedRandomGeneratorRandomGeneratorDependent<T, IContinuousRandomGenerator> weightedRandomGenerator =>
-			new WeightedRandomGeneratorRandomGeneratorDependent<T, IContinuousRandomGenerator>(
-				m_DependedRandomGeneratorProvider.randomGenerator, m_Values, m_Weights);
+		[NotNull]
+		public WeightedRandomGeneratorRandomGeneratorDependent<T, IContinuousRandomGenerator> weightedRandomGenerator
+		{
+			[Pure]
+			get =>
+				new WeightedRandomGeneratorRandomGeneratorDependent<T, IContinuousRandomGenerator>(
+					m_DependedRandomGeneratorProvider.randomGenerator, m_Values, m_Weights);
+		}
 
 		/// <summary>
 		/// Returns a shared
 		/// <see cref="WeightedRandomGeneratorRandomGeneratorDependent{T, IContinuousRandomGenerator}"/>.
 		/// </summary>
+		[NotNull]
 		public WeightedRandomGeneratorRandomGeneratorDependent<T, IContinuousRandomGenerator>
 			sharedWeightedRandomGenerator
 		{

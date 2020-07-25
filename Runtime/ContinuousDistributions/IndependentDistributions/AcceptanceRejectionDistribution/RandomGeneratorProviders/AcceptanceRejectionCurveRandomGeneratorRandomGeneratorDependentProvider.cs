@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
@@ -30,10 +31,14 @@ namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
 		/// <see cref="AcceptanceRejectionCurveRandomGeneratorRandomGeneratorDependent{IContinuousRandomGenerator,IContinuousRandomGenerator}"/>
 		/// and returns it as <see cref="IContinuousRandomGenerator"/>.
 		/// </summary>
-		public override IContinuousRandomGenerator randomGenerator =>
-			new AcceptanceRejectionCurveRandomGeneratorRandomGeneratorDependent<IContinuousRandomGenerator,
-				IContinuousRandomGenerator>(
-				m_ValueRandomGenerator.randomGenerator, m_CheckRandomGenerator.randomGenerator, m_ProbabilityCurve);
+		public override IContinuousRandomGenerator randomGenerator
+		{
+			[Pure]
+			get =>
+				new AcceptanceRejectionCurveRandomGeneratorRandomGeneratorDependent<IContinuousRandomGenerator,
+					IContinuousRandomGenerator>(
+					m_ValueRandomGenerator.randomGenerator, m_CheckRandomGenerator.randomGenerator, m_ProbabilityCurve);
+		}
 
 		/// <summary>
 		/// Returns a shared
@@ -58,16 +63,22 @@ namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
 		/// <see cref="AcceptanceRejectionCurveRandomGeneratorRandomGeneratorDependent{IContinuousRandomGenerator,IContinuousRandomGenerator}"/>
 		/// and returns it.
 		/// </summary>
+		[NotNull]
 		public AcceptanceRejectionCurveRandomGeneratorRandomGeneratorDependent<IContinuousRandomGenerator,
-			IContinuousRandomGenerator> acceptanceRejectionRandomGenerator =>
-			new AcceptanceRejectionCurveRandomGeneratorRandomGeneratorDependent<IContinuousRandomGenerator,
-				IContinuousRandomGenerator>(
-				m_ValueRandomGenerator.randomGenerator, m_CheckRandomGenerator.randomGenerator, m_ProbabilityCurve);
+			IContinuousRandomGenerator> acceptanceRejectionRandomGenerator
+		{
+			[Pure]
+			get =>
+				new AcceptanceRejectionCurveRandomGeneratorRandomGeneratorDependent<IContinuousRandomGenerator,
+					IContinuousRandomGenerator>(
+					m_ValueRandomGenerator.randomGenerator, m_CheckRandomGenerator.randomGenerator, m_ProbabilityCurve);
+		}
 
 		/// <summary>
 		/// Returns a shared
 		/// <see cref="AcceptanceRejectionCurveRandomGeneratorRandomGeneratorDependent{IContinuousRandomGenerator,IContinuousRandomGenerator}"/>.
 		/// </summary>
+		[NotNull]
 		public AcceptanceRejectionCurveRandomGeneratorRandomGeneratorDependent<IContinuousRandomGenerator,
 			IContinuousRandomGenerator> sharedAcceptanceRejectionRandomGenerator
 		{

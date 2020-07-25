@@ -42,6 +42,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		[NotNull]
 		public Func<float> iidFunc
 		{
+			[Pure]
 			get => m_iidFunc;
 			set => m_iidFunc = value;
 		}
@@ -51,11 +52,13 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// <inheritdoc/>
 		public byte iids
 		{
+			[Pure]
 			get => m_iids;
 			set => m_iids = value;
 		}
 
 		/// <inheritdoc/>
+		[Pure]
 		public float Generate()
 		{
 			return IrwinHallDistribution.Generate(m_iidFunc, m_iids);

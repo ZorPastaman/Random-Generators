@@ -1,6 +1,7 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
 using System;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Zor.RandomGenerators.DiscreteDistributions
@@ -27,6 +28,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <remarks>
 		/// It's recommended to cache the result.
 		/// </remarks>
+		[CanBeNull]
 		public IDiscreteRandomGenerator<T> GetRandomGenerator<T>()
 		{
 			if (m_DiscreteRandomGeneratorProvider is DiscreteRandomGeneratorProvider<T>

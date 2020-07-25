@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
@@ -22,21 +23,39 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// Creates a new <see cref="MarsagliaRandomGeneratorSimple"/> and returns it
 		/// as <see cref="IContinuousRandomGenerator"/>.
 		/// </summary>
-		public override IContinuousRandomGenerator randomGenerator => new MarsagliaRandomGeneratorSimple();
+		public override IContinuousRandomGenerator randomGenerator
+		{
+			[Pure]
+			get => new MarsagliaRandomGeneratorSimple();
+		}
 
 		/// <summary>
 		/// Returns a shared <see cref="MarsagliaRandomGeneratorSimple"/> as <see cref="IContinuousRandomGenerator"/>.
 		/// </summary>
-		public override IContinuousRandomGenerator sharedRandomGenerator => m_MarsagliaRandomGenerator;
+		public override IContinuousRandomGenerator sharedRandomGenerator
+		{
+			[Pure]
+			get => m_MarsagliaRandomGenerator;
+		}
 
 		/// <summary>
 		/// Creates a new <see cref="MarsagliaRandomGeneratorSimple"/> and returns it.
 		/// </summary>
-		public MarsagliaRandomGeneratorSimple marsagliaRandomGenerator => new MarsagliaRandomGeneratorSimple();
+		[NotNull]
+		public MarsagliaRandomGeneratorSimple marsagliaRandomGenerator
+		{
+			[Pure]
+			get => new MarsagliaRandomGeneratorSimple();
+		}
 
 		/// <summary>
 		/// Returns a shared <see cref="MarsagliaRandomGeneratorSimple"/>.
 		/// </summary>
-		public MarsagliaRandomGeneratorSimple sharedMarsagliaRandomGenerator => m_MarsagliaRandomGenerator;
+		[NotNull]
+		public MarsagliaRandomGeneratorSimple sharedMarsagliaRandomGenerator
+		{
+			[Pure]
+			get => m_MarsagliaRandomGenerator;
+		}
 	}
 }

@@ -1,6 +1,7 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
 using System;
+using JetBrains.Annotations;
 using Random = UnityEngine.Random;
 
 namespace Zor.RandomGenerators.ContinuousDistributions.UniformDistributions
@@ -12,6 +13,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.UniformDistributions
 	public sealed class UnityRandomGeneratorSimple : IContinuousRandomGenerator
 	{
 		/// <inheritdoc/>
+		[Pure]
 		public float Generate()
 		{
 			return Random.value;

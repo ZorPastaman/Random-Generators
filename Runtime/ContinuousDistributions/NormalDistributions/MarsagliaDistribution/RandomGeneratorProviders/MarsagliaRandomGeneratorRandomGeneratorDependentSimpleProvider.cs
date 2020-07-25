@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
@@ -26,9 +27,13 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// <see cref="MarsagliaRandomGeneratorRandomGeneratorDependentSimple{IContinuousRandomGenerator}"/>
 		/// and returns it as <see cref="IContinuousRandomGenerator"/>.
 		/// </summary>
-		public override IContinuousRandomGenerator randomGenerator =>
-			new MarsagliaRandomGeneratorRandomGeneratorDependentSimple<IContinuousRandomGenerator>(
-				m_DependedRandomGenerator.randomGenerator);
+		public override IContinuousRandomGenerator randomGenerator
+		{
+			[Pure]
+			get =>
+				new MarsagliaRandomGeneratorRandomGeneratorDependentSimple<IContinuousRandomGenerator>(
+					m_DependedRandomGenerator.randomGenerator);
+		}
 
 		/// <summary>
 		/// Returns a shared
@@ -53,15 +58,21 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// <see cref="MarsagliaRandomGeneratorRandomGeneratorDependentSimple{IContinuousRandomGenerator}"/>
 		/// and returns it.
 		/// </summary>
+		[NotNull]
 		public MarsagliaRandomGeneratorRandomGeneratorDependentSimple<IContinuousRandomGenerator>
-			marsagliaRandomGenerator =>
-			new MarsagliaRandomGeneratorRandomGeneratorDependentSimple<IContinuousRandomGenerator>(
-				m_DependedRandomGenerator.randomGenerator);
+			marsagliaRandomGenerator
+		{
+			[Pure]
+			get =>
+				new MarsagliaRandomGeneratorRandomGeneratorDependentSimple<IContinuousRandomGenerator>(
+					m_DependedRandomGenerator.randomGenerator);
+		}
 
 		/// <summary>
 		/// Returns a shared
 		/// <see cref="MarsagliaRandomGeneratorRandomGeneratorDependentSimple{IContinuousRandomGenerator}"/>.
 		/// </summary>
+		[NotNull]
 		public MarsagliaRandomGeneratorRandomGeneratorDependentSimple<IContinuousRandomGenerator>
 			sharedMarsagliaRandomGenerator
 		{

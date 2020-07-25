@@ -47,23 +47,27 @@ namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
 		[NotNull]
 		public Func<float, float> probabilityFunc
 		{
+			[Pure]
 			get => m_probabilityFunc;
 			set => m_probabilityFunc = value;
 		}
 
 		public float min
 		{
+			[Pure]
 			get => m_min;
 			set => m_min = value;
 		}
 
 		public float max
 		{
+			[Pure]
 			get => m_max;
 			set => m_max = value;
 		}
 
 		/// <inheritdoc/>
+		[Pure]
 		public float Generate()
 		{
 			return AcceptanceRejectionDistribution.Generate(m_probabilityFunc, m_min, m_max);

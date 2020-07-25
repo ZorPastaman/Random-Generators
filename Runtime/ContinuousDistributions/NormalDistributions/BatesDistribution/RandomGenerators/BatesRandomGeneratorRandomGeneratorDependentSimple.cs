@@ -42,22 +42,33 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		[NotNull]
 		public T dependedRandomGenerator
 		{
+			[Pure]
 			get => m_dependedRandomGenerator;
 			set => m_dependedRandomGenerator = value;
 		}
 
-		public float mean => BatesDistribution.DefaultMean;
+		public float mean
+		{
+			[Pure]
+			get => BatesDistribution.DefaultMean;
+		}
 
-		public float deviation => BatesDistribution.DefaultDeviation;
+		public float deviation
+		{
+			[Pure]
+			get => BatesDistribution.DefaultDeviation;
+		}
 
 		/// <inheritdoc/>
 		public byte iids
 		{
+			[Pure]
 			get => m_iids;
 			set => m_iids = value;
 		}
 
 		/// <inheritdoc/>
+		[Pure]
 		public float Generate()
 		{
 			return BatesDistribution.Generate(m_dependedRandomGenerator, m_iids);

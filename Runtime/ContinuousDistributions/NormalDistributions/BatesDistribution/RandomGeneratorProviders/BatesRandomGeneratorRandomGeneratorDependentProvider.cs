@@ -29,9 +29,13 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// Creates a new <see cref="BatesRandomGeneratorRandomGeneratorDependent{T}"/>
 		/// and returns it as <see cref="IContinuousRandomGenerator"/>.
 		/// </summary>
-		public override IContinuousRandomGenerator randomGenerator =>
-			new BatesRandomGeneratorRandomGeneratorDependent<IContinuousRandomGenerator>(
-				m_DependedRandomGeneratorProvider.randomGenerator, m_Mean, m_Deviation, m_Iids);
+		public override IContinuousRandomGenerator randomGenerator
+		{
+			[Pure]
+			get =>
+				new BatesRandomGeneratorRandomGeneratorDependent<IContinuousRandomGenerator>(
+					m_DependedRandomGeneratorProvider.randomGenerator, m_Mean, m_Deviation, m_Iids);
+		}
 
 		/// <summary>
 		/// Returns a shared <see cref="BatesRandomGeneratorRandomGeneratorDependent{T}"/>
@@ -54,9 +58,13 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// Creates a new <see cref="BatesRandomGeneratorRandomGeneratorDependent{T}"/> and returns it.
 		/// </summary>
 		[NotNull]
-		public BatesRandomGeneratorRandomGeneratorDependent<IContinuousRandomGenerator> batesRandomGenerator =>
-			new BatesRandomGeneratorRandomGeneratorDependent<IContinuousRandomGenerator>(
-				m_DependedRandomGeneratorProvider.randomGenerator, m_Mean, m_Deviation, m_Iids);
+		public BatesRandomGeneratorRandomGeneratorDependent<IContinuousRandomGenerator> batesRandomGenerator
+		{
+			[Pure]
+			get =>
+				new BatesRandomGeneratorRandomGeneratorDependent<IContinuousRandomGenerator>(
+					m_DependedRandomGeneratorProvider.randomGenerator, m_Mean, m_Deviation, m_Iids);
+		}
 
 		/// <summary>
 		/// Returns a shared <see cref="BatesRandomGeneratorRandomGeneratorDependent{T}"/>.

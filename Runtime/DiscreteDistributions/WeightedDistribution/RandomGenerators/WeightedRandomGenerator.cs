@@ -29,19 +29,26 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 			m_sum = WeightedDistribution.ComputeSum(weights, m_count);
 		}
 
-		public int weightsCount => m_count;
+		public int weightsCount
+		{
+			[Pure]
+			get => m_count;
+		}
 
+		[Pure]
 		public uint GetWeight(int index)
 		{
 			return m_weights[index];
 		}
 
+		[Pure]
 		public T GetValue(int index)
 		{
 			return m_values[index];
 		}
 
 		/// <inheritdoc/>
+		[Pure]
 		public T Generate()
 		{
 			int index = WeightedDistribution.Generate(m_weights, m_sum, m_count);

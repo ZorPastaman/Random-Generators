@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
@@ -20,7 +21,11 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// Creates a new <see cref="BoxMullerRandomGeneratorSimple"/> and returns it
 		/// as <see cref="IContinuousRandomGenerator"/>
 		/// </summary>
-		public override IContinuousRandomGenerator randomGenerator => new BoxMullerRandomGeneratorSimple();
+		public override IContinuousRandomGenerator randomGenerator
+		{
+			[Pure]
+			get => new BoxMullerRandomGeneratorSimple();
+		}
 
 		/// <summary>
 		/// Returns a shared <see cref="BoxMullerRandomGeneratorSimple"/> as <see cref="IContinuousRandomGenerator"/>.
@@ -41,11 +46,17 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// <summary>
 		/// Creates a new <see cref="BoxMullerRandomGeneratorSimple"/> and returns it.
 		/// </summary>
-		public BoxMullerRandomGeneratorSimple boxMullerRandomGenerator => new BoxMullerRandomGeneratorSimple();
+		[NotNull]
+		public BoxMullerRandomGeneratorSimple boxMullerRandomGenerator
+		{
+			[Pure]
+			get => new BoxMullerRandomGeneratorSimple();
+		}
 
 		/// <summary>
 		/// Returns a shared <see cref="BoxMullerRandomGeneratorSimple"/>.
 		/// </summary>
+		[NotNull]
 		public BoxMullerRandomGeneratorSimple sharedBoxMullerRandomGenerator
 		{
 			get

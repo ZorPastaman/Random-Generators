@@ -24,6 +24,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
 		/// It's recommended that <paramref name="probabilityCurve"/> has at least one point with probability 1
 		/// to avoid too many loop cycles.
 		/// </remarks>
+		[Pure]
 		public static float Generate([NotNull] AnimationCurve probabilityCurve)
 		{
 			float value;
@@ -49,6 +50,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
 		/// It's recommended that <paramref name="probabilityCurve"/> has at least one point with probability 1
 		/// to avoid too many loop cycles.
 		/// </remarks>
+		[Pure]
 		public static float Generate([NotNull] AnimationCurve probabilityCurve, float min, float max)
 		{
 			float value;
@@ -74,6 +76,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
 		/// It's recommended that <paramref name="probabilityFunc"/> has at least one point with probability 1
 		/// to avoid too many loop cycles.
 		/// </remarks>
+		[Pure]
 		public static float Generate([NotNull] Func<float, float> probabilityFunc)
 		{
 			float value;
@@ -99,6 +102,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
 		/// It's recommended that <paramref name="probabilityFunc"/> has at least one point with probability 1
 		/// to avoid too many loop cycles.
 		/// </remarks>
+		[Pure]
 		public static float Generate([NotNull] Func<float, float> probabilityFunc, float min, float max)
 		{
 			float value;
@@ -124,6 +128,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
 		/// It's recommended that <paramref name="probabilityCurve"/> has at least one point with probability 1
 		/// to avoid too many loop cycles.
 		/// </remarks>
+		[Pure]
 		public static float Generate([NotNull] Func<float> valueFunc, [NotNull] AnimationCurve probabilityCurve)
 		{
 			float value;
@@ -151,6 +156,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
 		/// It's recommended that <paramref name="probabilityCurve"/> has at least one point with max probability
 		/// to avoid too many loop cycles.
 		/// </remarks>
+		[Pure]
 		public static float Generate([NotNull] Func<float> valueFunc, [NotNull] Func<float> checkFunc,
 			[NotNull] AnimationCurve probabilityCurve)
 		{
@@ -177,6 +183,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
 		/// It's recommended that <paramref name="probabilityFunc"/> has at least one point with probability 1
 		/// to avoid too many loop cycles.
 		/// </remarks>
+		[Pure]
 		public static float Generate([NotNull] Func<float> valueFunc, [NotNull] Func<float, float> probabilityFunc)
 		{
 			float value;
@@ -204,6 +211,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
 		/// It's recommended that <paramref name="probabilityFunc"/> has at least one point with max probability
 		/// to avoid too many loop cycles.
 		/// </remarks>
+		[Pure]
 		public static float Generate([NotNull] Func<float> valueFunc, [NotNull] Func<float> checkFunc,
 			[NotNull] Func<float, float> probabilityFunc)
 		{
@@ -230,6 +238,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
 		/// It's recommended that <paramref name="probabilityCurve"/> has at least one point with probability 1
 		/// to avoid too many loop cycles.
 		/// </remarks>
+		[Pure]
 		public static float Generate<T>([NotNull] T valueGenerator, [NotNull] AnimationCurve probabilityCurve)
 			where T : IContinuousRandomGenerator
 		{
@@ -258,6 +267,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
 		/// It's recommended that <paramref name="probabilityCurve"/> has at least one point with max probability
 		/// to avoid too many loop cycles.
 		/// </remarks>
+		[Pure]
 		public static float Generate<TValue, TCheck>([NotNull] TValue valueGenerator, [NotNull] TCheck checkGenerator,
 			[NotNull] AnimationCurve probabilityCurve)
 			where TValue : IContinuousRandomGenerator where TCheck : IContinuousRandomGenerator
@@ -285,6 +295,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
 		/// It's recommended that <paramref name="probabilityFunc"/> has at least one point with max probability
 		/// to avoid too many loop cycles.
 		/// </remarks>
+		[Pure]
 		public static float Generate<T>([NotNull] T valueGenerator, [NotNull] Func<float, float> probabilityFunc)
 			where T : IContinuousRandomGenerator
 		{
@@ -313,6 +324,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
 		/// It's recommended that <paramref name="probabilityFunc"/> has at least one point with max probability
 		/// to avoid too many loop cycles.
 		/// </remarks>
+		[Pure]
 		public static float Generate<TValue, TCheck>([NotNull] TValue valueGenerator, [NotNull] TCheck checkGenerator,
 			[NotNull] Func<float, float> probabilityFunc)
 			where TValue : IContinuousRandomGenerator where TCheck : IContinuousRandomGenerator

@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
@@ -24,9 +25,13 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// <see cref="BoxMullerRandomGeneratorRandomGeneratorDependentSimple{IContinuousRandomGenerator}"/>
 		/// and returns it as <see cref="IContinuousRandomGenerator"/>.
 		/// </summary>
-		public override IContinuousRandomGenerator randomGenerator =>
-			new BoxMullerRandomGeneratorRandomGeneratorDependentSimple<IContinuousRandomGenerator>(
-				m_DependedRandomGeneratorProvider.randomGenerator);
+		public override IContinuousRandomGenerator randomGenerator
+		{
+			[Pure]
+			get =>
+				new BoxMullerRandomGeneratorRandomGeneratorDependentSimple<IContinuousRandomGenerator>(
+					m_DependedRandomGeneratorProvider.randomGenerator);
+		}
 
 		/// <summary>
 		/// Returns a shared
@@ -51,15 +56,21 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// <see cref="BoxMullerRandomGeneratorRandomGeneratorDependentSimple{IContinuousRandomGenerator}"/>
 		/// and returns it.
 		/// </summary>
+		[NotNull]
 		public BoxMullerRandomGeneratorRandomGeneratorDependentSimple<IContinuousRandomGenerator>
-			boxMullerRandomGenerator =>
-			new BoxMullerRandomGeneratorRandomGeneratorDependentSimple<IContinuousRandomGenerator>(
-				m_DependedRandomGeneratorProvider.randomGenerator);
+			boxMullerRandomGenerator
+		{
+			[Pure]
+			get =>
+				new BoxMullerRandomGeneratorRandomGeneratorDependentSimple<IContinuousRandomGenerator>(
+					m_DependedRandomGeneratorProvider.randomGenerator);
+		}
 
 		/// <summary>
 		/// Returns a shared
 		/// <see cref="BoxMullerRandomGeneratorRandomGeneratorDependentSimple{IContinuousRandomGenerator}"/>.
 		/// </summary>
+		[NotNull]
 		public BoxMullerRandomGeneratorRandomGeneratorDependentSimple<IContinuousRandomGenerator>
 			sharedBoxMullerRandomGenerator
 		{

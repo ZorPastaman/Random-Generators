@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Zor.RandomGenerators.DiscreteDistributions
@@ -23,8 +24,11 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// Creates a new <see cref="WeightedRandomGenerator{T}"/> and returns it
 		/// as <see cref="IDiscreteRandomGenerator{T}"/>.
 		/// </summary>
-		public override IDiscreteRandomGenerator<T> randomGenerator =>
-			new WeightedRandomGenerator<T>(m_Values, m_Weights);
+		public override IDiscreteRandomGenerator<T> randomGenerator
+		{
+			[Pure]
+			get => new WeightedRandomGenerator<T>(m_Values, m_Weights);
+		}
 
 		/// <summary>
 		/// Returns a shared <see cref="WeightedRandomGenerator{T}"/> as <see cref="IDiscreteRandomGenerator{T}"/>.
@@ -45,12 +49,17 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <summary>
 		/// Creates a new <see cref="WeightedRandomGenerator{T}"/> and returns it.
 		/// </summary>
-		public WeightedRandomGenerator<T> weightedRandomGenerator =>
-			new WeightedRandomGenerator<T>(m_Values, m_Weights);
+		[NotNull]
+		public WeightedRandomGenerator<T> weightedRandomGenerator
+		{
+			[Pure]
+			get => new WeightedRandomGenerator<T>(m_Values, m_Weights);
+		}
 
 		/// <summary>
 		/// Returns a shared <see cref="WeightedRandomGenerator{T}"/>.
 		/// </summary>
+		[NotNull]
 		public WeightedRandomGenerator<T> sharedWeightedRandomGenerator
 		{
 			get

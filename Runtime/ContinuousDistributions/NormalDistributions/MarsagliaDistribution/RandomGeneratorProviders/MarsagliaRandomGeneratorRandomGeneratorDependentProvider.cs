@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
@@ -26,9 +27,13 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// Creates a new <see cref="MarsagliaRandomGeneratorRandomGeneratorDependent{IContinuousRandomGenerator}"/>
 		/// and returns it as <see cref="IContinuousRandomGenerator"/>.
 		/// </summary>
-		public override IContinuousRandomGenerator randomGenerator =>
-			new MarsagliaRandomGeneratorRandomGeneratorDependent<IContinuousRandomGenerator>(
-				m_DependedRandomGenerator.randomGenerator, m_Mean, m_Deviation);
+		public override IContinuousRandomGenerator randomGenerator
+		{
+			[Pure]
+			get =>
+				new MarsagliaRandomGeneratorRandomGeneratorDependent<IContinuousRandomGenerator>(
+					m_DependedRandomGenerator.randomGenerator, m_Mean, m_Deviation);
+		}
 
 		/// <summary>
 		/// Returns a shared <see cref="MarsagliaRandomGeneratorRandomGeneratorDependent{IContinuousRandomGenerator}"/>
@@ -51,13 +56,19 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// Creates a new <see cref="MarsagliaRandomGeneratorRandomGeneratorDependent{IContinuousRandomGenerator}"/>
 		/// and returns it.
 		/// </summary>
-		public MarsagliaRandomGeneratorRandomGeneratorDependent<IContinuousRandomGenerator> marsagliaRandomGenerator =>
-			new MarsagliaRandomGeneratorRandomGeneratorDependent<IContinuousRandomGenerator>(
-				m_DependedRandomGenerator.randomGenerator, m_Mean, m_Deviation);
+		[NotNull]
+		public MarsagliaRandomGeneratorRandomGeneratorDependent<IContinuousRandomGenerator> marsagliaRandomGenerator
+		{
+			[Pure]
+			get =>
+				new MarsagliaRandomGeneratorRandomGeneratorDependent<IContinuousRandomGenerator>(
+					m_DependedRandomGenerator.randomGenerator, m_Mean, m_Deviation);
+		}
 
 		/// <summary>
 		/// Returns a shared <see cref="MarsagliaRandomGeneratorRandomGeneratorDependent{IContinuousRandomGenerator}"/>.
 		/// </summary>
+		[NotNull]
 		public MarsagliaRandomGeneratorRandomGeneratorDependent<IContinuousRandomGenerator>
 			sharedMarsagliaRandomGenerator
 		{

@@ -39,6 +39,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// </summary>
 		public Func<float> iidFunc
 		{
+			[Pure]
 			get => m_iidFunc;
 			set
 			{
@@ -47,11 +48,20 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 			}
 		}
 
-		public float mean => MarsagliaDistribution.DefaultMean;
+		public float mean
+		{
+			[Pure]
+			get => MarsagliaDistribution.DefaultMean;
+		}
 
-		public float deviation => MarsagliaDistribution.DefaultDeviation;
+		public float deviation
+		{
+			[Pure]
+			get => MarsagliaDistribution.DefaultDeviation;
+		}
 
 		/// <inheritdoc/>
+		[Pure]
 		public float Generate()
 		{
 			if (m_hasSpared)

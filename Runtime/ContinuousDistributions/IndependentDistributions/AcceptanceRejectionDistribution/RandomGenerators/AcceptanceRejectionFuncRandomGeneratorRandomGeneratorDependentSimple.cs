@@ -48,6 +48,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
 		[NotNull]
 		public T valueGenerator
 		{
+			[Pure]
 			get => m_valueGenerator;
 			set => m_valueGenerator = value;
 		}
@@ -59,11 +60,13 @@ namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
 		[NotNull]
 		public Func<float, float> probabilityFunc
 		{
+			[Pure]
 			get => m_probabilityFunc;
 			set => m_probabilityFunc = value;
 		}
 
 		/// <inheritdoc/>
+		[Pure]
 		public float Generate()
 		{
 			return AcceptanceRejectionDistribution.Generate(m_valueGenerator, m_probabilityFunc);

@@ -41,18 +41,28 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 			m_Iids = other.iids;
 		}
 
-		public float mean => BatesDistribution.DefaultMean;
+		public float mean
+		{
+			[Pure]
+			get => BatesDistribution.DefaultMean;
+		}
 
-		public float deviation => BatesDistribution.DefaultDeviation;
+		public float deviation
+		{
+			[Pure]
+			get => BatesDistribution.DefaultDeviation;
+		}
 
 		/// <inheritdoc/>
 		public byte iids
 		{
+			[Pure]
 			get => m_Iids;
 			set => m_Iids = value;
 		}
 
 		/// <inheritdoc/>
+		[Pure]
 		public float Generate()
 		{
 			return BatesDistribution.Generate(m_Iids);

@@ -25,6 +25,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// How many independent and identically distributed random variables are generated.
 		/// </param>
 		/// <returns>Generated value in range [0, <paramref name="iids"/>].</returns>
+		[Pure]
 		public static float Generate(byte iids = DefaultIids)
 		{
 			float random = 0f;
@@ -47,6 +48,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// Generated value in range
 		/// [<paramref name="startPoint"/>, <paramref name="startPoint"/> + <paramref name="iids"/>].
 		/// </returns>
+		[Pure]
 		public static float Generate(float startPoint, byte iids = DefaultIids)
 		{
 			return Modify(Generate(iids), startPoint);
@@ -60,6 +62,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// How many independent and identically distributed random variables are generated.
 		/// </param>
 		/// <returns>Generated value in range [0, <paramref name="iids"/>].</returns>
+		[Pure]
 		public static float Generate([NotNull] Func<float> iidFunc, byte iids = DefaultIids)
 		{
 			float random = 0f;
@@ -83,6 +86,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// Generated value in range
 		/// [<paramref name="startPoint"/>, <paramref name="startPoint"/> + <paramref name="iids"/>].
 		/// </returns>
+		[Pure]
 		public static float Generate([NotNull] Func<float> iidFunc, float startPoint, byte iids = DefaultIids)
 		{
 			return Modify(Generate(iidFunc, iids), startPoint);
@@ -96,6 +100,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// How many independent and identically distributed random variables are generated.
 		/// </param>
 		/// <returns>Generated value in range [0, <paramref name="iids"/>].</returns>
+		[Pure]
 		public static float Generate<T>([NotNull] T iidGenerator, byte iids = DefaultIids)
 			where T : IContinuousRandomGenerator
 		{
@@ -121,6 +126,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// Generated value in range
 		/// [<paramref name="startPoint"/>, <paramref name="startPoint"/> + <paramref name="iids"/>].
 		/// </returns>
+		[Pure]
 		public static float Generate<T>([NotNull] T iidGenerator, float startPoint, byte iids = DefaultIids)
 			where T : IContinuousRandomGenerator
 		{
@@ -136,7 +142,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// Modified generated value in range
 		/// [<paramref name="startPoint"/>, <paramref name="startPoint"/> + n].
 		/// </returns>
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		private static float Modify(float generated, float startPoint)
 		{
 			return generated + startPoint;

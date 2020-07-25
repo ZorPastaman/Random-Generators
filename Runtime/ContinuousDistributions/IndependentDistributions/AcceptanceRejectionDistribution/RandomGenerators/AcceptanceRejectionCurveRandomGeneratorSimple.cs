@@ -57,11 +57,13 @@ namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
 		[NotNull]
 		public AnimationCurve probabilityCurve
 		{
+			[Pure]
 			get => m_ProbabilityCurve;
 			set => m_ProbabilityCurve = value;
 		}
 
 		/// <inheritdoc/>
+		[Pure]
 		public float Generate()
 		{
 			return AcceptanceRejectionDistribution.Generate(m_ProbabilityCurve);

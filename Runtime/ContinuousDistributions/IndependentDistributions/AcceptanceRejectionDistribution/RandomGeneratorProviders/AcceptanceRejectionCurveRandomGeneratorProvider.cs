@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
@@ -22,25 +23,40 @@ namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
 		/// Creates a new <see cref="AcceptanceRejectionCurveRandomGenerator"/>
 		/// and returns it as <see cref="IContinuousRandomGenerator"/>.
 		/// </summary>
-		public override IContinuousRandomGenerator randomGenerator =>
-			new AcceptanceRejectionCurveRandomGenerator(m_AcceptanceRejectionRandomGenerator);
+		public override IContinuousRandomGenerator randomGenerator
+		{
+			[Pure]
+			get => new AcceptanceRejectionCurveRandomGenerator(m_AcceptanceRejectionRandomGenerator);
+		}
 
 		/// <summary>
 		/// Returns a shared <see cref="AcceptanceRejectionCurveRandomGenerator"/>
 		/// as <see cref="IContinuousRandomGenerator"/>.
 		/// </summary>
-		public override IContinuousRandomGenerator sharedRandomGenerator => m_AcceptanceRejectionRandomGenerator;
+		public override IContinuousRandomGenerator sharedRandomGenerator
+		{
+			[Pure]
+			get => m_AcceptanceRejectionRandomGenerator;
+		}
 
 		/// <summary>
 		/// Creates a new <see cref="AcceptanceRejectionCurveRandomGenerator"/> and returns it.
 		/// </summary>
-		public AcceptanceRejectionCurveRandomGenerator acceptanceRejectionRandomGenerator =>
-			new AcceptanceRejectionCurveRandomGenerator(m_AcceptanceRejectionRandomGenerator);
+		[NotNull]
+		public AcceptanceRejectionCurveRandomGenerator acceptanceRejectionRandomGenerator
+		{
+			[Pure]
+			get => new AcceptanceRejectionCurveRandomGenerator(m_AcceptanceRejectionRandomGenerator);
+		}
 
 		/// <summary>
 		/// Returns a shared <see cref="AcceptanceRejectionCurveRandomGenerator"/>.
 		/// </summary>
-		public AcceptanceRejectionCurveRandomGenerator sharedAcceptanceRejectionRandomGenerator =>
-			m_AcceptanceRejectionRandomGenerator;
+		[NotNull]
+		public AcceptanceRejectionCurveRandomGenerator sharedAcceptanceRejectionRandomGenerator
+		{
+			[Pure]
+			get => m_AcceptanceRejectionRandomGenerator;
+		}
 	}
 }

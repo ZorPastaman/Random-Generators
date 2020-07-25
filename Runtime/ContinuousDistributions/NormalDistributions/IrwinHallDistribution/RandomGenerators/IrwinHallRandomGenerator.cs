@@ -46,6 +46,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 
 		public float startPoint
 		{
+			[Pure]
 			get => m_StartPoint;
 			set => m_StartPoint = value;
 		}
@@ -53,11 +54,13 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// <inheritdoc/>
 		public byte iids
 		{
+			[Pure]
 			get => m_Iids;
 			set => m_Iids = value;
 		}
 
 		/// <inheritdoc/>
+		[Pure]
 		public float Generate()
 		{
 			return IrwinHallDistribution.Generate(m_StartPoint, m_Iids);

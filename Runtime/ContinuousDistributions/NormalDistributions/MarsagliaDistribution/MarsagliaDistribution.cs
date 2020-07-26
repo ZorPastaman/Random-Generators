@@ -104,7 +104,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// Two generated values.
 		/// </returns>
 		[Pure]
-		public static (float, float) Generate<T>([NotNull] T iidGenerator) where T : IContinuousRandomGenerator
+		public static (float, float) Generate<T>([NotNull] T iidGenerator) where T : IContinuousGenerator
 		{
 			float u, v, s;
 
@@ -132,7 +132,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// </returns>
 		[Pure]
 		public static (float, float) Generate<T>([NotNull] T iidGenerator, float mean, float deviation)
-			where T : IContinuousRandomGenerator
+			where T : IContinuousGenerator
 		{
 			(float z0, float z1) = Generate(iidGenerator);
 			return Modify(z0, z1, mean, deviation);

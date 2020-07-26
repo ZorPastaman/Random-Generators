@@ -240,7 +240,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
 		/// </remarks>
 		[Pure]
 		public static float Generate<T>([NotNull] T valueGenerator, [NotNull] AnimationCurve probabilityCurve)
-			where T : IContinuousRandomGenerator
+			where T : IContinuousGenerator
 		{
 			float value;
 
@@ -270,7 +270,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
 		[Pure]
 		public static float Generate<TValue, TCheck>([NotNull] TValue valueGenerator, [NotNull] TCheck checkGenerator,
 			[NotNull] AnimationCurve probabilityCurve)
-			where TValue : IContinuousRandomGenerator where TCheck : IContinuousRandomGenerator
+			where TValue : IContinuousGenerator where TCheck : IContinuousGenerator
 		{
 			float value;
 
@@ -297,7 +297,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
 		/// </remarks>
 		[Pure]
 		public static float Generate<T>([NotNull] T valueGenerator, [NotNull] Func<float, float> probabilityFunc)
-			where T : IContinuousRandomGenerator
+			where T : IContinuousGenerator
 		{
 			float value;
 
@@ -327,7 +327,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
 		[Pure]
 		public static float Generate<TValue, TCheck>([NotNull] TValue valueGenerator, [NotNull] TCheck checkGenerator,
 			[NotNull] Func<float, float> probabilityFunc)
-			where TValue : IContinuousRandomGenerator where TCheck : IContinuousRandomGenerator
+			where TValue : IContinuousGenerator where TCheck : IContinuousGenerator
 		{
 			float value;
 

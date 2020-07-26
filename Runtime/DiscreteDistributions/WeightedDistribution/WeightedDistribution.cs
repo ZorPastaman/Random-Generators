@@ -83,7 +83,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <returns>Index of a gotten value from <paramref name="weights"/>.</returns>
 		[Pure]
 		public static int Generate<T>([NotNull] T iidGenerator, [NotNull] uint[] weights)
-			where T : IContinuousRandomGenerator
+			where T : IContinuousGenerator
 		{
 			int count = weights.Length;
 			uint sum = ComputeSum(weights, count);
@@ -104,7 +104,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// </remarks>
 		[Pure]
 		public static int Generate<T>([NotNull] T iidGenerator, [NotNull] uint[] weights, uint sum, int count)
-			where T : IContinuousRandomGenerator
+			where T : IContinuousGenerator
 		{
 			return Pop(weights, sum, count, iidGenerator.Generate());
 		}

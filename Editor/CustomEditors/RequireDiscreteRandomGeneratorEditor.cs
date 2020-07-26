@@ -8,7 +8,7 @@ using Object = UnityEngine.Object;
 
 namespace Zor.RandomGenerators.PropertyDrawerAttributes
 {
-	[CustomPropertyDrawer(typeof(RequireDiscreteRandomGenerator))]
+	[CustomPropertyDrawer(typeof(RequireDiscreteGenerator))]
 	public sealed class RequireDiscreteRandomGeneratorEditor : PropertyDrawer
 	{
 		private const string GeneratorPropertyName = "m_DiscreteRandomGeneratorProvider";
@@ -16,9 +16,9 @@ namespace Zor.RandomGenerators.PropertyDrawerAttributes
 
 		public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
 		{
-			if (property.type != nameof(DiscreteRandomGeneratorProviderReference))
+			if (property.type != nameof(DiscreteGeneratorProviderReference))
 			{
-				Debug.LogError($"Attribute {nameof(RequireDiscreteRandomGenerator)} is set on a wrong type: {property.type}. Expected {nameof(DiscreteRandomGeneratorProviderReference)}.");
+				Debug.LogError($"Attribute {nameof(RequireDiscreteGenerator)} is set on a wrong type: {property.type}. Expected {nameof(DiscreteGeneratorProviderReference)}.");
 				return base.GetPropertyHeight(property, label);
 			}
 
@@ -38,9 +38,9 @@ namespace Zor.RandomGenerators.PropertyDrawerAttributes
 
 		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
 		{
-			if (property.type != nameof(DiscreteRandomGeneratorProviderReference))
+			if (property.type != nameof(DiscreteGeneratorProviderReference))
 			{
-				Debug.LogError($"Attribute {nameof(RequireDiscreteRandomGenerator)} is set on a wrong type: {property.type}. Expected {nameof(DiscreteRandomGeneratorProviderReference)}.");
+				Debug.LogError($"Attribute {nameof(RequireDiscreteGenerator)} is set on a wrong type: {property.type}. Expected {nameof(DiscreteGeneratorProviderReference)}.");
 				return;
 			}
 
@@ -85,7 +85,7 @@ namespace Zor.RandomGenerators.PropertyDrawerAttributes
 				return false;
 			}
 
-			return ((RequireDiscreteRandomGenerator)attribute).valueType == argumentType;
+			return ((RequireDiscreteGenerator)attribute).valueType == argumentType;
 		}
 
 		private static Type GetGenericArgumentType(Type type)
@@ -93,7 +93,7 @@ namespace Zor.RandomGenerators.PropertyDrawerAttributes
 			while (type.BaseType != null)
 			{
 				type = type.BaseType;
-				if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(DiscreteRandomGeneratorProvider<>))
+				if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(DiscreteGeneratorProvider<>))
 				{
 					return type.GetGenericArguments()[0];
 				}

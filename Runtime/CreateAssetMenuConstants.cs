@@ -24,7 +24,6 @@ namespace Zor.RandomGenerators
 		public const string UnityDistributionFolder = UniformDistributionsFolder + "Unity Distribution/";
 
 		public const string DiscreteDistributionsFolder = RandomGeneratorProvidersFolder + "Discrete Distributions/";
-
 		public const string WeightedDistributionsFolder = DiscreteDistributionsFolder + "Weighted Distribution/";
 
 		public const int Order = 446;

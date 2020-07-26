@@ -13,23 +13,23 @@ namespace Zor.RandomGenerators.Tests
 	public sealed class DiscreteDistributionTest : MonoBehaviour
 	{
 #pragma warning disable CS0649
-		[SerializeField, RequireDiscreteRandomGenerator(typeof(int))]
-		private DiscreteRandomGeneratorProviderReference m_GeneratorProviderReference;
+		[SerializeField, RequireDiscreteGenerator(typeof(int))]
+		private DiscreteGeneratorProviderReference m_GeneratorProviderReference;
 		[SerializeField] private uint m_GenerationsPerFrame = 100;
 		[SerializeField] private List<ResultEntry> m_Results = new List<ResultEntry>();
 		[SerializeField] private uint m_PerformanceTestsCount = 10000;
 #pragma warning restore CS0649
 
-		private IDiscreteRandomGenerator<int> m_randomGenerator;
+		private IDiscreteGenerator<int> m_generator;
 
 		private void Start()
 		{
-			m_randomGenerator = m_GeneratorProviderReference.GetRandomGenerator<int>();
+			m_generator = m_GeneratorProviderReference.GetGenerator<int>();
 
 			var stopWatch = Stopwatch.StartNew();
 			for (uint i = 0; i < m_PerformanceTestsCount; ++i)
 			{
-				m_randomGenerator.Generate();
+				m_generator.Generate();
 			}
 			stopWatch.Stop();
 			Debug.Log($"[DiscreteDistributionTest] Performance test. Ticks: {stopWatch.ElapsedTicks}, Milliseconds: {stopWatch.ElapsedMilliseconds}");
@@ -39,7 +39,7 @@ namespace Zor.RandomGenerators.Tests
 		{
 			for (int i = 0; i < m_GenerationsPerFrame; ++i)
 			{
-				int generated = m_randomGenerator.Generate();
+				int generated = m_generator.Generate();
 				int index = FindGeneratedIndex(generated);
 
 				if (index >= 0)

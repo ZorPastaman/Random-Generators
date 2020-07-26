@@ -14,12 +14,12 @@ namespace Zor.RandomGenerators.Tests
 #pragma warning disable CS0649
 		[SerializeField] private AnimationCurve m_Curve;
 		[SerializeField] private float m_StepLength = 0.1f;
-		[SerializeField] private ContinuousRandomGeneratorProviderReference m_RandomGeneratorProviderReference;
+		[SerializeField] private ContinuousGeneratorProviderReference m_GeneratorProviderReference;
 		[SerializeField] private uint m_GenerationsPerFrame = 1;
 		[SerializeField] private uint m_PerformanceTestsCount = 10000;
 #pragma warning restore CS0649
 
-		private IContinuousRandomGenerator m_randomGenerator;
+		private IContinuousGenerator m_generator;
 
 		private readonly List<(float, uint)> m_generatedCounts = new List<(float, uint)>();
 		private uint m_generations;
@@ -28,12 +28,12 @@ namespace Zor.RandomGenerators.Tests
 
 		private void Start()
 		{
-			m_randomGenerator = m_RandomGeneratorProviderReference.randomGenerator;
+			m_generator = m_GeneratorProviderReference.generator;
 
 			var stopWatch = Stopwatch.StartNew();
 			for (uint i = 0; i < m_PerformanceTestsCount; ++i)
 			{
-				m_randomGenerator.Generate();
+				m_generator.Generate();
 			}
 			stopWatch.Stop();
 			Debug.Log($"[ContinuousDistributionTest] Performance test. Ticks: {stopWatch.ElapsedTicks}, Milliseconds: {stopWatch.ElapsedMilliseconds}");
@@ -43,7 +43,7 @@ namespace Zor.RandomGenerators.Tests
 		{
 			for (uint generation = 0; generation < m_GenerationsPerFrame; ++generation)
 			{
-				float generatedValue = m_randomGenerator.Generate();
+				float generatedValue = m_generator.Generate();
 				int index = FindGeneratedIndex(generatedValue);
 
 				if (index >= 0)

@@ -19,6 +19,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// <param name="dependedGenerator">
 		/// Random generator that returns independent and identically distributed random variable in range [0, 1].
 		/// </param>
+		/// <param name="iids">How many independent and identically distributed random variables are generated.</param>
 		public BatesGeneratorDependentSimple([NotNull] T dependedGenerator, byte iids = BatesDistribution.DefaultIids)
 		{
 			m_dependedGenerator = dependedGenerator;

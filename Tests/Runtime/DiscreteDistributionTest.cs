@@ -26,6 +26,12 @@ namespace Zor.RandomGenerators.Tests
 		{
 			m_generator = m_GeneratorProviderReference.GetGenerator<int>();
 
+			if (m_generator == null)
+			{
+				enabled = false;
+				return;
+			}
+
 			var stopWatch = Stopwatch.StartNew();
 			for (uint i = 0; i < m_PerformanceTestsCount; ++i)
 			{

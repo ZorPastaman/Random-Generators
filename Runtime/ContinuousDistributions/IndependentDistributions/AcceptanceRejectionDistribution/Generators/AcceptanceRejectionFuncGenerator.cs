@@ -22,6 +22,8 @@ namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
 		/// <para>The argument is generated value, the result is its probability.</para>
 		/// <para>At least one point must have possibility 1.</para>
 		/// </param>
+		/// <param name="min"></param>
+		/// <param name="max"></param>
 		public AcceptanceRejectionFuncGenerator([NotNull] Func<float, float> probabilityFunc, float min, float max)
 		{
 			m_probabilityFunc = probabilityFunc;

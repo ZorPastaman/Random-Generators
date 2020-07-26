@@ -7,7 +7,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
 {
 	/// <summary>
 	/// Acceptance-Rejection Random Generator
-	/// using <see cref="AcceptanceRejectionDistribution.Generate(Func{float},Func{float,float}"/>.
+	/// using <see cref="AcceptanceRejectionDistribution.Generate(Func{float},Func{float,float})"/>.
 	/// </summary>
 	public sealed class AcceptanceRejectionFuncGeneratorFuncDependentSimple : IAcceptanceRejectionGenerator
 	{

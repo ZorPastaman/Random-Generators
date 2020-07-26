@@ -23,6 +23,8 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="iidFunc">
 		/// Function that returns independent and identically distributed random variable in range [0, 1].
 		/// </param>
+		/// <param name="values"></param>
+		/// <param name="weights"></param>
 		/// <remarks>
 		/// Counts of <paramref name="values"/> and <paramref name="weights"/> must be the same
 		/// and greater than 0.

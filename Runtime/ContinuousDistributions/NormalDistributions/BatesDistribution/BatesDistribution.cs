@@ -42,10 +42,11 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 			return random / iids;
 		}
 
-
 		/// <summary>
 		/// Generates a random value using the specified parameters and <see cref="Random.value"/> as an iid source.
 		/// </summary>
+		/// <param name="mean"></param>
+		/// <param name="deviation"></param>
 		/// <param name="iids">
 		/// How many independent and identically distributed random variables are generated.
 		/// </param>
@@ -91,6 +92,8 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// Generates a random value using the specified parameters and <paramref name="iidFunc"/> as an iid source.
 		/// </summary>
 		/// <param name="iidFunc">Iid in range [0, 1] source.</param>
+		/// <param name="mean"></param>
+		/// <param name="deviation"></param>
 		/// <param name="iids">
 		/// How many independent and identically distributed random variables are generated.
 		/// </param>
@@ -141,6 +144,8 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// and <paramref name="iidGenerator"/> as an iid source.
 		/// </summary>
 		/// <param name="iidGenerator">Iid in range [0, 1] source.</param>
+		/// <param name="mean"></param>
+		/// <param name="deviation"></param>
 		/// <param name="iids">
 		/// How many independent and identically distributed random variables are generated.
 		/// </param>
@@ -163,6 +168,8 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// <paramref name="mean"/> and <paramref name="deviation"/>.
 		/// </summary>
 		/// <param name="generated">Generated value in range [0, 1]</param>
+		/// <param name="mean"></param>
+		/// <param name="deviation"></param>
 		/// <returns>
 		/// Modified generated value in range
 		/// [<paramref name="mean"/> - <paramref name="deviation"/>,

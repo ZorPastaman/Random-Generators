@@ -23,6 +23,8 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// <param name="dependedGenerator">
 		/// Random generator that returns independent and identically distributed random variable in range [0, 1].
 		/// </param>
+		/// <param name="mean"></param>
+		/// <param name="deviation"></param>
 		public MarsagliaGeneratorDependent([NotNull] T dependedGenerator, float mean, float deviation)
 		{
 			m_dependedGenerator = dependedGenerator;

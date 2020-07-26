@@ -27,6 +27,8 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// <summary>
 		/// Creates a <see cref="BatesGenerator"/> with the specified parameters.
 		/// </summary>
+		/// <param name="mean"></param>
+		/// <param name="deviation"></param>
 		/// <param name="iids">
 		/// How many independent and identically distributed random variables are generated.
 		/// </param>

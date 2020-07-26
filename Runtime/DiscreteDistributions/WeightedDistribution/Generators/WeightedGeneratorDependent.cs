@@ -9,6 +9,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	/// Weighted random generator using <see cref="WeightedDistribution.Generate{T}(T,uint[],uint,int)"/>.
 	/// </summary>
 	/// <typeparam name="TValue">Value type.</typeparam>
+	/// <typeparam name="TGenerator"></typeparam>
 	public sealed class WeightedGeneratorDependent<TValue, TGenerator> : IDiscreteGenerator<TValue>
 		where TGenerator : IContinuousGenerator
 	{
@@ -25,6 +26,8 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="dependedGenerator">
 		/// Random generator that returns independent and identically distributed random variable in range [0, 1].
 		/// </param>
+		/// <param name="values"></param>
+		/// <param name="weights"></param>
 		/// <remarks>
 		/// Counts of <paramref name="values"/> and <paramref name="weights"/> must be the same
 		/// and greater than 0.

@@ -23,6 +23,8 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// <param name="iidFunc">
 		/// Function that returns independent and identically distributed random variable in range [0, 1].
 		/// </param>
+		/// <param name="mean"></param>
+		/// <param name="deviation"></param>
 		public BoxMullerGeneratorFuncDependent([NotNull] Func<float> iidFunc, float mean, float deviation)
 		{
 			m_iidFunc = iidFunc;

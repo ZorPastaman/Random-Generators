@@ -28,6 +28,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// <summary>
 		/// Creates an <see cref="IrwinHallGenerator"/> with the specified parameters.
 		/// </summary>
+		/// <param name="startPoint"></param>
 		/// <param name="iids">How many independent and identically distributed random variables are generated.</param>
 		public IrwinHallGenerator(float startPoint, byte iids = IrwinHallDistribution.DefaultIids)
 		{

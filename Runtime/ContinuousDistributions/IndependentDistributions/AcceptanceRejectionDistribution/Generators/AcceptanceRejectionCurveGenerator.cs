@@ -38,6 +38,8 @@ namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
 		/// <para>X - generated value, Y - its probability.</para>
 		/// <para>At least one point must have possibility 1.</para>
 		/// </param>
+		/// <param name="min"></param>
+		/// <param name="max"></param>
 		public AcceptanceRejectionCurveGenerator([NotNull] AnimationCurve probabilityCurve, float min, float max)
 		{
 			m_ProbabilityCurve = probabilityCurve;

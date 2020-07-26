@@ -45,6 +45,8 @@ namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
 		/// Probability function where x is a random value in range [<paramref name="min"/>, <paramref name="max"/>]
 		/// and y is its probability in range [0, 1].
 		/// </param>
+		/// <param name="min"></param>
+		/// <param name="max"></param>
 		/// <returns>Generated value.</returns>
 		/// <remarks>
 		/// It's recommended that <paramref name="probabilityCurve"/> has at least one point with probability 1
@@ -97,6 +99,8 @@ namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
 		/// Probability function where the argument is a random value in range
 		/// [<paramref name="min"/>, <paramref name="max"/>] and the result is its probability in range [0, 1].
 		/// </param>
+		/// <param name="min"></param>
+		/// <param name="max"></param>
 		/// <returns>Generated value.</returns>
 		/// <remarks>
 		/// It's recommended that <paramref name="probabilityFunc"/> has at least one point with probability 1

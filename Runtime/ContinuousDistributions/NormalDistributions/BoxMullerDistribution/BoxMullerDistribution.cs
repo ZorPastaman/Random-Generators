@@ -78,6 +78,8 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// Generates a random value using <paramref name="iidFunc"/> as an iid source.
 		/// </summary>
 		/// <param name="iidFunc">Iid in range [0, 1] source.</param>
+		/// <param name="mean"></param>
+		/// <param name="deviation"></param>
 		/// <returns>
 		/// Two generated values.
 		/// </returns>
@@ -113,6 +115,8 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// Generates a random value using <paramref name="iidGenerator"/> as an iid source.
 		/// </summary>
 		/// <param name="iidGenerator">Iid in range [0, 1] source.</param>
+		/// <param name="mean"></param>
+		/// <param name="deviation"></param>
 		/// <returns>
 		/// Two generated values.
 		/// </returns>

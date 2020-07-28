@@ -19,7 +19,9 @@ namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
 	{
 #pragma warning disable CS0649
 		[SerializeField] private ContinuousGeneratorProviderReference m_ValueGenerator;
-		[SerializeField] private AnimationCurve m_ProbabilityCurve;
+		[SerializeField,
+		Tooltip("X - generated value\nY - its probability\nAt least one point must have possibility 1.")]
+		private AnimationCurve m_ProbabilityCurve;
 #pragma warning restore CS0649
 
 		private AcceptanceRejectionCurveGeneratorDependentSimple<IContinuousGenerator>

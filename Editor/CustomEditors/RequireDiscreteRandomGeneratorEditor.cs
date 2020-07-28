@@ -11,7 +11,7 @@ namespace Zor.RandomGenerators.PropertyDrawerAttributes
 	[CustomPropertyDrawer(typeof(RequireDiscreteGenerator))]
 	public sealed class RequireDiscreteRandomGeneratorEditor : PropertyDrawer
 	{
-		private const string GeneratorPropertyName = "m_DiscreteRandomGeneratorProvider";
+		private const string GeneratorPropertyName = "m_DiscreteGeneratorProvider";
 		private const string SharedPropertyName = "m_Shared";
 
 		public override float GetPropertyHeight(SerializedProperty property, GUIContent label)

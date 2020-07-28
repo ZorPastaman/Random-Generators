@@ -8,7 +8,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	/// Provides <see cref="WeightedGeneratorDependent{TValue,TGenerator}"/>.
 	/// </summary>
 	[CreateAssetMenu(
-		menuName = CreateAssetMenuConstants.WeightedDistributionsFolder + "Int Weighted Generator Dependent Provider",
+		menuName = CreateAssetMenuConstants.WeightedDistributionFolder + "Int Weighted Generator Dependent Provider",
 		fileName = "Int Weighted Generator Dependent Provider",
 		order = CreateAssetMenuConstants.Order
 	)]

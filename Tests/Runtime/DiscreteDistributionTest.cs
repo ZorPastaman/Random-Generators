@@ -17,10 +17,13 @@ namespace Zor.RandomGenerators.Tests
 		private DiscreteGeneratorProviderReference m_GeneratorProviderReference;
 		[SerializeField] private uint m_GenerationsPerFrame = 100;
 		[SerializeField] private List<ResultEntry> m_Results = new List<ResultEntry>();
+		[SerializeField] private AnimationCurve m_ResultsCurve;
 		[SerializeField] private uint m_PerformanceTestsCount = 10000;
 #pragma warning restore CS0649
 
 		private IDiscreteGenerator<int> m_generator;
+
+		private Keyframe[] m_keyframes;
 
 		private void Start()
 		{
@@ -78,6 +81,30 @@ namespace Zor.RandomGenerators.Tests
 				entry.Possibility = (float)entry.Count / sum;
 				m_Results[i] = entry;
 			}
+
+			int resultsCount = m_Results.Count;
+
+			Array.Resize(ref m_keyframes, resultsCount);
+
+			for (int i = 0; i < resultsCount; ++i)
+			{
+				ResultEntry result = m_Results[i];
+				m_keyframes[i] = new Keyframe(result.Element, result.Possibility);
+
+				if (i > 0)
+				{
+					m_keyframes[i].inTangent = (m_keyframes[i].value - m_keyframes[i - 1].value) /
+						(m_keyframes[i].time - m_keyframes[i - 1].time);
+				}
+
+				if (i < resultsCount - 1)
+				{
+					m_keyframes[i].outTangent = (m_keyframes[i + 1].value - m_keyframes[i].value) /
+						(m_keyframes[i + 1].time - m_keyframes[i].time);
+				}
+			}
+
+			m_ResultsCurve.keys = m_keyframes;
 		}
 
 		private int FindGeneratedIndex(int generated)

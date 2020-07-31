@@ -10,7 +10,7 @@ using Debug = UnityEngine.Debug;
 
 namespace Zor.RandomGenerators.Tests
 {
-	public sealed class DiscreteDistributionTest : MonoBehaviour
+	public sealed class IntDiscreteDistributionTest : MonoBehaviour
 	{
 #pragma warning disable CS0649
 		[SerializeField, RequireDiscreteGenerator(typeof(int))]
@@ -41,7 +41,7 @@ namespace Zor.RandomGenerators.Tests
 				m_generator.Generate();
 			}
 			stopWatch.Stop();
-			Debug.Log($"[DiscreteDistributionTest] Performance test. Ticks: {stopWatch.ElapsedTicks}, Milliseconds: {stopWatch.ElapsedMilliseconds}");
+			Debug.Log($"[IntDiscreteDistributionTest] Performance test. Ticks: {stopWatch.ElapsedTicks}, Milliseconds: {stopWatch.ElapsedMilliseconds}");
 		}
 
 		private void Update()

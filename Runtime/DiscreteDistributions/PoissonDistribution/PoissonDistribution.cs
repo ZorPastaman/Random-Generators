@@ -20,7 +20,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="lambda"></param>
 		/// <returns>Generated value.</returns>
 		[Pure]
-		public static int Generate(float lambda)
+		public static uint Generate(float lambda)
 		{
 			return Pop(Random.value, lambda);
 		}
@@ -36,7 +36,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// in range [0, 1].
 		/// </remarks>
 		[Pure]
-		public static int Generate([NotNull] Func<float> iidFunc, float lambda)
+		public static uint Generate([NotNull] Func<float> iidFunc, float lambda)
 		{
 			return Pop(iidFunc(), lambda);
 		}
@@ -53,7 +53,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// in range [0, 1].
 		/// </remarks>
 		[Pure]
-		public static int Generate<T>([NotNull] T iidGenerator, float lambda) where T : IContinuousGenerator
+		public static uint Generate<T>([NotNull] T iidGenerator, float lambda) where T : IContinuousGenerator
 		{
 			return Pop(iidGenerator.Generate(), lambda);
 		}
@@ -65,9 +65,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="lambda"></param>
 		/// <returns>Popped value.</returns>
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-		private static int Pop(float u, float lambda)
+		private static uint Pop(float u, float lambda)
 		{
-			int x = 0;
+			uint x = 0;
 			float p = Mathf.Exp(-lambda);
 			float s = p;
 

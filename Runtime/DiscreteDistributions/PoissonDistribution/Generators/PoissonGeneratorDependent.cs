@@ -55,7 +55,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		}
 
 		/// <inheritdoc/>
-		public int Generate()
+		public uint Generate()
 		{
 			return PoissonDistribution.Generate(m_iidGenerator, m_lambda);
 		}

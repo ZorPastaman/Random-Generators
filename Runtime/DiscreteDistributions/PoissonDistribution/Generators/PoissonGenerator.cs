@@ -50,7 +50,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 
 		/// <inheritdoc/>
 		[Pure]
-		public int Generate()
+		public uint Generate()
 		{
 			return PoissonDistribution.Generate(m_Lambda);
 		}

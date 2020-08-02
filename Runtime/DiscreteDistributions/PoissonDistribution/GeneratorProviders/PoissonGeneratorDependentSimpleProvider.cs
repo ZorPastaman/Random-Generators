@@ -7,36 +7,35 @@ using Zor.RandomGenerators.ContinuousDistributions;
 namespace Zor.RandomGenerators.DiscreteDistributions
 {
 	/// <summary>
-	/// Provides <see cref="PoissonGeneratorDependent{T}"/>.
+	/// Provides <see cref="PoissonGeneratorDependentSimple{T}"/>.
 	/// </summary>
 	[CreateAssetMenu(
-		menuName = CreateAssetMenuConstants.PoissonDistributionFolder + "Poisson Generator Dependent Provider",
-		fileName = "Poisson Generator Dependent Provider",
+		menuName = CreateAssetMenuConstants.PoissonDistributionFolder + "Poisson Generator Dependent Simple Provider",
+		fileName = "Poisson Generator Dependent Simple Provider",
 		order = CreateAssetMenuConstants.Order
 	)]
-	public sealed class PoissonGeneratorDependentProvider : DiscreteGeneratorProvider<int>
+	public sealed class PoissonGeneratorDependentSimpleProvider : DiscreteGeneratorProvider<int>
 	{
 #pragma warning disable CS0649
 		[SerializeField] private ContinuousGeneratorProviderReference m_DependentGeneratorProvider;
 		[SerializeField] private float m_Lambda;
-		[SerializeField] private int m_StartPoint;
 #pragma warning restore CS0649
 
-		private PoissonGeneratorDependent<IContinuousGenerator> m_sharedGenerator;
+		private PoissonGeneratorDependentSimple<IContinuousGenerator> m_sharedGenerator;
 
 		/// <summary>
-		/// Creates a new <see cref="PoissonGeneratorDependent{T}"/>
+		/// Creates a new <see cref="PoissonGeneratorDependentSimple{T}"/>
 		/// and returns it as <see cref="IDiscreteGenerator{Int32}"/>.
 		/// </summary>
 		public override IDiscreteGenerator<int> generator
 		{
 			[Pure]
-			get => new PoissonGeneratorDependent<IContinuousGenerator>(
-				m_DependentGeneratorProvider.generator, m_Lambda, m_StartPoint);
+			get => new PoissonGeneratorDependentSimple<IContinuousGenerator>(
+				m_DependentGeneratorProvider.generator, m_Lambda);
 		}
 
 		/// <summary>
-		/// Returns a shared <see cref="PoissonGeneratorDependent{T}"/>
+		/// Returns a shared <see cref="PoissonGeneratorDependentSimple{T}"/>
 		/// as <see cref="IDiscreteGenerator{Int32}"/>.
 		/// </summary>
 		public override IDiscreteGenerator<int> sharedGenerator
@@ -54,20 +53,20 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		}
 
 		/// <summary>
-		/// Creates a new <see cref="PoissonGeneratorDependent{T}"/> and returns it.
+		/// Creates a new <see cref="PoissonGeneratorDependentSimple{T}"/> and returns it.
 		/// </summary>
 		[NotNull]
-		public PoissonGeneratorDependent<IContinuousGenerator> poissonGenerator
+		public PoissonGeneratorDependentSimple<IContinuousGenerator> poissonGenerator
 		{
 			[Pure]
-			get => new PoissonGeneratorDependent<IContinuousGenerator>(
-				m_DependentGeneratorProvider.generator, m_Lambda, m_StartPoint);
+			get => new PoissonGeneratorDependentSimple<IContinuousGenerator>(
+				m_DependentGeneratorProvider.generator, m_Lambda);
 		}
 
 		/// <summary>
-		/// Returns a shared <see cref="PoissonGeneratorDependent{T}"/>.
+		/// Returns a shared <see cref="PoissonGeneratorDependentSimple{T}"/>.
 		/// </summary>
-		public PoissonGeneratorDependent<IContinuousGenerator> sharedPoissonGenerator
+		public PoissonGeneratorDependentSimple<IContinuousGenerator> sharedPoissonGenerator
 		{
 			[Pure]
 			get

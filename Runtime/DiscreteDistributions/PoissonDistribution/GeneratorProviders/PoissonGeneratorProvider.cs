@@ -13,7 +13,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		fileName = "Poisson Generator Provider",
 		order = CreateAssetMenuConstants.Order
 	)]
-	public sealed class PoissonGeneratorProvider : DiscreteGeneratorProvider<uint>
+	public sealed class PoissonGeneratorProvider : DiscreteGeneratorProvider<int>
 	{
 #pragma warning disable CS0649
 		[SerializeField] private PoissonGenerator m_PoissonGenerator;
@@ -22,7 +22,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <summary>
 		/// Creates a new <see cref="PoissonGenerator"/> and returns it as <see cref="IDiscreteGenerator{Int32}"/>.
 		/// </summary>
-		public override IDiscreteGenerator<uint> generator
+		public override IDiscreteGenerator<int> generator
 		{
 			[Pure]
 			get => new PoissonGenerator(m_PoissonGenerator);
@@ -31,7 +31,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <summary>
 		/// Returns a shared <see cref="PoissonGenerator"/> as <see cref="IDiscreteGenerator{Int32}"/>.
 		/// </summary>
-		public override IDiscreteGenerator<uint> sharedGenerator
+		public override IDiscreteGenerator<int> sharedGenerator
 		{
 			[Pure]
 			get => m_PoissonGenerator;

@@ -8,11 +8,10 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	/// <summary>
 	/// Poisson Random Generator using <see cref="PoissonDistribution.Generate{T}(T,float)"/>.
 	/// </summary>
-	public sealed class PoissonGeneratorDependent<T> : IPoissonGenerator where T : IContinuousGenerator
+	public sealed class PoissonGeneratorDependentSimple<T> : IPoissonGenerator where T : IContinuousGenerator
 	{
 		[NotNull] private T m_iidGenerator;
 		private float m_lambda;
-		private int m_startPoint;
 
 		/// <summary>
 		/// Creates a <see cref="PoissonGeneratorDependentSimple{T}"/> with the specified parameters.
@@ -21,23 +20,20 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// Random generator that returns independent and identically distributed random variable in range [0, 1].
 		/// </param>
 		/// <param name="lambda"></param>
-		/// <param name="startPoint"></param>
-		public PoissonGeneratorDependent([NotNull] T iidGenerator, float lambda, int startPoint)
+		public PoissonGeneratorDependentSimple([NotNull] T iidGenerator, float lambda)
 		{
 			m_iidGenerator = iidGenerator;
 			m_lambda = lambda;
-			m_startPoint = startPoint;
 		}
 
 		/// <summary>
 		/// Copy constructor.
 		/// </summary>
 		/// <param name="other"></param>
-		public PoissonGeneratorDependent([NotNull] PoissonGeneratorDependent<T> other)
+		public PoissonGeneratorDependentSimple([NotNull] PoissonGeneratorDependentSimple<T> other)
 		{
 			m_iidGenerator = other.m_iidGenerator;
 			m_lambda = other.m_lambda;
-			m_startPoint = other.m_startPoint;
 		}
 
 		/// <summary>
@@ -61,14 +57,13 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		public int startPoint
 		{
 			[Pure]
-			get => m_startPoint;
-			set => m_startPoint = value;
+			get => PoissonDistribution.DefaultStartPoint;
 		}
 
 		/// <inheritdoc/>
 		public int Generate()
 		{
-			return PoissonDistribution.Generate(m_iidGenerator, m_lambda, m_startPoint);
+			return PoissonDistribution.Generate(m_iidGenerator, m_lambda);
 		}
 	}
 }

@@ -5,8 +5,10 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	/// <summary>
 	/// A <see cref="IDiscreteGenerator{T}"/> using functions from <see cref="PoissonDistribution"/>.
 	/// </summary>
-	public interface IPoissonGenerator : IDiscreteGenerator<uint>
+	public interface IPoissonGenerator : IDiscreteGenerator<int>
 	{
 		float lambda { get; }
+
+		int startPoint { get; }
 	}
 }

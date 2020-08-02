@@ -14,15 +14,29 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	/// </summary>
 	public static class PoissonDistribution
 	{
+		public const int DefaultStartPoint = 0;
+
 		/// <summary>
 		/// Generates a random value using <see cref="Random.value"/> as an iid source.
 		/// </summary>
 		/// <param name="lambda"></param>
-		/// <returns>Generated value.</returns>
+		/// <returns>Generated value in range [0, infinity].</returns>
 		[Pure]
-		public static uint Generate(float lambda)
+		public static int Generate(float lambda)
 		{
 			return Pop(Random.value, lambda);
+		}
+
+		/// <summary>
+		/// Generates a random value using <see cref="Random.value"/> as an iid source.
+		/// </summary>
+		/// <param name="lambda"></param>
+		/// <param name="startPoint"></param>
+		/// <returns>Generated value in range [<paramref name="startPoint"/>, infinity].</returns>
+		[Pure]
+		public static int Generate(float lambda, int startPoint)
+		{
+			return Pop(Random.value, lambda) + startPoint;
 		}
 
 		/// <summary>
@@ -30,15 +44,32 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// </summary>
 		/// <param name="iidFunc">Iid source.</param>
 		/// <param name="lambda"></param>
-		/// <returns>Generated value.</returns>
+		/// <returns>Generated value in range [0, infinity].</returns>
 		/// <remarks>
 		/// <paramref name="iidFunc"/> must return independent and identically distributed random variable
 		/// in range [0, 1].
 		/// </remarks>
 		[Pure]
-		public static uint Generate([NotNull] Func<float> iidFunc, float lambda)
+		public static int Generate([NotNull] Func<float> iidFunc, float lambda)
 		{
 			return Pop(iidFunc(), lambda);
+		}
+
+		/// <summary>
+		/// Generates a random value using <paramref name="iidFunc"/> as an iid source.
+		/// </summary>
+		/// <param name="iidFunc">Iid source.</param>
+		/// <param name="lambda"></param>
+		/// <param name="startPoint"></param>
+		/// <returns>Generated value in range [<paramref name="startPoint"/>, infinity].</returns>
+		/// <remarks>
+		/// <paramref name="iidFunc"/> must return independent and identically distributed random variable
+		/// in range [0, 1].
+		/// </remarks>
+		[Pure]
+		public static int Generate([NotNull] Func<float> iidFunc, float lambda, int startPoint)
+		{
+			return Pop(iidFunc(), lambda) + startPoint;
 		}
 
 		/// <summary>
@@ -47,15 +78,34 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="iidGenerator">Iid source.</param>
 		/// <param name="lambda"></param>
 		/// <typeparam name="T"></typeparam>
-		/// <returns>Generated value.</returns>
+		/// <returns>Generated value in range [0, infinity].</returns>
 		/// <remarks>
 		/// <paramref name="iidGenerator"/> must return independent and identically distributed random variable
 		/// in range [0, 1].
 		/// </remarks>
 		[Pure]
-		public static uint Generate<T>([NotNull] T iidGenerator, float lambda) where T : IContinuousGenerator
+		public static int Generate<T>([NotNull] T iidGenerator, float lambda) where T : IContinuousGenerator
 		{
 			return Pop(iidGenerator.Generate(), lambda);
+		}
+
+		/// <summary>
+		/// Generates a random value using <paramref name="iidGenerator"/> as an iid source.
+		/// </summary>
+		/// <param name="iidGenerator">Iid source.</param>
+		/// <param name="lambda"></param>
+		/// <param name="startPoint"></param>
+		/// <typeparam name="T"></typeparam>
+		/// <returns>Generated value in range [<paramref name="startPoint"/>, infinity].</returns>
+		/// <remarks>
+		/// <paramref name="iidGenerator"/> must return independent and identically distributed random variable
+		/// in range [0, 1].
+		/// </remarks>
+		[Pure]
+		public static int Generate<T>([NotNull] T iidGenerator, float lambda, int startPoint)
+			where T : IContinuousGenerator
+		{
+			return Pop(iidGenerator.Generate(), lambda) + startPoint;
 		}
 
 		/// <summary>
@@ -65,9 +115,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="lambda"></param>
 		/// <returns>Popped value.</returns>
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-		private static uint Pop(float u, float lambda)
+		private static int Pop(float u, float lambda)
 		{
-			uint x = 0;
+			int x = 0;
 			float p = Mathf.Exp(-lambda);
 			float s = p;
 

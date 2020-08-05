@@ -25,6 +25,7 @@ namespace Zor.RandomGenerators
 
 		public const string DiscreteDistributionsFolder = RandomGeneratorProvidersFolder + "Discrete Distributions/";
 		public const string BernoulliDistributionFolder = DiscreteDistributionsFolder + "Bernoulli Distribution/";
+		public const string BinomialDistributionFolder = DiscreteDistributionsFolder + "Binomial Distribution/";
 		public const string PoissonDistributionFolder = DiscreteDistributionsFolder + "Poisson Distribution/";
 		public const string WeightedDistributionFolder = DiscreteDistributionsFolder + "Weighted Distribution/";
 

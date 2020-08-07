@@ -11,7 +11,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.MarsagliaDistributionFolder + "Marsaglia Generator Depended Provider",
 		fileName = "Marsaglia Generator Depended Provider",
-		order = CreateAssetMenuConstants.Order
+		order = CreateAssetMenuConstants.DistributionOrder
 	)]
 	public sealed class MarsagliaGeneratorDependentProvider : ContinuousGeneratorProvider
 	{

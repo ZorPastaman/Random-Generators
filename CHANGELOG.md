@@ -20,5 +20,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Poisson distribution.
 - Unity random generator wrapper.
 - Weighted distribution.
+- Clamp modificator.
+- Round modificator.
 
 [unreleased]: https://github.com/ZorPastaman/Random-Generators

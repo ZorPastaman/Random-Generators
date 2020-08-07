@@ -10,7 +10,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.WeightedDistributionFolder + "Bool Weighted Generator Dependent Provider",
 		fileName = "Bool Weighted Generator Dependent Provider",
-		order = CreateAssetMenuConstants.Order
+		order = CreateAssetMenuConstants.DistributionOrder
 	)]
 	public sealed class BoolWeightedGeneratorDependentProvider : WeightedGeneratorDependentProvider<bool>
 	{

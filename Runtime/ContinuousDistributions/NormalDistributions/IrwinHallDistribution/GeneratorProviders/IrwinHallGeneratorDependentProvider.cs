@@ -11,7 +11,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.IrwinHallDistributionFolder + "Irwin-Hall Generator Dependent Provider",
 		fileName = "Irwin-Hall Generator Dependent Provider",
-		order = CreateAssetMenuConstants.Order
+		order = CreateAssetMenuConstants.DistributionOrder
 	)]
 	public sealed class IrwinHallGeneratorDependentProvider : ContinuousGeneratorProvider
 	{

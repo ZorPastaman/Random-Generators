@@ -11,7 +11,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.AcceptanceRejectionDistributionFolder + "Acceptance-Rejection Curve Generator Provider",
 		fileName = "Acceptance-Rejection Curve Generator Provider",
-		order = CreateAssetMenuConstants.Order
+		order = CreateAssetMenuConstants.DistributionOrder
 	)]
 	public sealed class AcceptanceRejectionCurveGeneratorProvider : ContinuousGeneratorProvider
 	{

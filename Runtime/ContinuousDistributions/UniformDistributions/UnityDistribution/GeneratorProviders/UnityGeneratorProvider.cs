@@ -11,7 +11,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.UniformDistributions
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.UnityDistributionFolder + "Unity Generator Provider",
 		fileName = "Unity Generator Provider",
-		order = CreateAssetMenuConstants.Order
+		order = CreateAssetMenuConstants.DistributionOrder
 	)]
 	public sealed class UnityGeneratorProvider : ContinuousGeneratorProvider
 	{

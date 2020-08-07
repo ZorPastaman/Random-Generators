@@ -23,12 +23,17 @@ namespace Zor.RandomGenerators
 		public const string UniformDistributionsFolder = ContinuousDistributionsFolder + "Uniform Distributions/";
 		public const string UnityDistributionFolder = UniformDistributionsFolder + "Unity Distribution/";
 
+		public const string ContinuousModificatorsFolder = ContinuousDistributionsFolder + "Modificators/";
+
 		public const string DiscreteDistributionsFolder = RandomGeneratorProvidersFolder + "Discrete Distributions/";
 		public const string BernoulliDistributionFolder = DiscreteDistributionsFolder + "Bernoulli Distribution/";
 		public const string BinomialDistributionFolder = DiscreteDistributionsFolder + "Binomial Distribution/";
 		public const string PoissonDistributionFolder = DiscreteDistributionsFolder + "Poisson Distribution/";
 		public const string WeightedDistributionFolder = DiscreteDistributionsFolder + "Weighted Distribution/";
 
-		public const int Order = 446;
+		public const string DiscreteModificatorsFolder = DiscreteDistributionsFolder + "Modificators/";
+
+		public const int DistributionOrder = 446;
+		public const int ModificatorOrder = 447;
 	}
 }

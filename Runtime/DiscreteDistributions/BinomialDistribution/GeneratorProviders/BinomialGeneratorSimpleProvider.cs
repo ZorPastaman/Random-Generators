@@ -11,7 +11,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.BinomialDistributionFolder + "Binomial Generator Simple Provider",
 		fileName = "Binomial Generator Simple Provider",
-		order = CreateAssetMenuConstants.Order
+		order = CreateAssetMenuConstants.DistributionOrder
 	)]
 	public sealed class BinomialGeneratorSimpleProvider : DiscreteGeneratorProvider<int>
 	{

@@ -11,7 +11,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.BernoulliDistributionFolder + "Bernoulli Generator Provider",
 		fileName = "Bernoulli Generator Provider",
-		order = CreateAssetMenuConstants.Order
+		order = CreateAssetMenuConstants.DistributionOrder
 	)]
 	public sealed class BernoulliGeneratorProvider : DiscreteGeneratorProvider<bool>
 	{

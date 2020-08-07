@@ -11,7 +11,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.PoissonDistributionFolder + "Poisson Generator Simple Provider",
 		fileName = "Poisson Generator Simple Provider",
-		order = CreateAssetMenuConstants.Order
+		order = CreateAssetMenuConstants.DistributionOrder
 	)]
 	public sealed class PoissonGeneratorSimpleProvider : DiscreteGeneratorProvider<int>
 	{

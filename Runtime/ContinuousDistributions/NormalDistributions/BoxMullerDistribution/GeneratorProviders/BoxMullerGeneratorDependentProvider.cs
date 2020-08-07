@@ -11,7 +11,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.BoxMullerDistributionFolder + "Box-Muller Generator Dependent Provider",
 		fileName = "Box-Muller Generator Dependent Provider",
-		order = CreateAssetMenuConstants.Order
+		order = CreateAssetMenuConstants.DistributionOrder
 	)]
 	public sealed class BoxMullerGeneratorDependentProvider : ContinuousGeneratorProvider
 	{

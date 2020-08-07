@@ -11,7 +11,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.BatesDistributionFolder + "Bates Generator Simple Provider",
 		fileName = "Bates Generator Simple Provider",
-		order = CreateAssetMenuConstants.Order
+		order = CreateAssetMenuConstants.DistributionOrder
 	)]
 	public sealed class BatesGeneratorSimpleProvider : ContinuousGeneratorProvider
 	{

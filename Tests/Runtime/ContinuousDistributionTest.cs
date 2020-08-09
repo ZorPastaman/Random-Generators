@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.Profiling;
 using Zor.RandomGenerators.ContinuousDistributions;
 using Debug = UnityEngine.Debug;
 
@@ -49,7 +50,12 @@ namespace Zor.RandomGenerators.Tests
 		{
 			for (uint generation = 0; generation < m_GenerationsPerFrame; ++generation)
 			{
+				Profiler.BeginSample("ContinuousTest.Generate");
+
 				float generatedValue = m_generator.Generate();
+
+				Profiler.EndSample();
+
 				int index = FindGeneratedIndex(generatedValue);
 
 				if (index >= 0)

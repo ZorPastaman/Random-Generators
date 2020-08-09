@@ -26,7 +26,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// Creates a new <see cref="WeightedGeneratorDependent{TValue,TGenerator}"/>
 		/// and returns it as <see cref="IDiscreteGenerator{T}"/>.
 		/// </summary>
-		public override IDiscreteGenerator<T> generator
+		public sealed override IDiscreteGenerator<T> generator
 		{
 			[Pure]
 			get => new WeightedGeneratorDependent<T, IContinuousGenerator>(
@@ -38,7 +38,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <see cref="WeightedGeneratorDependent{TValue,TGenerator}"/>
 		/// as <see cref="IDiscreteGenerator{T}"/>.
 		/// </summary>
-		public override IDiscreteGenerator<T> sharedGenerator
+		public sealed override IDiscreteGenerator<T> sharedGenerator
 		{
 			get
 			{

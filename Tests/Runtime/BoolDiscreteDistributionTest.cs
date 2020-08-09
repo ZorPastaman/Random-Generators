@@ -2,6 +2,7 @@
 
 using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.Profiling;
 using Zor.RandomGenerators.DiscreteDistributions;
 using Zor.RandomGenerators.PropertyDrawerAttributes;
 using Debug = UnityEngine.Debug;
@@ -44,7 +45,13 @@ namespace Zor.RandomGenerators.Tests
 		{
 			for (int i = 0; i < m_GenerationsPerFrame; ++i)
 			{
-				if (m_generator.Generate())
+				Profiler.BeginSample("BoolDiscreteTest.Generate");
+
+				bool value = m_generator.Generate();
+
+				Profiler.EndSample();
+
+				if (value)
 				{
 					++m_TrueCount;
 				}

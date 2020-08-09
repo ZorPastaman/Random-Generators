@@ -33,7 +33,17 @@ namespace Zor.RandomGenerators
 
 		public const string DiscreteModificatorsFolder = DiscreteDistributionsFolder + "Modificators/";
 
+		public const string DiscreteDistributionFiltersFolder = DiscreteDistributionsFolder + "Distribution Filters/";
+
+		public const string DiscreteFilteredGeneratorsFolder = DiscreteDistributionFiltersFolder +
+			"Filtered Generators/";
+
+		public const string DiscreteFiltersFolder = DiscreteDistributionFiltersFolder + "Filters/";
+		public const string SameSequenceDiscreteFiltersFolder = DiscreteFiltersFolder + "Same Sequence Filters/";
+
 		public const int DistributionOrder = 446;
 		public const int ModificatorOrder = 447;
+		public const int FilteredGeneratorOrder = 448;
+		public const int FilterOrder = 449;
 	}
 }

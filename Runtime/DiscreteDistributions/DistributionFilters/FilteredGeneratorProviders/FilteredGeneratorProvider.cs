@@ -23,6 +23,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 
 		public sealed override IDiscreteGenerator<T> sharedGenerator
 		{
+			[Pure]
 			get
 			{
 				if (m_sharedFilteredGenerator == null)
@@ -41,8 +42,10 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 			get => new FilteredGenerator<T>(m_FilteredGenerator.GetGenerator<T>(), filters);
 		}
 
+		[NotNull]
 		public FilteredGenerator<T> sharedFilteredGenerator
 		{
+			[Pure]
 			get
 			{
 				if (m_sharedFilteredGenerator == null)
@@ -54,8 +57,10 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 			}
 		}
 
+		[NotNull]
 		private IFilter<T>[] filters
 		{
+			[Pure]
 			get
 			{
 				if (m_filtersCache == null)

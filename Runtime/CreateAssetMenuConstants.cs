@@ -39,6 +39,7 @@ namespace Zor.RandomGenerators
 			"Filtered Generators/";
 
 		public const string DiscreteFiltersFolder = DiscreteDistributionFiltersFolder + "Filters/";
+		public const string OppositePatterDiscreteFiltersFolder = DiscreteFiltersFolder + "Opposite Pattern Filters/";
 		public const string SamePatternDiscreteFiltersFolder = DiscreteFiltersFolder + "Same Pattern Filters/";
 		public const string SameSequenceDiscreteFiltersFolder = DiscreteFiltersFolder + "Same Sequence Filters/";
 

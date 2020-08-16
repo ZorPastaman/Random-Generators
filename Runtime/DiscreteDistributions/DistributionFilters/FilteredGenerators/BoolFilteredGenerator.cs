@@ -8,13 +8,13 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 	public sealed class BoolFilteredGenerator : IDiscreteGenerator<bool>
 	{
 		[NotNull] private IDiscreteGenerator<bool> m_filteredGenerator;
-		[NotNull] private IFilter<bool>[] m_filters;
+		[NotNull] private IDisceteFilter<bool>[] m_filters;
 
 		private bool[] m_sequence;
 		private byte m_currentSequenceLength;
 
 		public BoolFilteredGenerator([NotNull] IDiscreteGenerator<bool> filteredGenerator,
-			[NotNull] params IFilter<bool>[] filters)
+			[NotNull] params IDisceteFilter<bool>[] filters)
 		{
 			m_filteredGenerator = filteredGenerator;
 			m_filters = filters;
@@ -37,7 +37,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		}
 
 		[NotNull]
-		public IFilter<bool>[] filters
+		public IDisceteFilter<bool>[] filters
 		{
 			[Pure]
 			get => m_filters;

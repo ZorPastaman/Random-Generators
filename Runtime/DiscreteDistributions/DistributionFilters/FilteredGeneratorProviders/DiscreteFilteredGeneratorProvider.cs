@@ -5,20 +5,20 @@ using UnityEngine;
 
 namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 {
-	public abstract class FilteredGeneratorProvider<T> : DiscreteGeneratorProvider<T>
+	public abstract class DiscreteFilteredGeneratorProvider<T> : DiscreteGeneratorProvider<T>
 	{
 #pragma warning disable CS0649
 		[SerializeField] private DiscreteGeneratorProviderReference m_FilteredGenerator;
 		[SerializeField] private DiscreteFilterProviderReference[] m_Filters;
 #pragma warning restore CS0649
 
-		private FilteredGenerator<T> m_sharedFilteredGenerator;
-		private IFilter<T>[] m_filtersCache;
+		private DiscreteFilteredGenerator<T> m_sharedFilteredGenerator;
+		private IDisceteFilter<T>[] m_filtersCache;
 
 		public sealed override IDiscreteGenerator<T> generator
 		{
 			[Pure]
-			get => new FilteredGenerator<T>(m_FilteredGenerator.GetGenerator<T>(), filters);
+			get => new DiscreteFilteredGenerator<T>(m_FilteredGenerator.GetGenerator<T>(), filters);
 		}
 
 		public sealed override IDiscreteGenerator<T> sharedGenerator
@@ -36,14 +36,14 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		}
 
 		[NotNull]
-		public FilteredGenerator<T> filteredGenerator
+		public DiscreteFilteredGenerator<T> filteredGenerator
 		{
 			[Pure]
-			get => new FilteredGenerator<T>(m_FilteredGenerator.GetGenerator<T>(), filters);
+			get => new DiscreteFilteredGenerator<T>(m_FilteredGenerator.GetGenerator<T>(), filters);
 		}
 
 		[NotNull]
-		public FilteredGenerator<T> sharedFilteredGenerator
+		public DiscreteFilteredGenerator<T> sharedFilteredGenerator
 		{
 			[Pure]
 			get
@@ -58,7 +58,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		}
 
 		[NotNull]
-		private IFilter<T>[] filters
+		private IDisceteFilter<T>[] filters
 		{
 			[Pure]
 			get
@@ -66,7 +66,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 				if (m_filtersCache == null)
 				{
 					int filtersCount = m_Filters.Length;
-					m_filtersCache = new IFilter<T>[filtersCount];
+					m_filtersCache = new IDisceteFilter<T>[filtersCount];
 
 					for (int i = 0; i < filtersCount; ++i)
 					{

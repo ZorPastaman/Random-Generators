@@ -4,9 +4,9 @@ using JetBrains.Annotations;
 
 namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 {
-	public static class FilterExtensions
+	public static class DiscreteFilterExtensions
 	{
-		public static bool NeedRegenerate<T>([NotNull] this IFilter<T>[] filters, [NotNull] T[] sequence,
+		public static bool NeedRegenerate<T>([NotNull] this IDisceteFilter<T>[] filters, [NotNull] T[] sequence,
 			[NotNull] T newValue, byte sequenceLength)
 		{
 			bool needRegenerate = false;

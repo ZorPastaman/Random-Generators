@@ -10,7 +10,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		fileName = "Bool Opposite Pattern Discrete Filter",
 		order = CreateAssetMenuConstants.FilterOrder
 	)]
-	public sealed class BoolOppositePatternFilterProvider : FilterProvider<bool>
+	public sealed class BoolOppositePatternFilterProvider : DiscreteFilterProvider<bool>
 	{
 #pragma warning disable CS0649
 		[SerializeField] private byte m_MaxPatternLength;
@@ -18,13 +18,13 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 
 		private BoolOppositePatternFilter m_sharedFilter;
 
-		public override IFilter<bool> filter
+		public override IDisceteFilter<bool> filter
 		{
 			[Pure]
 			get => new BoolOppositePatternFilter(m_MaxPatternLength);
 		}
 
-		public override IFilter<bool> sharedFilter
+		public override IDisceteFilter<bool> sharedFilter
 		{
 			[Pure]
 			get

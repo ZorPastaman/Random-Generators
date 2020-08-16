@@ -9,13 +9,13 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 	public struct DiscreteFilterProviderReference
 	{
 #pragma warning disable CS0649
-		[SerializeField] private FilterProvider_Base m_FilterProvider;
+		[SerializeField] private DiscreteFilterProvider_Base m_FilterProvider;
 		[SerializeField] private bool m_Shared;
 #pragma warning restore CS0649
 
-		public IFilter<T> GetFilter<T>()
+		public IDisceteFilter<T> GetFilter<T>()
 		{
-			if (m_FilterProvider is FilterProvider<T> typedFilterProvider)
+			if (m_FilterProvider is DiscreteFilterProvider<T> typedFilterProvider)
 			{
 				return m_Shared ? typedFilterProvider.sharedFilter : typedFilterProvider.filter;
 			}

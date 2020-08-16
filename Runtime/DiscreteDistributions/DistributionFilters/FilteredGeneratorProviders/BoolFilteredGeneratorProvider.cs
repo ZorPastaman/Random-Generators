@@ -18,7 +18,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 #pragma warning restore CS0649
 
 		private BoolFilteredGenerator m_sharedFilteredGenerator;
-		private IFilter<bool>[] m_filtersCache;
+		private IDisceteFilter<bool>[] m_filtersCache;
 
 		public override IDiscreteGenerator<bool> generator
 		{
@@ -63,7 +63,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		}
 
 		[NotNull]
-		private IFilter<bool>[] filters
+		private IDisceteFilter<bool>[] filters
 		{
 			[Pure]
 			get
@@ -71,7 +71,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 				if (m_filtersCache == null)
 				{
 					int filtersCount = m_Filters.Length;
-					m_filtersCache = new IFilter<bool>[filtersCount];
+					m_filtersCache = new IDisceteFilter<bool>[filtersCount];
 
 					for (int i = 0; i < filtersCount; ++i)
 					{

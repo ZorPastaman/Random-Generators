@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 {
-	public abstract class SameSequenceFilterProvider<T> : FilterProvider<T>
+	public abstract class SameSequenceFilterProvider<T> : DiscreteFilterProvider<T>
 	{
 #pragma warning disable CS0649
 		[SerializeField] private byte m_MaxSameSequenceLength;
@@ -13,13 +13,13 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 
 		private SameSequenceFilter<T> m_sharedFilter;
 
-		public override IFilter<T> filter
+		public override IDisceteFilter<T> filter
 		{
 			[Pure]
 			get => new SameSequenceFilter<T>(m_MaxSameSequenceLength);
 		}
 
-		public override IFilter<T> sharedFilter
+		public override IDisceteFilter<T> sharedFilter
 		{
 			[Pure]
 			get

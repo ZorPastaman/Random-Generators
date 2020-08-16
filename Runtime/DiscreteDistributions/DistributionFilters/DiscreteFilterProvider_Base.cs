@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 {
-	public abstract class FilterProvider_Base : ScriptableObject
+	public abstract class DiscreteFilterProvider_Base : ScriptableObject
 	{
 	}
 }

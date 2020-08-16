@@ -5,23 +5,23 @@ using JetBrains.Annotations;
 
 namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 {
-	public sealed class FilteredGenerator<T> : IDiscreteGenerator<T>
+	public sealed class DiscreteFilteredGenerator<T> : IDiscreteGenerator<T>
 	{
 		[NotNull] private IDiscreteGenerator<T> m_filteredGenerator;
-		[NotNull] private IFilter<T>[] m_filters;
+		[NotNull] private IDisceteFilter<T>[] m_filters;
 
 		private T[] m_sequence;
 		private byte m_currentSequenceLength;
 
-		public FilteredGenerator([NotNull] IDiscreteGenerator<T> filteredGenerator,
-			[NotNull] params IFilter<T>[] filters)
+		public DiscreteFilteredGenerator([NotNull] IDiscreteGenerator<T> filteredGenerator,
+			[NotNull] params IDisceteFilter<T>[] filters)
 		{
 			m_filteredGenerator = filteredGenerator;
 			m_filters = filters;
 			InitializeSequence();
 		}
 
-		public FilteredGenerator([NotNull] FilteredGenerator<T> other)
+		public DiscreteFilteredGenerator([NotNull] DiscreteFilteredGenerator<T> other)
 		{
 			m_filteredGenerator = other.m_filteredGenerator;
 			m_filters = other.m_filters;
@@ -37,7 +37,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		}
 
 		[NotNull]
-		public IFilter<T>[] filters
+		public IDisceteFilter<T>[] filters
 		{
 			[Pure]
 			get => m_filters;

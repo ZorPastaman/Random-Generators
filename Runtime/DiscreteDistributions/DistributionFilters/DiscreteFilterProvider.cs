@@ -4,12 +4,12 @@ using JetBrains.Annotations;
 
 namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 {
-	public abstract class FilterProvider<T> : FilterProvider_Base
+	public abstract class DiscreteFilterProvider<T> : DiscreteFilterProvider_Base
 	{
 		[NotNull]
-		public abstract IFilter<T> filter { get; }
+		public abstract IDisceteFilter<T> filter { get; }
 
 		[NotNull]
-		public abstract IFilter<T> sharedFilter { get; }
+		public abstract IDisceteFilter<T> sharedFilter { get; }
 	}
 }

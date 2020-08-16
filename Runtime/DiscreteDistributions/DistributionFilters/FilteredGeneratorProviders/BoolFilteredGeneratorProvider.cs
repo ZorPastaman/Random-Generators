@@ -2,6 +2,7 @@
 
 using JetBrains.Annotations;
 using UnityEngine;
+using Zor.RandomGenerators.PropertyDrawerAttributes;
 
 namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 {
@@ -14,7 +15,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 	{
 #pragma warning disable CS0649
 		[SerializeField] private DiscreteGeneratorProviderReference m_FilteredGenerator;
-		[SerializeField] private DiscreteFilterProviderReference[] m_Filters;
+		[SerializeField, RequireDiscreteFilter(typeof(bool))] private DiscreteFilterProviderReference[] m_Filters;
 #pragma warning restore CS0649
 
 		private BoolFilteredGenerator m_sharedFilteredGenerator;

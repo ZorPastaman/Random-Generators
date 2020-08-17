@@ -29,6 +29,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 #### Filters
 - Ascendant Sequence filter.
+- Descendant Sequence filter.
 - Opposite Pattern filter.
 - Pair filter.
 - Same Pattern filter.

@@ -13,7 +13,12 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 
 			for (int i = 0, count = filters.Length; !needRegenerate && i < count; ++i)
 			{
-				needRegenerate = filters[i].NeedRegenerate(sequence, newValue, sequenceLength);
+				IDisceteFilter<T> filter = filters[i];
+
+				if (filter.requiredSequenceLength <= sequenceLength)
+				{
+					needRegenerate = filter.NeedRegenerate(sequence, newValue, sequenceLength);
+				}
 			}
 
 			return needRegenerate;

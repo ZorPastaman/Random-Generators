@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Added
+
+#### Distributions
 - Random generators infrastructure.
 - Random generator providers infrastructure.
 - Acceptance-Rejection distribution.
@@ -20,7 +22,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Poisson distribution.
 - Unity random generator wrapper.
 - Weighted distribution.
+
+#### Modificators
 - Clamp modificator.
 - Round modificator.
+
+#### Filters
+- Ascendant Sequence filter.
+- Opposite Pattern filter.
+- Pair filter.
+- Same Pattern filter.
+- Same Sequence filter.
 
 [unreleased]: https://github.com/ZorPastaman/Random-Generators

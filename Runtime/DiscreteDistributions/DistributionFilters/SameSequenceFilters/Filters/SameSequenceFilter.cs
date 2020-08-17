@@ -37,11 +37,6 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		[Pure]
 		public bool NeedRegenerate(T[] sequence, T newValue, byte sequenceLength)
 		{
-			if (sequenceLength < m_maxSameSequenceLength)
-			{
-				return false;
-			}
-
 			bool hasDifferent = false;
 
 			for (int i = sequenceLength - m_maxSameSequenceLength; !hasDifferent && i < sequenceLength; ++i)

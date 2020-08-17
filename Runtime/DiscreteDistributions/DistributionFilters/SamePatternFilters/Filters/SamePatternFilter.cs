@@ -37,17 +37,14 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		[Pure]
 		public bool NeedRegenerate(T[] sequence, T newValue, byte sequenceLength)
 		{
-			byte patternLength = (byte)(m_maxPatternLength * 2 + 1);
-
-			if (sequenceLength < patternLength ||
-				!s_comparer.Equals(sequence[sequenceLength - m_maxPatternLength - 1], newValue))
+			if (!s_comparer.Equals(sequence[sequenceLength - m_maxPatternLength - 1], newValue))
 			{
 				return false;
 			}
 
 			bool nonPattern = false;
 
-			for (int i = sequenceLength - patternLength, j = sequenceLength - m_maxPatternLength;
+			for (int i = sequenceLength - m_maxPatternLength * 2 - 1, j = sequenceLength - m_maxPatternLength;
 				!nonPattern && j < sequenceLength;
 				++i, ++j)
 			{

@@ -36,8 +36,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 
 		public bool NeedRegenerate(T[] sequence, T newValue, byte sequenceLength)
 		{
-			return sequenceLength > m_elementsBetweenPair &&
-				s_comparer.Equals(sequence[sequenceLength - m_elementsBetweenPair - 1], newValue);
+			return s_comparer.Equals(sequence[sequenceLength - m_elementsBetweenPair - 1], newValue);
 		}
 	}
 }

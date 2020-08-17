@@ -9,7 +9,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.UniformDistributions
 	/// Provides <see cref="UnityGenerator"/>.
 	/// </summary>
 	[CreateAssetMenu(
-		menuName = CreateAssetMenuConstants.UnityDistributionFolder + "Unity Generator Provider",
+		menuName = CreateAssetMenuConstants.UnityContinuousDistributionFolder + "Unity Generator Provider",
 		fileName = "Unity Generator Provider",
 		order = CreateAssetMenuConstants.DistributionOrder
 	)]

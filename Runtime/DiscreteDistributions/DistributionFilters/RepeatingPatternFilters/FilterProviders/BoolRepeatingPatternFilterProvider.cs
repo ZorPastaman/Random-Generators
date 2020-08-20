@@ -5,11 +5,12 @@ using UnityEngine;
 namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 {
 	[CreateAssetMenu(
-		menuName = CreateAssetMenuConstants.AscendantSequenceDiscreteFiltersFolder + "Bool Ascendant Sequence Filter Provider",
-		fileName = "Bool Ascendant Sequence Filter Provider",
+		menuName = CreateAssetMenuConstants.RepeatingPatternDiscreteFiltersFolder +
+			"Bool Repeating Pattern Filter Provider",
+		fileName = "Bool Repeating Pattern Filter Provider",
 		order = CreateAssetMenuConstants.FilterOrder
 	)]
-	public sealed class BoolAscendantSequenceFilterProvider : AscendantSequenceFilterProvider<bool>
+	public sealed class BoolRepeatingPatternFilterProvider : RepeatingPatternFilterProvider<bool>
 	{
 	}
 }

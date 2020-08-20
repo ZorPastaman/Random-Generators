@@ -13,13 +13,13 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 
 		private SamePatternFilter<T> m_sharedFilter;
 
-		public override IDisceteFilter<T> filter
+		public sealed override IDisceteFilter<T> filter
 		{
 			[Pure]
 			get => new SamePatternFilter<T>(m_MaxSamePatternLength);
 		}
 
-		public override IDisceteFilter<T> sharedFilter
+		public sealed override IDisceteFilter<T> sharedFilter
 		{
 			[Pure]
 			get

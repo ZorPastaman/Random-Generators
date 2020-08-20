@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 {
 	[CreateAssetMenu(
-		menuName = CreateAssetMenuConstants.AscendantSequenceFiltersFolder + "Float Ascendant Sequence Filter Provider",
+		menuName = CreateAssetMenuConstants.AscendantSequenceDiscreteFiltersFolder + "Float Ascendant Sequence Filter Provider",
 		fileName = "Float Ascendant Sequence Filter Provider",
 		order = CreateAssetMenuConstants.FilterOrder
 	)]

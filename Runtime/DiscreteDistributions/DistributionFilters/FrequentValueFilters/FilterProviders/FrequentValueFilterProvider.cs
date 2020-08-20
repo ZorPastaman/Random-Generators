@@ -14,13 +14,13 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 
 		private FrequentValueFilter<T> m_sharedFilter;
 
-		public sealed override IDisceteFilter<T> filter
+		public sealed override IDiscreteFilter<T> filter
 		{
 			[Pure]
 			get => new FrequentValueFilter<T>(m_ControlledSequenceLength, m_AllowedRepeats);
 		}
 
-		public sealed override IDisceteFilter<T> sharedFilter
+		public sealed override IDiscreteFilter<T> sharedFilter
 		{
 			[Pure]
 			get

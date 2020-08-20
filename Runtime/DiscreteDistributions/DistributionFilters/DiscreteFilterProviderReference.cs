@@ -13,7 +13,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		[SerializeField] private bool m_Shared;
 #pragma warning restore CS0649
 
-		public IDisceteFilter<T> GetFilter<T>()
+		public IDiscreteFilter<T> GetFilter<T>()
 		{
 			if (m_FilterProvider is DiscreteFilterProvider<T> typedFilterProvider)
 			{

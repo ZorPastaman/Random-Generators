@@ -4,7 +4,7 @@ using JetBrains.Annotations;
 
 namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 {
-	public interface IDisceteFilter<in T>
+	public interface IDiscreteFilter<in T>
 	{
 		byte requiredSequenceLength { get; }
 

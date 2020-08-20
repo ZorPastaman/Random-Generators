@@ -5,7 +5,7 @@ using JetBrains.Annotations;
 
 namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 {
-	public sealed class FrequentValueFilter<T> : IDisceteFilter<T>
+	public sealed class FrequentValueFilter<T> : IDiscreteFilter<T>
 	{
 		private static readonly EqualityComparer<T> s_comparer = EqualityComparer<T>.Default;
 

@@ -7,9 +7,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 	public abstract class DiscreteFilterProvider<T> : DiscreteFilterProvider_Base
 	{
 		[NotNull]
-		public abstract IDisceteFilter<T> filter { get; }
+		public abstract IDiscreteFilter<T> filter { get; }
 
 		[NotNull]
-		public abstract IDisceteFilter<T> sharedFilter { get; }
+		public abstract IDiscreteFilter<T> sharedFilter { get; }
 	}
 }

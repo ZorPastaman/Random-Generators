@@ -13,7 +13,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 #pragma warning restore CS0649
 
 		private DiscreteFilteredGenerator<T> m_sharedFilteredGenerator;
-		private IDisceteFilter<T>[] m_filtersCache;
+		private IDiscreteFilter<T>[] m_filtersCache;
 
 		public sealed override IDiscreteGenerator<T> generator
 		{
@@ -58,7 +58,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		}
 
 		[NotNull]
-		private IDisceteFilter<T>[] filters
+		private IDiscreteFilter<T>[] filters
 		{
 			[Pure]
 			get
@@ -66,7 +66,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 				if (m_filtersCache == null)
 				{
 					int filtersCount = m_Filters.Length;
-					m_filtersCache = new IDisceteFilter<T>[filtersCount];
+					m_filtersCache = new IDiscreteFilter<T>[filtersCount];
 
 					for (int i = 0; i < filtersCount; ++i)
 					{

@@ -14,13 +14,13 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 
 		private DescendantSequenceFilter<T> m_sharedFilter;
 
-		public sealed override IDisceteFilter<T> filter
+		public sealed override IDiscreteFilter<T> filter
 		{
 			[Pure]
 			get => new DescendantSequenceFilter<T>(m_DescendantSequenceLength);
 		}
 
-		public sealed override IDisceteFilter<T> sharedFilter
+		public sealed override IDiscreteFilter<T> sharedFilter
 		{
 			[Pure]
 			get

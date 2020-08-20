@@ -4,7 +4,7 @@ using JetBrains.Annotations;
 
 namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 {
-	public sealed class BoolOppositePatternFilter : IDisceteFilter<bool>
+	public sealed class BoolOppositePatternFilter : IDiscreteFilter<bool>
 	{
 		private byte m_maxPatternLength;
 

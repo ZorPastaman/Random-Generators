@@ -13,13 +13,13 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 
 		private PairFilter<T> m_sharedFilter;
 
-		public sealed override IDisceteFilter<T> filter
+		public sealed override IDiscreteFilter<T> filter
 		{
 			[Pure]
 			get => new PairFilter<T>(m_ElementsBetweenPair);
 		}
 
-		public sealed override IDisceteFilter<T> sharedFilter
+		public sealed override IDiscreteFilter<T> sharedFilter
 		{
 			[Pure]
 			get

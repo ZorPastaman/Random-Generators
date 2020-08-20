@@ -5,7 +5,7 @@ using JetBrains.Annotations;
 
 namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 {
-	public sealed class DescendantSequenceFilter<T> : IDisceteFilter<T> where T : IComparable<T>
+	public sealed class DescendantSequenceFilter<T> : IDiscreteFilter<T> where T : IComparable<T>
 	{
 		private byte m_descendantSequenceLength;
 

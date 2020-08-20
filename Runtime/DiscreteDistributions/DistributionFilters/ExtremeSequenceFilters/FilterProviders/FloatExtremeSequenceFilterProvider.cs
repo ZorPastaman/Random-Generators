@@ -16,13 +16,13 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		[SerializeField] private FloatExtremeSequenceFilter m_ExtremeSequenceFilter;
 #pragma warning restore CS0649
 
-		public override IDisceteFilter<float> filter
+		public override IDiscreteFilter<float> filter
 		{
 			[Pure]
 			get => new FloatExtremeSequenceFilter(m_ExtremeSequenceFilter);
 		}
 
-		public override IDisceteFilter<float> sharedFilter
+		public override IDiscreteFilter<float> sharedFilter
 		{
 			[Pure]
 			get => m_ExtremeSequenceFilter;

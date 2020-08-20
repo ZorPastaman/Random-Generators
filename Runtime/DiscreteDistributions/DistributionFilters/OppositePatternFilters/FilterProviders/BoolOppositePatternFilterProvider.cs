@@ -18,13 +18,13 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 
 		private BoolOppositePatternFilter m_sharedFilter;
 
-		public override IDisceteFilter<bool> filter
+		public override IDiscreteFilter<bool> filter
 		{
 			[Pure]
 			get => new BoolOppositePatternFilter(m_MaxPatternLength);
 		}
 
-		public override IDisceteFilter<bool> sharedFilter
+		public override IDiscreteFilter<bool> sharedFilter
 		{
 			[Pure]
 			get

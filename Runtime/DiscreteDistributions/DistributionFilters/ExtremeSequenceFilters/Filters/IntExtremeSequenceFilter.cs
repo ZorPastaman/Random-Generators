@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 {
 	[Serializable]
-	public sealed class IntExtremeSequenceFilter : IDisceteFilter<int>
+	public sealed class IntExtremeSequenceFilter : IDiscreteFilter<int>
 	{
 #pragma warning disable CS0649
 		[SerializeField] private int m_ExpectedMin;

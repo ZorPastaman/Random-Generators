@@ -48,6 +48,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 			}
 		}
 
+		[Pure]
 		public bool Generate()
 		{
 			bool generated = m_filteredGenerator.Generate();

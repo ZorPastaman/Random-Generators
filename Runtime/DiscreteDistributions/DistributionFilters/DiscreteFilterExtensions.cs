@@ -6,6 +6,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 {
 	public static class DiscreteFilterExtensions
 	{
+		[Pure]
 		public static bool NeedRegenerate<T>([NotNull] this IDisceteFilter<T>[] filters, [NotNull] T[] sequence,
 			[NotNull] T newValue, byte sequenceLength)
 		{
@@ -14,11 +15,8 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 			for (int i = 0, count = filters.Length; !needRegenerate && i < count; ++i)
 			{
 				IDisceteFilter<T> filter = filters[i];
-
-				if (filter.requiredSequenceLength <= sequenceLength)
-				{
-					needRegenerate = filter.NeedRegenerate(sequence, newValue, sequenceLength);
-				}
+				needRegenerate = filter.requiredSequenceLength <= sequenceLength &&
+					filter.NeedRegenerate(sequence, newValue, sequenceLength);
 			}
 
 			return needRegenerate;

@@ -18,13 +18,14 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		[SerializeField, RequireDiscreteFilter(typeof(bool))] private DiscreteFilterProviderReference[] m_Filters;
 #pragma warning restore CS0649
 
-		private BoolFilteredGenerator m_sharedFilteredGenerator;
+		private BoolFilteredGenerator<IDiscreteGenerator<bool>> m_sharedFilteredGenerator;
 		private IDiscreteFilter<bool>[] m_filtersCache;
 
 		public override IDiscreteGenerator<bool> generator
 		{
 			[Pure]
-			get => new BoolFilteredGenerator(m_FilteredGenerator.GetGenerator<bool>(), filters);
+			get => new BoolFilteredGenerator<IDiscreteGenerator<bool>>(
+				m_FilteredGenerator.GetGenerator<bool>(), filters);
 		}
 
 		public override IDiscreteGenerator<bool> sharedGenerator
@@ -42,14 +43,15 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		}
 
 		[NotNull]
-		public BoolFilteredGenerator filteredGenerator
+		public BoolFilteredGenerator<IDiscreteGenerator<bool>> filteredGenerator
 		{
 			[Pure]
-			get => new BoolFilteredGenerator(m_FilteredGenerator.GetGenerator<bool>(), filters);
+			get => new BoolFilteredGenerator<IDiscreteGenerator<bool>>(
+				m_FilteredGenerator.GetGenerator<bool>(), filters);
 		}
 
 		[NotNull]
-		public BoolFilteredGenerator sharedFilteredGenerator
+		public BoolFilteredGenerator<IDiscreteGenerator<bool>> sharedFilteredGenerator
 		{
 			[Pure]
 			get

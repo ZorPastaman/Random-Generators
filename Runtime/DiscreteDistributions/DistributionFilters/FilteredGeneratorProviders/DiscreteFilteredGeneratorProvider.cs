@@ -12,13 +12,14 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		[SerializeField] private DiscreteFilterProviderReference[] m_Filters;
 #pragma warning restore CS0649
 
-		private DiscreteFilteredGenerator<T> m_sharedFilteredGenerator;
+		private DiscreteFilteredGenerator<T, IDiscreteGenerator<T>> m_sharedFilteredGenerator;
 		private IDiscreteFilter<T>[] m_filtersCache;
 
 		public sealed override IDiscreteGenerator<T> generator
 		{
 			[Pure]
-			get => new DiscreteFilteredGenerator<T>(m_FilteredGenerator.GetGenerator<T>(), filters);
+			get => new DiscreteFilteredGenerator<T, IDiscreteGenerator<T>>(
+				m_FilteredGenerator.GetGenerator<T>(), filters);
 		}
 
 		public sealed override IDiscreteGenerator<T> sharedGenerator
@@ -36,14 +37,15 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		}
 
 		[NotNull]
-		public DiscreteFilteredGenerator<T> filteredGenerator
+		public DiscreteFilteredGenerator<T, IDiscreteGenerator<T>> filteredGenerator
 		{
 			[Pure]
-			get => new DiscreteFilteredGenerator<T>(m_FilteredGenerator.GetGenerator<T>(), filters);
+			get => new DiscreteFilteredGenerator<T, IDiscreteGenerator<T>>(
+				m_FilteredGenerator.GetGenerator<T>(), filters);
 		}
 
 		[NotNull]
-		public DiscreteFilteredGenerator<T> sharedFilteredGenerator
+		public DiscreteFilteredGenerator<T, IDiscreteGenerator<T>> sharedFilteredGenerator
 		{
 			[Pure]
 			get

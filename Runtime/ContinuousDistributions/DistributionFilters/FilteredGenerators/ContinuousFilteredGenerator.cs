@@ -3,26 +3,25 @@
 using System;
 using JetBrains.Annotations;
 
-namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
+namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 {
-	public sealed class DiscreteFilteredGenerator<TValue, TGenerator> : IDiscreteGenerator<TValue>
-		where TGenerator : IDiscreteGenerator<TValue>
+	public sealed class ContinuousFilteredGenerator<T> : IContinuousGenerator where T : IContinuousGenerator
 	{
-		[NotNull] private TGenerator m_filteredGenerator;
-		[NotNull] private IDiscreteFilter<TValue>[] m_filters;
+		[NotNull] private T m_filteredGenerator;
+		[NotNull] private IContinuousFilter[] m_filters;
 
-		private TValue[] m_sequence;
+		private float[] m_sequence;
 		private byte m_currentSequenceLength;
 
-		public DiscreteFilteredGenerator([NotNull] TGenerator filteredGenerator,
-			[NotNull] params IDiscreteFilter<TValue>[] filters)
+		public ContinuousFilteredGenerator([NotNull] T filteredGenerator,
+			[NotNull] params IContinuousFilter[] filters)
 		{
 			m_filteredGenerator = filteredGenerator;
 			m_filters = filters;
 			InitializeSequence();
 		}
 
-		public DiscreteFilteredGenerator([NotNull] DiscreteFilteredGenerator<TValue, TGenerator> other)
+		public ContinuousFilteredGenerator([NotNull] ContinuousFilteredGenerator<T> other)
 		{
 			m_filteredGenerator = other.m_filteredGenerator;
 			m_filters = other.m_filters;
@@ -30,7 +29,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		}
 
 		[NotNull]
-		public TGenerator filteredGenerator
+		public T filteredGenerator
 		{
 			[Pure]
 			get => m_filteredGenerator;
@@ -38,7 +37,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		}
 
 		[NotNull]
-		public IDiscreteFilter<TValue>[] filters
+		public IContinuousFilter[] filters
 		{
 			[Pure]
 			get => m_filters;
@@ -49,9 +48,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 			}
 		}
 
-		public TValue Generate()
+		public float Generate()
 		{
-			TValue generated;
+			float generated;
 
 			do
 			{
@@ -81,7 +80,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 				sequenceLength = Math.Max(sequenceLength, m_filters[i].requiredSequenceLength);
 			}
 
-			m_sequence = new TValue[sequenceLength];
+			m_sequence = new float[sequenceLength];
 			m_currentSequenceLength = 0;
 		}
 	}

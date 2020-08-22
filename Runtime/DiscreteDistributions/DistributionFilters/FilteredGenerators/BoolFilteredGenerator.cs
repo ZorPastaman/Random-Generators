@@ -5,23 +5,22 @@ using JetBrains.Annotations;
 
 namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 {
-	public sealed class BoolFilteredGenerator : IDiscreteGenerator<bool>
+	public sealed class BoolFilteredGenerator<T> : IDiscreteGenerator<bool> where T : IDiscreteGenerator<bool>
 	{
-		[NotNull] private IDiscreteGenerator<bool> m_filteredGenerator;
+		[NotNull] private T m_filteredGenerator;
 		[NotNull] private IDiscreteFilter<bool>[] m_filters;
 
 		private bool[] m_sequence;
 		private byte m_currentSequenceLength;
 
-		public BoolFilteredGenerator([NotNull] IDiscreteGenerator<bool> filteredGenerator,
-			[NotNull] params IDiscreteFilter<bool>[] filters)
+		public BoolFilteredGenerator([NotNull] T filteredGenerator, [NotNull] params IDiscreteFilter<bool>[] filters)
 		{
 			m_filteredGenerator = filteredGenerator;
 			m_filters = filters;
 			InitializeSequence();
 		}
 
-		public BoolFilteredGenerator([NotNull] BoolFilteredGenerator other)
+		public BoolFilteredGenerator([NotNull] BoolFilteredGenerator<T> other)
 		{
 			m_filteredGenerator = other.m_filteredGenerator;
 			m_filters = other.m_filters;
@@ -29,7 +28,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		}
 
 		[NotNull]
-		public IDiscreteGenerator<bool> filteredGenerator
+		public T filteredGenerator
 		{
 			[Pure]
 			get => m_filteredGenerator;

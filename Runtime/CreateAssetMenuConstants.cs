@@ -32,6 +32,7 @@ namespace Zor.RandomGenerators
 			"Filtered Generators/";
 
 		public const string ContinuousFiltersFolder = ContinuousDistributionFiltersFolder + "Filters/";
+		public const string LittleDifferenceFiltersFolder = ContinuousFiltersFolder + "Little Difference Filters/";
 
 		public const string DiscreteDistributionsFolder = RandomGeneratorProvidersFolder + "Discrete Distributions/";
 		public const string BernoulliDistributionFolder = DiscreteDistributionsFolder + "Bernoulli Distribution/";

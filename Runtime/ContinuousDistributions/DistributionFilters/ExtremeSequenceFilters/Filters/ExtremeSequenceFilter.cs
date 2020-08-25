@@ -4,10 +4,10 @@ using System;
 using JetBrains.Annotations;
 using UnityEngine;
 
-namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
+namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 {
 	[Serializable]
-	public sealed class FloatExtremeSequenceFilter : IDiscreteFilter<float>
+	public sealed class ExtremeSequenceFilter : IContinuousFilter
 	{
 #pragma warning disable CS0649
 		[SerializeField] private float m_ExpectedMin;
@@ -16,11 +16,11 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		[SerializeField] private byte m_ExtremeSequenceLength = 6;
 #pragma warning restore CS0649
 
-		public FloatExtremeSequenceFilter()
+		public ExtremeSequenceFilter()
 		{
 		}
 
-		public FloatExtremeSequenceFilter(float expectedMin, float expectedMax, float range, byte extremeSequenceLength)
+		public ExtremeSequenceFilter(float expectedMin, float expectedMax, float range, byte extremeSequenceLength)
 		{
 			m_ExpectedMin = expectedMin;
 			m_ExpectedMax = expectedMax;
@@ -28,7 +28,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 			m_ExtremeSequenceLength = extremeSequenceLength;
 		}
 
-		public FloatExtremeSequenceFilter([NotNull] FloatExtremeSequenceFilter other)
+		public ExtremeSequenceFilter([NotNull] ExtremeSequenceFilter other)
 		{
 			m_ExpectedMin = other.m_ExpectedMin;
 			m_ExpectedMax = other.m_ExpectedMax;

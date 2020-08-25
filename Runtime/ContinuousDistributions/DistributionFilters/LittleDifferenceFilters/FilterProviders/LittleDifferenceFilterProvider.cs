@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 {
 	[CreateAssetMenu(
-		menuName = CreateAssetMenuConstants.LittleDifferenceFiltersFolder + "Little Difference Filter Provider",
+		menuName = CreateAssetMenuConstants.LittleDifferenceContinuousFiltersFolder + "Little Difference Filter Provider",
 		fileName = "Little Difference Filter Provider",
 		order = CreateAssetMenuConstants.FilterOrder
 	)]

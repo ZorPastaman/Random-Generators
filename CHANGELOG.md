@@ -32,6 +32,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Ascendant Sequence filter.
 - Descendant Sequence filter.
 - Extreme Sequence filter.
+- Greater Sequence filter.
 - Frequent Value filter.
 - Little Difference filter.
 - Opposite Pattern filter.

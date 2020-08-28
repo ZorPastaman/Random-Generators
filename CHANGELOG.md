@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Box-Muller distribution.
 - Irwin-Hall distribution.
 - Marsaglia distribution.
+- Sharp random generator wrapper.
 - Poisson distribution.
 - Unity random generator wrapper.
 - Weighted distribution.

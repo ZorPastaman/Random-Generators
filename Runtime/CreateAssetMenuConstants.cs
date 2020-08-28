@@ -21,6 +21,7 @@ namespace Zor.RandomGenerators
 		public const string MarsagliaDistributionFolder = NormalDistributionsFolder + "Marsaglia Distribution/";
 
 		public const string UniformDistributionsFolder = ContinuousDistributionsFolder + "Uniform Distributions/";
+		public const string SharpContinuousDistributionFolder = UniformDistributionsFolder + "Sharp Distribution/";
 		public const string UnityContinuousDistributionFolder = UniformDistributionsFolder + "Unity Distribution/";
 
 		public const string ContinuousModificatorsFolder = ContinuousDistributionsFolder + "Modificators/";
@@ -45,6 +46,7 @@ namespace Zor.RandomGenerators
 		public const string BernoulliDistributionFolder = DiscreteDistributionsFolder + "Bernoulli Distribution/";
 		public const string BinomialDistributionFolder = DiscreteDistributionsFolder + "Binomial Distribution/";
 		public const string PoissonDistributionFolder = DiscreteDistributionsFolder + "Poisson Distribution/";
+		public const string SharpDiscreteDistributionFolder = DiscreteDistributionsFolder + "Sharp Distribution/";
 		public const string UnityDiscreteDistributionFolder = DiscreteDistributionsFolder + "Unity Distribution/";
 		public const string WeightedDistributionFolder = DiscreteDistributionsFolder + "Weighted Distribution/";
 

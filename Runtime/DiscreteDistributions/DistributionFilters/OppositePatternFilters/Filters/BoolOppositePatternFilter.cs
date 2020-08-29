@@ -1,47 +1,56 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using System;
 using JetBrains.Annotations;
+using UnityEngine;
 
 namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 {
+	[Serializable]
 	public sealed class BoolOppositePatternFilter : IDiscreteFilter<bool>
 	{
-		private byte m_maxPatternLength;
+#pragma warning disable CS0649
+		[SerializeField] private byte m_MaxPatternLength;
+#pragma warning restore CS0649
+
+		public BoolOppositePatternFilter()
+		{
+		}
 
 		public BoolOppositePatternFilter(byte maxPatternLength)
 		{
-			m_maxPatternLength = maxPatternLength;
+			m_MaxPatternLength = maxPatternLength;
 		}
 
 		public BoolOppositePatternFilter([NotNull] BoolOppositePatternFilter other)
 		{
-			m_maxPatternLength = other.m_maxPatternLength;
+			m_MaxPatternLength = other.m_MaxPatternLength;
 		}
 
 		public byte maxPatternLength
 		{
 			[Pure]
-			get => m_maxPatternLength;
-			set => m_maxPatternLength = value;
+			get => m_MaxPatternLength;
+			set => m_MaxPatternLength = value;
 		}
 
 		public byte requiredSequenceLength
 		{
 			[Pure]
-			get => (byte)(m_maxPatternLength * 2 + 1);
+			get => (byte)(m_MaxPatternLength * 2 + 1);
 		}
 
 		[Pure]
 		public bool NeedRegenerate(bool[] sequence, bool newValue, byte sequenceLength)
 		{
-			if (sequence[sequenceLength - m_maxPatternLength - 1] == newValue)
+			if (sequence[sequenceLength - m_MaxPatternLength - 1] == newValue)
 			{
 				return false;
 			}
 
 			bool nonOppositePattern = false;
 
-			for (int i = sequenceLength - m_maxPatternLength * 2 - 1, j = sequenceLength - m_maxPatternLength;
+			for (int i = sequenceLength - m_MaxPatternLength * 2 - 1, j = sequenceLength - m_MaxPatternLength;
 				!nonOppositePattern && j < sequenceLength;
 				++i, ++j)
 			{

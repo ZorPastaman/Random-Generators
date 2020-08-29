@@ -13,7 +13,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 	public sealed class BoolOppositePatternFilterProvider : DiscreteFilterProvider<bool>
 	{
 #pragma warning disable CS0649
-		[SerializeField] private byte m_MaxPatternLength;
+		[SerializeField] private BoolOppositePatternFilter m_OppositePatternFilter;
 #pragma warning restore CS0649
 
 		private BoolOppositePatternFilter m_sharedFilter;
@@ -21,43 +21,27 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		public override IDiscreteFilter<bool> filter
 		{
 			[Pure]
-			get => new BoolOppositePatternFilter(m_MaxPatternLength);
+			get => new BoolOppositePatternFilter(m_OppositePatternFilter);
 		}
 
 		public override IDiscreteFilter<bool> sharedFilter
 		{
 			[Pure]
-			get
-			{
-				if (m_sharedFilter == null)
-				{
-					m_sharedFilter = oppositePatternFilter;
-				}
-
-				return m_sharedFilter;
-			}
+			get => m_OppositePatternFilter;
 		}
 
 		[NotNull]
 		public BoolOppositePatternFilter oppositePatternFilter
 		{
 			[Pure]
-			get => new BoolOppositePatternFilter(m_MaxPatternLength);
+			get => new BoolOppositePatternFilter(m_OppositePatternFilter);
 		}
 
 		[NotNull]
 		public BoolOppositePatternFilter sharedOppositePatternFilter
 		{
 			[Pure]
-			get
-			{
-				if (m_sharedFilter == null)
-				{
-					m_sharedFilter = oppositePatternFilter;
-				}
-
-				return m_sharedFilter;
-			}
+			get => m_OppositePatternFilter;
 		}
 	}
 }

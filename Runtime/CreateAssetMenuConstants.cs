@@ -41,6 +41,8 @@ namespace Zor.RandomGenerators
 			"Extreme Sequence Filters/";
 		public const string GreaterSequenceFiltersFolder = ContinuousFiltersFolder +
 			"Greater Sequence Filters/";
+		public const string LessSequenceFiltersFolder = ContinuousFiltersFolder +
+			"Less Sequence Filters/";
 		public const string LittleDifferenceContinuousFiltersFolder = ContinuousFiltersFolder +
 			"Little Difference Filters/";
 

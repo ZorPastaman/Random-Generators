@@ -8,7 +8,7 @@ using UnityEngine.Profiling;
 using Zor.RandomGenerators.ContinuousDistributions;
 using Debug = UnityEngine.Debug;
 
-namespace Zor.RandomGenerators.Tests
+namespace Zor.RandomGenerators.Tests.DistributionTests
 {
 	public sealed class ContinuousDistributionTest : MonoBehaviour
 	{
@@ -16,7 +16,7 @@ namespace Zor.RandomGenerators.Tests
 		[SerializeField] private AnimationCurve m_Curve;
 		[SerializeField] private float m_StepLength = 0.1f;
 		[SerializeField] private ContinuousGeneratorProviderReference m_GeneratorProviderReference;
-		[SerializeField] private uint m_GenerationsPerFrame = 1;
+		[SerializeField] private uint m_GenerationsPerFrame = 100;
 		[SerializeField] private uint m_PerformanceTestsCount = 10000;
 #pragma warning restore CS0649
 

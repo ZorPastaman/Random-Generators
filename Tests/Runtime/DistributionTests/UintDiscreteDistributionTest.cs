@@ -9,7 +9,7 @@ using Zor.RandomGenerators.DiscreteDistributions;
 using Zor.RandomGenerators.PropertyDrawerAttributes;
 using Debug = UnityEngine.Debug;
 
-namespace Zor.RandomGenerators.Tests
+namespace Zor.RandomGenerators.Tests.DistributionTests
 {
 	public sealed class UintDiscreteDistributionTest : MonoBehaviour
 	{

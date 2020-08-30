@@ -25,10 +25,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Weighted distribution.
 
 #### Modificators
+- Modificators infrastructure.
 - Clamp modificator.
 - Round modificator.
 
 #### Filters
+- Filters infrastructure.
 - Ascendant Sequence filter.
 - Descendant Sequence filter.
 - Extreme Sequence filter.

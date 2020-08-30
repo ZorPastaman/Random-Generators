@@ -5,11 +5,20 @@ using UnityEngine;
 
 namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 {
+	/// <summary>
+	/// Provides <see cref="IContinuousFilter"/>.
+	/// </summary>
 	public abstract class ContinuousFilterProvider : ScriptableObject
 	{
+		/// <summary>
+		/// Creates a new <see cref="IContinuousFilter"/> and returns it.
+		/// </summary>
 		[NotNull]
 		public abstract IContinuousFilter filter { get; }
 
+		/// <summary>
+		/// Returns a shared <see cref="IContinuousFilter"/>.
+		/// </summary>
 		[NotNull]
 		public abstract IContinuousFilter sharedFilter { get; }
 	}

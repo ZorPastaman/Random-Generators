@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 {
+	/// <summary>
+	/// Referenced <see cref="IDiscreteFilter{T}"/> provider.
+	/// </summary>
 	public abstract class DiscreteFilterProvider_Base : ScriptableObject
 	{
 	}

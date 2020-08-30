@@ -6,40 +6,40 @@ using UnityEngine;
 namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 {
 	[CreateAssetMenu(
-		menuName = CreateAssetMenuConstants.LessSequenceFiltersFolder + "Less Sequence Filter Provider",
+		menuName = CreateAssetMenuConstants.LessContinuousFiltersFolder + "Less Sequence Filter Provider",
 		fileName = "Less Sequence Filter Provider",
 		order = CreateAssetMenuConstants.FilterOrder
 	)]
-	public sealed class LessSequenceFilterProvider : ContinuousFilterProvider
+	public sealed class LessFilterProvider : ContinuousFilterProvider
 	{
 #pragma warning disable CS0649
-		[SerializeField] private LessSequenceFilter m_LessSequenceFilter;
+		[SerializeField] private LessFilter m_LessFilter;
 #pragma warning restore CS0649
 
 		public override IContinuousFilter filter
 		{
 			[Pure]
-			get => new LessSequenceFilter(m_LessSequenceFilter);
+			get => new LessFilter(m_LessFilter);
 		}
 
 		public override IContinuousFilter sharedFilter
 		{
 			[Pure]
-			get => m_LessSequenceFilter;
+			get => m_LessFilter;
 		}
 
 		[NotNull]
-		public LessSequenceFilter lessSequenceFilter
+		public LessFilter lessFilter
 		{
 			[Pure]
-			get => new LessSequenceFilter(m_LessSequenceFilter);
+			get => new LessFilter(m_LessFilter);
 		}
 
 		[NotNull]
-		public LessSequenceFilter sharedLessSequenceFilter
+		public LessFilter sharedLessFilter
 		{
 			[Pure]
-			get => m_LessSequenceFilter;
+			get => m_LessFilter;
 		}
 	}
 }

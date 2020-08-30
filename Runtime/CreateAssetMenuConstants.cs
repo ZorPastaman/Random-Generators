@@ -39,12 +39,12 @@ namespace Zor.RandomGenerators
 			"Descendant Sequence Filters/";
 		public const string ExtremeSequenceContinuousFiltersFolder = ContinuousFiltersFolder +
 			"Extreme Sequence Filters/";
-		public const string GreaterSequenceFiltersFolder = ContinuousFiltersFolder +
-			"Greater Sequence Filters/";
-		public const string LessSequenceFiltersFolder = ContinuousFiltersFolder +
-			"Less Sequence Filters/";
+		public const string GreaterContinuousFiltersFolder = ContinuousFiltersFolder + "Greater Filters/";
+		public const string InRangeContinuousFiltersFolder = ContinuousFiltersFolder + "In Range Filters/";
+		public const string LessContinuousFiltersFolder = ContinuousFiltersFolder + "Less Filters/";
 		public const string LittleDifferenceContinuousFiltersFolder = ContinuousFiltersFolder +
 			"Little Difference Filters/";
+		public const string NotInRangeContinuousFiltersFolder = ContinuousFiltersFolder + "Not In Range Filters/";
 
 		public const string DiscreteDistributionsFolder = RandomGeneratorProvidersFolder + "Discrete Distributions/";
 		public const string BernoulliDistributionFolder = DiscreteDistributionsFolder + "Bernoulli Distribution/";

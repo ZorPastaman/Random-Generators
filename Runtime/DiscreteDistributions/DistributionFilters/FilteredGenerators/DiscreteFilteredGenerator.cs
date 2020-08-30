@@ -62,7 +62,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 			{
 				m_sequence[m_currentSequenceLength++] = generated;
 			}
-			else
+			else if (m_currentSequenceLength > 0)
 			{
 				int last = m_currentSequenceLength - 1;
 				Array.Copy(m_sequence, 1, m_sequence, 0, last);

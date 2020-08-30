@@ -7,34 +7,44 @@ using UnityEngine;
 namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 {
 	[Serializable]
-	public sealed class GreaterSequenceFilter : IContinuousFilter
+	public sealed class InRangeFilter : IContinuousFilter
 	{
 #pragma warning disable CS0649
-		[SerializeField] private float m_Value;
-		[SerializeField] private byte m_ControlledSequenceLength;
+		[SerializeField] private float m_Min = -1f;
+		[SerializeField] private float m_Max = 1f;
+		[SerializeField] private byte m_ControlledSequenceLength = 4;
 #pragma warning restore CS0649
 
-		public GreaterSequenceFilter()
+		public InRangeFilter()
 		{
 		}
 
-		public GreaterSequenceFilter(float value, byte controlledSequenceLength)
+		public InRangeFilter(float min, float max, byte controlledSequenceLength)
 		{
-			m_Value = value;
+			m_Min = min;
+			m_Max = max;
 			m_ControlledSequenceLength = controlledSequenceLength;
 		}
 
-		public GreaterSequenceFilter([NotNull] GreaterSequenceFilter other)
+		public InRangeFilter([NotNull] InRangeFilter other)
 		{
-			m_Value = other.m_Value;
+			m_Min = other.m_Min;
+			m_Max = other.m_Max;
 			m_ControlledSequenceLength = other.m_ControlledSequenceLength;
 		}
 
-		public float value
+		public float min
 		{
 			[Pure]
-			get => m_Value;
-			set => m_Value = value;
+			get => m_Min;
+			set => m_Min = value;
+		}
+
+		public float max
+		{
+			[Pure]
+			get => m_Max;
+			set => m_Max = value;
 		}
 
 		public byte controlledSequenceLength
@@ -53,14 +63,15 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		[Pure]
 		public bool NeedRegenerate(float[] sequence, float newValue, byte sequenceLength)
 		{
-			bool greater = true;
+			bool inRange = true;
 
-			for (int i = sequenceLength - m_ControlledSequenceLength; greater && i < sequenceLength; ++i)
+			for (int i = sequenceLength - m_ControlledSequenceLength; inRange & i < sequenceLength; ++i)
 			{
-				greater = sequence[i] > m_Value;
+				float value = sequence[i];
+				inRange = m_Min <= value & m_Max >= value;
 			}
 
-			return greater && newValue > m_Value;
+			return inRange & m_Min <= newValue & m_Max >= newValue;
 		}
 	}
 }

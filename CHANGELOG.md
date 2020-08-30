@@ -34,7 +34,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Extreme Sequence filter.
 - Greater Sequence filter.
 - Frequent Value filter.
+- In Range filter.
 - Little Difference filter.
+- Not In Range filter.
 - Opposite Pattern filter.
 - Pair filter.
 - Repeating Pattern filter.

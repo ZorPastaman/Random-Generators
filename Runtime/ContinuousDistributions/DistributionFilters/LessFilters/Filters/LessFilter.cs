@@ -7,24 +7,24 @@ using UnityEngine;
 namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 {
 	[Serializable]
-	public sealed class LessSequenceFilter : IContinuousFilter
+	public sealed class LessFilter : IContinuousFilter
 	{
 #pragma warning disable CS0649
 		[SerializeField] private float m_Value;
 		[SerializeField] private byte m_ControlledSequenceLength;
 #pragma warning restore CS0649
 
-		public LessSequenceFilter()
+		public LessFilter()
 		{
 		}
 
-		public LessSequenceFilter(float value, byte controlledSequenceLength)
+		public LessFilter(float value, byte controlledSequenceLength)
 		{
 			m_Value = value;
 			m_ControlledSequenceLength = controlledSequenceLength;
 		}
 
-		public LessSequenceFilter([NotNull] LessSequenceFilter other)
+		public LessFilter([NotNull] LessFilter other)
 		{
 			m_Value = other.m_Value;
 			m_ControlledSequenceLength = other.m_ControlledSequenceLength;

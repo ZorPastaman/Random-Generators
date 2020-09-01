@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 {
+	/// <summary>
+	/// Provides <see cref="DescendantSequenceFilter"/>.
+	/// </summary>
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.DescendantSequenceContinuousFiltersFolder +
 			"Descendant Sequence Filter Provider",
@@ -17,18 +20,27 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		[SerializeField] private DescendantSequenceFilter m_DescendantSequenceFilter;
 #pragma warning restore CS0649
 
+		/// <summary>
+		/// Creates a new <see cref="DescendantSequenceFilter"/> and returns it as <see cref="IContinuousFilter"/>.
+		/// </summary>
 		public override IContinuousFilter filter
 		{
 			[Pure]
 			get => new DescendantSequenceFilter(m_DescendantSequenceFilter);
 		}
 
+		/// <summary>
+		/// Returns a shared <see cref="DescendantSequenceFilter"/> as <see cref="IContinuousFilter"/>.
+		/// </summary>
 		public override IContinuousFilter sharedFilter
 		{
 			[Pure]
 			get => m_DescendantSequenceFilter;
 		}
 
+		/// <summary>
+		/// Creates a new <see cref="DescendantSequenceFilter"/> and returns it.
+		/// </summary>
 		[NotNull]
 		public DescendantSequenceFilter descendantSequenceFilter
 		{
@@ -36,6 +48,9 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 			get => new DescendantSequenceFilter(m_DescendantSequenceFilter);
 		}
 
+		/// <summary>
+		/// Returns a shared <see cref="DescendantSequenceFilter"/>.
+		/// </summary>
 		[NotNull]
 		public DescendantSequenceFilter sharedDescendantSequenceFilter
 		{

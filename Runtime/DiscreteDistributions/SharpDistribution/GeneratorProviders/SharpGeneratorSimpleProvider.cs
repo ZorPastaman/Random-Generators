@@ -17,7 +17,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	{
 #pragma warning disable CS0649
 		[SerializeField] private int m_Min;
-		[SerializeField] private int m_Max;
+		[SerializeField] private int m_Max = 10;
 #pragma warning restore CS0649
 
 		private SharpGenerator m_sharedGenerator;

@@ -3,41 +3,40 @@
 using JetBrains.Annotations;
 using UnityEngine;
 
-namespace Zor.RandomGenerators.DiscreteDistributions
+namespace Zor.RandomGenerators.ContinuousDistributions.UniformDistributions
 {
 	/// <summary>
-	/// Provides <see cref="SharpGenerator"/> with the specified seed.
+	/// Provides <see cref="SharpGeneratorRanged"/> with the specified seed.
 	/// </summary>
 	[CreateAssetMenu(
-		menuName = CreateAssetMenuConstants.SharpDiscreteDistributionFolder + "Sharp Generator Provider",
-		fileName = "Sharp Generator Provider",
+		menuName = CreateAssetMenuConstants.SharpContinuousDistributionFolder + "Sharp Generator Ranged Provider",
+		fileName = "Sharp Generator Ranged Provider",
 		order = CreateAssetMenuConstants.DistributionOrder
 	)]
-	public sealed class SharpGeneratorProvider : DiscreteGeneratorProvider<int>
+	public sealed class SharpGeneratorRangedProvider : ContinuousGeneratorProvider
 	{
 #pragma warning disable CS0649
 		[SerializeField] private int m_Seed;
-		[SerializeField] private int m_Min;
-		[SerializeField] private int m_Max = 10;
+		[SerializeField] private float m_Min;
+		[SerializeField] private float m_Max = 1f;
 #pragma warning restore CS0649
 
-		private SharpGenerator m_sharedGenerator;
+		private SharpGeneratorRanged m_sharedGenerator;
 
 		/// <summary>
-		/// Creates a new <see cref="SharpGenerator"/> and returns it as <see cref="IDiscreteGenerator{Int32}"/>.
+		/// Creates a new <see cref="SharpGeneratorRanged"/> and returns it as <see cref="IContinuousGenerator"/>.
 		/// </summary>
-		public override IDiscreteGenerator<int> generator
+		public override IContinuousGenerator generator
 		{
 			[Pure]
-			get => new SharpGenerator(m_Seed, m_Min, m_Max);
+			get => new SharpGeneratorRanged(m_Seed, m_Min, m_Max);
 		}
 
 		/// <summary>
-		/// Returns a shared <see cref="SharpGenerator"/> as <see cref="IDiscreteGenerator{Int32}"/>.
+		/// Returns a shared <see cref="SharpGeneratorRanged"/> as <see cref="IContinuousGenerator"/>.
 		/// </summary>
-		public override IDiscreteGenerator<int> sharedGenerator
+		public override IContinuousGenerator sharedGenerator
 		{
-			[Pure]
 			get
 			{
 				if (m_sharedGenerator == null)
@@ -50,22 +49,21 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		}
 
 		/// <summary>
-		/// Creates a new <see cref="SharpGenerator"/> and returns it.
+		/// Creates a new <see cref="SharpGeneratorRanged"/> and returns it.
 		/// </summary>
 		[NotNull]
-		public SharpGenerator sharpGenerator
+		public SharpGeneratorRanged sharpGenerator
 		{
 			[Pure]
-			get => new SharpGenerator(m_Seed, m_Min, m_Max);
+			get => new SharpGeneratorRanged(m_Seed, m_Min, m_Max);
 		}
 
 		/// <summary>
-		/// Returns a shared <see cref="SharpGenerator"/>.
+		/// Returns a shared <see cref="SharpGeneratorRanged"/>.
 		/// </summary>
 		[NotNull]
-		public SharpGenerator sharedSharpGenerator
+		public SharpGeneratorRanged sharedSharpGenerator
 		{
-			[Pure]
 			get
 			{
 				if (m_sharedGenerator == null)
@@ -93,7 +91,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 			}
 		}
 
-		public int min
+		public float min
 		{
 			[Pure]
 			get => m_Min;
@@ -109,7 +107,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 			}
 		}
 
-		public int max
+		public float max
 		{
 			[Pure]
 			get => m_Max;

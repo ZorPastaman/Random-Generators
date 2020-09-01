@@ -15,7 +15,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 	{
 #pragma warning disable CS0649
 		[SerializeField, Tooltip("Allowed descendant sequence length.")]
-		private byte m_DescendantSequenceLength = 5;
+		private byte m_DescendantSequenceLength = 3;
 #pragma warning restore CS0649
 
 		/// <summary>

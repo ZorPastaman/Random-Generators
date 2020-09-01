@@ -20,7 +20,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[SerializeField] private int m_Max;
 #pragma warning restore CS0649
 
-		private SharpGenerator m_sharedSharpGenerator;
+		private SharpGenerator m_sharedGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="SharpGenerator"/> and returns it as <see cref="IDiscreteGenerator{Int32}"/>.
@@ -39,12 +39,12 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 			[Pure]
 			get
 			{
-				if (m_sharedSharpGenerator == null)
+				if (m_sharedGenerator == null)
 				{
-					m_sharedSharpGenerator = sharpGenerator;
+					m_sharedGenerator = sharpGenerator;
 				}
 
-				return m_sharedSharpGenerator;
+				return m_sharedGenerator;
 			}
 		}
 
@@ -67,12 +67,44 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 			[Pure]
 			get
 			{
-				if (m_sharedSharpGenerator == null)
+				if (m_sharedGenerator == null)
 				{
-					m_sharedSharpGenerator = sharpGenerator;
+					m_sharedGenerator = sharpGenerator;
 				}
 
-				return m_sharedSharpGenerator;
+				return m_sharedGenerator;
+			}
+		}
+
+		public int min
+		{
+			[Pure]
+			get => m_Min;
+			set
+			{
+				if (m_Min == value)
+				{
+					return;
+				}
+
+				m_Min = value;
+				m_sharedGenerator = null;
+			}
+		}
+
+		public int max
+		{
+			[Pure]
+			get => m_Max;
+			set
+			{
+				if (m_Max == value)
+				{
+					return;
+				}
+
+				m_Max = value;
+				m_sharedGenerator = null;
 			}
 		}
 	}

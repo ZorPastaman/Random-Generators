@@ -19,7 +19,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.UniformDistributions
 		[SerializeField] private int m_Seed;
 #pragma warning restore CS0649
 
-		private SharpGenerator m_sharedSharpGenerator;
+		private SharpGenerator m_sharedGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="SharpGenerator"/> and returns it as <see cref="IContinuousGenerator"/>.
@@ -38,12 +38,12 @@ namespace Zor.RandomGenerators.ContinuousDistributions.UniformDistributions
 			[Pure]
 			get
 			{
-				if (m_sharedSharpGenerator == null)
+				if (m_sharedGenerator == null)
 				{
-					m_sharedSharpGenerator = sharpGenerator;
+					m_sharedGenerator = sharpGenerator;
 				}
 
-				return m_sharedSharpGenerator;
+				return m_sharedGenerator;
 			}
 		}
 
@@ -66,12 +66,28 @@ namespace Zor.RandomGenerators.ContinuousDistributions.UniformDistributions
 			[Pure]
 			get
 			{
-				if (m_sharedSharpGenerator == null)
+				if (m_sharedGenerator == null)
 				{
-					m_sharedSharpGenerator = sharpGenerator;
+					m_sharedGenerator = sharpGenerator;
 				}
 
-				return m_sharedSharpGenerator;
+				return m_sharedGenerator;
+			}
+		}
+
+		public int seed
+		{
+			[Pure]
+			get => m_Seed;
+			set
+			{
+				if (m_Seed == value)
+				{
+					return;
+				}
+
+				m_Seed = value;
+				m_sharedGenerator = null;
 			}
 		}
 	}

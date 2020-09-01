@@ -10,7 +10,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.UniformDistributions
 	/// </summary>
 	public sealed class SharpGenerator : IContinuousGenerator
 	{
-		private readonly Random m_random;
+		[NotNull] private Random m_random;
 
 		/// <summary>
 		/// Creates a <see cref="SharpGenerator"/> with default seed.
@@ -27,6 +27,32 @@ namespace Zor.RandomGenerators.ContinuousDistributions.UniformDistributions
 		public SharpGenerator(int seed)
 		{
 			m_random = new Random(seed);
+		}
+
+		/// <summary>
+		/// Creates a <see cref="SharpGenerator"/> with the specified <see cref="Random"/>.
+		/// </summary>
+		/// <param name="random"></param>
+		public SharpGenerator([NotNull] Random random)
+		{
+			m_random = random;
+		}
+
+		/// <summary>
+		/// Copy constructor.
+		/// </summary>
+		/// <param name="other"></param>
+		public SharpGenerator([NotNull] SharpGenerator other)
+		{
+			m_random = other.m_random;
+		}
+
+		[NotNull]
+		public Random random
+		{
+			[Pure]
+			get => m_random;
+			set => m_random = value;
 		}
 
 		/// <inheritdoc/>

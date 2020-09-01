@@ -10,7 +10,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	/// </summary>
 	public sealed class SharpGenerator : IDiscreteGenerator<int>
 	{
-		private readonly Random m_random;
+		[NotNull] private Random m_random;
 		private int m_min;
 		private int m_max;
 
@@ -37,6 +37,38 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 			m_random = new Random(seed);
 			m_min = min;
 			m_max = max;
+		}
+
+		/// <summary>
+		/// Creates a <see cref="SharpGenerator"/> with the specified <see cref="Random"/>.
+		/// </summary>
+		/// <param name="random"></param>
+		/// <param name="min"></param>
+		/// <param name="max"></param>
+		public SharpGenerator([NotNull] Random random, int min, int max)
+		{
+			m_random = random;
+			m_min = min;
+			m_max = max;
+		}
+
+		/// <summary>
+		/// Copy constructor.
+		/// </summary>
+		/// <param name="other"></param>
+		public SharpGenerator([NotNull] SharpGenerator other)
+		{
+			m_random = other.m_random;
+			m_min = other.m_min;
+			m_max = other.m_max;
+		}
+
+		[NotNull]
+		public Random random
+		{
+			[Pure]
+			get => m_random;
+			set => m_random = value;
 		}
 
 		public int min

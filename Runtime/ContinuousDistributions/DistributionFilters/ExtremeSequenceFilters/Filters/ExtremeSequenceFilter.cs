@@ -6,20 +6,39 @@ using UnityEngine;
 
 namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 {
+	/// <summary>
+	/// The filter recommends to regenerate a new value if it continues a sequence where every value is too close
+	/// to an expected minimum or maximum.
+	/// </summary>
 	[Serializable]
 	public sealed class ExtremeSequenceFilter : IContinuousFilter
 	{
 #pragma warning disable CS0649
 		[SerializeField] private float m_ExpectedMin;
 		[SerializeField] private float m_ExpectedMax = 10f;
-		[SerializeField] private float m_Range = 5f;
-		[SerializeField] private byte m_ExtremeSequenceLength = 6;
+		[SerializeField,
+		Tooltip("How far from an expected minimum or maximum a value may be to be counted as close enough.")]
+		private float m_Range = 5f;
+		[SerializeField, Tooltip("Allowed extreme sequence length.")]
+		private byte m_ExtremeSequenceLength = 6;
 #pragma warning restore CS0649
 
+		/// <summary>
+		/// Creates a new <see cref="ExtremeSequenceFilter"/> with the default parameters.
+		/// </summary>
 		public ExtremeSequenceFilter()
 		{
 		}
 
+		/// <summary>
+		/// Creates a new <see cref="ExtremeSequenceFilter"/> with the specified parameters.
+		/// </summary>
+		/// <param name="expectedMin"></param>
+		/// <param name="expectedMax"></param>
+		/// <param name="range">
+		/// How far from an expected minimum or maximum a value may be to be counted as close enough.
+		/// </param>
+		/// <param name="extremeSequenceLength">Allowed extreme sequence length.</param>
 		public ExtremeSequenceFilter(float expectedMin, float expectedMax, float range, byte extremeSequenceLength)
 		{
 			m_ExpectedMin = expectedMin;
@@ -28,6 +47,10 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 			m_ExtremeSequenceLength = extremeSequenceLength;
 		}
 
+		/// <summary>
+		/// Copy constructor.
+		/// </summary>
+		/// <param name="other"></param>
 		public ExtremeSequenceFilter([NotNull] ExtremeSequenceFilter other)
 		{
 			m_ExpectedMin = other.m_ExpectedMin;
@@ -50,6 +73,9 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 			set => m_ExpectedMax = value;
 		}
 
+		/// <summary>
+		/// How far from an expected minimum or maximum a value may be to be counted as close enough.
+		/// </summary>
 		public float range
 		{
 			[Pure]
@@ -57,6 +83,9 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 			set => m_Range = value;
 		}
 
+		/// <summary>
+		/// Allowed extreme sequence length.
+		/// </summary>
 		public byte extremeSequenceLength
 		{
 			[Pure]
@@ -64,24 +93,51 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 			set => m_ExtremeSequenceLength = value;
 		}
 
+		/// <inheritdoc/>
 		public byte requiredSequenceLength
 		{
 			[Pure]
 			get => m_ExtremeSequenceLength;
 		}
 
+		/// <inheritdoc/>
 		[Pure]
 		public bool NeedRegenerate(float[] sequence, float newValue, byte sequenceLength)
 		{
+			return NeedRegenerate(sequence, newValue, m_ExpectedMin, m_ExpectedMax, m_Range, sequenceLength,
+				m_ExtremeSequenceLength);
+		}
+
+		/// <summary>
+		/// Checks if the value <paramref name="newValue"/> continues the extreme sequence <paramref name="sequence"/>
+		/// and needs to be regenerated.
+		/// </summary>
+		/// <param name="sequence">Sequence of generated and already applied values.</param>
+		/// <param name="newValue">New generated value.</param>
+		/// <param name="expectedMin"></param>
+		/// <param name="expectedMax"></param>
+		/// <param name="range">
+		/// How far from an expected minimum or maximum a value may be to be counted as close enough.
+		/// </param>
+		/// <param name="sequenceLength">Current sequence length.</param>
+		/// <param name="extremeSequenceLength">Allowed extreme sequence length.</param>
+		/// <returns>
+		/// <para>True if the value <paramref name="newValue"/> needs to be regenerated.</para>
+		/// <para>False if the value <paramref name="newValue"/> doesn't need to be regenerated.</para>
+		/// </returns>
+		[Pure]
+		public static bool NeedRegenerate(float[] sequence, float newValue, float expectedMin, float expectedMax,
+			float range, byte sequenceLength, byte extremeSequenceLength)
+		{
 			float extreme;
 
-			if (newValue < m_ExpectedMin + m_Range)
+			if (newValue < expectedMin + range)
 			{
-				extreme = m_ExpectedMin;
+				extreme = expectedMin;
 			}
-			else if (newValue > m_ExpectedMax - m_Range)
+			else if (newValue > expectedMax - range)
 			{
-				extreme = m_ExpectedMax;
+				extreme = expectedMax;
 			}
 			else
 			{
@@ -90,9 +146,9 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 
 			bool inRange = true;
 
-			for (int i = sequenceLength - m_ExtremeSequenceLength; inRange && i < sequenceLength; ++i)
+			for (int i = sequenceLength - extremeSequenceLength; inRange & i < sequenceLength; ++i)
 			{
-				inRange = Mathf.Abs(sequence[i] - extreme) <= m_Range;
+				inRange = Mathf.Abs(sequence[i] - extreme) <= range;
 			}
 
 			return inRange;

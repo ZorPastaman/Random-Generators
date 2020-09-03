@@ -5,6 +5,10 @@ using JetBrains.Annotations;
 
 namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 {
+	/// <summary>
+	/// Random generator that takes a generated value from its depended generator filtered with its filters.
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
 	public sealed class ContinuousFilteredGenerator<T> : IContinuousGenerator where T : IContinuousGenerator
 	{
 		[NotNull] private T m_filteredGenerator;
@@ -13,6 +17,11 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		private float[] m_sequence;
 		private byte m_currentSequenceLength;
 
+		/// <summary>
+		/// Creates a <see cref="ContinuousFilteredGenerator{T}"/> with the specified parameters.
+		/// </summary>
+		/// <param name="filteredGenerator"></param>
+		/// <param name="filters"></param>
 		public ContinuousFilteredGenerator([NotNull] T filteredGenerator,
 			[NotNull] params IContinuousFilter[] filters)
 		{
@@ -21,6 +30,10 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 			InitializeSequence();
 		}
 
+		/// <summary>
+		/// Copy constructor.
+		/// </summary>
+		/// <param name="other"></param>
 		public ContinuousFilteredGenerator([NotNull] ContinuousFilteredGenerator<T> other)
 		{
 			m_filteredGenerator = other.m_filteredGenerator;
@@ -48,6 +61,13 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 			}
 		}
 
+		/// <summary>
+		/// Takes a generated value from its depended generator filtered with its filters.
+		/// </summary>
+		/// <returns>Filtered generated value.</returns>
+		/// <remarks>
+		/// The value is regenerated until all the filters approve it.
+		/// </remarks>
 		public float Generate()
 		{
 			float generated;

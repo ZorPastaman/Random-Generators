@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 {
+	/// <summary>
+	/// Provides <see cref="ContinuousFilteredGenerator{IContinuousGenerator}"/>.
+	/// </summary>
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.ContinuousFilteredGeneratorsFolder +
 			"Continuous Filtered Generator Provider",
@@ -21,15 +24,22 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		private ContinuousFilteredGenerator<IContinuousGenerator> m_sharedFilteredGenerator;
 		private IContinuousFilter[] m_filtersCache;
 
+		/// <summary>
+		/// Creates a new <see cref="ContinuousFilteredGenerator{IContinuousGenerator}"/>
+		/// and returns it as <see cref="IContinuousGenerator"/>.
+		/// </summary>
 		public override IContinuousGenerator generator
 		{
 			[Pure]
 			get => new ContinuousFilteredGenerator<IContinuousGenerator>(m_FilteredGenerator.generator, filters);
 		}
 
+		/// <summary>
+		/// Returns a shared <see cref="ContinuousFilteredGenerator{IContinuousGenerator}"/>
+		/// as <see cref="IContinuousGenerator"/>.
+		/// </summary>
 		public override IContinuousGenerator sharedGenerator
 		{
-			[Pure]
 			get
 			{
 				if (m_sharedFilteredGenerator == null)
@@ -41,6 +51,9 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 			}
 		}
 
+		/// <summary>
+		/// Creates a new <see cref="ContinuousFilteredGenerator{IContinuousGenerator}"/> and returns it.
+		/// </summary>
 		[NotNull]
 		public ContinuousFilteredGenerator<IContinuousGenerator> filteredGenerator
 		{
@@ -48,10 +61,12 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 			get => new ContinuousFilteredGenerator<IContinuousGenerator>(m_FilteredGenerator.generator, filters);
 		}
 
+		/// <summary>
+		/// Returns a shared <see cref="ContinuousFilteredGenerator{IContinuousGenerator}"/>.
+		/// </summary>
 		[NotNull]
 		public ContinuousFilteredGenerator<IContinuousGenerator> sharedFilteredGenerator
 		{
-			[Pure]
 			get
 			{
 				if (m_sharedFilteredGenerator == null)
@@ -63,10 +78,15 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 			}
 		}
 
+		/// <summary>
+		/// <para>Filters cache.</para>
+		/// <para>
+		/// Filters cache is created from <see cref="m_Filters"/> when this property is called for the first time.
+		/// </para>
+		/// </summary>
 		[NotNull]
 		private IContinuousFilter[] filters
 		{
-			[Pure]
 			get
 			{
 				if (m_filtersCache == null)

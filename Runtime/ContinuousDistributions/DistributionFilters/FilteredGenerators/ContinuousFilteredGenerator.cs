@@ -81,7 +81,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 			{
 				m_sequence[m_currentSequenceLength++] = generated;
 			}
-			else if (m_currentSequenceLength > 0)
+			else
 			{
 				int last = m_currentSequenceLength - 1;
 				Array.Copy(m_sequence, 1, m_sequence, 0, last);
@@ -93,7 +93,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 
 		private void InitializeSequence()
 		{
-			byte sequenceLength = 0;
+			byte sequenceLength = 1;
 
 			for (int i = 0, count = m_filters.Length; i < count; ++i)
 			{

@@ -49,16 +49,51 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 			set => m_filteredGenerator = value;
 		}
 
-		[NotNull]
-		public IContinuousFilter[] filters
+		/// <summary>
+		/// How many filters are used by this generator.
+		/// </summary>
+		public int filtersCount
 		{
 			[Pure]
-			get => m_filters;
-			set
-			{
-				m_filters = value;
-				InitializeSequence();
-			}
+			get => m_filters.Length;
+		}
+
+		/// <summary>
+		/// Returns a <see cref="IContinuousFilter"/> at the index <paramref name="index"/>.
+		/// </summary>
+		/// <param name="index"></param>
+		/// <returns><see cref="IContinuousFilter"/> at the index <paramref name="index"/>.</returns>
+		[NotNull, Pure]
+		public IContinuousFilter GetFilter(int index)
+		{
+			return m_filters[index];
+		}
+
+		/// <summary>
+		/// Sets the filter <paramref name="filter"/> at the index <paramref name="index"/>.
+		/// </summary>
+		/// <param name="filter"></param>
+		/// <param name="index"></param>
+		/// <remarks>
+		/// Current sequence of generated values is cleared by this method.
+		/// </remarks>
+		public void SetFilter([NotNull] IContinuousFilter filter, int index)
+		{
+			m_filters[index] = filter;
+			InitializeSequence();
+		}
+
+		/// <summary>
+		/// Sets the set of filters <paramref name="filters"/>.
+		/// </summary>
+		/// <param name="filters"></param>
+		/// <remarks>
+		/// Current sequence of generated values is cleared by this method.
+		/// </remarks>
+		public void SetFilters([NotNull] params IContinuousFilter[] filters)
+		{
+			m_filters = filters;
+			InitializeSequence();
 		}
 
 		/// <summary>

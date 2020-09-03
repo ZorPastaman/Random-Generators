@@ -37,16 +37,28 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 			set => m_filteredGenerator = value;
 		}
 
-		[NotNull]
-		public IDiscreteFilter<TValue>[] filters
+		public int filtersCount
 		{
 			[Pure]
-			get => m_filters;
-			set
-			{
-				m_filters = value;
-				InitializeSequence();
-			}
+			get => m_filters.Length;
+		}
+
+		[NotNull, Pure]
+		public IDiscreteFilter<TValue> GetFilter(int index)
+		{
+			return m_filters[index];
+		}
+
+		public void SetFilter([NotNull] IDiscreteFilter<TValue> filter, int index)
+		{
+			m_filters[index] = filter;
+			InitializeSequence();
+		}
+
+		public void SetFilters([NotNull] params IDiscreteFilter<TValue>[] filters)
+		{
+			m_filters = filters;
+			InitializeSequence();
 		}
 
 		public TValue Generate()

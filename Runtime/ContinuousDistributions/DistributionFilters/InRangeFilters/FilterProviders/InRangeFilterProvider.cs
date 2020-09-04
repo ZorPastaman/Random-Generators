@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 {
+	/// <summary>
+	/// Provides <see cref="InRangeFilter"/>.
+	/// </summary>
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.InRangeContinuousFiltersFolder + "In Range Filter Provider",
 		fileName = "In Range Filter Provider",
@@ -16,18 +19,27 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		[SerializeField] private InRangeFilter m_InRangeFilter;
 #pragma warning restore CS0649
 
+		/// <summary>
+		/// Creates a new <see cref="InRangeFilter"/> and returns it as <see cref="IContinuousFilter"/>.
+		/// </summary>
 		public override IContinuousFilter filter
 		{
 			[Pure]
 			get => new InRangeFilter(m_InRangeFilter);
 		}
 
+		/// <summary>
+		/// Returns a shared <see cref="InRangeFilter"/> as <see cref="IContinuousFilter"/>.
+		/// </summary>
 		public override IContinuousFilter sharedFilter
 		{
 			[Pure]
 			get => m_InRangeFilter;
 		}
 
+		/// <summary>
+		/// Creates a new <see cref="InRangeFilter"/> and returns it.
+		/// </summary>
 		[NotNull]
 		public InRangeFilter inRangeFilter
 		{
@@ -35,6 +47,9 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 			get => new InRangeFilter(m_InRangeFilter);
 		}
 
+		/// <summary>
+		/// Returns a shared see cref="InRangeFilter"/>.
+		/// </summary>
 		[NotNull]
 		public InRangeFilter sharedInRangeFilter
 		{

@@ -6,61 +6,103 @@ using UnityEngine;
 
 namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 {
+	/// <summary>
+	/// The filter recommends to regenerate a new value if it continues a sequence where every value is greater
+	/// than the specified reference value.
+	/// </summary>
 	[Serializable]
 	public sealed class GreaterFilter : IContinuousFilter
 	{
 #pragma warning disable CS0649
-		[SerializeField] private float m_Value;
-		[SerializeField] private byte m_ControlledSequenceLength;
+		[SerializeField] private float m_ReferenceValue;
+		[SerializeField, Tooltip("Allowed greater sequence length.")]
+		private byte m_GreaterSequenceLength = 3;
 #pragma warning restore CS0649
 
+		/// <summary>
+		/// Creates a <see cref="GreaterFilter"/> with the default parameters.
+		/// </summary>
 		public GreaterFilter()
 		{
 		}
 
-		public GreaterFilter(float value, byte controlledSequenceLength)
+		/// <summary>
+		/// Creates a <see cref="GreaterFilter"/> with the specified parameters.
+		/// </summary>
+		/// <param name="referenceValue"></param>
+		/// <param name="greaterSequenceLength">Allowed greater sequence length.</param>
+		public GreaterFilter(float referenceValue, byte greaterSequenceLength)
 		{
-			m_Value = value;
-			m_ControlledSequenceLength = controlledSequenceLength;
+			m_ReferenceValue = referenceValue;
+			m_GreaterSequenceLength = greaterSequenceLength;
 		}
 
+		/// <summary>
+		/// Copy constructor.
+		/// </summary>
+		/// <param name="other"></param>
 		public GreaterFilter([NotNull] GreaterFilter other)
 		{
-			m_Value = other.m_Value;
-			m_ControlledSequenceLength = other.m_ControlledSequenceLength;
+			m_ReferenceValue = other.m_ReferenceValue;
+			m_GreaterSequenceLength = other.m_GreaterSequenceLength;
 		}
 
-		public float value
+		public float referenceValue
 		{
 			[Pure]
-			get => m_Value;
-			set => m_Value = value;
+			get => m_ReferenceValue;
+			set => m_ReferenceValue = value;
 		}
 
-		public byte controlledSequenceLength
+		/// <summary>
+		/// Allowed greater sequence length.
+		/// </summary>
+		public byte greaterSequenceLength
 		{
 			[Pure]
-			get => m_ControlledSequenceLength;
-			set => m_ControlledSequenceLength = value;
+			get => m_GreaterSequenceLength;
+			set => m_GreaterSequenceLength = value;
 		}
 
+		/// <inheritdoc/>
 		public byte requiredSequenceLength
 		{
 			[Pure]
-			get => m_ControlledSequenceLength;
+			get => m_GreaterSequenceLength;
 		}
 
+		/// <inheritdoc/>
 		[Pure]
 		public bool NeedRegenerate(float[] sequence, float newValue, byte sequenceLength)
 		{
+			return NeedRegenerate(sequence, newValue, m_ReferenceValue, sequenceLength, m_GreaterSequenceLength);
+		}
+
+		/// <summary>
+		/// Checks if the value <paramref name="newValue"/> continues the greater sequence <paramref name="sequence"/>
+		/// and needs to be regenerated.
+		/// </summary>
+		/// <param name="sequence">Sequence of generated and already applied values.</param>
+		/// <param name="newValue">New generated value.</param>
+		/// <param name="referenceValue"></param>
+		/// <param name="sequenceLength">Current sequence length.</param>
+		/// <param name="greaterSequenceLength">Allowed greater sequence length.</param>
+		/// <returns>
+		/// <para>True if the value <paramref name="newValue"/> needs to be regenerated.</para>
+		/// <para>False if the value <paramref name="newValue"/> doesn't need to be regenerated.</para>
+		/// </returns>
+		[Pure]
+		public static bool NeedRegenerate([NotNull] float[] sequence, float newValue, float referenceValue,
+			byte sequenceLength, byte greaterSequenceLength)
+		{
 			bool greater = true;
 
-			for (int i = sequenceLength - m_ControlledSequenceLength; greater && i < sequenceLength; ++i)
+			for (int i = sequenceLength - greaterSequenceLength; greater & i < sequenceLength; ++i)
 			{
-				greater = sequence[i] > m_Value;
+				greater = sequence[i] > referenceValue;
 			}
 
-			return greater && newValue > m_Value;
+			return greater & newValue > referenceValue;
 		}
 	}
 }

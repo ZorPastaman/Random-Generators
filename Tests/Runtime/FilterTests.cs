@@ -58,38 +58,63 @@ namespace Zor.RandomGenerators.Tests
 		}
 
 		[Test]
-		public static void ExtremeSequenceFilterTest()
+		public static void ExtremeFilterTest()
 		{
 			float[] sequence = {0f, 1f, 2f, 3f, 4f};
-			Assert.IsTrue(ExtremeSequenceFilter.NeedRegenerate(sequence, 3f, 0f, 10f, 5f,
+			Assert.IsTrue(ExtremeFilter.NeedRegenerate(sequence, 3f, 0f, 10f, 5f,
 				(byte)sequence.Length, 5));
 			sequence = new[] {0f, 1f, 2f, 3f, 4f};
-			Assert.IsFalse(ExtremeSequenceFilter.NeedRegenerate(sequence, 8f, 0f, 10f, 5f,
+			Assert.IsFalse(ExtremeFilter.NeedRegenerate(sequence, 8f, 0f, 10f, 5f,
 				(byte)sequence.Length, 5));
 			sequence = new[] {0f, 1f, 2f, 3f, 4f, 2f, 3f};
-			Assert.IsTrue(ExtremeSequenceFilter.NeedRegenerate(sequence, 3f, 0f, 10f, 5f,
+			Assert.IsTrue(ExtremeFilter.NeedRegenerate(sequence, 3f, 0f, 10f, 5f,
 				(byte)sequence.Length, 5));
 			sequence = new[] {0f, 1f, 2f, 3f, 4f, 2f, 3f};
-			Assert.IsFalse(ExtremeSequenceFilter.NeedRegenerate(sequence, 8f, 0f, 10f, 5f,
+			Assert.IsFalse(ExtremeFilter.NeedRegenerate(sequence, 8f, 0f, 10f, 5f,
 				(byte)sequence.Length, 5));
 			sequence = new[] {1f, 3f, 8f, 4f, 9f};
-			Assert.IsFalse(ExtremeSequenceFilter.NeedRegenerate(sequence, 8f, 0f, 10f, 5f,
+			Assert.IsFalse(ExtremeFilter.NeedRegenerate(sequence, 8f, 0f, 10f, 5f,
 				(byte)sequence.Length, 5));
 			sequence = new float[0];
-			Assert.IsTrue(ExtremeSequenceFilter.NeedRegenerate(sequence, 2f, 0f, 10f, 5f,
+			Assert.IsTrue(ExtremeFilter.NeedRegenerate(sequence, 2f, 0f, 10f, 5f,
 				(byte)sequence.Length, 0));
 			sequence = new float[0];
-			Assert.IsFalse(ExtremeSequenceFilter.NeedRegenerate(sequence, 5f, 0f, 10f, 3f,
+			Assert.IsFalse(ExtremeFilter.NeedRegenerate(sequence, 5f, 0f, 10f, 3f,
 				(byte)sequence.Length, 0));
 			sequence = new[] {6f, 7f, 8f, 7f, 9f};
-			Assert.IsTrue(ExtremeSequenceFilter.NeedRegenerate(sequence, 8f, 0f, 10f, 5f,
+			Assert.IsTrue(ExtremeFilter.NeedRegenerate(sequence, 8f, 0f, 10f, 5f,
 				(byte)sequence.Length, 5));
 			sequence = new[] {6f, 7f, 8f, 7f, 9f};
-			Assert.IsFalse(ExtremeSequenceFilter.NeedRegenerate(sequence, 3f, 0f, 10f, 5f,
+			Assert.IsFalse(ExtremeFilter.NeedRegenerate(sequence, 3f, 0f, 10f, 5f,
 				(byte)sequence.Length, 5));
 			sequence = new[] {6f, 3f, 8f, 7f, 9f};
-			Assert.IsFalse(ExtremeSequenceFilter.NeedRegenerate(sequence, 8f, 0f, 10f, 5f,
+			Assert.IsFalse(ExtremeFilter.NeedRegenerate(sequence, 8f, 0f, 10f, 5f,
 				(byte)sequence.Length, 5));
+		}
+
+		[Test]
+		public static void GreaterFilterTest()
+		{
+			float[] sequence = {1f, 2f, 3f};
+			Assert.IsTrue(GreaterFilter.NeedRegenerate(sequence, 2f, 0f, (byte)sequence.Length, 3));
+			sequence = new[] {-1f, -2f, -3f};
+			Assert.IsFalse(GreaterFilter.NeedRegenerate(sequence, -2f, 0f, (byte)sequence.Length, 3));
+			sequence = new[] {-1f, 2f, -3f};
+			Assert.IsFalse(GreaterFilter.NeedRegenerate(sequence, 4f, 0f, (byte)sequence.Length, 3));
+			sequence = new[] {1f, 2f, 3f};
+			Assert.IsFalse(GreaterFilter.NeedRegenerate(sequence, -1f, 0f, (byte)sequence.Length, 3));
+			sequence = new[] {1f, 5f, 3f, 6f, 1f, 7f};
+			Assert.IsTrue(GreaterFilter.NeedRegenerate(sequence, 2f, 0f, (byte)sequence.Length, 3));
+			sequence = new[] {1f, -2f, -3f, -7f, -8f};
+			Assert.IsFalse(GreaterFilter.NeedRegenerate(sequence, -8f, 0f, (byte)sequence.Length, 3));
+			sequence = new[] {1f, 2f, 0f};
+			Assert.IsFalse(GreaterFilter.NeedRegenerate(sequence, 1f, 0f, (byte)sequence.Length, 3));
+			sequence = new[] {1f, 2f, 3f};
+			Assert.IsFalse(GreaterFilter.NeedRegenerate(sequence, 0f, 0f, (byte)sequence.Length, 3));
+			sequence = new float[0];
+			Assert.IsTrue(GreaterFilter.NeedRegenerate(sequence, 1f, 0f, (byte)sequence.Length, 0));
+			sequence = new float[0];
+			Assert.IsFalse(GreaterFilter.NeedRegenerate(sequence, -1f, 0f, (byte)sequence.Length, 0));
 		}
 	}
 }

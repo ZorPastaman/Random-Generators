@@ -8,7 +8,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 {
 	/// <summary>
 	/// The filter recommends to regenerate a new value if it continues a descendant sequence
-	/// of the length <see cref="m_DescendantSequenceLength"/>.
+	/// of the specified length.
 	/// </summary>
 	[Serializable]
 	public sealed class DescendantSequenceFilter : IContinuousFilter

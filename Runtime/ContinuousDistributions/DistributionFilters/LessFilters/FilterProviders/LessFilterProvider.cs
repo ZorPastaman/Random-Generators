@@ -6,8 +6,8 @@ using UnityEngine;
 namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 {
 	[CreateAssetMenu(
-		menuName = CreateAssetMenuConstants.LessContinuousFiltersFolder + "Less Sequence Filter Provider",
-		fileName = "Less Sequence Filter Provider",
+		menuName = CreateAssetMenuConstants.LessContinuousFiltersFolder + "Less Filter Provider",
+		fileName = "Less Filter Provider",
 		order = CreateAssetMenuConstants.FilterOrder
 	)]
 	public sealed class LessFilterProvider : ContinuousFilterProvider

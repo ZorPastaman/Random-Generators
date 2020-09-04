@@ -37,8 +37,7 @@ namespace Zor.RandomGenerators
 			"Ascendant Sequence Filters/";
 		public const string DescendantSequenceContinuousFiltersFolder = ContinuousFiltersFolder +
 			"Descendant Sequence Filters/";
-		public const string ExtremeSequenceContinuousFiltersFolder = ContinuousFiltersFolder +
-			"Extreme Sequence Filters/";
+		public const string ExtremeContinuousFiltersFolder = ContinuousFiltersFolder + "Extreme Filters/";
 		public const string GreaterContinuousFiltersFolder = ContinuousFiltersFolder + "Greater Filters/";
 		public const string InRangeContinuousFiltersFolder = ContinuousFiltersFolder + "In Range Filters/";
 		public const string LessContinuousFiltersFolder = ContinuousFiltersFolder + "Less Filters/";
@@ -66,7 +65,7 @@ namespace Zor.RandomGenerators
 			"Ascendant Sequence Filters/";
 		public const string DescendantSequenceDiscreteFiltersFolder = DiscreteFiltersFolder +
 			"Descendant Sequence Filters/";
-		public const string ExtremeSequenceDiscreteFiltersFolder = DiscreteFiltersFolder + "Extreme Sequence Filters/";
+		public const string ExtremeSequenceDiscreteFiltersFolder = DiscreteFiltersFolder + "Extreme Filters/";
 		public const string FrequentValueDiscreteFiltersFolder = DiscreteFiltersFolder + "Frequent Value Filters/";
 		public const string OppositePatterDiscreteFiltersFolder = DiscreteFiltersFolder + "Opposite Pattern Filters/";
 		public const string PairDiscreteFiltersFolder = DiscreteFiltersFolder + "Pair Filters/";

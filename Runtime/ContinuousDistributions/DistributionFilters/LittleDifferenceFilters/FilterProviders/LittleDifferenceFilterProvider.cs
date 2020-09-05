@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 {
+	/// <summary>
+	/// Provides <see cref="LittleDifferenceFilter"/>.
+	/// </summary>
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.LittleDifferenceContinuousFiltersFolder + "Little Difference Filter Provider",
 		fileName = "Little Difference Filter Provider",
@@ -16,18 +19,27 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		[SerializeField] private LittleDifferenceFilter m_LittleDifferenceFilter;
 #pragma warning restore CS0649
 
+		/// <summary>
+		/// Creates a new <see cref="LittleDifferenceFilter"/> and returns it as <see cref="IContinuousFilter"/>.
+		/// </summary>
 		public override IContinuousFilter filter
 		{
 			[Pure]
 			get => new LittleDifferenceFilter(m_LittleDifferenceFilter);
 		}
 
+		/// <summary>
+		/// Returns a shared <see cref="LittleDifferenceFilter"/> as <see cref="IContinuousFilter"/>.
+		/// </summary>
 		public override IContinuousFilter sharedFilter
 		{
 			[Pure]
 			get => m_LittleDifferenceFilter;
 		}
 
+		/// <summary>
+		/// Creates a new <see cref="LittleDifferenceFilter"/> and returns it.
+		/// </summary>
 		[NotNull]
 		public LittleDifferenceFilter littleDifferenceFilter
 		{
@@ -35,6 +47,9 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 			get => new LittleDifferenceFilter(m_LittleDifferenceFilter);
 		}
 
+		/// <summary>
+		/// Returns a shared <see cref="LittleDifferenceFilter"/>.
+		/// </summary>
 		[NotNull]
 		public LittleDifferenceFilter sharedLittleDifferenceFilter
 		{

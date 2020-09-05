@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 {
+	/// <summary>
+	/// Provides <see cref="LessFilter"/>.
+	/// </summary>
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.LessContinuousFiltersFolder + "Less Filter Provider",
 		fileName = "Less Filter Provider",
@@ -16,18 +19,27 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		[SerializeField] private LessFilter m_LessFilter;
 #pragma warning restore CS0649
 
+		/// <summary>
+		/// Creates a new <see cref="LessFilter"/> and returns it as <see cref="IContinuousFilter"/>.
+		/// </summary>
 		public override IContinuousFilter filter
 		{
 			[Pure]
 			get => new LessFilter(m_LessFilter);
 		}
 
+		/// <summary>
+		/// Returns a shared <see cref="LessFilter"/> as <see cref="IContinuousFilter"/>.
+		/// </summary>
 		public override IContinuousFilter sharedFilter
 		{
 			[Pure]
 			get => m_LessFilter;
 		}
 
+		/// <summary>
+		/// Creates a new <see cref="LessFilter"/> and returns it.
+		/// </summary>
 		[NotNull]
 		public LessFilter lessFilter
 		{
@@ -35,6 +47,9 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 			get => new LessFilter(m_LessFilter);
 		}
 
+		/// <summary>
+		/// Returns a shared <see cref="LessFilter"/>.
+		/// </summary>
 		[NotNull]
 		public LessFilter sharedLessFilter
 		{

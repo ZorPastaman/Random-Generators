@@ -142,5 +142,30 @@ namespace Zor.RandomGenerators.Tests
 			Assert.IsFalse(InRangeFilter.NeedRegenerate(sequence, 2f, -1f, 1f, (byte)sequence.Length, 0));
 			Assert.IsFalse(InRangeFilter.NeedRegenerate(sequence, -2f, -1f, 1f, (byte)sequence.Length, 0));
 		}
+
+		[Test]
+		public static void LessFilterTest()
+		{
+			float[] sequence = {-1f, -2f, -3f};
+			Assert.IsTrue(LessFilter.NeedRegenerate(sequence, -2f, 0f, (byte)sequence.Length, 3));
+			sequence = new[] {1f, 2f, 3f};
+			Assert.IsFalse(LessFilter.NeedRegenerate(sequence, 2f, 0f, (byte)sequence.Length, 3));
+			sequence = new[] {1f, -2f, 3f};
+			Assert.IsFalse(LessFilter.NeedRegenerate(sequence, -4f, 0f, (byte)sequence.Length, 3));
+			sequence = new[] {-1f, -2f, -3f};
+			Assert.IsFalse(LessFilter.NeedRegenerate(sequence, 1f, 0f, (byte)sequence.Length, 3));
+			sequence = new[] {-1f, -5f, -3f, -6f, -1f, -7f};
+			Assert.IsTrue(LessFilter.NeedRegenerate(sequence, -2f, 0f, (byte)sequence.Length, 3));
+			sequence = new[] {-1f, 2f, 3f, 7f, 8f};
+			Assert.IsFalse(LessFilter.NeedRegenerate(sequence, 8f, 0f, (byte)sequence.Length, 3));
+			sequence = new[] {-1f, -2f, 0f};
+			Assert.IsFalse(LessFilter.NeedRegenerate(sequence, -1f, 0f, (byte)sequence.Length, 3));
+			sequence = new[] {-1f, -2f, -3f};
+			Assert.IsFalse(LessFilter.NeedRegenerate(sequence, 0f, 0f, (byte)sequence.Length, 3));
+			sequence = new float[0];
+			Assert.IsTrue(LessFilter.NeedRegenerate(sequence, -1f, 0f, (byte)sequence.Length, 0));
+			sequence = new float[0];
+			Assert.IsFalse(LessFilter.NeedRegenerate(sequence, 1f, 0f, (byte)sequence.Length, 0));
+		}
 	}
 }

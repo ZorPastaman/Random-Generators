@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 {
+	/// <summary>
+	/// Provides <see cref="NotInRangeFilter"/>.
+	/// </summary>
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.NotInRangeContinuousFiltersFolder + "Not In Range Filter Provider",
 		fileName = "Not In Range Filter Provider",
@@ -16,18 +19,27 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		[SerializeField] private NotInRangeFilter m_InRangeFilter;
 #pragma warning restore CS0649
 
+		/// <summary>
+		/// Creates a new <see cref="NotInRangeFilter"/> and returns it as <see cref="IContinuousFilter"/>.
+		/// </summary>
 		public override IContinuousFilter filter
 		{
 			[Pure]
 			get => new NotInRangeFilter(m_InRangeFilter);
 		}
 
+		/// <summary>
+		/// Returns a shared <see cref="NotInRangeFilter"/> as <see cref="IContinuousFilter"/>.
+		/// </summary>
 		public override IContinuousFilter sharedFilter
 		{
 			[Pure]
 			get => m_InRangeFilter;
 		}
 
+		/// <summary>
+		/// Creates a new <see cref="NotInRangeFilter"/> and returns it.
+		/// </summary>
 		[NotNull]
 		public NotInRangeFilter inRangeFilter
 		{
@@ -35,6 +47,9 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 			get => new NotInRangeFilter(m_InRangeFilter);
 		}
 
+		/// <summary>
+		/// Returns a shared <see cref="NotInRangeFilter"/>.
+		/// </summary>
 		[NotNull]
 		public NotInRangeFilter sharedInRangeFilter
 		{

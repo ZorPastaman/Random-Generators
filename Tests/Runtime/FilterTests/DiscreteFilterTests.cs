@@ -31,5 +31,30 @@ namespace Zor.RandomGenerators.Tests
 			sequence = new [] {1};
 			Assert.IsFalse(AscendantSequenceFilter<int>.NeedRegenerate(sequence, 0, (byte)sequence.Length, 1));
 		}
+
+		[Test]
+		public static void DescendantSequenceFilterTest()
+		{
+			int[] sequence = {3, 1, 0, -1, -3};
+			Assert.IsTrue(DescendantSequenceFilter<int>.NeedRegenerate(sequence, -5, (byte)sequence.Length, 5));
+			sequence = new[] {2, 0, 2, -4, -6};
+			Assert.IsFalse(DescendantSequenceFilter<int>.NeedRegenerate(sequence, -8, (byte)sequence.Length, 5));
+			sequence = new[] {10, 8, 6, 4, 2, 0, -2};
+			Assert.IsTrue(DescendantSequenceFilter<int>.NeedRegenerate(sequence, -4, (byte)sequence.Length, 5));
+			sequence = new[] {10, 8, 6, 4, 2, 4, -2};
+			Assert.IsFalse(DescendantSequenceFilter<int>.NeedRegenerate(sequence, -4, (byte)sequence.Length, 5));
+			sequence = new[] {-4, -2, 0, 5, 10};
+			Assert.IsFalse(DescendantSequenceFilter<int>.NeedRegenerate(sequence, -6, (byte)sequence.Length, 5));
+			sequence = new[] {3, 1, 0, -1, -3};
+			Assert.IsFalse(DescendantSequenceFilter<int>.NeedRegenerate(sequence, -1, (byte)sequence.Length, 5));
+			sequence = new[] {3, 1, 1, -1, -3};
+			Assert.IsFalse(DescendantSequenceFilter<int>.NeedRegenerate(sequence, -4, (byte)sequence.Length, 5));
+			sequence = new[] {3, 1, 0, -1, -3};
+			Assert.IsFalse(DescendantSequenceFilter<int>.NeedRegenerate(sequence, -3, (byte)sequence.Length, 5));
+			sequence = new[] {1};
+			Assert.IsTrue(DescendantSequenceFilter<int>.NeedRegenerate(sequence, 0, (byte)sequence.Length, 1));
+			sequence = new[] {1};
+			Assert.IsFalse(DescendantSequenceFilter<int>.NeedRegenerate(sequence, 2, (byte)sequence.Length, 1));
+		}
 	}
 }

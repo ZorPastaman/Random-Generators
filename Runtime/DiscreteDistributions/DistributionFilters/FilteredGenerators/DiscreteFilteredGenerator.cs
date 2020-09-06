@@ -5,6 +5,11 @@ using JetBrains.Annotations;
 
 namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 {
+	/// <summary>
+	/// Random generator that takes a generated value from its depended generator filtered with its filters.
+	/// </summary>
+	/// <typeparam name="TValue"></typeparam>
+	/// <typeparam name="TGenerator"></typeparam>
 	public sealed class DiscreteFilteredGenerator<TValue, TGenerator> : IDiscreteGenerator<TValue>
 		where TGenerator : IDiscreteGenerator<TValue>
 	{
@@ -14,6 +19,11 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		private TValue[] m_sequence;
 		private byte m_currentSequenceLength;
 
+		/// <summary>
+		/// Creates a <see cref="DiscreteFilteredGenerator{TValue,TGenerator}"/> with the specified parameters.
+		/// </summary>
+		/// <param name="filteredGenerator"></param>
+		/// <param name="filters"></param>
 		public DiscreteFilteredGenerator([NotNull] TGenerator filteredGenerator,
 			[NotNull] params IDiscreteFilter<TValue>[] filters)
 		{
@@ -22,6 +32,10 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 			InitializeSequence();
 		}
 
+		/// <summary>
+		/// Copy constructor.
+		/// </summary>
+		/// <param name="other"></param>
 		public DiscreteFilteredGenerator([NotNull] DiscreteFilteredGenerator<TValue, TGenerator> other)
 		{
 			m_filteredGenerator = other.m_filteredGenerator;
@@ -37,30 +51,60 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 			set => m_filteredGenerator = value;
 		}
 
+		/// <summary>
+		/// How many filters are used by this generator.
+		/// </summary>
 		public int filtersCount
 		{
 			[Pure]
 			get => m_filters.Length;
 		}
 
+		/// <summary>
+		/// Returns an <see cref="IDiscreteFilter{T}"/> at the index <paramref name="index"/>.
+		/// </summary>
+		/// <param name="index"></param>
+		/// <returns><see cref="IDiscreteFilter{T}"/> at the index <paramref name="index"/>.</returns>
 		[NotNull, Pure]
 		public IDiscreteFilter<TValue> GetFilter(int index)
 		{
 			return m_filters[index];
 		}
 
+		/// <summary>
+		/// Sets the filter <paramref name="filter"/> at the index <paramref name="index"/>.
+		/// </summary>
+		/// <param name="filter"></param>
+		/// <param name="index"></param>
+		/// <remarks>
+		/// Current sequence of generated values is cleared by this method.
+		/// </remarks>
 		public void SetFilter([NotNull] IDiscreteFilter<TValue> filter, int index)
 		{
 			m_filters[index] = filter;
 			InitializeSequence();
 		}
 
+		/// <summary>
+		/// Sets the set of filters <paramref name="filters"/>.
+		/// </summary>
+		/// <param name="filters"></param>
+		/// <remarks>
+		/// Current sequence of generated values is cleared by this method.
+		/// </remarks>
 		public void SetFilters([NotNull] params IDiscreteFilter<TValue>[] filters)
 		{
 			m_filters = filters;
 			InitializeSequence();
 		}
 
+		/// <summary>
+		/// Takes a generated value from its depended generator filtered with its filters.
+		/// </summary>
+		/// <returns>Filtered generated value.</returns>
+		/// <remarks>
+		/// The value is regenerated until all the filters approve it.
+		/// </remarks>
 		public TValue Generate()
 		{
 			TValue generated;

@@ -6,6 +6,9 @@ using Zor.RandomGenerators.PropertyDrawerAttributes;
 
 namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 {
+	/// <summary>
+	/// Provides <see cref="BoolFilteredGenerator{T}"/>.
+	/// </summary>
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.DiscreteFilteredGeneratorsFolder + "Bool Filtered Generator Provider",
 		fileName = "Bool Filtered Generator Provider",
@@ -21,6 +24,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		private BoolFilteredGenerator<IDiscreteGenerator<bool>> m_sharedFilteredGenerator;
 		private IDiscreteFilter<bool>[] m_filtersCache;
 
+		/// <summary>
+		/// Creates a new <see cref="BoolFilteredGenerator{T}"/> and returns it as <see cref="IDiscreteGenerator{T}"/>.
+		/// </summary>
 		public override IDiscreteGenerator<bool> generator
 		{
 			[Pure]
@@ -28,9 +34,11 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 				m_FilteredGenerator.GetGenerator<bool>(), filters);
 		}
 
+		/// <summary>
+		/// Returns a shared <see cref="BoolFilteredGenerator{T}"/> as <see cref="IDiscreteGenerator{T}"/>.
+		/// </summary>
 		public override IDiscreteGenerator<bool> sharedGenerator
 		{
-			[Pure]
 			get
 			{
 				if (m_sharedFilteredGenerator == null)
@@ -42,6 +50,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 			}
 		}
 
+		/// <summary>
+		/// Creates a new <see cref="BoolFilteredGenerator{T}"/> and returns it.
+		/// </summary>
 		[NotNull]
 		public BoolFilteredGenerator<IDiscreteGenerator<bool>> filteredGenerator
 		{
@@ -50,10 +61,12 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 				m_FilteredGenerator.GetGenerator<bool>(), filters);
 		}
 
+		/// <summary>
+		/// Returns a shared <see cref="BoolFilteredGenerator{T}"/>.
+		/// </summary>
 		[NotNull]
 		public BoolFilteredGenerator<IDiscreteGenerator<bool>> sharedFilteredGenerator
 		{
-			[Pure]
 			get
 			{
 				if (m_sharedFilteredGenerator == null)
@@ -65,10 +78,15 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 			}
 		}
 
+		/// <summary>
+		/// <para>Filters cache.</para>
+		/// <para>
+		/// Filters cache is created from <see cref="m_Filters"/> when this property is called for the first time.
+		/// </para>
+		/// </summary>
 		[NotNull]
 		private IDiscreteFilter<bool>[] filters
 		{
-			[Pure]
 			get
 			{
 				if (m_filtersCache == null)

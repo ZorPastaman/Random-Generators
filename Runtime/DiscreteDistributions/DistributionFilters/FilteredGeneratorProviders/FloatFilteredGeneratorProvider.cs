@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 {
+	/// <summary>
+	/// Provides <see cref="DiscreteFilteredGenerator{Single,TGenerator}"/>.
+	/// </summary>
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.DiscreteFilteredGeneratorsFolder + "Float Filtered Generator Provider",
 		fileName = "Float Filtered Generator Provider",

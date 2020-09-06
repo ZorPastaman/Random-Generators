@@ -5,6 +5,10 @@ using JetBrains.Annotations;
 
 namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 {
+	/// <summary>
+	/// Random generator that takes a generated value from its depended generator filtered with its filters.
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
 	public sealed class BoolFilteredGenerator<T> : IDiscreteGenerator<bool> where T : IDiscreteGenerator<bool>
 	{
 		[NotNull] private T m_filteredGenerator;
@@ -13,6 +17,11 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		private bool[] m_sequence;
 		private byte m_currentSequenceLength;
 
+		/// <summary>
+		/// Creates a <see cref="BoolFilteredGenerator{T}"/> with the specified parameters.
+		/// </summary>
+		/// <param name="filteredGenerator"></param>
+		/// <param name="filters"></param>
 		public BoolFilteredGenerator([NotNull] T filteredGenerator, [NotNull] params IDiscreteFilter<bool>[] filters)
 		{
 			m_filteredGenerator = filteredGenerator;
@@ -20,6 +29,10 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 			InitializeSequence();
 		}
 
+		/// <summary>
+		/// Copy constructor.
+		/// </summary>
+		/// <param name="other"></param>
 		public BoolFilteredGenerator([NotNull] BoolFilteredGenerator<T> other)
 		{
 			m_filteredGenerator = other.m_filteredGenerator;
@@ -35,30 +48,60 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 			set => m_filteredGenerator = value;
 		}
 
+		/// <summary>
+		/// How many filters are used by this generator.
+		/// </summary>
 		public int filtersCount
 		{
 			[Pure]
 			get => m_filters.Length;
 		}
 
+		/// <summary>
+		/// Returns an <see cref="IDiscreteFilter{T}"/> at the index <paramref name="index"/>.
+		/// </summary>
+		/// <param name="index"></param>
+		/// <returns><see cref="IDiscreteFilter{T}"/> at the index <paramref name="index"/>.</returns>
 		[NotNull, Pure]
 		public IDiscreteFilter<bool> GetFilter(int index)
 		{
 			return m_filters[index];
 		}
 
+		/// <summary>
+		/// Sets the filter <paramref name="filter"/> at the index <paramref name="index"/>.
+		/// </summary>
+		/// <param name="filter"></param>
+		/// <param name="index"></param>
+		/// <remarks>
+		/// Current sequence of generated values is cleared by this method.
+		/// </remarks>
 		public void SetFilter([NotNull] IDiscreteFilter<bool> filter, int index)
 		{
 			m_filters[index] = filter;
 			InitializeSequence();
 		}
 
+		/// <summary>
+		/// Sets the set of filters <paramref name="filters"/>.
+		/// </summary>
+		/// <param name="filters"></param>
+		/// <remarks>
+		/// Current sequence of generated values is cleared by this method.
+		/// </remarks>
 		public void SetFilters([NotNull] params IDiscreteFilter<bool>[] filters)
 		{
 			m_filters = filters;
 			InitializeSequence();
 		}
 
+		/// <summary>
+		/// Takes a generated value from its depended generator filtered with its filters.
+		/// </summary>
+		/// <returns>Filtered generated value.</returns>
+		/// <remarks>
+		/// The value is flipped if at least one filter doesn't approve a value.
+		/// </remarks>
 		public bool Generate()
 		{
 			bool generated = m_filteredGenerator.Generate();

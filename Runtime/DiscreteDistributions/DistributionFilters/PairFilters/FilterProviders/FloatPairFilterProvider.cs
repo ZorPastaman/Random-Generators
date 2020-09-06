@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 {
+	/// <summary>
+	/// Provides <see cref="PairFilter{Single}"/>.
+	/// </summary>
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.PairDiscreteFiltersFolder + "Float Pair Filter Provider",
 		fileName = "Float Pair Filter Provider",

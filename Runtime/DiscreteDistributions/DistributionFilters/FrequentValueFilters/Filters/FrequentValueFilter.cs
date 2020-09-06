@@ -68,7 +68,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 
 		/// <summary>
 		/// Checks if the value <paramref name="newValue"/> is contained in the sequence <paramref name="sequence"/>
-		/// more than allowed times <paramref name="allowedRepeats"/>.
+		/// more than allowed times <paramref name="allowedRepeats"/> and needs to be regenerated.
 		/// </summary>
 		/// <param name="sequence">Sequence of generated and already applied values.</param>
 		/// <param name="newValue">New generated value.</param>

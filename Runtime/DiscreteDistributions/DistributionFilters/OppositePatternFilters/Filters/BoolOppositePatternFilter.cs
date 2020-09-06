@@ -66,7 +66,8 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		}
 
 		/// <summary>
-		/// Checks if the value <paramref name="newValue"/> forms a pattern opposite to a previous pattern.
+		/// Checks if the value <paramref name="newValue"/> forms a pattern opposite to a previous pattern
+		/// and needs to be regenerated.
 		/// </summary>
 		/// <param name="sequence">Sequence of generated and already applied values.</param>
 		/// <param name="newValue">New generated value.</param>

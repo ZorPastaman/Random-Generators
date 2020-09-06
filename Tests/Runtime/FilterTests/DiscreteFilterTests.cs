@@ -163,5 +163,21 @@ namespace Zor.RandomGenerators.Tests
 			Assert.IsTrue(BoolOppositePatternFilter.NeedRegenerate(sequence, false, (byte)sequence.Length, 1));
 			Assert.IsFalse(BoolOppositePatternFilter.NeedRegenerate(sequence, true, (byte)sequence.Length, 1));
 		}
+
+		[Test]
+		public static void PairFilterTest()
+		{
+			int[] sequence = {1};
+			Assert.IsTrue(PairFilter<int>.NeedRegenerate(sequence, 1, (byte)sequence.Length, 0));
+			Assert.IsFalse(PairFilter<int>.NeedRegenerate(sequence, 0, (byte)sequence.Length, 0));
+			sequence = new[] {1, 0};
+			Assert.IsTrue(PairFilter<int>.NeedRegenerate(sequence, 1, (byte)sequence.Length, 1));
+			Assert.IsFalse(PairFilter<int>.NeedRegenerate(sequence, 0, (byte)sequence.Length, 1));
+			Assert.IsTrue(PairFilter<int>.NeedRegenerate(sequence, 0, (byte)sequence.Length, 0));
+			Assert.IsFalse(PairFilter<int>.NeedRegenerate(sequence, 1, (byte)sequence.Length, 0));
+			sequence = new[] {1, 2, 1, 4, -5, 6, 0};
+			Assert.IsTrue(PairFilter<int>.NeedRegenerate(sequence, 4, (byte)sequence.Length, 3));
+			Assert.IsFalse(PairFilter<int>.NeedRegenerate(sequence, 6, (byte)sequence.Length, 3));
+		}
 	}
 }

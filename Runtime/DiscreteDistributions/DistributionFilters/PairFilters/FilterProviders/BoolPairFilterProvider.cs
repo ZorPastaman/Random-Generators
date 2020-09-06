@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 {
+	/// <summary>
+	/// Provides <see cref="PairFilter{Boolean}"/>.
+	/// </summary>
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.PairDiscreteFiltersFolder + "Bool Pair Filter Provider",
 		fileName = "Bool Pair Filter Provider",

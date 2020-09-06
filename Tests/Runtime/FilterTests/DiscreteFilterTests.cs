@@ -126,5 +126,22 @@ namespace Zor.RandomGenerators.Tests
 			Assert.IsFalse(IntExtremeFilter.NeedRegenerate(sequence, 8, 0, 10, 5,
 				(byte)sequence.Length, 5));
 		}
+
+		[Test]
+		public static void FrequentValueFilterTest()
+		{
+			int[] sequence = {1, 2};
+			Assert.IsTrue(FrequentValueFilter<int>.NeedRegenerate(sequence, 1, (byte)sequence.Length, 2, 0));
+			Assert.IsFalse(FrequentValueFilter<int>.NeedRegenerate(sequence, 1, (byte)sequence.Length, 2, 1));
+			sequence = new[] {-2, 1, 2, 1};
+			Assert.IsTrue(FrequentValueFilter<int>.NeedRegenerate(sequence, 1, (byte)sequence.Length, 2, 0));
+			Assert.IsFalse(FrequentValueFilter<int>.NeedRegenerate(sequence, 1, (byte)sequence.Length, 2, 1));
+			Assert.IsTrue(FrequentValueFilter<int>.NeedRegenerate(sequence, 1, (byte)sequence.Length, 3, 1));
+			Assert.IsFalse(FrequentValueFilter<int>.NeedRegenerate(sequence, 1, (byte)sequence.Length, 3, 2));
+			sequence = new[] {1};
+			Assert.IsTrue(FrequentValueFilter<int>.NeedRegenerate(sequence, 1, (byte)sequence.Length, 1, 0));
+			sequence = new[] {0};
+			Assert.IsFalse(FrequentValueFilter<int>.NeedRegenerate(sequence, 1, (byte)sequence.Length, 1, 0));
+		}
 	}
 }

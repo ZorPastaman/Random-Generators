@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 {
+	/// <summary>
+	/// Provides <see cref="FrequentValueFilter{Single}"/>.
+	/// </summary>
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.FrequentValueDiscreteFiltersFolder + "Float Frequent Value Filter Provider",
 		fileName = "Float Frequent Value Filter Provider",

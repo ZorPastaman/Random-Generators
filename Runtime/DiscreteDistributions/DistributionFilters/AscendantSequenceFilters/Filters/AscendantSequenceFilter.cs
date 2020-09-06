@@ -68,7 +68,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		/// <para>False if the value <paramref name="newValue"/> doesn't need to be regenerated.</para>
 		/// </returns>
 		[Pure]
-		public static bool NeedRegenerate([NotNull] T[] sequence, T newValue, byte sequenceLength,
+		public static bool NeedRegenerate([NotNull] T[] sequence, [CanBeNull] T newValue, byte sequenceLength,
 			byte ascendantSequenceLength)
 		{
 			bool ascending = true;

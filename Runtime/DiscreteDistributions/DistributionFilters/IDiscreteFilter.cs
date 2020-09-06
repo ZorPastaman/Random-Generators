@@ -25,6 +25,6 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		/// <para>True if the value <paramref name="newValue"/> needs to be regenerated.</para>
 		/// <para>False if the value <paramref name="newValue"/> doesn't need to be regenerated.</para>
 		/// </returns>
-		bool NeedRegenerate([NotNull] T[] sequence, [NotNull] T newValue, byte sequenceLength);
+		bool NeedRegenerate([NotNull] T[] sequence, [CanBeNull] T newValue, byte sequenceLength);
 	}
 }

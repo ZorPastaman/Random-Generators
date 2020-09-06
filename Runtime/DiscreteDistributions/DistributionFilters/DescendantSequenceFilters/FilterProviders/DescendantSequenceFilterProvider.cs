@@ -13,7 +13,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 	public abstract class DescendantSequenceFilterProvider<T> : DiscreteFilterProvider<T> where T : IComparable<T>
 	{
 #pragma warning disable CS0649
-		[SerializeField] private byte m_DescendantSequenceLength;
+		[SerializeField] private byte m_DescendantSequenceLength = 3;
 #pragma warning restore CS0649
 
 		private DescendantSequenceFilter<T> m_sharedFilter;

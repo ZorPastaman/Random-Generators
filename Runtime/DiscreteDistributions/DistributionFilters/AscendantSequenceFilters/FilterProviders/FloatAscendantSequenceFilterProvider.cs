@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 {
+	/// <summary>
+	/// Provides <see cref="AscendantSequenceFilter{Single}"/>.
+	/// </summary>
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.AscendantSequenceDiscreteFiltersFolder + "Float Ascendant Sequence Filter Provider",
 		fileName = "Float Ascendant Sequence Filter Provider",

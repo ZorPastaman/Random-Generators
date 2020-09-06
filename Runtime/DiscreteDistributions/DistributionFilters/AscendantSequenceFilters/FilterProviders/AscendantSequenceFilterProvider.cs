@@ -6,6 +6,10 @@ using UnityEngine;
 
 namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 {
+	/// <summary>
+	/// Provides <see cref="AscendantSequenceFilter{T}"/>.
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
 	public abstract class AscendantSequenceFilterProvider<T> : DiscreteFilterProvider<T> where T : IComparable<T>
 	{
 #pragma warning disable CS0649
@@ -14,15 +18,20 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 
 		private AscendantSequenceFilter<T> m_sharedFilter;
 
+		/// <summary>
+		/// Creates a new <see cref="AscendantSequenceFilter{T}"/> and returns it as <see cref="IDiscreteFilter{T}"/>.
+		/// </summary>
 		public sealed override IDiscreteFilter<T> filter
 		{
 			[Pure]
 			get => new AscendantSequenceFilter<T>(m_AscendantSequenceLength);
 		}
 
+		/// <summary>
+		/// Returns a shared <see cref="AscendantSequenceFilter{T}"/> as <see cref="IDiscreteFilter{T}"/>.
+		/// </summary>
 		public sealed override IDiscreteFilter<T> sharedFilter
 		{
-			[Pure]
 			get
 			{
 				if (m_sharedFilter == null)
@@ -34,6 +43,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 			}
 		}
 
+		/// <summary>
+		/// Creates a new <see cref="AscendantSequenceFilter{T}"/> and returns it.
+		/// </summary>
 		[NotNull]
 		public AscendantSequenceFilter<T> ascendantSequenceFilter
 		{
@@ -41,10 +53,12 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 			get => new AscendantSequenceFilter<T>(m_AscendantSequenceLength);
 		}
 
+		/// <summary>
+		/// Returns a shared <see cref="AscendantSequenceFilter{T}"/>.
+		/// </summary>
 		[NotNull]
 		public AscendantSequenceFilter<T> sharedAscendantSequenceFilter
 		{
-			[Pure]
 			get
 			{
 				if (m_sharedFilter == null)

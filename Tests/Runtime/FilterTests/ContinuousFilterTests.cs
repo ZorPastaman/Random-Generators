@@ -5,7 +5,7 @@ using Zor.RandomGenerators.ContinuousDistributions.DistributionFilters;
 
 namespace Zor.RandomGenerators.Tests
 {
-	public static class FilterTests
+	public static class ContinuousFilterTests
 	{
 		[Test]
 		public static void AscendantSequenceFilterTest()

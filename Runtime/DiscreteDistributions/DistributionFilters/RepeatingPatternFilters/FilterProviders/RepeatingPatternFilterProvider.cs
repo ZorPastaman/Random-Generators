@@ -5,24 +5,33 @@ using UnityEngine;
 
 namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 {
+	/// <summary>
+	/// Provides <see cref="RepeatingPatternFilter{T}"/>.
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
 	public abstract class RepeatingPatternFilterProvider<T> : DiscreteFilterProvider<T>
 	{
 #pragma warning disable CS0649
-		[SerializeField] private byte m_ControlledSequenceLength;
-		[SerializeField] private byte m_PatternLength;
+		[SerializeField] private byte m_ControlledSequenceLength = 9;
+		[SerializeField] private byte m_PatternLength = 2;
 #pragma warning restore CS0649
 
 		private RepeatingPatternFilter<T> m_sharedRepeatingPatternFilter;
 
+		/// <summary>
+		/// Creates a new <see cref="RepeatingPatternFilter{T}"/> and returns it as <see cref="IDiscreteFilter{T}"/>.
+		/// </summary>
 		public sealed override IDiscreteFilter<T> filter
 		{
 			[Pure]
 			get => new RepeatingPatternFilter<T>(m_ControlledSequenceLength, m_PatternLength);
 		}
 
+		/// <summary>
+		/// Returns a shared <see cref="RepeatingPatternFilter{T}"/> as <see cref="IDiscreteFilter{T}"/>.
+		/// </summary>
 		public sealed override IDiscreteFilter<T> sharedFilter
 		{
-			[Pure]
 			get
 			{
 				if (m_sharedRepeatingPatternFilter == null)
@@ -34,6 +43,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 			}
 		}
 
+		/// <summary>
+		/// Creates a new <see cref="RepeatingPatternFilter{T}"/> and returns it.
+		/// </summary>
 		[NotNull]
 		public RepeatingPatternFilter<T> repeatingPatternFilter
 		{
@@ -41,10 +53,12 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 			get => new RepeatingPatternFilter<T>(m_ControlledSequenceLength, m_PatternLength);
 		}
 
+		/// <summary>
+		/// Returns a shared <see cref="RepeatingPatternFilter{T}"/>.
+		/// </summary>
 		[NotNull]
 		public RepeatingPatternFilter<T> sharedRepeatingPatternFilter
 		{
-			[Pure]
 			get
 			{
 				if (m_sharedRepeatingPatternFilter == null)

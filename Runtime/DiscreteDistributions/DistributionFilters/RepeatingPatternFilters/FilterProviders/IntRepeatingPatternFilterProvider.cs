@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 {
+	/// <summary>
+	/// Provides <see cref="RepeatingPatternFilter{Int32}"/>.
+	/// </summary>
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.RepeatingPatternDiscreteFiltersFolder + 
 			"Int Repeating Pattern Filter Provider",

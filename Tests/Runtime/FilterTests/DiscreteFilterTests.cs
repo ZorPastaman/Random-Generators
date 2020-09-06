@@ -179,5 +179,29 @@ namespace Zor.RandomGenerators.Tests
 			Assert.IsTrue(PairFilter<int>.NeedRegenerate(sequence, 4, (byte)sequence.Length, 3));
 			Assert.IsFalse(PairFilter<int>.NeedRegenerate(sequence, 6, (byte)sequence.Length, 3));
 		}
+
+		[Test]
+		public static void RepeatingPatternFilterTest()
+		{
+			int[] sequence = {3, 5, 6, 1, 3};
+			Assert.IsTrue(RepeatingPatternFilter<int>.NeedRegenerate(sequence, 5, (byte)sequence.Length, 5, 2));
+			Assert.IsFalse(RepeatingPatternFilter<int>.NeedRegenerate(sequence, 3, (byte)sequence.Length, 5, 2));
+			sequence = new[] {3, 5, 6, 9, 1, 3, 5};
+			Assert.IsTrue(RepeatingPatternFilter<int>.NeedRegenerate(sequence, 6, (byte)sequence.Length, 7, 3));
+			Assert.IsFalse(RepeatingPatternFilter<int>.NeedRegenerate(sequence, 5, (byte)sequence.Length, 7, 3));
+			sequence = new[] {3, 5, 6, 9, 1, 4, 5};
+			Assert.IsFalse(RepeatingPatternFilter<int>.NeedRegenerate(sequence, 6, (byte)sequence.Length, 7, 3));
+			Assert.IsTrue(RepeatingPatternFilter<int>.NeedRegenerate(sequence, 6, (byte)sequence.Length, 7, 2));
+			sequence = new[] {4, 5, 6, 3, 5, 3, 5};
+			Assert.IsTrue(RepeatingPatternFilter<int>.NeedRegenerate(sequence, 3,(byte)sequence.Length, 7, 2));
+			Assert.IsFalse(RepeatingPatternFilter<int>.NeedRegenerate(sequence, 3, (byte)sequence.Length, 7, 3));
+			sequence = new[] {1, 2, 1};
+			Assert.IsTrue(RepeatingPatternFilter<int>.NeedRegenerate(sequence, 2, (byte)sequence.Length, 3, 2));
+			Assert.IsFalse(RepeatingPatternFilter<int>.NeedRegenerate(sequence, 0, (byte)sequence.Length, 3, 2));
+			sequence = new[] {3, 5, 4, 5, 1, 4, 5};
+			Assert.IsTrue(RepeatingPatternFilter<int>.NeedRegenerate(sequence, 1, (byte)sequence.Length, 5, 3));
+			Assert.IsTrue(RepeatingPatternFilter<int>.NeedRegenerate(sequence, 1, (byte)sequence.Length, 5, 2));
+			Assert.IsFalse(RepeatingPatternFilter<int>.NeedRegenerate(sequence, 2, (byte)sequence.Length, 5, 3));
+		}
 	}
 }

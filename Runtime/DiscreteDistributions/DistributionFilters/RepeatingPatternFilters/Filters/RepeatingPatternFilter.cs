@@ -1,32 +1,42 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
-using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 
 namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 {
+	/// <summary>
+	/// The filter recommends to regenerate a new value if it forms a pattern the same to a pattern
+	/// some elements before.
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
 	public sealed class RepeatingPatternFilter<T> : IDiscreteFilter<T>
 	{
 		private static readonly EqualityComparer<T> s_comparer = EqualityComparer<T>.Default;
 
-		[NotNull] private T[] m_patternCache;
 		private byte m_controlledSequenceLength;
 		private byte m_patternLength;
 
+		/// <summary>
+		/// Creates a <see cref="RepeatingPatternFilter{T}"/> with the specified parameters.
+		/// </summary>
+		/// <param name="controlledSequenceLength"></param>
+		/// <param name="patternLength"></param>
 		public RepeatingPatternFilter(byte controlledSequenceLength, byte patternLength)
 		{
 			m_controlledSequenceLength = controlledSequenceLength;
 			m_patternLength = patternLength;
-			m_patternCache = new T[m_patternLength];
 		}
 
+		/// <summary>
+		/// Copy constructor.
+		/// </summary>
+		/// <param name="other"></param>
 		public RepeatingPatternFilter([NotNull] RepeatingPatternFilter<T> other)
 		{
 			m_controlledSequenceLength = other.m_controlledSequenceLength;
 			m_patternLength = other.m_patternLength;
-			m_patternCache = new T[m_patternLength];
 		}
 
 		public byte controlledSequenceLength
@@ -40,58 +50,67 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		{
 			[Pure]
 			get => m_patternLength;
-			set
-			{
-				if (m_patternLength == value)
-				{
-					return;
-				}
-
-				m_patternLength = value;
-				m_patternCache = new T[m_patternLength];
-			}
+			set => m_patternLength = value;
 		}
 
+		/// <inheritdoc/>
 		public byte requiredSequenceLength
 		{
 			[Pure]
 			get => m_controlledSequenceLength;
 		}
 
+		/// <inheritdoc/>
 		[Pure]
 		public bool NeedRegenerate(T[] sequence, T newValue, byte sequenceLength)
 		{
-			for (int i = sequenceLength - m_patternLength + 1, j = 0; i < sequenceLength; ++i, ++j)
-			{
-				m_patternCache[j] = sequence[i];
-			}
-			m_patternCache[m_patternLength - 1] = newValue;
+			return NeedRegenerate(sequence, newValue, sequenceLength, m_controlledSequenceLength, m_patternLength);
+		}
 
+		/// <summary>
+		/// Checks if the new value <paramref name="newValue"/> forms a pattern the same to a pattern
+		/// some elements before and needs to be regenerated.
+		/// </summary>
+		/// <param name="sequence">Sequence of generated and already applied values.</param>
+		/// <param name="newValue">New generated value.</param>
+		/// <param name="sequenceLength">Current sequence length.</param>
+		/// <param name="controlledSequenceLength"></param>
+		/// <param name="patternLength"></param>
+		/// <returns>
+		/// <para>True if the value <paramref name="newValue"/> needs to be regenerated.</para>
+		/// <para>False if the value <paramref name="newValue"/> doesn't need to be regenerated.</para>
+		/// </returns>
+		[Pure]
+		public static bool NeedRegenerate([NotNull] T[] sequence, [CanBeNull] T newValue, byte sequenceLength,
+			byte controlledSequenceLength, byte patternLength)
+		{
+			int checkStartIndex = sequenceLength - patternLength + 1;
+			int samePatternIndex = sequenceLength - controlledSequenceLength;
 			bool foundPattern = false;
 
-			for (int i = sequenceLength - m_controlledSequenceLength + 1;
-				!foundPattern && i < sequenceLength - m_patternLength;
-				++i)
+			for (int stopIndex = checkStartIndex - patternLength + 1;
+				!foundPattern & samePatternIndex < stopIndex;
+				++samePatternIndex)
 			{
-				foundPattern = CheckSequenceAt(sequence, i);
+				foundPattern = s_comparer.Equals(sequence[samePatternIndex + patternLength - 1], newValue) &&
+					IsPatternSame(sequence, samePatternIndex, checkStartIndex, sequenceLength);
 			}
-
-			Array.Clear(m_patternCache, 0, m_patternLength);
 
 			return foundPattern;
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-		private bool CheckSequenceAt([NotNull] T[] sequence, int index)
+		private static bool IsPatternSame([NotNull] T[] sequence, int leftPatternIndex, int rightPatternIndex,
+			int sequenceLength)
 		{
-			bool foundPattern = true;
+			bool isSame = true;
 
-			for (int i = index, j = 0; foundPattern && i < index + m_patternLength; ++i, ++j)
+			for (; isSame & rightPatternIndex < sequenceLength; ++leftPatternIndex, ++rightPatternIndex)
 			{
-				foundPattern = s_comparer.Equals(sequence[i], m_patternCache[j]);
+				isSame = s_comparer.Equals(sequence[leftPatternIndex], sequence[rightPatternIndex]);
 			}
 
-			return foundPattern;
+			return isSame;
 		}
 	}
 }

@@ -57,7 +57,8 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 
 		/// <summary>
 		/// Checks if the value <paramref cref="newValue"/> forms the same pattern
-		/// in the sequence <paramref name="sequence"/> as a pattern before.
+		/// in the sequence <paramref name="sequence"/> as a pattern before
+		/// and needs to be regenerated.
 		/// </summary>
 		/// <param name="sequence">Sequence of generated and already applied values.</param>
 		/// <param name="newValue">New generated value.</param>

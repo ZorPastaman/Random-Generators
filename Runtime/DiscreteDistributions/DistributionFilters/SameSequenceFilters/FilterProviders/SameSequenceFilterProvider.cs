@@ -5,6 +5,10 @@ using UnityEngine;
 
 namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 {
+	/// <summary>
+	/// Provides <see cref="SameSequenceFilter{T}"/>.
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
 	public abstract class SameSequenceFilterProvider<T> : DiscreteFilterProvider<T>
 	{
 #pragma warning disable CS0649
@@ -13,15 +17,20 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 
 		private SameSequenceFilter<T> m_sharedFilter;
 
+		/// <summary>
+		/// Creates a new <see cref="SameSequenceFilter{T}"/> and returns it as <see cref="IDiscreteFilter{T}"/>.
+		/// </summary>
 		public sealed override IDiscreteFilter<T> filter
 		{
 			[Pure]
 			get => new SameSequenceFilter<T>(m_MaxSameSequenceLength);
 		}
 
+		/// <summary>
+		/// Returns a shared <see cref="SameSequenceFilter{T}"/> as <see cref="IDiscreteFilter{T}"/>.
+		/// </summary>
 		public sealed override IDiscreteFilter<T> sharedFilter
 		{
-			[Pure]
 			get
 			{
 				if (m_sharedFilter == null)
@@ -33,6 +42,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 			}
 		}
 
+		/// <summary>
+		/// Creates a new <see cref="SameSequenceFilter{T}"/> and returns it.
+		/// </summary>
 		[NotNull]
 		public SameSequenceFilter<T> sameSequenceFilter
 		{
@@ -40,10 +52,12 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 			get => new SameSequenceFilter<T>(m_MaxSameSequenceLength);
 		}
 
+		/// <summary>
+		/// Returns a shared <see cref="SameSequenceFilter{T}"/>.
+		/// </summary>
 		[NotNull]
 		public SameSequenceFilter<T> sharedSameSequenceFilter
 		{
-			[Pure]
 			get
 			{
 				if (m_sharedFilter == null)

@@ -225,5 +225,27 @@ namespace Zor.RandomGenerators.Tests
 			sequence = new[] {3, 4, 5, 7, 4, 3, 4};
 			Assert.IsFalse(SamePatternFilter<int>.NeedRegenerate(sequence, 5, (byte)sequence.Length, 3));
 		}
+
+		[Test]
+		public static void SameSequenceFilterTest()
+		{
+			int[] sequence = {1};
+			Assert.IsTrue(SameSequenceFilter<int>.NeedRegenerate(sequence, 1, (byte)sequence.Length, 1));
+			Assert.IsFalse(SameSequenceFilter<int>.NeedRegenerate(sequence, 0, (byte)sequence.Length, 1));
+			sequence = new[] {2, 0, 0};
+			Assert.IsTrue(SameSequenceFilter<int>.NeedRegenerate(sequence, 0, (byte)sequence.Length, 2));
+			Assert.IsFalse(SameSequenceFilter<int>.NeedRegenerate(sequence, 1, (byte)sequence.Length, 2));
+			sequence = new[] {0, 2, 0};
+			Assert.IsFalse(SameSequenceFilter<int>.NeedRegenerate(sequence, 0, (byte)sequence.Length, 2));
+			Assert.IsFalse(SameSequenceFilter<int>.NeedRegenerate(sequence, 2, (byte)sequence.Length, 2));
+			sequence = new[] {5, 0, 3, 5, 3, 8, 8};
+			Assert.IsTrue(SameSequenceFilter<int>.NeedRegenerate(sequence, 8, (byte)sequence.Length, 2));
+			Assert.IsFalse(SameSequenceFilter<int>.NeedRegenerate(sequence, 3, (byte)sequence.Length, 2));
+			sequence = new[] {5, 0, 3, 5, 8, 8, 8};
+			Assert.IsTrue(SameSequenceFilter<int>.NeedRegenerate(sequence, 8, (byte)sequence.Length, 3));
+			Assert.IsFalse(SameSequenceFilter<int>.NeedRegenerate(sequence, 3, (byte)sequence.Length, 3));
+			Assert.IsTrue(SameSequenceFilter<int>.NeedRegenerate(sequence, 8, (byte)sequence.Length, 2));
+			Assert.IsFalse(SameSequenceFilter<int>.NeedRegenerate(sequence, 3, (byte)sequence.Length, 2));
+		}
 	}
 }

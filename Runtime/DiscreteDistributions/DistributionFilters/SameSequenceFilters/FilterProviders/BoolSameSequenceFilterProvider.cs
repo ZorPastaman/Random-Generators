@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 {
+	/// <summary>
+	/// Provides <see cref="SameSequenceFilter{Boolean}"/>.
+	/// </summary>
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.SameSequenceDiscreteFiltersFolder + "Bool Same Sequence Discrete Filter",
 		fileName = "Bool Same Sequence Discrete Filter",

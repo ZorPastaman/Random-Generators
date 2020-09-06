@@ -146,7 +146,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 			sum = 0;
 			int i = 0;
 
-			for (; sum <= random && i < count; ++i)
+			for (; sum <= random & i < count; ++i)
 			{
 				sum += weights[i];
 			}

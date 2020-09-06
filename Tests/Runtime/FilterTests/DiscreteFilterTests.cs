@@ -143,5 +143,25 @@ namespace Zor.RandomGenerators.Tests
 			sequence = new[] {0};
 			Assert.IsFalse(FrequentValueFilter<int>.NeedRegenerate(sequence, 1, (byte)sequence.Length, 1, 0));
 		}
+
+		[Test]
+		public static void BoolOppositePatternFilterTest()
+		{
+			bool[] sequence = {false, false, false, true, true};
+			Assert.IsTrue(BoolOppositePatternFilter.NeedRegenerate(sequence, true, (byte)sequence.Length, 3));
+			Assert.IsFalse(BoolOppositePatternFilter.NeedRegenerate(sequence, false, (byte)sequence.Length, 3));
+			sequence = new[] {false, true, false, true, false};
+			Assert.IsTrue(BoolOppositePatternFilter.NeedRegenerate(sequence, true, (byte)sequence.Length, 3));
+			Assert.IsFalse(BoolOppositePatternFilter.NeedRegenerate(sequence, false, (byte)sequence.Length, 3));
+			sequence = new[] {false, true, true, false, false, false, true, true};
+			Assert.IsTrue(BoolOppositePatternFilter.NeedRegenerate(sequence, true, (byte)sequence.Length, 3));
+			Assert.IsFalse(BoolOppositePatternFilter.NeedRegenerate(sequence, false, (byte)sequence.Length, 3));
+			sequence = new[] {false, true, false, false, false, false, true, true};
+			Assert.IsTrue(BoolOppositePatternFilter.NeedRegenerate(sequence, true, (byte)sequence.Length, 3));
+			Assert.IsFalse(BoolOppositePatternFilter.NeedRegenerate(sequence, false, (byte)sequence.Length, 3));
+			sequence = new[] {true};
+			Assert.IsTrue(BoolOppositePatternFilter.NeedRegenerate(sequence, false, (byte)sequence.Length, 1));
+			Assert.IsFalse(BoolOppositePatternFilter.NeedRegenerate(sequence, true, (byte)sequence.Length, 1));
+		}
 	}
 }

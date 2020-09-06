@@ -4,34 +4,34 @@ using System;
 using JetBrains.Annotations;
 using UnityEngine;
 
-namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
+namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 {
 	/// <summary>
 	/// The filter recommends to regenerate a new value if it continues a sequence where every value is too close
 	/// to an expected minimum or maximum.
 	/// </summary>
 	[Serializable]
-	public sealed class ExtremeFilter : IContinuousFilter
+	public sealed class IntExtremeFilter : IDiscreteFilter<int>
 	{
 #pragma warning disable CS0649
-		[SerializeField] private float m_ExpectedMin;
-		[SerializeField] private float m_ExpectedMax = 10f;
+		[SerializeField] private int m_ExpectedMin;
+		[SerializeField] private int m_ExpectedMax = 10;
 		[SerializeField,
 		Tooltip("How far from an expected minimum or maximum a value may be to be counted as close enough.")]
-		private float m_Range = 5f;
+		private uint m_Range = 5;
 		[SerializeField, Tooltip("Allowed extreme sequence length.")]
 		private byte m_ExtremeSequenceLength = 6;
 #pragma warning restore CS0649
 
 		/// <summary>
-		/// Creates a new <see cref="ExtremeFilter"/> with the default parameters.
+		/// Creates an <see cref="IntExtremeFilter"/> with the default parameters.
 		/// </summary>
-		public ExtremeFilter()
+		public IntExtremeFilter()
 		{
 		}
 
 		/// <summary>
-		/// Creates a new <see cref="ExtremeFilter"/> with the specified parameters.
+		/// Creates an <see cref="IntExtremeFilter"/> with the specified parameters.
 		/// </summary>
 		/// <param name="expectedMin"></param>
 		/// <param name="expectedMax"></param>
@@ -39,7 +39,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		/// How far from an expected minimum or maximum a value may be to be counted as close enough.
 		/// </param>
 		/// <param name="extremeSequenceLength">Allowed extreme sequence length.</param>
-		public ExtremeFilter(float expectedMin, float expectedMax, float range, byte extremeSequenceLength)
+		public IntExtremeFilter(int expectedMin, int expectedMax, uint range, byte extremeSequenceLength)
 		{
 			m_ExpectedMin = expectedMin;
 			m_ExpectedMax = expectedMax;
@@ -51,7 +51,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		/// Copy constructor.
 		/// </summary>
 		/// <param name="other"></param>
-		public ExtremeFilter([NotNull] ExtremeFilter other)
+		public IntExtremeFilter([NotNull] IntExtremeFilter other)
 		{
 			m_ExpectedMin = other.m_ExpectedMin;
 			m_ExpectedMax = other.m_ExpectedMax;
@@ -59,14 +59,14 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 			m_ExtremeSequenceLength = other.m_ExtremeSequenceLength;
 		}
 
-		public float expectedMin
+		public int expectedMin
 		{
 			[Pure]
 			get => m_ExpectedMin;
 			set => m_ExpectedMin = value;
 		}
 
-		public float expectedMax
+		public int expectedMax
 		{
 			[Pure]
 			get => m_ExpectedMax;
@@ -76,7 +76,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		/// <summary>
 		/// How far from an expected minimum or maximum a value may be to be counted as close enough.
 		/// </summary>
-		public float range
+		public uint range
 		{
 			[Pure]
 			get => m_Range;
@@ -102,10 +102,10 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 
 		/// <inheritdoc/>
 		[Pure]
-		public bool NeedRegenerate(float[] sequence, float newValue, byte sequenceLength)
+		public bool NeedRegenerate(int[] sequence, int newValue, byte sequenceLength)
 		{
-			return NeedRegenerate(sequence, newValue, m_ExpectedMin, m_ExpectedMax, m_Range, sequenceLength,
-				m_ExtremeSequenceLength);
+			return NeedRegenerate(sequence, newValue, m_ExpectedMin, m_ExpectedMax, m_Range,
+				sequenceLength, m_ExtremeSequenceLength);
 		}
 
 		/// <summary>
@@ -126,10 +126,10 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		/// <para>False if the value <paramref name="newValue"/> doesn't need to be regenerated.</para>
 		/// </returns>
 		[Pure]
-		public static bool NeedRegenerate([NotNull] float[] sequence, float newValue, float expectedMin,
-			float expectedMax, float range, byte sequenceLength, byte extremeSequenceLength)
+		public static bool NeedRegenerate([NotNull] int[] sequence, int newValue, int expectedMin, int expectedMax,
+			uint range, byte sequenceLength, byte extremeSequenceLength)
 		{
-			float extreme;
+			int extreme;
 
 			if (newValue < expectedMin + range)
 			{

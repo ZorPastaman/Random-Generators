@@ -1,6 +1,7 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
 using System;
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -12,11 +13,15 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 	[Serializable]
 	public sealed class InRangeFilter : IContinuousFilter
 	{
+		public const float DefaultMin = -1f;
+		public const float DefaultMax = 1f;
+		public const byte DefaultInRangeSequenceLength = 3;
+
 #pragma warning disable CS0649
-		[SerializeField] private float m_Min = -1f;
-		[SerializeField] private float m_Max = 1f;
+		[SerializeField] private float m_Min = DefaultMin;
+		[SerializeField] private float m_Max = DefaultMax;
 		[SerializeField, Tooltip("Allowed in range sequence length.")]
-		private byte m_InRangeSequenceLength = 3;
+		private byte m_InRangeSequenceLength = DefaultInRangeSequenceLength;
 #pragma warning restore CS0649
 
 		/// <summary>
@@ -52,15 +57,17 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 
 		public float min
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_Min;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_Min = value;
 		}
 
 		public float max
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_Max;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_Max = value;
 		}
 
@@ -69,20 +76,21 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		/// </summary>
 		public byte inRangeSequenceLength
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_InRangeSequenceLength;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_InRangeSequenceLength = value;
 		}
 
 		/// <inheritdoc/>
 		public byte requiredSequenceLength
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_InRangeSequenceLength;
 		}
 
 		/// <inheritdoc/>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public bool NeedRegenerate(float[] sequence, float newValue, byte sequenceLength)
 		{
 			return NeedRegenerate(sequence, newValue, m_Min, m_Max, sequenceLength, m_InRangeSequenceLength);

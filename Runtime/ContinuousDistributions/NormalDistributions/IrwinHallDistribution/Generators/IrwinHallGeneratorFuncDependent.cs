@@ -1,6 +1,7 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
 using System;
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 
 namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
@@ -22,8 +23,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// </param>
 		/// <param name="startPoint"></param>
 		/// <param name="iids">How many independent and identically distributed random variables are generated.</param>
-		public IrwinHallGeneratorFuncDependent([NotNull] Func<float> iidFunc, float startPoint,
-			byte iids = IrwinHallDistribution.DefaultIids)
+		public IrwinHallGeneratorFuncDependent([NotNull] Func<float> iidFunc, float startPoint, byte iids)
 		{
 			m_iidFunc = iidFunc;
 			m_startPoint = startPoint;
@@ -47,28 +47,31 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		[NotNull]
 		public Func<float> iidFunc
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_iidFunc;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_iidFunc = value;
 		}
 
 		public float startPoint
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_startPoint;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_startPoint = value;
 		}
 
 		/// <inheritdoc/>
 		public byte iids
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_iids;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_iids = value;
 		}
 
 		/// <inheritdoc/>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public float Generate()
 		{
 			return IrwinHallDistribution.Generate(m_iidFunc, m_startPoint, m_iids);

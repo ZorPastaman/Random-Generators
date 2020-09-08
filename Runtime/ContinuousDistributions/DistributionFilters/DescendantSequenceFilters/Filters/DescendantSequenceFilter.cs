@@ -1,6 +1,7 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
 using System;
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -13,9 +14,11 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 	[Serializable]
 	public sealed class DescendantSequenceFilter : IContinuousFilter
 	{
+		public const byte DefaultDescendantSequenceLength = 3;
+
 #pragma warning disable CS0649
 		[SerializeField, Tooltip("Allowed descendant sequence length.")]
-		private byte m_DescendantSequenceLength = 3;
+		private byte m_DescendantSequenceLength = DefaultDescendantSequenceLength;
 #pragma warning restore CS0649
 
 		/// <summary>
@@ -50,20 +53,21 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		/// </summary>
 		public byte descendantSequenceLength
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_DescendantSequenceLength;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_DescendantSequenceLength = value;
 		}
 
 		/// <inheritdoc/>
 		public byte requiredSequenceLength
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_DescendantSequenceLength;
 		}
 
 		/// <inheritdoc/>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public bool NeedRegenerate(float[] sequence, float newValue, byte sequenceLength)
 		{
 			return NeedRegenerate(sequence, newValue, sequenceLength, descendantSequenceLength);

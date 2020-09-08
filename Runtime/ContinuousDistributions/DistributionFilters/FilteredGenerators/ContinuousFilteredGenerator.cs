@@ -1,6 +1,7 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
 using System;
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 
 namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
@@ -44,8 +45,9 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		[NotNull]
 		public T filteredGenerator
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_filteredGenerator;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_filteredGenerator = value;
 		}
 
@@ -54,7 +56,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		/// </summary>
 		public int filtersCount
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_filters.Length;
 		}
 
@@ -63,7 +65,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		/// </summary>
 		/// <param name="index"></param>
 		/// <returns><see cref="IContinuousFilter"/> at the index <paramref name="index"/>.</returns>
-		[NotNull, Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), NotNull, Pure]
 		public IContinuousFilter GetFilter(int index)
 		{
 			return m_filters[index];
@@ -77,6 +79,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		/// <remarks>
 		/// Current sequence of generated values is cleared by this method.
 		/// </remarks>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public void SetFilter([NotNull] IContinuousFilter filter, int index)
 		{
 			m_filters[index] = filter;
@@ -90,6 +93,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		/// <remarks>
 		/// Current sequence of generated values is cleared by this method.
 		/// </remarks>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public void SetFilters([NotNull] params IContinuousFilter[] filters)
 		{
 			m_filters = filters;

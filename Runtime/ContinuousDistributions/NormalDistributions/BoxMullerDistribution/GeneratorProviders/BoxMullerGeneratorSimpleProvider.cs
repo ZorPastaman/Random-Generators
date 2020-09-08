@@ -69,5 +69,10 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 				return m_sharedGenerator;
 			}
 		}
+
+		private void OnValidate()
+		{
+			m_sharedGenerator = null;
+		}
 	}
 }

@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -16,8 +17,13 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 	public sealed class InRangeFilterProvider : ContinuousFilterProvider
 	{
 #pragma warning disable CS0649
-		[SerializeField] private InRangeFilter m_InRangeFilter;
+		[SerializeField] private float m_Min = InRangeFilter.DefaultMin;
+		[SerializeField] private float m_Max = InRangeFilter.DefaultMax;
+		[SerializeField, Tooltip("Allowed in range sequence length.")]
+		private byte m_InRangeSequenceLength = InRangeFilter.DefaultInRangeSequenceLength;
 #pragma warning restore CS0649
+
+		private InRangeFilter m_sharedFilter;
 
 		/// <summary>
 		/// Creates a new <see cref="InRangeFilter"/> and returns it as <see cref="IContinuousFilter"/>.
@@ -25,7 +31,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		public override IContinuousFilter filter
 		{
 			[Pure]
-			get => new InRangeFilter(m_InRangeFilter);
+			get => new InRangeFilter(m_Min, m_Max, m_InRangeSequenceLength);
 		}
 
 		/// <summary>
@@ -33,8 +39,15 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		/// </summary>
 		public override IContinuousFilter sharedFilter
 		{
-			[Pure]
-			get => m_InRangeFilter;
+			get
+			{
+				if (m_sharedFilter == null)
+				{
+					m_sharedFilter = inRangeFilter;
+				}
+
+				return m_sharedFilter;
+			}
 		}
 
 		/// <summary>
@@ -44,7 +57,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		public InRangeFilter inRangeFilter
 		{
 			[Pure]
-			get => new InRangeFilter(m_InRangeFilter);
+			get => new InRangeFilter(m_Min, m_Max, m_InRangeSequenceLength);
 		}
 
 		/// <summary>
@@ -53,8 +66,71 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		[NotNull]
 		public InRangeFilter sharedInRangeFilter
 		{
-			[Pure]
-			get => m_InRangeFilter;
+			get
+			{
+				if (m_sharedFilter == null)
+				{
+					m_sharedFilter = inRangeFilter;
+				}
+
+				return m_sharedFilter;
+			}
+		}
+
+		public float min
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_Min;
+			set
+			{
+				if (m_Min == value)
+				{
+					return;
+				}
+
+				m_Min = value;
+				m_sharedFilter = null;
+			}
+		}
+
+		public float max
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_Max;
+			set
+			{
+				if (m_Max == value)
+				{
+					return;
+				}
+
+				m_Max = value;
+				m_sharedFilter = null;
+			}
+		}
+
+		/// <summary>
+		/// Allowed in range sequence length.
+		/// </summary>
+		public byte inRangeSequenceLength
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_InRangeSequenceLength;
+			set
+			{
+				if (m_InRangeSequenceLength == value)
+				{
+					return;
+				}
+
+				m_InRangeSequenceLength = value;
+				m_sharedFilter = null;
+			}
+		}
+
+		private void OnValidate()
+		{
+			m_sharedFilter = null;
 		}
 	}
 }

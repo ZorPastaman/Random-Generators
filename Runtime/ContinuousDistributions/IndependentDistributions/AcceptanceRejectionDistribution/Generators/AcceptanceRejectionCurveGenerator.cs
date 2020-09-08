@@ -1,6 +1,7 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
 using System;
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -17,8 +18,8 @@ namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
 		[SerializeField,
 		Tooltip("X - generated value\nY - its probability\nAt least one point must have possibility 1.")]
 		private AnimationCurve m_ProbabilityCurve;
-		[SerializeField] private float m_Min;
-		[SerializeField] private float m_Max = 1f;
+		[SerializeField] private float m_Min = AcceptanceRejectionDistribution.DefaultMin;
+		[SerializeField] private float m_Max = AcceptanceRejectionDistribution.DefaultMax;
 #pragma warning restore CS0649
 
 		/// <summary>
@@ -66,27 +67,30 @@ namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
 		[NotNull]
 		public AnimationCurve probabilityCurve
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_ProbabilityCurve;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_ProbabilityCurve = value;
 		}
 
 		public float min
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_Min;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_Min = value;
 		}
 
 		public float max
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_Max;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_Max = value;
 		}
 
 		/// <inheritdoc/>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public float Generate()
 		{
 			return AcceptanceRejectionDistribution.Generate(m_ProbabilityCurve, m_Min, m_Max);

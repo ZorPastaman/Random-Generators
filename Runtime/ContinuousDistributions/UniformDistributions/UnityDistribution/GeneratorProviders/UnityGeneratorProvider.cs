@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -16,8 +17,11 @@ namespace Zor.RandomGenerators.ContinuousDistributions.UniformDistributions
 	public sealed class UnityGeneratorProvider : ContinuousGeneratorProvider
 	{
 #pragma warning disable CS0649
-		[SerializeField] private UnityGenerator m_UnityGenerator;
+		[SerializeField] private float m_Min = UnityGeneratorDefaults.DefaultMin;
+		[SerializeField] private float m_Max = UnityGeneratorDefaults.DefaultMax;
 #pragma warning restore CS0649
+
+		private UnityGenerator m_sharedGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="UnityGenerator"/> and returns it as <see cref="IContinuousGenerator"/>.
@@ -25,7 +29,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.UniformDistributions
 		public override IContinuousGenerator generator
 		{
 			[Pure]
-			get => new UnityGenerator(m_UnityGenerator);
+			get => new UnityGenerator(m_Min, m_Max);
 		}
 
 		/// <summary>
@@ -33,8 +37,15 @@ namespace Zor.RandomGenerators.ContinuousDistributions.UniformDistributions
 		/// </summary>
 		public override IContinuousGenerator sharedGenerator
 		{
-			[Pure]
-			get => m_UnityGenerator;
+			get
+			{
+				if (m_sharedGenerator == null)
+				{
+					m_sharedGenerator = unityGenerator;
+				}
+
+				return m_sharedGenerator;
+			}
 		}
 
 		/// <summary>
@@ -44,7 +55,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.UniformDistributions
 		public UnityGenerator unityGenerator
 		{
 			[Pure]
-			get => new UnityGenerator(m_UnityGenerator);
+			get => new UnityGenerator(m_Min, m_Max);
 		}
 
 		/// <summary>
@@ -53,8 +64,52 @@ namespace Zor.RandomGenerators.ContinuousDistributions.UniformDistributions
 		[NotNull]
 		public UnityGenerator sharedUnityGenerator
 		{
-			[Pure]
-			get => m_UnityGenerator;
+			get
+			{
+				if (m_sharedGenerator == null)
+				{
+					m_sharedGenerator = unityGenerator;
+				}
+
+				return m_sharedGenerator;
+			}
+		}
+
+		public float min
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_Min;
+			set
+			{
+				if (m_Min == value)
+				{
+					return;
+				}
+
+				m_Min = value;
+				m_sharedGenerator = null;
+			}
+		}
+
+		public float max
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_Max;
+			set
+			{
+				if (m_Max == value)
+				{
+					return;
+				}
+
+				m_Max = value;
+				m_sharedGenerator = null;
+			}
+		}
+
+		private void OnValidate()
+		{
+			m_sharedGenerator = null;
 		}
 	}
 }

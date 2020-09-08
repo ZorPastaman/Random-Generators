@@ -15,9 +15,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.UniformDistributions
 	)]
 	public sealed class UnityGeneratorSimpleProvider : ContinuousGeneratorProvider
 	{
-#pragma warning disable CS0649
-		[SerializeField] private UnityGeneratorSimple m_UnityGenerator;
-#pragma warning restore CS0649
+		private UnityGeneratorSimple m_sharedGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="UnityGeneratorSimple"/> and returns it
@@ -34,8 +32,15 @@ namespace Zor.RandomGenerators.ContinuousDistributions.UniformDistributions
 		/// </summary>
 		public override IContinuousGenerator sharedGenerator
 		{
-			[Pure]
-			get => m_UnityGenerator;
+			get
+			{
+				if (m_sharedGenerator == null)
+				{
+					m_sharedGenerator = unityGenerator;
+				}
+
+				return m_sharedGenerator;
+			}
 		}
 
 		/// <summary>
@@ -54,8 +59,20 @@ namespace Zor.RandomGenerators.ContinuousDistributions.UniformDistributions
 		[NotNull]
 		public UnityGeneratorSimple sharedUnityGenerator
 		{
-			[Pure]
-			get => m_UnityGenerator;
+			get
+			{
+				if (m_sharedGenerator == null)
+				{
+					m_sharedGenerator = unityGenerator;
+				}
+
+				return m_sharedGenerator;
+			}
+		}
+
+		private void OnValidate()
+		{
+			m_sharedGenerator = null;
 		}
 	}
 }

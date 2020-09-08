@@ -1,6 +1,7 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
 using System;
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -13,10 +14,13 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 	[Serializable]
 	public sealed class LittleDifferenceFilter : IContinuousFilter
 	{
+		public const float DefaultRequiredDifference = 0.02f;
+		public const byte DefaultLittleDifferenceSequenceLength = 2;
+
 #pragma warning disable CS0649
-		[SerializeField] private float m_RequiredDifference = 0.02f;
+		[SerializeField] private float m_RequiredDifference = DefaultRequiredDifference;
 		[SerializeField, Tooltip("Allowed little difference sequence length.")]
-		private byte m_LittleDifferenceSequenceLength = 2;
+		private byte m_LittleDifferenceSequenceLength = DefaultLittleDifferenceSequenceLength;
 #pragma warning restore CS0649
 
 		/// <summary>
@@ -49,8 +53,9 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 
 		public float requiredDifference
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_RequiredDifference;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_RequiredDifference = value;
 		}
 
@@ -59,20 +64,21 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		/// </summary>
 		public byte littleDifferenceSequenceLength
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_LittleDifferenceSequenceLength;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_LittleDifferenceSequenceLength = value;
 		}
 
 		/// <inheritdoc/>
 		public byte requiredSequenceLength
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_LittleDifferenceSequenceLength;
 		}
 
 		/// <inheritdoc/>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public bool NeedRegenerate(float[] sequence, float newValue, byte sequenceLength)
 		{
 			return NeedRegenerate(sequence, newValue, m_RequiredDifference, sequenceLength,

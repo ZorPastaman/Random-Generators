@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -16,8 +17,11 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 	public sealed class BatesGeneratorSimpleProvider : ContinuousGeneratorProvider
 	{
 #pragma warning disable CS0649
-		[SerializeField] private BatesGeneratorSimple m_BatesGenerator;
+		[SerializeField, Tooltip("How many independent and identically distributed random variables are generated.")]
+		private byte m_Iids = BatesDistribution.DefaultIids;
 #pragma warning restore CS0649
+
+		private BatesGeneratorSimple m_sharedGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="BatesGeneratorSimple"/> and returns it
@@ -26,7 +30,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		public override IContinuousGenerator generator
 		{
 			[Pure]
-			get => new BatesGeneratorSimple(m_BatesGenerator);
+			get => new BatesGeneratorSimple(m_Iids);
 		}
 
 		/// <summary>
@@ -34,8 +38,15 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// </summary>
 		public override IContinuousGenerator sharedGenerator
 		{
-			[Pure]
-			get => m_BatesGenerator;
+			get
+			{
+				if (m_sharedGenerator == null)
+				{
+					m_sharedGenerator = batesGenerator;
+				}
+
+				return m_sharedGenerator;
+			}
 		}
 
 		/// <summary>
@@ -45,7 +56,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		public BatesGeneratorSimple batesGenerator
 		{
 			[Pure]
-			get => new BatesGeneratorSimple(m_BatesGenerator);
+			get => new BatesGeneratorSimple(m_Iids);
 		}
 
 		/// <summary>
@@ -54,8 +65,39 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		[NotNull]
 		public BatesGeneratorSimple sharedBatesGenerator
 		{
-			[Pure]
-			get => m_BatesGenerator;
+			get
+			{
+				if (m_sharedGenerator == null)
+				{
+					m_sharedGenerator = batesGenerator;
+				}
+
+				return m_sharedGenerator;
+			}
+		}
+
+		/// <summary>
+		/// How many independent and identically distributed random variables are generated.
+		/// </summary>
+		public byte iids
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_Iids;
+			set
+			{
+				if (m_Iids == value)
+				{
+					return;
+				}
+
+				m_Iids = value;
+				m_sharedGenerator = null;
+			}
+		}
+
+		private void OnValidate()
+		{
+			m_sharedGenerator = null;
 		}
 	}
 }

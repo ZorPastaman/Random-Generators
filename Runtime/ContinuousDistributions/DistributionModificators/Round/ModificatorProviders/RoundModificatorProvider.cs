@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -16,7 +17,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionModificators
 	public sealed class RoundModificatorProvider : ContinuousGeneratorProvider
 	{
 #pragma warning disable CS0649
-		[SerializeField] private ContinuousGeneratorProviderReference m_DependedGenerator;
+		[SerializeField] private ContinuousGeneratorProviderReference m_DependedGeneratorProvider;
 #pragma warning restore CS0649
 
 		private RoundModificator<IContinuousGenerator> m_sharedModificator;
@@ -27,7 +28,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionModificators
 		public override IContinuousGenerator generator
 		{
 			[Pure]
-			get => new RoundModificator<IContinuousGenerator>(m_DependedGenerator.generator);
+			get => new RoundModificator<IContinuousGenerator>(m_DependedGeneratorProvider.generator);
 		}
 
 		/// <summary>
@@ -54,7 +55,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionModificators
 		public RoundModificator<IContinuousGenerator> roundModificator
 		{
 			[Pure]
-			get => new RoundModificator<IContinuousGenerator>(m_DependedGenerator.generator);
+			get => new RoundModificator<IContinuousGenerator>(m_DependedGeneratorProvider.generator);
 		}
 
 		/// <summary>
@@ -73,6 +74,27 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionModificators
 
 				return m_sharedModificator;
 			}
+		}
+
+		public ContinuousGeneratorProviderReference dependedGeneratorProvider
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_DependedGeneratorProvider;
+			set
+			{
+				if (m_DependedGeneratorProvider == value)
+				{
+					return;
+				}
+
+				m_DependedGeneratorProvider = value;
+				m_sharedModificator = null;
+			}
+		}
+
+		private void OnValidate()
+		{
+			m_sharedModificator = null;
 		}
 	}
 }

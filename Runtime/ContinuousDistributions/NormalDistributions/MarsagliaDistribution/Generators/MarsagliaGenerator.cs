@@ -1,6 +1,7 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
 using System;
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -47,8 +48,9 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 
 		public float mean
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_Mean;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set
 			{
 				m_Mean = value;
@@ -58,8 +60,9 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 
 		public float deviation
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_Deviation;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set
 			{
 				m_Deviation = value;

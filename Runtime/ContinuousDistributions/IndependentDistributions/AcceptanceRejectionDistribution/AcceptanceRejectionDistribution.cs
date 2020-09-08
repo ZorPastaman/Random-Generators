@@ -12,6 +12,9 @@ namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
 	/// </summary>
 	public static class AcceptanceRejectionDistribution
 	{
+		public const float DefaultMin = 0f;
+		public const float DefaultMax = 1f;
+
 		/// <summary>
 		/// Generates a random value using <paramref name="probabilityCurve"/> as a probability function
 		/// and <see cref="Random.value"/> as a generated value source.

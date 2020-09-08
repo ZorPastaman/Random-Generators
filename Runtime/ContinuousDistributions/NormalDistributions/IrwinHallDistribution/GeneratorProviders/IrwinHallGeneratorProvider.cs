@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -16,8 +17,12 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 	public sealed class IrwinHallGeneratorProvider : ContinuousGeneratorProvider
 	{
 #pragma warning disable CS0649
-		[SerializeField] private IrwinHallGenerator m_IrwinHallGenerator;
+		[SerializeField] private float m_StartPoint = IrwinHallDistribution.DefaultStartPoint;
+		[SerializeField, Tooltip("How many independent and identically distributed random variables are generated.")]
+		private byte m_Iids = IrwinHallDistribution.DefaultIids;
 #pragma warning restore CS0649
+
+		private IrwinHallGenerator m_sharedGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="IrwinHallGenerator"/> and returns it
@@ -26,7 +31,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		public override IContinuousGenerator generator
 		{
 			[Pure]
-			get => new IrwinHallGenerator(m_IrwinHallGenerator);
+			get => new IrwinHallGenerator(m_StartPoint, m_Iids);
 		}
 
 		/// <summary>
@@ -34,8 +39,15 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// </summary>
 		public override IContinuousGenerator sharedGenerator
 		{
-			[Pure]
-			get => m_IrwinHallGenerator;
+			get
+			{
+				if (m_sharedGenerator == null)
+				{
+					m_sharedGenerator = irwinHallGenerator;
+				}
+
+				return m_sharedGenerator;
+			}
 		}
 
 		/// <summary>
@@ -45,7 +57,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		public IrwinHallGenerator irwinHallGenerator
 		{
 			[Pure]
-			get => new IrwinHallGenerator(m_IrwinHallGenerator);
+			get => new IrwinHallGenerator(m_StartPoint, m_Iids);
 		}
 
 		/// <summary>
@@ -54,8 +66,55 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		[NotNull]
 		public IrwinHallGenerator sharedIrwinHallGenerator
 		{
-			[Pure]
-			get => m_IrwinHallGenerator;
+			get
+			{
+				if (m_sharedGenerator == null)
+				{
+					m_sharedGenerator = irwinHallGenerator;
+				}
+
+				return m_sharedGenerator;
+			}
+		}
+
+		public float startPoint
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_StartPoint;
+			set
+			{
+				if (m_StartPoint == value)
+				{
+					return;
+				}
+
+				m_StartPoint = value;
+				m_sharedGenerator = null;
+			}
+		}
+
+		/// <summary>
+		/// How many independent and identically distributed random variables are generated.
+		/// </summary>
+		public byte iids
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_Iids;
+			set
+			{
+				if (m_Iids == value)
+				{
+					return;
+				}
+
+				m_Iids = value;
+				m_sharedGenerator = null;
+			}
+		}
+
+		private void OnValidate()
+		{
+			m_sharedGenerator = null;
 		}
 	}
 }

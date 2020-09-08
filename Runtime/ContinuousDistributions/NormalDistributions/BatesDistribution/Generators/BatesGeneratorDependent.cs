@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 
 namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
@@ -26,8 +27,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// <param name="iids">
 		/// How many independent and identically distributed random variables are generated.
 		/// </param>
-		public BatesGeneratorDependent([NotNull] T dependedGenerator,
-			float mean, float deviation, byte iids = BatesDistribution.DefaultIids)
+		public BatesGeneratorDependent([NotNull] T dependedGenerator, float mean, float deviation, byte iids)
 		{
 			m_dependedGenerator = dependedGenerator;
 			m_mean = mean;
@@ -52,35 +52,39 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		[NotNull]
 		public T dependedRandomGenerator
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_dependedGenerator;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_dependedGenerator = value;
 		}
 
 		public float mean
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_mean;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_mean = value;
 		}
 
 		public float deviation
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_deviation;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_deviation = value;
 		}
 
 		/// <inheritdoc/>
 		public byte iids
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_iids;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_iids = value;
 		}
 
 		/// <inheritdoc/>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public float Generate()
 		{
 			return BatesDistribution.Generate(m_dependedGenerator, m_mean, m_deviation, m_iids);

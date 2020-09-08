@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -16,8 +17,13 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 	public sealed class BatesGeneratorProvider : ContinuousGeneratorProvider
 	{
 #pragma warning disable CS0649
-		[SerializeField] private BatesGenerator m_BatesGenerator;
+		[SerializeField] private float m_Mean = BatesDistribution.DefaultMean;
+		[SerializeField] private float m_Deviation = BatesDistribution.DefaultDeviation;
+		[SerializeField, Tooltip("How many independent and identically distributed random variables are generated.")]
+		private byte m_Iids = BatesDistribution.DefaultIids;
 #pragma warning restore CS0649
+
+		private BatesGenerator m_sharedGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="BatesGenerator"/> and returns it as <see cref="IContinuousGenerator"/>.
@@ -25,7 +31,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		public override IContinuousGenerator generator
 		{
 			[Pure]
-			get => new BatesGenerator(m_BatesGenerator);
+			get => new BatesGenerator(m_Mean, m_Deviation, m_Iids);
 		}
 
 		/// <summary>
@@ -33,8 +39,15 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// </summary>
 		public override IContinuousGenerator sharedGenerator
 		{
-			[Pure]
-			get => m_BatesGenerator;
+			get
+			{
+				if (m_sharedGenerator == null)
+				{
+					m_sharedGenerator = batesGenerator;
+				}
+
+				return m_sharedGenerator;
+			}
 		}
 
 		/// <summary>
@@ -44,7 +57,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		public BatesGenerator batesGenerator
 		{
 			[Pure]
-			get => new BatesGenerator(m_BatesGenerator);
+			get => new BatesGenerator(m_Mean, m_Deviation, m_Iids);
 		}
 
 		/// <summary>
@@ -53,8 +66,71 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		[NotNull]
 		public BatesGenerator sharedBatesGenerator
 		{
-			[Pure]
-			get => m_BatesGenerator;
+			get
+			{
+				if (m_sharedGenerator == null)
+				{
+					m_sharedGenerator = batesGenerator;
+				}
+
+				return m_sharedGenerator;
+			}
+		}
+
+		public float mean
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_Mean;
+			set
+			{
+				if (m_Mean == value)
+				{
+					return;
+				}
+
+				m_Mean = value;
+				m_sharedGenerator = null;
+			}
+		}
+
+		public float deviation
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_Deviation;
+			set
+			{
+				if (m_Deviation == value)
+				{
+					return;
+				}
+
+				m_Deviation = value;
+				m_sharedGenerator = null;
+			}
+		}
+
+		/// <summary>
+		/// How many independent and identically distributed random variables are generated.
+		/// </summary>
+		public byte iids
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_Iids;
+			set
+			{
+				if (m_Iids == value)
+				{
+					return;
+				}
+
+				m_Iids = value;
+				m_sharedGenerator = null;
+			}
+		}
+
+		private void OnValidate()
+		{
+			m_sharedGenerator = null;
 		}
 	}
 }

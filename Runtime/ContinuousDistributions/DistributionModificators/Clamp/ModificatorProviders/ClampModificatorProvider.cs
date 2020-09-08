@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -16,9 +17,9 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionModificators
 	public sealed class ClampModificatorProvider : ContinuousGeneratorProvider
 	{
 #pragma warning disable CS0649
-		[SerializeField] private ContinuousGeneratorProviderReference m_DependedGenerator;
-		[SerializeField] private float m_Min;
-		[SerializeField] private float m_Max = 1f;
+		[SerializeField] private ContinuousGeneratorProviderReference m_DependedGeneratorProvider;
+		[SerializeField] private float m_Min = ClampModificatorDefaults.DefaultMin;
+		[SerializeField] private float m_Max = ClampModificatorDefaults.DefaultMax;
 #pragma warning restore CS0649
 
 		private ClampModificator<IContinuousGenerator> m_sharedModificator;
@@ -29,7 +30,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionModificators
 		public override IContinuousGenerator generator
 		{
 			[Pure]
-			get => new ClampModificator<IContinuousGenerator>(m_DependedGenerator.generator, m_Min, m_Max);
+			get => new ClampModificator<IContinuousGenerator>(m_DependedGeneratorProvider.generator, m_Min, m_Max);
 		}
 
 		/// <summary>
@@ -56,7 +57,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionModificators
 		public ClampModificator<IContinuousGenerator> clampModificator
 		{
 			[Pure]
-			get => new ClampModificator<IContinuousGenerator>(m_DependedGenerator.generator, m_Min, m_Max);
+			get => new ClampModificator<IContinuousGenerator>(m_DependedGeneratorProvider.generator, m_Min, m_Max);
 		}
 
 		/// <summary>
@@ -75,6 +76,59 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionModificators
 
 				return m_sharedModificator;
 			}
+		}
+
+		public ContinuousGeneratorProviderReference dependedGeneratorProvider
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_DependedGeneratorProvider;
+			set
+			{
+				if (m_DependedGeneratorProvider == value)
+				{
+					return;
+				}
+
+				m_DependedGeneratorProvider = value;
+				m_sharedModificator = null;
+			}
+		}
+
+		public float min
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_Min;
+			set
+			{
+				if (m_Min == value)
+				{
+					return;
+				}
+
+				m_Min = value;
+				m_sharedModificator = null;
+			}
+		}
+
+		public float max
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_Max;
+			set
+			{
+				if (m_Max == value)
+				{
+					return;
+				}
+
+				m_Max = value;
+				m_sharedModificator = null;
+			}
+		}
+
+		private void OnValidate()
+		{
+			m_sharedModificator = null;
 		}
 	}
 }

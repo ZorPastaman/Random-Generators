@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -17,8 +18,11 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 	public sealed class DescendantSequenceFilterProvider : ContinuousFilterProvider
 	{
 #pragma warning disable CS0649
-		[SerializeField] private DescendantSequenceFilter m_DescendantSequenceFilter;
+		[SerializeField, Tooltip("Allowed descendant sequence length.")]
+		private byte m_DescendantSequenceLength = DescendantSequenceFilter.DefaultDescendantSequenceLength;
 #pragma warning restore CS0649
+
+		private DescendantSequenceFilter m_sharedFilter;
 
 		/// <summary>
 		/// Creates a new <see cref="DescendantSequenceFilter"/> and returns it as <see cref="IContinuousFilter"/>.
@@ -26,7 +30,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		public override IContinuousFilter filter
 		{
 			[Pure]
-			get => new DescendantSequenceFilter(m_DescendantSequenceFilter);
+			get => new DescendantSequenceFilter(m_DescendantSequenceLength);
 		}
 
 		/// <summary>
@@ -34,8 +38,15 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		/// </summary>
 		public override IContinuousFilter sharedFilter
 		{
-			[Pure]
-			get => m_DescendantSequenceFilter;
+			get
+			{
+				if (m_sharedFilter == null)
+				{
+					m_sharedFilter = descendantSequenceFilter;
+				}
+
+				return m_sharedFilter;
+			}
 		}
 
 		/// <summary>
@@ -45,7 +56,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		public DescendantSequenceFilter descendantSequenceFilter
 		{
 			[Pure]
-			get => new DescendantSequenceFilter(m_DescendantSequenceFilter);
+			get => new DescendantSequenceFilter(m_DescendantSequenceLength);
 		}
 
 		/// <summary>
@@ -54,8 +65,39 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		[NotNull]
 		public DescendantSequenceFilter sharedDescendantSequenceFilter
 		{
-			[Pure]
-			get => m_DescendantSequenceFilter;
+			get
+			{
+				if (m_sharedFilter == null)
+				{
+					m_sharedFilter = descendantSequenceFilter;
+				}
+
+				return m_sharedFilter;
+			}
+		}
+
+		/// <summary>
+		/// Allowed descendant sequence length.
+		/// </summary>
+		public byte descendantSequenceLength
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_DescendantSequenceLength;
+			set
+			{
+				if (m_DescendantSequenceLength == value)
+				{
+					return;
+				}
+
+				m_DescendantSequenceLength = value;
+				m_sharedFilter = null;
+			}
+		}
+
+		private void OnValidate()
+		{
+			m_sharedFilter = null;
 		}
 	}
 }

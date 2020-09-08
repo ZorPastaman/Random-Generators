@@ -1,6 +1,7 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
 using System;
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 
 namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
@@ -48,27 +49,30 @@ namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
 		[NotNull]
 		public Func<float, float> probabilityFunc
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_probabilityFunc;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_probabilityFunc = value;
 		}
 
 		public float min
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_min;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_min = value;
 		}
 
 		public float max
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_max;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_max = value;
 		}
 
 		/// <inheritdoc/>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public float Generate()
 		{
 			return AcceptanceRejectionDistribution.Generate(m_probabilityFunc, m_min, m_max);

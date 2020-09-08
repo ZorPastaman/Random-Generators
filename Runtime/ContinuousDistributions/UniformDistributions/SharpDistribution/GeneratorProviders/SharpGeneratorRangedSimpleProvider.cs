@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -17,8 +18,8 @@ namespace Zor.RandomGenerators.ContinuousDistributions.UniformDistributions
 	public sealed class SharpGeneratorRangedSimpleProvider : ContinuousGeneratorProvider
 	{
 #pragma warning disable CS0649
-		[SerializeField] private float m_Min;
-		[SerializeField] private float m_Max = 1f;
+		[SerializeField] private float m_Min = SharpGeneratorDefaults.DefaultMin;
+		[SerializeField] private float m_Max = SharpGeneratorDefaults.DefaultMax;
 #pragma warning restore CS0649
 
 		private SharpGeneratorRanged m_sharedGenerator;
@@ -77,7 +78,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.UniformDistributions
 
 		public float min
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_Min;
 			set
 			{
@@ -93,7 +94,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.UniformDistributions
 
 		public float max
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_Max;
 			set
 			{
@@ -105,6 +106,11 @@ namespace Zor.RandomGenerators.ContinuousDistributions.UniformDistributions
 				m_Max = value;
 				m_sharedGenerator = null;
 			}
+		}
+
+		private void OnValidate()
+		{
+			m_sharedGenerator = null;
 		}
 	}
 }

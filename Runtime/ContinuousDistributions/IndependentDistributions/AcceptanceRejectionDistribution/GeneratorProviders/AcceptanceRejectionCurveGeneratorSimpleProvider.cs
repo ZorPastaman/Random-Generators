@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -16,8 +17,12 @@ namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
 	public sealed class AcceptanceRejectionCurveGeneratorSimpleProvider : ContinuousGeneratorProvider
 	{
 #pragma warning disable CS0649
-		[SerializeField] private AcceptanceRejectionCurveGeneratorSimple m_AcceptanceRejectionGenerator;
+		[SerializeField,
+		Tooltip("X - generated value\nY - its probability\nAt least one point must have possibility 1.")]
+		private AnimationCurve m_ProbabilityCurve;
 #pragma warning restore CS0649
+
+		private AcceptanceRejectionCurveGeneratorSimple m_sharedGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="AcceptanceRejectionCurveGeneratorSimple"/>
@@ -26,7 +31,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
 		public override IContinuousGenerator generator
 		{
 			[Pure]
-			get => new AcceptanceRejectionCurveGeneratorSimple(m_AcceptanceRejectionGenerator);
+			get => new AcceptanceRejectionCurveGeneratorSimple(m_ProbabilityCurve);
 		}
 
 		/// <summary>
@@ -35,28 +40,67 @@ namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
 		/// </summary>
 		public override IContinuousGenerator sharedGenerator
 		{
-			[Pure]
-			get => m_AcceptanceRejectionGenerator;
+			get
+			{
+				if (m_sharedGenerator == null)
+				{
+					m_sharedGenerator = acceptanceRejectionGenerator;
+				}
+
+				return m_sharedGenerator;
+			}
 		}
 
 		/// <summary>
 		/// Creates a new <see cref="AcceptanceRejectionCurveGeneratorSimple"/> and returns it.
 		/// </summary>
 		[NotNull]
-		public AcceptanceRejectionCurveGeneratorSimple acceptanceRejectionRandomGenerator
+		public AcceptanceRejectionCurveGeneratorSimple acceptanceRejectionGenerator
 		{
 			[Pure]
-			get => new AcceptanceRejectionCurveGeneratorSimple(m_AcceptanceRejectionGenerator);
+			get => new AcceptanceRejectionCurveGeneratorSimple(m_ProbabilityCurve);
 		}
 
 		/// <summary>
 		/// Returns a shared <see cref="AcceptanceRejectionCurveGeneratorSimple"/>.
 		/// </summary>
 		[NotNull]
-		public AcceptanceRejectionCurveGeneratorSimple sharedAcceptanceRejectionRandomGenerator
+		public AcceptanceRejectionCurveGeneratorSimple sharedAcceptanceRejectionGenerator
 		{
-			[Pure]
-			get => m_AcceptanceRejectionGenerator;
+			get
+			{
+				if (m_sharedGenerator == null)
+				{
+					m_sharedGenerator = acceptanceRejectionGenerator;
+				}
+
+				return m_sharedGenerator;
+			}
+		}
+
+		/// <summary>
+		/// X - generated value\nY - its probability\nAt least one point must have possibility 1.
+		/// </summary>
+		[NotNull]
+		public AnimationCurve probabilityCurve
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_ProbabilityCurve;
+			set
+			{
+				if (m_ProbabilityCurve.Equals(value))
+				{
+					return;
+				}
+
+				m_ProbabilityCurve = value;
+				m_sharedGenerator = null;
+			}
+		}
+
+		private void OnValidate()
+		{
+			m_sharedGenerator = null;
 		}
 	}
 }

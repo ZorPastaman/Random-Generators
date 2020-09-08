@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -18,7 +19,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
 		ContinuousGeneratorProvider
 	{
 #pragma warning disable CS0649
-		[SerializeField] private ContinuousGeneratorProviderReference m_ValueGenerator;
+		[SerializeField] private ContinuousGeneratorProviderReference m_ValueGeneratorProvider;
 		[SerializeField,
 		Tooltip("X - generated value\nY - its probability\nAt least one point must have possibility 1.")]
 		private AnimationCurve m_ProbabilityCurve;
@@ -36,7 +37,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
 		{
 			[Pure]
 			get => new AcceptanceRejectionCurveGeneratorDependentSimple<IContinuousGenerator>(
-				m_ValueGenerator.generator, m_ProbabilityCurve);
+				m_ValueGeneratorProvider.generator, m_ProbabilityCurve);
 		}
 
 		/// <summary>
@@ -67,7 +68,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
 		{
 			[Pure]
 			get => new AcceptanceRejectionCurveGeneratorDependentSimple<IContinuousGenerator>(
-				m_ValueGenerator.generator, m_ProbabilityCurve);
+				m_ValueGeneratorProvider.generator, m_ProbabilityCurve);
 		}
 
 		/// <summary>
@@ -86,6 +87,47 @@ namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
 
 				return m_sharedGenerator;
 			}
+		}
+
+		public ContinuousGeneratorProviderReference valueGeneratorProvider
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_ValueGeneratorProvider;
+			set
+			{
+				if (m_ValueGeneratorProvider == value)
+				{
+					return;
+				}
+
+				m_ValueGeneratorProvider = value;
+				m_sharedGenerator = null;
+			}
+		}
+
+		/// <summary>
+		/// X - generated value\nY - its probability\nAt least one point must have possibility 1.
+		/// </summary>
+		[NotNull]
+		public AnimationCurve probabilityCurve
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_ProbabilityCurve;
+			set
+			{
+				if (m_ProbabilityCurve.Equals(value))
+				{
+					return;
+				}
+
+				m_ProbabilityCurve = value;
+				m_sharedGenerator = null;
+			}
+		}
+
+		private void OnValidate()
+		{
+			m_sharedGenerator = null;
 		}
 	}
 }

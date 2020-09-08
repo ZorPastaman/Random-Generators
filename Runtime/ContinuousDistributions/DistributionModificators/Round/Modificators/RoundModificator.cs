@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -9,7 +10,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionModificators
 	/// Round Modificator for <see cref="IContinuousGenerator"/>.
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
-	public sealed class RoundModificator<T> : IContinuousGenerator where T : IContinuousGenerator
+	public sealed class RoundModificator<T> : IRoundModificator where T : IContinuousGenerator
 	{
 		[NotNull] private T m_dependedGenerator;
 
@@ -34,13 +35,14 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionModificators
 		[NotNull]
 		public T dependedGenerator
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_dependedGenerator;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_dependedGenerator = value;
 		}
 
 		/// <inheritdoc/>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public float Generate()
 		{
 			return Mathf.Round(m_dependedGenerator.Generate());

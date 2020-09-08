@@ -1,6 +1,7 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
 using System;
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -13,10 +14,13 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 	[Serializable]
 	public sealed class GreaterFilter : IContinuousFilter
 	{
+		public const float DefaultReferenceValue = 0f;
+		public const byte DefaultGreaterSequenceLength = 3;
+
 #pragma warning disable CS0649
-		[SerializeField] private float m_ReferenceValue;
+		[SerializeField] private float m_ReferenceValue = DefaultReferenceValue;
 		[SerializeField, Tooltip("Allowed greater sequence length.")]
-		private byte m_GreaterSequenceLength = 3;
+		private byte m_GreaterSequenceLength = DefaultGreaterSequenceLength;
 #pragma warning restore CS0649
 
 		/// <summary>
@@ -49,8 +53,9 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 
 		public float referenceValue
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_ReferenceValue;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_ReferenceValue = value;
 		}
 
@@ -59,20 +64,21 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		/// </summary>
 		public byte greaterSequenceLength
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_GreaterSequenceLength;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_GreaterSequenceLength = value;
 		}
 
 		/// <inheritdoc/>
 		public byte requiredSequenceLength
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_GreaterSequenceLength;
 		}
 
 		/// <inheritdoc/>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public bool NeedRegenerate(float[] sequence, float newValue, byte sequenceLength)
 		{
 			return NeedRegenerate(sequence, newValue, m_ReferenceValue, sequenceLength, m_GreaterSequenceLength);

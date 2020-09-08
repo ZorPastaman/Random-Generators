@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -16,9 +17,9 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 	public sealed class MarsagliaGeneratorDependentProvider : ContinuousGeneratorProvider
 	{
 #pragma warning disable CS0649
-		[SerializeField] private ContinuousGeneratorProviderReference m_DependedGenerator;
-		[SerializeField] private float m_Mean;
-		[SerializeField] private float m_Deviation;
+		[SerializeField] private ContinuousGeneratorProviderReference m_DependedGeneratorProvider;
+		[SerializeField] private float m_Mean = MarsagliaDistribution.DefaultMean;
+		[SerializeField] private float m_Deviation = MarsagliaDistribution.DefaultDeviation;
 #pragma warning restore CS0649
 
 		private MarsagliaGeneratorDependent<IContinuousGenerator> m_sharedGenerator;
@@ -31,7 +32,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		{
 			[Pure]
 			get => new MarsagliaGeneratorDependent<IContinuousGenerator>(
-				m_DependedGenerator.generator, m_Mean, m_Deviation);
+				m_DependedGeneratorProvider.generator, m_Mean, m_Deviation);
 		}
 
 		/// <summary>
@@ -60,7 +61,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		{
 			[Pure]
 			get => new MarsagliaGeneratorDependent<IContinuousGenerator>(
-				m_DependedGenerator.generator, m_Mean, m_Deviation);
+				m_DependedGeneratorProvider.generator, m_Mean, m_Deviation);
 		}
 
 		/// <summary>
@@ -78,6 +79,59 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 
 				return m_sharedGenerator;
 			}
+		}
+
+		public ContinuousGeneratorProviderReference dependedGeneratorProvider
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_DependedGeneratorProvider;
+			set
+			{
+				if (m_DependedGeneratorProvider == value)
+				{
+					return;
+				}
+
+				m_DependedGeneratorProvider = value;
+				m_sharedGenerator = null;
+			}
+		}
+
+		public float mean
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_Mean;
+			set
+			{
+				if (m_Mean == value)
+				{
+					return;
+				}
+
+				m_Mean = value;
+				m_sharedGenerator = null;
+			}
+		}
+
+		public float deviation
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_Deviation;
+			set
+			{
+				if (m_Deviation == value)
+				{
+					return;
+				}
+
+				m_Deviation = value;
+				m_sharedGenerator = null;
+			}
+		}
+
+		private void OnValidate()
+		{
+			m_sharedGenerator = null;
 		}
 	}
 }

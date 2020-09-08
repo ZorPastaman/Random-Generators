@@ -1,6 +1,7 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
 using System;
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 
 namespace Zor.RandomGenerators.ContinuousDistributions.UniformDistributions
@@ -8,7 +9,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.UniformDistributions
 	/// <summary>
 	/// Sharp distribution generator using <see cref="Random.NextDouble"/>.
 	/// </summary>
-	public sealed class SharpGenerator : IContinuousGenerator
+	public sealed class SharpGenerator : ISharpGenerator
 	{
 		[NotNull] private Random m_random;
 
@@ -50,13 +51,26 @@ namespace Zor.RandomGenerators.ContinuousDistributions.UniformDistributions
 		[NotNull]
 		public Random random
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_random;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_random = value;
 		}
 
+		public float min
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => SharpGeneratorDefaults.DefaultMin;
+		}
+
+		public float max
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => SharpGeneratorDefaults.DefaultMax;
+		}
+
 		/// <inheritdoc/>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public float Generate()
 		{
 			return (float)m_random.NextDouble();

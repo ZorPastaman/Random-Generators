@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -16,8 +17,11 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 	public sealed class BoxMullerGeneratorProvider : ContinuousGeneratorProvider
 	{
 #pragma warning disable CS0649
-		[SerializeField] private BoxMullerGenerator m_BoxMullerGenerator;
+		[SerializeField] private float m_Mean = BoxMullerDistribution.DefaultMean;
+		[SerializeField] private float m_Deviation = BoxMullerDistribution.DefaultDeviation;
 #pragma warning disable CS0649
+
+		private BoxMullerGenerator m_sharedGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="BoxMullerGenerator"/> and returns it
@@ -26,7 +30,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		public override IContinuousGenerator generator
 		{
 			[Pure]
-			get => new BoxMullerGenerator(m_BoxMullerGenerator);
+			get => new BoxMullerGenerator(m_Mean, m_Deviation);
 		}
 
 		/// <summary>
@@ -34,8 +38,15 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// </summary>
 		public override IContinuousGenerator sharedGenerator
 		{
-			[Pure]
-			get => m_BoxMullerGenerator;
+			get
+			{
+				if (m_sharedGenerator == null)
+				{
+					m_sharedGenerator = boxMullerGenerator;
+				}
+
+				return m_sharedGenerator;
+			}
 		}
 
 		/// <summary>
@@ -45,7 +56,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		public BoxMullerGenerator boxMullerGenerator
 		{
 			[Pure]
-			get => new BoxMullerGenerator(m_BoxMullerGenerator);
+			get => new BoxMullerGenerator(m_Mean, m_Deviation);
 		}
 
 		/// <summary>
@@ -54,8 +65,52 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		[NotNull]
 		public BoxMullerGenerator sharedBoxMullerGenerator
 		{
-			[Pure]
-			get => m_BoxMullerGenerator;
+			get
+			{
+				if (m_sharedGenerator == null)
+				{
+					m_sharedGenerator = boxMullerGenerator;
+				}
+
+				return m_sharedGenerator;
+			}
+		}
+
+		public float mean
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_Mean;
+			set
+			{
+				if (m_Mean == value)
+				{
+					return;
+				}
+
+				m_Mean = value;
+				m_sharedGenerator = null;
+			}
+		}
+
+		public float deviation
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_Deviation;
+			set
+			{
+				if (m_Deviation == value)
+				{
+					return;
+				}
+
+				m_Deviation = value;
+				m_sharedGenerator = null;
+			}
+		}
+
+		private void OnValidate()
+		{
+			m_sharedGenerator = null;
 		}
 	}
 }

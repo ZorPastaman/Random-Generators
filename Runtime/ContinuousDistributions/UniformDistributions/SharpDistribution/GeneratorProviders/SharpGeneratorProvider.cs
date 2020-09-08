@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -77,7 +78,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.UniformDistributions
 
 		public int seed
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_Seed;
 			set
 			{
@@ -89,6 +90,11 @@ namespace Zor.RandomGenerators.ContinuousDistributions.UniformDistributions
 				m_Seed = value;
 				m_sharedGenerator = null;
 			}
+		}
+
+		private void OnValidate()
+		{
+			m_sharedGenerator = null;
 		}
 	}
 }

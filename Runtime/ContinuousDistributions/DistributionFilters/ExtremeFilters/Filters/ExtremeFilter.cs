@@ -1,6 +1,7 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
 using System;
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -13,14 +14,19 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 	[Serializable]
 	public sealed class ExtremeFilter : IContinuousFilter
 	{
+		public const float DefaultExpectedMin = -1f;
+		public const float DefaultExpectedMax = 1f;
+		public const float DefaultRange = 1f;
+		public const byte DefaultExtremeSequenceLength = 6;
+
 #pragma warning disable CS0649
-		[SerializeField] private float m_ExpectedMin;
-		[SerializeField] private float m_ExpectedMax = 10f;
+		[SerializeField] private float m_ExpectedMin = DefaultExpectedMin;
+		[SerializeField] private float m_ExpectedMax = DefaultExpectedMax;
 		[SerializeField,
 		Tooltip("How far from an expected minimum or maximum a value may be to be counted as close enough.")]
-		private float m_Range = 5f;
+		private float m_Range = DefaultRange;
 		[SerializeField, Tooltip("Allowed extreme sequence length.")]
-		private byte m_ExtremeSequenceLength = 6;
+		private byte m_ExtremeSequenceLength = DefaultExtremeSequenceLength;
 #pragma warning restore CS0649
 
 		/// <summary>
@@ -61,15 +67,17 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 
 		public float expectedMin
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_ExpectedMin;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_ExpectedMin = value;
 		}
 
 		public float expectedMax
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_ExpectedMax;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_ExpectedMax = value;
 		}
 
@@ -78,8 +86,9 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		/// </summary>
 		public float range
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_Range;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_Range = value;
 		}
 
@@ -88,20 +97,21 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		/// </summary>
 		public byte extremeSequenceLength
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_ExtremeSequenceLength;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_ExtremeSequenceLength = value;
 		}
 
 		/// <inheritdoc/>
 		public byte requiredSequenceLength
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_ExtremeSequenceLength;
 		}
 
 		/// <inheritdoc/>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public bool NeedRegenerate(float[] sequence, float newValue, byte sequenceLength)
 		{
 			return NeedRegenerate(sequence, newValue, m_ExpectedMin, m_ExpectedMax, m_Range, sequenceLength,

@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -19,7 +20,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 #pragma warning disable CS0649
 		[SerializeField] private ContinuousGeneratorProviderReference m_DependedGeneratorProvider;
 		[SerializeField, Tooltip("How many independent and identically distributed random variables are generated.")]
-		private byte m_Iids;
+		private byte m_Iids = IrwinHallDistribution.DefaultIids;
 #pragma warning restore CS0649
 
 		private IrwinHallGeneratorDependentSimple<IContinuousGenerator> m_sharedGenerator;
@@ -78,6 +79,46 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 
 				return m_sharedGenerator;
 			}
+		}
+
+		public ContinuousGeneratorProviderReference dependedGeneratorProvider
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_DependedGeneratorProvider;
+			set
+			{
+				if (m_DependedGeneratorProvider == value)
+				{
+					return;
+				}
+
+				m_DependedGeneratorProvider = value;
+				m_sharedGenerator = null;
+			}
+		}
+
+		/// <summary>
+		/// How many independent and identically distributed random variables are generated.
+		/// </summary>
+		public byte iids
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_Iids;
+			set
+			{
+				if (m_Iids == value)
+				{
+					return;
+				}
+
+				m_Iids = value;
+				m_sharedGenerator = null;
+			}
+		}
+
+		private void OnValidate()
+		{
+			m_sharedGenerator = null;
 		}
 	}
 }

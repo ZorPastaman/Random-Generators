@@ -30,7 +30,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// <paramref name="iids"/> must be greater than 0.
 		/// </remarks>
 		[Pure]
-		public static float Generate(byte iids = DefaultIids)
+		public static float Generate(byte iids)
 		{
 			float random = 0f;
 
@@ -59,7 +59,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// <paramref name="iids"/> must be greater than 0.
 		/// </remarks>
 		[Pure]
-		public static float Generate(float mean, float deviation, byte iids = DefaultIids)
+		public static float Generate(float mean, float deviation, byte iids)
 		{
 			return Modify(Generate(iids), mean, deviation);
 		}
@@ -76,7 +76,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// <paramref name="iids"/> must be greater than 0.
 		/// </remarks>
 		[Pure]
-		public static float Generate([NotNull] Func<float> iidFunc, byte iids = DefaultIids)
+		public static float Generate([NotNull] Func<float> iidFunc, byte iids)
 		{
 			float random = 0f;
 
@@ -107,7 +107,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// </remarks>
 		[Pure]
 		public static float Generate([NotNull] Func<float> iidFunc,
-			float mean, float deviation, byte iids = DefaultIids)
+			float mean, float deviation, byte iids)
 		{
 			return Modify(Generate(iidFunc, iids), mean, deviation);
 		}
@@ -126,8 +126,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// <paramref name="iids"/> must be greater than 0.
 		/// </remarks>
 		[Pure]
-		public static float Generate<T>([NotNull] T iidGenerator, byte iids = DefaultIids)
-			where T : IContinuousGenerator
+		public static float Generate<T>([NotNull] T iidGenerator, byte iids) where T : IContinuousGenerator
 		{
 			float random = 0f;
 
@@ -157,7 +156,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// <paramref name="iids"/> must be greater than 0.
 		/// </remarks>
 		[Pure]
-		public static float Generate<T>([NotNull] T iidGenerator, float mean, float deviation, byte iids = DefaultIids)
+		public static float Generate<T>([NotNull] T iidGenerator, float mean, float deviation, byte iids)
 			where T : IContinuousGenerator
 		{
 			return Modify(Generate(iidGenerator, iids), mean, deviation);

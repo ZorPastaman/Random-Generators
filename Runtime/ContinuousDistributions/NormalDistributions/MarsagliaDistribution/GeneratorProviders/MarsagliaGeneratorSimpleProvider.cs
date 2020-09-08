@@ -9,15 +9,13 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 	/// Provides <see cref="MarsagliaGeneratorSimple"/>.
 	/// </summary>
 	[CreateAssetMenu(
-		menuName = CreateAssetMenuConstants.MarsagliaDistributionFolder + "Marsaglia Random Generator Simple Provider",
-		fileName = "Marsaglia Random Generator Simple Provider",
+		menuName = CreateAssetMenuConstants.MarsagliaDistributionFolder + "Marsaglia Generator Simple Provider",
+		fileName = "Marsaglia Generator Simple Provider",
 		order = CreateAssetMenuConstants.DistributionOrder
 	)]
-	public sealed class MarsagliaRandomGeneratorSimpleProvider : ContinuousGeneratorProvider
+	public sealed class MarsagliaGeneratorSimpleProvider : ContinuousGeneratorProvider
 	{
-#pragma warning disable CS0649
-		[SerializeField] private MarsagliaGeneratorSimple m_MarsagliaGenerator;
-#pragma warning restore CS0649
+		private MarsagliaGeneratorSimple m_sharedGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="MarsagliaGeneratorSimple"/> and returns it
@@ -34,8 +32,15 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		/// </summary>
 		public override IContinuousGenerator sharedGenerator
 		{
-			[Pure]
-			get => m_MarsagliaGenerator;
+			get
+			{
+				if (m_sharedGenerator == null)
+				{
+					m_sharedGenerator = marsagliaGenerator;
+				}
+
+				return m_sharedGenerator;
+			}
 		}
 
 		/// <summary>
@@ -54,8 +59,20 @@ namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions
 		[NotNull]
 		public MarsagliaGeneratorSimple sharedMarsagliaGenerator
 		{
-			[Pure]
-			get => m_MarsagliaGenerator;
+			get
+			{
+				if (m_sharedGenerator == null)
+				{
+					m_sharedGenerator = marsagliaGenerator;
+				}
+
+				return m_sharedGenerator;
+			}
+		}
+
+		private void OnValidate()
+		{
+			m_sharedGenerator = null;
 		}
 	}
 }

@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -16,8 +17,12 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 	public sealed class LittleDifferenceFilterProvider : ContinuousFilterProvider
 	{
 #pragma warning disable CS0649
-		[SerializeField] private LittleDifferenceFilter m_LittleDifferenceFilter;
+		[SerializeField] private float m_RequiredDifference = LittleDifferenceFilter.DefaultRequiredDifference;
+		[SerializeField, Tooltip("Allowed little difference sequence length.")]
+		private byte m_LittleDifferenceSequenceLength = LittleDifferenceFilter.DefaultLittleDifferenceSequenceLength;
 #pragma warning restore CS0649
+
+		private LittleDifferenceFilter m_sharedFilter;
 
 		/// <summary>
 		/// Creates a new <see cref="LittleDifferenceFilter"/> and returns it as <see cref="IContinuousFilter"/>.
@@ -25,7 +30,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		public override IContinuousFilter filter
 		{
 			[Pure]
-			get => new LittleDifferenceFilter(m_LittleDifferenceFilter);
+			get => new LittleDifferenceFilter(m_RequiredDifference, m_LittleDifferenceSequenceLength);
 		}
 
 		/// <summary>
@@ -33,8 +38,15 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		/// </summary>
 		public override IContinuousFilter sharedFilter
 		{
-			[Pure]
-			get => m_LittleDifferenceFilter;
+			get
+			{
+				if (m_sharedFilter == null)
+				{
+					m_sharedFilter = littleDifferenceFilter;
+				}
+
+				return m_sharedFilter;
+			}
 		}
 
 		/// <summary>
@@ -44,7 +56,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		public LittleDifferenceFilter littleDifferenceFilter
 		{
 			[Pure]
-			get => new LittleDifferenceFilter(m_LittleDifferenceFilter);
+			get => new LittleDifferenceFilter(m_RequiredDifference, m_LittleDifferenceSequenceLength);
 		}
 
 		/// <summary>
@@ -53,8 +65,55 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		[NotNull]
 		public LittleDifferenceFilter sharedLittleDifferenceFilter
 		{
-			[Pure]
-			get => m_LittleDifferenceFilter;
+			get
+			{
+				if (m_sharedFilter == null)
+				{
+					m_sharedFilter = littleDifferenceFilter;
+				}
+
+				return m_sharedFilter;
+			}
+		}
+
+		public float requiredDifference
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_RequiredDifference;
+			set
+			{
+				if (m_RequiredDifference == value)
+				{
+					return;
+				}
+
+				m_RequiredDifference = value;
+				m_sharedFilter = null;
+			}
+		}
+
+		/// <summary>
+		/// Allowed little difference sequence length.
+		/// </summary>
+		public byte littleDifferenceSequenceLength
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_LittleDifferenceSequenceLength;
+			set
+			{
+				if (m_LittleDifferenceSequenceLength == value)
+				{
+					return;
+				}
+
+				m_LittleDifferenceSequenceLength = value;
+				m_sharedFilter = null;
+			}
+		}
+
+		private void OnValidate()
+		{
+			m_sharedFilter = null;
 		}
 	}
 }

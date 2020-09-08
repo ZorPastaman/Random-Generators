@@ -1,6 +1,7 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
 using System;
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -11,11 +12,11 @@ namespace Zor.RandomGenerators.ContinuousDistributions.UniformDistributions
 	/// Unity distribution generator using <see cref="Random.Range(float,float)"/>.
 	/// </summary>
 	[Serializable]
-	public sealed class UnityGenerator : IContinuousGenerator
+	public sealed class UnityGenerator : IUnityGenerator
 	{
 #pragma warning disable CS0649
-		[SerializeField] private float m_Min;
-		[SerializeField] private float m_Max = 1f;
+		[SerializeField] private float m_Min = UnityGeneratorDefaults.DefaultMin;
+		[SerializeField] private float m_Max = UnityGeneratorDefaults.DefaultMax;
 #pragma warning restore CS0649
 
 		/// <summary>
@@ -45,20 +46,22 @@ namespace Zor.RandomGenerators.ContinuousDistributions.UniformDistributions
 
 		public float min
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_Min;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_Min = value;
 		}
 
 		public float max
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_Max;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_Max = value;
 		}
 
 		/// <inheritdoc/>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public float Generate()
 		{
 			return Random.Range(m_Min, m_Max);

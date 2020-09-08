@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -16,8 +17,12 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 	public sealed class GreaterFilterProvider : ContinuousFilterProvider
 	{
 #pragma warning disable CS0649
-		[SerializeField] private GreaterFilter m_GreaterFilter;
+		[SerializeField] private float m_ReferenceValue = GreaterFilter.DefaultReferenceValue;
+		[SerializeField, Tooltip("Allowed greater sequence length.")]
+		private byte m_GreaterSequenceLength = GreaterFilter.DefaultGreaterSequenceLength;
 #pragma warning restore CS0649
+
+		private GreaterFilter m_sharedFilter;
 
 		/// <summary>
 		/// Creates a new <see cref="GreaterFilter"/> and returns it as <see cref="IContinuousFilter"/>.
@@ -25,7 +30,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		public override IContinuousFilter filter
 		{
 			[Pure]
-			get => new GreaterFilter(m_GreaterFilter);
+			get => new GreaterFilter(m_ReferenceValue, m_GreaterSequenceLength);
 		}
 
 		/// <summary>
@@ -33,8 +38,15 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		/// </summary>
 		public override IContinuousFilter sharedFilter
 		{
-			[Pure]
-			get => m_GreaterFilter;
+			get
+			{
+				if (m_sharedFilter == null)
+				{
+					m_sharedFilter = greaterFilter;
+				}
+
+				return m_sharedFilter;
+			}
 		}
 
 		/// <summary>
@@ -44,7 +56,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		public GreaterFilter greaterFilter
 		{
 			[Pure]
-			get => new GreaterFilter(m_GreaterFilter);
+			get => new GreaterFilter(m_ReferenceValue, m_GreaterSequenceLength);
 		}
 
 		/// <summary>
@@ -53,8 +65,55 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		[NotNull]
 		public GreaterFilter sharedGreaterFilter
 		{
-			[Pure]
-			get => m_GreaterFilter;
+			get
+			{
+				if (m_sharedFilter == null)
+				{
+					m_sharedFilter = greaterFilter;
+				}
+
+				return m_sharedFilter;
+			}
+		}
+
+		public float referenceValue
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_ReferenceValue;
+			set
+			{
+				if (m_ReferenceValue == value)
+				{
+					return;
+				}
+
+				m_ReferenceValue = value;
+				m_sharedFilter = null;
+			}
+		}
+
+		/// <summary>
+		/// Allowed greater sequence length.
+		/// </summary>
+		public byte greaterSequenceLength
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_GreaterSequenceLength;
+			set
+			{
+				if (m_GreaterSequenceLength == value)
+				{
+					return;
+				}
+
+				m_GreaterSequenceLength = value;
+				m_sharedFilter = null;
+			}
+		}
+
+		private void OnValidate()
+		{
+			m_sharedFilter = null;
 		}
 	}
 }

@@ -1,6 +1,7 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
 using System;
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 
 namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
@@ -51,8 +52,9 @@ namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
 		[NotNull]
 		public TValue valueGenerator
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_valueGenerator;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_valueGenerator = value;
 		}
 
@@ -62,8 +64,9 @@ namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
 		[NotNull]
 		public TCheck checkGenerator
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_checkGenerator;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_checkGenerator = value;
 		}
 
@@ -74,13 +77,14 @@ namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions
 		[NotNull]
 		public Func<float, float> probabilityFunc
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_probabilityFunc;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_probabilityFunc = value;
 		}
 
 		/// <inheritdoc/>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public float Generate()
 		{
 			return AcceptanceRejectionDistribution.Generate(m_valueGenerator, m_checkGenerator, m_probabilityFunc);

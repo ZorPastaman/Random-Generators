@@ -12,15 +12,12 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 	/// than the specified reference value.
 	/// </summary>
 	[Serializable]
-	public sealed class LessFilter : IContinuousFilter
+	public sealed class LessFilter : ILessFilter
 	{
-		public const float DefaultReferenceValue = 0f;
-		public const byte DefaultLessSequenceLength = 3;
-
 #pragma warning disable CS0649
-		[SerializeField] private float m_ReferenceValue = DefaultReferenceValue;
+		[SerializeField] private float m_ReferenceValue = LessFiltering.DefaultReferenceValue;
 		[SerializeField, Tooltip("Allowed less sequence length.")]
-		private byte m_LessSequenceLength = DefaultLessSequenceLength;
+		private byte m_LessSequenceLength = LessFiltering.DefaultLessSequenceLength;
 #pragma warning restore CS0649
 
 		/// <summary>
@@ -81,33 +78,8 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public bool NeedRegenerate(float[] sequence, float newValue, byte sequenceLength)
 		{
-			return NeedRegenerate(sequence, newValue, m_ReferenceValue, sequenceLength, m_LessSequenceLength);
-		}
-
-		/// <summary>
-		/// Checks if the value <paramref name="newValue"/> continues the less sequence <paramref name="sequence"/>
-		/// and needs to be regenerated.
-		/// </summary>
-		/// <param name="sequence">Sequence of generated and already applied values.</param>
-		/// <param name="newValue">New generated value.</param>
-		/// <param name="referenceValue"></param>
-		/// <param name="sequenceLength">Current sequence length.</param>
-		/// <param name="lessSequenceLength">Allowed less sequence length.</param>
-		/// <returns>
-		/// <para>True if the value <paramref name="newValue"/> needs to be regenerated.</para>
-		/// <para>False if the value <paramref name="newValue"/> doesn't need to be regenerated.</para>
-		/// </returns>
-		public static bool NeedRegenerate([NotNull] float[] sequence, float newValue, float referenceValue,
-			byte sequenceLength, byte lessSequenceLength)
-		{
-			bool greater = true;
-
-			for (int i = sequenceLength - lessSequenceLength; greater & i < sequenceLength; ++i)
-			{
-				greater = sequence[i] < referenceValue;
-			}
-
-			return greater & newValue < referenceValue;
+			return LessFiltering.NeedRegenerate(sequence, newValue, m_ReferenceValue, sequenceLength,
+				m_LessSequenceLength);
 		}
 	}
 }

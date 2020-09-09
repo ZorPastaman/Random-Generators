@@ -10,7 +10,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 	/// Random generator that takes a generated value from its depended generator filtered with its filters.
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
-	public sealed class ContinuousFilteredGenerator<T> : IContinuousGenerator where T : IContinuousGenerator
+	public sealed class ContinuousFilteredGenerator<T> : IContinuousFilteredGenerator<T> where T : IContinuousGenerator
 	{
 		[NotNull] private T m_filteredGenerator;
 		[NotNull] private IContinuousFilter[] m_filters;

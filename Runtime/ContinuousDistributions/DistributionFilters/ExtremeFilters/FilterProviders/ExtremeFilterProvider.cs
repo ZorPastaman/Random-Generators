@@ -17,13 +17,13 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 	public sealed class ExtremeFilterProvider : ContinuousFilterProvider
 	{
 #pragma warning disable CS0649
-		[SerializeField] private float m_ExpectedMin = ExtremeFilter.DefaultExpectedMin;
-		[SerializeField] private float m_ExpectedMax = ExtremeFilter.DefaultExpectedMax;
+		[SerializeField] private float m_ExpectedMin = ExtremeFiltering.DefaultExpectedMin;
+		[SerializeField] private float m_ExpectedMax = ExtremeFiltering.DefaultExpectedMax;
 		[SerializeField,
 		Tooltip("How far from an expected minimum or maximum a value may be to be counted as close enough.")]
-		private float m_Range = ExtremeFilter.DefaultRange;
+		private float m_Range = ExtremeFiltering.DefaultRange;
 		[SerializeField, Tooltip("Allowed extreme sequence length.")]
-		private byte m_ExtremeSequenceLength = ExtremeFilter.DefaultExtremeSequenceLength;
+		private byte m_ExtremeSequenceLength = ExtremeFiltering.DefaultExtremeSequenceLength;
 #pragma warning restore CS0649
 
 		private ExtremeFilter m_sharedFilter;

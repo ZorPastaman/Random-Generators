@@ -3,7 +3,7 @@
 namespace Zor.RandomGenerators.ContinuousDistributions.DistributionModificators
 {
 	/// <summary>
-	/// A modificator which clamps a continuous generator between <see cref="min"/> and <see cref="max"/>.
+	/// A modificator that clamps a continuous generator between <see cref="min"/> and <see cref="max"/>.
 	/// </summary>
 	public interface IClampModificator : IContinuousGenerator
 	{

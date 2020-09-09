@@ -17,9 +17,9 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 	public sealed class LessFilterProvider : ContinuousFilterProvider
 	{
 #pragma warning disable CS0649
-		[SerializeField] private float m_ReferenceValue = LessFilter.DefaultReferenceValue;
+		[SerializeField] private float m_ReferenceValue = LessFiltering.DefaultReferenceValue;
 		[SerializeField, Tooltip("Allowed less sequence length.")]
-		private byte m_LessSequenceLength = LessFilter.DefaultLessSequenceLength;
+		private byte m_LessSequenceLength = LessFiltering.DefaultLessSequenceLength;
 #pragma warning restore CS0649
 
 		private LessFilter m_sharedFilter;

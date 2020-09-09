@@ -17,9 +17,9 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 	public sealed class GreaterFilterProvider : ContinuousFilterProvider
 	{
 #pragma warning disable CS0649
-		[SerializeField] private float m_ReferenceValue = GreaterFilter.DefaultReferenceValue;
+		[SerializeField] private float m_ReferenceValue = GreaterFiltering.DefaultReferenceValue;
 		[SerializeField, Tooltip("Allowed greater sequence length.")]
-		private byte m_GreaterSequenceLength = GreaterFilter.DefaultGreaterSequenceLength;
+		private byte m_GreaterSequenceLength = GreaterFiltering.DefaultGreaterSequenceLength;
 #pragma warning restore CS0649
 
 		private GreaterFilter m_sharedFilter;

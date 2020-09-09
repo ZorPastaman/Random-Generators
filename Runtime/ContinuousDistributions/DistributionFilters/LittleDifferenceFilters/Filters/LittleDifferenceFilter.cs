@@ -12,15 +12,12 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 	/// elements differ by less than the required difference.
 	/// </summary>
 	[Serializable]
-	public sealed class LittleDifferenceFilter : IContinuousFilter
+	public sealed class LittleDifferenceFilter : ILittleDifferenceFilter
 	{
-		public const float DefaultRequiredDifference = 0.02f;
-		public const byte DefaultLittleDifferenceSequenceLength = 2;
-
 #pragma warning disable CS0649
-		[SerializeField] private float m_RequiredDifference = DefaultRequiredDifference;
+		[SerializeField] private float m_RequiredDifference = LittleDifferenceFiltering.DefaultRequiredDifference;
 		[SerializeField, Tooltip("Allowed little difference sequence length.")]
-		private byte m_LittleDifferenceSequenceLength = DefaultLittleDifferenceSequenceLength;
+		private byte m_LittleDifferenceSequenceLength = LittleDifferenceFiltering.DefaultLittleDifferenceSequenceLength;
 #pragma warning restore CS0649
 
 		/// <summary>
@@ -81,37 +78,8 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public bool NeedRegenerate(float[] sequence, float newValue, byte sequenceLength)
 		{
-			return NeedRegenerate(sequence, newValue, m_RequiredDifference, sequenceLength,
+			return LittleDifferenceFiltering.NeedRegenerate(sequence, newValue, m_RequiredDifference, sequenceLength,
 				m_LittleDifferenceSequenceLength);
-		}
-
-		/// <summary>
-		/// Checks if the value <paramref name="newValue"/> continues the sequence <paramref name="sequence"/>
-		/// where consecutive elements differ by less than the required difference <paramref name="requiredDifference"/>
-		/// and needs to be regenerated.
-		/// </summary>
-		/// <param name="sequence">Sequence of generated and already applied values.</param>
-		/// <param name="newValue">New generated value.</param>
-		/// <param name="requiredDifference"></param>
-		/// <param name="sequenceLength">Current sequence length.</param>
-		/// <param name="littleDifferenceSequenceLength">Allowed little difference sequence length.</param>
-		/// <returns>
-		/// <para>True if the value <paramref name="newValue"/> needs to be regenerated.</para>
-		/// <para>False if the value <paramref name="newValue"/> doesn't need to be regenerated.</para>
-		/// </returns>
-		public static bool NeedRegenerate([NotNull] float[] sequence, float newValue, float requiredDifference,
-			byte sequenceLength, byte littleDifferenceSequenceLength)
-		{
-			bool littleDifference = true;
-
-			for (int i = sequenceLength - littleDifferenceSequenceLength + 1;
-				littleDifference & i < sequenceLength;
-				++i)
-			{
-				littleDifference = Mathf.Abs(sequence[i] - sequence[i - 1]) < requiredDifference;
-			}
-
-			return littleDifference & Mathf.Abs(newValue - sequence[sequenceLength - 1]) < requiredDifference;
 		}
 	}
 }

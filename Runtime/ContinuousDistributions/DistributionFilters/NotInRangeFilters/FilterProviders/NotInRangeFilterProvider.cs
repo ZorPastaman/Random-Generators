@@ -17,10 +17,10 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 	public sealed class NotInRangeFilterProvider : ContinuousFilterProvider
 	{
 #pragma warning disable CS0649
-		[SerializeField] private float m_Min = NotInRangeFilter.DefaultMin;
-		[SerializeField] private float m_Max = NotInRangeFilter.DefaultMax;
+		[SerializeField] private float m_Min = NotInRangeFiltering.DefaultMin;
+		[SerializeField] private float m_Max = NotInRangeFiltering.DefaultMax;
 		[SerializeField, Tooltip("Allowed not in range sequence length.")]
-		private byte m_NotInRangeSequenceLength = NotInRangeFilter.DefaultNotInRangeSequenceLength;
+		private byte m_NotInRangeSequenceLength = NotInRangeFiltering.DefaultNotInRangeSequenceLength;
 #pragma warning restore CS0649
 
 		private NotInRangeFilter m_sharedFilter;

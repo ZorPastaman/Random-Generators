@@ -12,15 +12,12 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 	/// than the specified reference value.
 	/// </summary>
 	[Serializable]
-	public sealed class GreaterFilter : IContinuousFilter
+	public sealed class GreaterFilter : IGreaterFilter
 	{
-		public const float DefaultReferenceValue = 0f;
-		public const byte DefaultGreaterSequenceLength = 3;
-
 #pragma warning disable CS0649
-		[SerializeField] private float m_ReferenceValue = DefaultReferenceValue;
+		[SerializeField] private float m_ReferenceValue = GreaterFiltering.DefaultReferenceValue;
 		[SerializeField, Tooltip("Allowed greater sequence length.")]
-		private byte m_GreaterSequenceLength = DefaultGreaterSequenceLength;
+		private byte m_GreaterSequenceLength = GreaterFiltering.DefaultGreaterSequenceLength;
 #pragma warning restore CS0649
 
 		/// <summary>
@@ -81,34 +78,8 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public bool NeedRegenerate(float[] sequence, float newValue, byte sequenceLength)
 		{
-			return NeedRegenerate(sequence, newValue, m_ReferenceValue, sequenceLength, m_GreaterSequenceLength);
-		}
-
-		/// <summary>
-		/// Checks if the value <paramref name="newValue"/> continues the greater sequence <paramref name="sequence"/>
-		/// and needs to be regenerated.
-		/// </summary>
-		/// <param name="sequence">Sequence of generated and already applied values.</param>
-		/// <param name="newValue">New generated value.</param>
-		/// <param name="referenceValue"></param>
-		/// <param name="sequenceLength">Current sequence length.</param>
-		/// <param name="greaterSequenceLength">Allowed greater sequence length.</param>
-		/// <returns>
-		/// <para>True if the value <paramref name="newValue"/> needs to be regenerated.</para>
-		/// <para>False if the value <paramref name="newValue"/> doesn't need to be regenerated.</para>
-		/// </returns>
-		[Pure]
-		public static bool NeedRegenerate([NotNull] float[] sequence, float newValue, float referenceValue,
-			byte sequenceLength, byte greaterSequenceLength)
-		{
-			bool greater = true;
-
-			for (int i = sequenceLength - greaterSequenceLength; greater & i < sequenceLength; ++i)
-			{
-				greater = sequence[i] > referenceValue;
-			}
-
-			return greater & newValue > referenceValue;
+			return GreaterFiltering.NeedRegenerate(sequence, newValue, m_ReferenceValue, sequenceLength,
+				m_GreaterSequenceLength);
 		}
 	}
 }

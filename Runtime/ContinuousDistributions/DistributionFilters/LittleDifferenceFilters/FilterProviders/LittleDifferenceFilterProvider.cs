@@ -17,9 +17,9 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 	public sealed class LittleDifferenceFilterProvider : ContinuousFilterProvider
 	{
 #pragma warning disable CS0649
-		[SerializeField] private float m_RequiredDifference = LittleDifferenceFilter.DefaultRequiredDifference;
+		[SerializeField] private float m_RequiredDifference = LittleDifferenceFiltering.DefaultRequiredDifference;
 		[SerializeField, Tooltip("Allowed little difference sequence length.")]
-		private byte m_LittleDifferenceSequenceLength = LittleDifferenceFilter.DefaultLittleDifferenceSequenceLength;
+		private byte m_LittleDifferenceSequenceLength = LittleDifferenceFiltering.DefaultLittleDifferenceSequenceLength;
 #pragma warning restore CS0649
 
 		private LittleDifferenceFilter m_sharedFilter;

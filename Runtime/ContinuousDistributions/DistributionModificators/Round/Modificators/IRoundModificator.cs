@@ -3,7 +3,7 @@
 namespace Zor.RandomGenerators.ContinuousDistributions.DistributionModificators
 {
 	/// <summary>
-	/// A modificator which rounds a continuous generator.
+	/// A modificator that rounds a continuous generator.
 	/// </summary>
 	public interface IRoundModificator : IContinuousGenerator
 	{

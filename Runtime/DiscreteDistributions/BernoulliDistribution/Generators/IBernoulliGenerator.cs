@@ -10,6 +10,6 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <summary>
 		/// True threshold in range [0, 1].
 		/// </summary>
-		float p { get; }
+		float probability { get; }
 	}
 }

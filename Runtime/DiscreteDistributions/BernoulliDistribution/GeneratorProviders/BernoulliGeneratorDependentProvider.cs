@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 using Zor.RandomGenerators.ContinuousDistributions;
@@ -17,8 +18,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	public sealed class BernoulliGeneratorDependentProvider : DiscreteGeneratorProvider<bool>
 	{
 #pragma warning disable CS0649
-		[SerializeField] private ContinuousGeneratorProviderReference m_DependedGeneratorProvider;
-		[SerializeField, Range(0f, 1f)] private float m_P = 0.5f;
+		[SerializeField, Tooltip("Independent and identically distributed random variable in range [0, 1] source.")]
+		private ContinuousGeneratorProviderReference m_DependedGeneratorProvider;
+		[SerializeField, Range(0f, 1f)] private float m_Probability = BernoulliDistribution.DefaultProbability;
 #pragma warning restore CS0649
 
 		private BernoulliGeneratorDependent<IContinuousGenerator> m_sharedGenerator;
@@ -31,7 +33,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		{
 			[Pure]
 			get => new BernoulliGeneratorDependent<IContinuousGenerator>(
-				m_DependedGeneratorProvider.generator, m_P);
+				m_DependedGeneratorProvider.generator, m_Probability);
 		}
 
 		/// <summary>
@@ -39,7 +41,6 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// </summary>
 		public override IDiscreteGenerator<bool> sharedGenerator
 		{
-			[Pure]
 			get
 			{
 				if (m_sharedGenerator == null)
@@ -59,7 +60,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		{
 			[Pure]
 			get => new BernoulliGeneratorDependent<IContinuousGenerator>(
-				m_DependedGeneratorProvider.generator, m_P);
+				m_DependedGeneratorProvider.generator, m_Probability);
 		}
 
 		/// <summary>
@@ -68,7 +69,6 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[NotNull]
 		public BernoulliGeneratorDependent<IContinuousGenerator> sharedBernoulliGenerator
 		{
-			[Pure]
 			get
 			{
 				if (m_sharedGenerator == null)
@@ -78,6 +78,49 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 
 				return m_sharedGenerator;
 			}
+		}
+
+		/// <summary>
+		/// Independent and identically distributed random variable in range [0, 1] source.
+		/// </summary>
+		public ContinuousGeneratorProviderReference dependedGeneratorProvider
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_DependedGeneratorProvider;
+			set
+			{
+				if (m_DependedGeneratorProvider == value)
+				{
+					return;
+				}
+
+				m_DependedGeneratorProvider = value;
+				m_sharedGenerator = null;
+			}
+		}
+
+		/// <summary>
+		/// True threshold in range [0, 1].
+		/// </summary>
+		public float probability
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_Probability;
+			set
+			{
+				if (m_Probability == value)
+				{
+					return;
+				}
+
+				m_Probability = value;
+				m_sharedGenerator = null;
+			}
+		}
+
+		private void OnValidate()
+		{
+			m_sharedGenerator = null;
 		}
 	}
 }

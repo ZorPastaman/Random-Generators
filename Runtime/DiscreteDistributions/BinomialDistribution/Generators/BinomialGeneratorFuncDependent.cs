@@ -1,6 +1,7 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
 using System;
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 
 namespace Zor.RandomGenerators.DiscreteDistributions
@@ -12,22 +13,23 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	{
 		[NotNull] private Func<float> m_iidFunc;
 		private int m_startPoint;
-		private float m_p;
-		private byte m_n;
+		private float m_probability;
+		private byte m_upperBound;
 
 		/// <summary>
 		/// Creates a <see cref="BinomialGeneratorFuncDependent"/> with the specified parameters.
 		/// </summary>
 		/// <param name="iidFunc">Iid source in range [0, 1].</param>
 		/// <param name="startPoint"></param>
-		/// <param name="p">True threshold in range [0, 1].</param>
-		/// <param name="n"></param>
-		public BinomialGeneratorFuncDependent([NotNull] Func<float> iidFunc, int startPoint, float p, byte n)
+		/// <param name="probability">True threshold in range [0, 1].</param>
+		/// <param name="upperBound"></param>
+		public BinomialGeneratorFuncDependent([NotNull] Func<float> iidFunc, int startPoint, float probability,
+			byte upperBound)
 		{
 			m_iidFunc = iidFunc;
 			m_startPoint = startPoint;
-			m_p = p;
-			m_n = n;
+			m_probability = probability;
+			m_upperBound = upperBound;
 		}
 
 		/// <summary>
@@ -38,8 +40,8 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		{
 			m_iidFunc = other.m_iidFunc;
 			m_startPoint = other.m_startPoint;
-			m_p = other.m_p;
-			m_n = other.m_n;
+			m_probability = other.m_probability;
+			m_upperBound = other.m_upperBound;
 		}
 
 		/// <summary>
@@ -48,38 +50,42 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[NotNull]
 		public Func<float> iidGenerator
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_iidFunc;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_iidFunc = value;
 		}
 
 		public int startPoint
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_startPoint;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_startPoint = value;
 		}
 
 		/// <inheritdoc/>
-		public float p
+		public float probability
 		{
-			[Pure]
-			get => m_p;
-			set => m_p = value;
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_probability;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
+			set => m_probability = value;
 		}
 
-		public byte n
+		public byte upperBound
 		{
-			[Pure]
-			get => m_n;
-			set => m_n = value;
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_upperBound;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
+			set => m_upperBound = value;
 		}
 
 		/// <inheritdoc/>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public int Generate()
 		{
-			return BinomialDistribution.Generate(m_iidFunc, m_startPoint, m_p, m_n);
+			return BinomialDistribution.Generate(m_iidFunc, m_startPoint, m_probability, m_upperBound);
 		}
 	}
 }

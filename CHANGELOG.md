@@ -32,11 +32,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 #### Filters
 - Filters infrastructure.
 - Ascendant Sequence filter.
+- Close filter.
 - Descendant Sequence filter.
-- Extreme Sequence filter.
-- Greater Sequence filter.
+- Greater filter.
 - Frequent Value filter.
 - In Range filter.
+- Less filter.
 - Little Difference filter.
 - Not In Range filter.
 - Opposite Pattern filter.

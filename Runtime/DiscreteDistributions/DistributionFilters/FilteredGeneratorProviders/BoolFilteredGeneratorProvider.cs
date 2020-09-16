@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 using Zor.RandomGenerators.PropertyDrawerAttributes;
@@ -17,8 +18,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 	public sealed class BoolFilteredGeneratorProvider : DiscreteGeneratorProvider<bool>
 	{
 #pragma warning disable CS0649
-		[SerializeField] private DiscreteGeneratorProviderReference m_FilteredGenerator;
-		[SerializeField, RequireDiscreteFilter(typeof(bool))] private DiscreteFilterProviderReference[] m_Filters;
+		[SerializeField] private DiscreteGeneratorProviderReference m_FilteredGeneratorProvider;
+		[SerializeField, RequireDiscreteFilter(typeof(bool))]
+		private DiscreteFilterProviderReference[] m_FilterProviders;
 #pragma warning restore CS0649
 
 		private BoolFilteredGenerator<IDiscreteGenerator<bool>> m_sharedFilteredGenerator;
@@ -31,7 +33,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		{
 			[Pure]
 			get => new BoolFilteredGenerator<IDiscreteGenerator<bool>>(
-				m_FilteredGenerator.GetGenerator<bool>(), filters);
+				m_FilteredGeneratorProvider.GetGenerator<bool>(), filters);
 		}
 
 		/// <summary>
@@ -58,7 +60,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		{
 			[Pure]
 			get => new BoolFilteredGenerator<IDiscreteGenerator<bool>>(
-				m_FilteredGenerator.GetGenerator<bool>(), filters);
+				m_FilteredGeneratorProvider.GetGenerator<bool>(), filters);
 		}
 
 		/// <summary>
@@ -78,10 +80,79 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 			}
 		}
 
+		public DiscreteGeneratorProviderReference filteredGeneratorProvider
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_FilteredGeneratorProvider;
+			set
+			{
+				if (m_FilteredGeneratorProvider == value)
+				{
+					return;
+				}
+
+				m_FilteredGeneratorProvider = value;
+				m_sharedFilteredGenerator = null;
+			}
+		}
+
+		/// <summary>
+		/// How many filters are used by this provider.
+		/// </summary>
+		public int filtersCount
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_FilterProviders.Length;
+		}
+
+		/// <summary>
+		/// Returns a <see cref="DiscreteFilterProviderReference"/> at the index <paramref name="index"/>.
+		/// </summary>
+		/// <param name="index"></param>
+		/// <returns><see cref="DiscreteFilterProviderReference"/> at the index <paramref name="index"/>.</returns>
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+		public DiscreteFilterProviderReference GetFilter(int index)
+		{
+			return m_FilterProviders[index];
+		}
+
+		/// <summary>
+		/// Sets the filter <paramref name="filterProvider"/> at the index <paramref name="index"/>.
+		/// </summary>
+		/// <param name="filterProvider"></param>
+		/// <param name="index"></param>
+		public void SetFilter(DiscreteFilterProviderReference filterProvider, int index)
+		{
+			if (m_FilterProviders[index] == filterProvider)
+			{
+				return;
+			}
+
+			m_FilterProviders[index] = filterProvider;
+			m_sharedFilteredGenerator = null;
+			m_filtersCache = null;
+		}
+
+		/// <summary>
+		/// Sets the set of filters <paramref name="filterProviders"/>.
+		/// </summary>
+		/// <param name="filterProviders"></param>
+		public void SetFilters([NotNull] DiscreteFilterProviderReference[] filterProviders)
+		{
+			if (m_FilterProviders == filterProviders)
+			{
+				return;
+			}
+
+			m_FilterProviders = filterProviders;
+			m_sharedFilteredGenerator = null;
+			m_filtersCache = null;
+		}
+
 		/// <summary>
 		/// <para>Filters cache.</para>
 		/// <para>
-		/// Filters cache is created from <see cref="m_Filters"/> when this property is called for the first time.
+		/// Filters cache is created from <see cref="m_FilterProviders"/> when this property is called for the first time.
 		/// </para>
 		/// </summary>
 		[NotNull]
@@ -91,17 +162,23 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 			{
 				if (m_filtersCache == null)
 				{
-					int filtersCount = m_Filters.Length;
-					m_filtersCache = new IDiscreteFilter<bool>[filtersCount];
+					int count = m_FilterProviders.Length;
+					m_filtersCache = new IDiscreteFilter<bool>[count];
 
-					for (int i = 0; i < filtersCount; ++i)
+					for (int i = 0; i < count; ++i)
 					{
-						m_filtersCache[i] = m_Filters[i].GetFilter<bool>();
+						m_filtersCache[i] = m_FilterProviders[i].GetFilter<bool>();
 					}
 				}
 
 				return m_filtersCache;
 			}
+		}
+
+		private void OnValidate()
+		{
+			m_sharedFilteredGenerator = null;
+			m_filtersCache = null;
 		}
 	}
 }

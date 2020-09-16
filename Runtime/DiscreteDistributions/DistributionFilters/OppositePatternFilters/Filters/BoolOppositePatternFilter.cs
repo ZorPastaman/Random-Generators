@@ -1,96 +1,66 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
 using System;
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
-using UnityEngine;
 
 namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 {
 	/// <summary>
 	/// The filter recommends to regenerate a new value if it forms a pattern opposite to a previous pattern.
 	/// </summary>
-	/// <example>
-	/// { false, false, false, true, true, true } - last value is regenerated.
-	/// </example>
-	[Serializable]
-	public sealed class BoolOppositePatternFilter : IDiscreteFilter<bool>
+	/// <remarks>
+	/// Type <typeparamref name="T"/> must take only two values like <see cref="bool"/>.
+	/// </remarks>
+	public sealed class OppositePatternFilter<T> : IOppositePatternFilter<T> where T : IEquatable<T>
 	{
-#pragma warning disable CS0649
-		[SerializeField] private byte m_PatternLength = 3;
-#pragma warning restore CS0649
+		private byte m_patternLength;
 
 		/// <summary>
-		/// Creates a <see cref="BoolOppositePatternFilter"/> with the default parameters.
+		/// Creates an <see cref="OppositePatternFilter{T}"/> with the default parameters.
 		/// </summary>
-		public BoolOppositePatternFilter()
+		public OppositePatternFilter()
 		{
 		}
 
 		/// <summary>
-		/// Creates a <see cref="BoolOppositePatternFilter"/> with the specified parameters.
+		/// Creates a <see cref="OppositePatternFilter{T}"/> with the specified parameters.
 		/// </summary>
 		/// <param name="patternLength"></param>
-		public BoolOppositePatternFilter(byte patternLength)
+		public OppositePatternFilter(byte patternLength)
 		{
-			m_PatternLength = patternLength;
+			m_patternLength = patternLength;
 		}
 
 		/// <summary>
 		/// Copy constructor.
 		/// </summary>
 		/// <param name="other"></param>
-		public BoolOppositePatternFilter([NotNull] BoolOppositePatternFilter other)
+		public OppositePatternFilter([NotNull] OppositePatternFilter<T> other)
 		{
-			m_PatternLength = other.m_PatternLength;
+			m_patternLength = other.m_patternLength;
 		}
 
 		public byte patternLength
 		{
-			[Pure]
-			get => m_PatternLength;
-			set => m_PatternLength = value;
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_patternLength;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
+			set => m_patternLength = value;
 		}
 
 		/// <inheritdoc/>
 		public byte requiredSequenceLength
 		{
-			[Pure]
-			get => (byte)(m_PatternLength * 2 - 1);
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => (byte)(m_patternLength * 2 - 1);
 		}
 
 		/// <inheritdoc/>
-		[Pure]
-		public bool NeedRegenerate(bool[] sequence, bool newValue, byte sequenceLength)
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+		public bool NeedRegenerate(T[] sequence, T newValue, byte sequenceLength)
 		{
-			return NeedRegenerate(sequence, newValue, sequenceLength, m_PatternLength);
-		}
-
-		/// <summary>
-		/// Checks if the value <paramref name="newValue"/> forms a pattern opposite to a previous pattern
-		/// and needs to be regenerated.
-		/// </summary>
-		/// <param name="sequence">Sequence of generated and already applied values.</param>
-		/// <param name="newValue">New generated value.</param>
-		/// <param name="sequenceLength">Current sequence length.</param>
-		/// <param name="patternLength"></param>
-		/// <returns>
-		/// <para>True if the value <paramref name="newValue"/> needs to be regenerated.</para>
-		/// <para>False if the value <paramref name="newValue"/> doesn't need to be regenerated.</para>
-		/// </returns>
-		[Pure]
-		public static bool NeedRegenerate([NotNull] bool[] sequence, bool newValue, byte sequenceLength,
-			byte patternLength)
-		{
-			bool oppositePattern = true;
-
-			for (int i = sequenceLength - patternLength * 2 + 1, j = sequenceLength - patternLength + 1;
-				oppositePattern & j < sequenceLength;
-				++i, ++j)
-			{
-				oppositePattern = sequence[i] != sequence[j];
-			}
-
-			return oppositePattern & sequence[sequenceLength - patternLength] != newValue;
+			return OppositePatternFiltering.NeedRegenerate(sequence, newValue, sequenceLength, m_patternLength);
 		}
 	}
 }

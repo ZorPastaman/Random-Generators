@@ -1,5 +1,7 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using System;
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -9,10 +11,10 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 	/// Provides <see cref="SamePatternFilter{T}"/>.
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
-	public abstract class SamePatterFilterProvider<T> : DiscreteFilterProvider<T>
+	public abstract class SamePatterFilterProvider<T> : DiscreteFilterProvider<T> where T : IEquatable<T>
 	{
 #pragma warning disable CS0649
-		[SerializeField] private byte m_MaxSamePatternLength;
+		[SerializeField] private byte m_PatternLength = SamePatternFiltering.DefaultPatternLength;
 #pragma warning restore CS0649
 
 		private SamePatternFilter<T> m_sharedFilter;
@@ -23,7 +25,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		public sealed override IDiscreteFilter<T> filter
 		{
 			[Pure]
-			get => new SamePatternFilter<T>(m_MaxSamePatternLength);
+			get => new SamePatternFilter<T>(m_PatternLength);
 		}
 
 		/// <summary>
@@ -49,7 +51,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		public SamePatternFilter<T> sameSequenceFilter
 		{
 			[Pure]
-			get => new SamePatternFilter<T>(m_MaxSamePatternLength);
+			get => new SamePatternFilter<T>(m_PatternLength);
 		}
 
 		/// <summary>
@@ -67,6 +69,27 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 
 				return m_sharedFilter;
 			}
+		}
+
+		public byte patternLength
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_PatternLength;
+			set
+			{
+				if (m_PatternLength == value)
+				{
+					return;
+				}
+
+				m_PatternLength = value;
+				m_sharedFilter = null;
+			}
+		}
+
+		private void OnValidate()
+		{
+			m_sharedFilter = null;
 		}
 	}
 }

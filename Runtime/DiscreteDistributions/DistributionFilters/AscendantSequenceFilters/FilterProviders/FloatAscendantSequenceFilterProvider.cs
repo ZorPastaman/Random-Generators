@@ -8,7 +8,8 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 	/// Provides <see cref="AscendantSequenceFilter{Single}"/>.
 	/// </summary>
 	[CreateAssetMenu(
-		menuName = CreateAssetMenuConstants.AscendantSequenceDiscreteFiltersFolder + "Float Ascendant Sequence Filter Provider",
+		menuName = CreateAssetMenuConstants.AscendantSequenceDiscreteFiltersFolder +
+			"Float Ascendant Sequence Filter Provider",
 		fileName = "Float Ascendant Sequence Filter Provider",
 		order = CreateAssetMenuConstants.FilterOrder
 	)]

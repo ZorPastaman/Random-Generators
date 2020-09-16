@@ -1,6 +1,7 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
 using System;
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -13,7 +14,8 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 	public abstract class AscendantSequenceFilterProvider<T> : DiscreteFilterProvider<T> where T : IComparable<T>
 	{
 #pragma warning disable CS0649
-		[SerializeField] private byte m_AscendantSequenceLength = 3;
+		[SerializeField, Tooltip("Allowed ascendant sequence length.")] private byte m_AscendantSequenceLength =
+			AscendantSequenceFiltering.DefaultAscendantSequenceLength;
 #pragma warning restore CS0649
 
 		private AscendantSequenceFilter<T> m_sharedFilter;
@@ -68,6 +70,30 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 
 				return m_sharedFilter;
 			}
+		}
+
+		/// <summary>
+		/// Allowed ascendant sequence length.
+		/// </summary>
+		public byte ascendantSequenceLength
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_AscendantSequenceLength;
+			set
+			{
+				if (m_AscendantSequenceLength == value)
+				{
+					return;
+				}
+
+				m_AscendantSequenceLength = value;
+				m_sharedFilter = null;
+			}
+		}
+
+		private void OnValidate()
+		{
+			m_sharedFilter = null;
 		}
 	}
 }

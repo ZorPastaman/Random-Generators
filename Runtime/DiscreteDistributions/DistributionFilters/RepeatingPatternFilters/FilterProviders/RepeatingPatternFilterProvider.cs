@@ -1,5 +1,7 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using System;
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -9,14 +11,15 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 	/// Provides <see cref="RepeatingPatternFilter{T}"/>.
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
-	public abstract class RepeatingPatternFilterProvider<T> : DiscreteFilterProvider<T>
+	public abstract class RepeatingPatternFilterProvider<T> : DiscreteFilterProvider<T> where T : IEquatable<T>
 	{
 #pragma warning disable CS0649
-		[SerializeField] private byte m_ControlledSequenceLength = 9;
-		[SerializeField] private byte m_PatternLength = 2;
+		[SerializeField] private byte m_ControlledSequenceLength =
+			RepeatingPatternFiltering.DefaultControlledSequenceLength;
+		[SerializeField] private byte m_PatternLength = RepeatingPatternFiltering.DefaultPatternLength;
 #pragma warning restore CS0649
 
-		private RepeatingPatternFilter<T> m_sharedRepeatingPatternFilter;
+		private RepeatingPatternFilter<T> m_sharedFilter;
 
 		/// <summary>
 		/// Creates a new <see cref="RepeatingPatternFilter{T}"/> and returns it as <see cref="IDiscreteFilter{T}"/>.
@@ -34,12 +37,12 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		{
 			get
 			{
-				if (m_sharedRepeatingPatternFilter == null)
+				if (m_sharedFilter == null)
 				{
-					m_sharedRepeatingPatternFilter = repeatingPatternFilter;
+					m_sharedFilter = repeatingPatternFilter;
 				}
 
-				return m_sharedRepeatingPatternFilter;
+				return m_sharedFilter;
 			}
 		}
 
@@ -61,13 +64,50 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		{
 			get
 			{
-				if (m_sharedRepeatingPatternFilter == null)
+				if (m_sharedFilter == null)
 				{
-					m_sharedRepeatingPatternFilter = repeatingPatternFilter;
+					m_sharedFilter = repeatingPatternFilter;
 				}
 
-				return m_sharedRepeatingPatternFilter;
+				return m_sharedFilter;
 			}
+		}
+
+		public byte controlledSequenceLength
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_ControlledSequenceLength;
+			set
+			{
+				if (m_ControlledSequenceLength == value)
+				{
+					return;
+				}
+
+				m_ControlledSequenceLength = value;
+				m_sharedFilter = null;
+			}
+		}
+
+		public byte patternLength
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_PatternLength;
+			set
+			{
+				if (m_PatternLength == value)
+				{
+					return;
+				}
+
+				m_PatternLength = value;
+				m_sharedFilter = null;
+			}
+		}
+
+		private void OnValidate()
+		{
+			m_sharedFilter = null;
 		}
 	}
 }

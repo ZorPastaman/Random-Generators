@@ -1,6 +1,7 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
 using System;
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -11,15 +12,19 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 	/// to a reference value.
 	/// </summary>
 	[Serializable]
-	public sealed class IntCloseFilter : IDiscreteFilter<int>
+	public sealed class IntCloseFilter : ICloseFilter<int>
 	{
+		public const int DefaultReferenceValue = 0;
+		public const int DefaultRange = 5;
+		public const byte DefaultCloseSequenceLength = 6;
+
 #pragma warning disable CS0649
-		[SerializeField] private int m_ReferenceValue;
+		[SerializeField] private int m_ReferenceValue = DefaultReferenceValue;
 		[SerializeField,
 		Tooltip("How far from a reference value a value may be to be counted as close enough.")]
-		private uint m_Range = 5;
+		private int m_Range = DefaultRange;
 		[SerializeField, Tooltip("Allowed close sequence length.")]
-		private byte m_CloseSequenceLength = 6;
+		private byte m_CloseSequenceLength = DefaultCloseSequenceLength;
 #pragma warning restore CS0649
 
 		/// <summary>
@@ -37,7 +42,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		/// How far from a reference value a value may be to be counted as close enough.
 		/// </param>
 		/// <param name="closeSequenceLength">Allowed close sequence length.</param>
-		public IntCloseFilter(int referenceValue, uint range, byte closeSequenceLength)
+		public IntCloseFilter(int referenceValue, int range, byte closeSequenceLength)
 		{
 			m_ReferenceValue = referenceValue;
 			m_Range = range;
@@ -57,18 +62,20 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 
 		public int referenceValue
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_ReferenceValue;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_ReferenceValue = value;
 		}
 
 		/// <summary>
 		/// How far from a reference value a value may be to be counted as close enough.
 		/// </summary>
-		public uint range
+		public int range
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_Range;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_Range = value;
 		}
 
@@ -77,20 +84,21 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		/// </summary>
 		public byte closeSequenceLength
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_CloseSequenceLength;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_CloseSequenceLength = value;
 		}
 
 		/// <inheritdoc/>
 		public byte requiredSequenceLength
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_CloseSequenceLength;
 		}
 
 		/// <inheritdoc/>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public bool NeedRegenerate(int[] sequence, int newValue, byte sequenceLength)
 		{
 			return NeedRegenerate(sequence, newValue, m_ReferenceValue, m_Range, sequenceLength, m_CloseSequenceLength);
@@ -114,7 +122,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		/// <para>False if the value <paramref name="newValue"/> doesn't need to be regenerated.</para>
 		/// </returns>
 		[Pure]
-		public static bool NeedRegenerate([NotNull] int[] sequence, int newValue, int referenceValue, uint range,
+		public static bool NeedRegenerate([NotNull] int[] sequence, int newValue, int referenceValue, int range,
 			byte sequenceLength, byte closeSequenceLength)
 		{
 			bool inRange = true;

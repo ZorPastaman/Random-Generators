@@ -1,6 +1,7 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
 using System;
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -11,15 +12,19 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 	/// to a reference value.
 	/// </summary>
 	[Serializable]
-	public sealed class FloatCloseFilter : IDiscreteFilter<float>
+	public sealed class FloatCloseFilter : ICloseFilter<float>
 	{
+		public const float DefaultReferenceValue = 0f;
+		public const float DefaultRange = 5f;
+		public const byte DefaultCloseSequenceLength = 6;
+
 #pragma warning disable CS0649
-		[SerializeField] private float m_ReferenceValue;
+		[SerializeField] private float m_ReferenceValue = DefaultReferenceValue;
 		[SerializeField,
 		Tooltip("How far from a reference value a value may be to be counted as close enough.")]
-		private float m_Range = 5f;
+		private float m_Range = DefaultRange;
 		[SerializeField, Tooltip("Allowed close sequence length.")]
-		private byte m_CloseSequenceLength = 6;
+		private byte m_CloseSequenceLength = DefaultCloseSequenceLength;
 #pragma warning restore CS0649
 
 		/// <summary>
@@ -57,8 +62,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 
 		public float referenceValue
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_ReferenceValue;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_ReferenceValue = value;
 		}
 
@@ -67,8 +73,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		/// </summary>
 		public float range
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_Range;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_Range = value;
 		}
 
@@ -77,20 +84,21 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		/// </summary>
 		public byte closeSequenceLength
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_CloseSequenceLength;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_CloseSequenceLength = value;
 		}
 
 		/// <inheritdoc/>
 		public byte requiredSequenceLength
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_CloseSequenceLength;
 		}
 
 		/// <inheritdoc/>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public bool NeedRegenerate(float[] sequence, float newValue, byte sequenceLength)
 		{
 			return NeedRegenerate(sequence, newValue, m_ReferenceValue, m_Range, sequenceLength, m_CloseSequenceLength);

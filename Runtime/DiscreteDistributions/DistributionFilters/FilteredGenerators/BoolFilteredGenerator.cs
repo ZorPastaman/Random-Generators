@@ -1,6 +1,7 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
 using System;
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 
 namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
@@ -43,8 +44,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		[NotNull]
 		public T filteredGenerator
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_filteredGenerator;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_filteredGenerator = value;
 		}
 
@@ -53,7 +55,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		/// </summary>
 		public int filtersCount
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_filters.Length;
 		}
 
@@ -62,7 +64,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		/// </summary>
 		/// <param name="index"></param>
 		/// <returns><see cref="IDiscreteFilter{T}"/> at the index <paramref name="index"/>.</returns>
-		[NotNull, Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), NotNull, Pure]
 		public IDiscreteFilter<bool> GetFilter(int index)
 		{
 			return m_filters[index];
@@ -76,6 +78,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		/// <remarks>
 		/// Current sequence of generated values is cleared by this method.
 		/// </remarks>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public void SetFilter([NotNull] IDiscreteFilter<bool> filter, int index)
 		{
 			m_filters[index] = filter;
@@ -89,6 +92,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		/// <remarks>
 		/// Current sequence of generated values is cleared by this method.
 		/// </remarks>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public void SetFilters([NotNull] params IDiscreteFilter<bool>[] filters)
 		{
 			m_filters = filters;

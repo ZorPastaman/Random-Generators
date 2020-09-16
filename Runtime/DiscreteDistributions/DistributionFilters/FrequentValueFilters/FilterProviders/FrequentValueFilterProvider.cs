@@ -1,5 +1,7 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using System;
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -9,11 +11,12 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 	/// Provides <see cref="FrequentValueFilter{T}"/>.
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
-	public abstract class FrequentValueFilterProvider<T> : DiscreteFilterProvider<T>
+	public abstract class FrequentValueFilterProvider<T> : DiscreteFilterProvider<T> where T : IEquatable<T>
 	{
 #pragma warning disable CS0649
-		[SerializeField] private byte m_ControlledSequenceLength = 2;
-		[SerializeField] private byte m_AllowedRepeats = 1;
+		[SerializeField] private byte m_ControlledSequenceLength =
+			FrequentValueFiltering.DefaultControlledSequenceLength;
+		[SerializeField] private byte m_AllowedRepeats = FrequentValueFiltering.DefaultAllowedRepeats;
 #pragma warning restore CS0649
 
 		private FrequentValueFilter<T> m_sharedFilter;
@@ -68,6 +71,43 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 
 				return m_sharedFilter;
 			}
+		}
+
+		public byte controlledSequenceLength
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_ControlledSequenceLength;
+			set
+			{
+				if (m_ControlledSequenceLength == value)
+				{
+					return;
+				}
+
+				m_ControlledSequenceLength = value;
+				m_sharedFilter = null;
+			}
+		}
+
+		public byte allowedRepeats
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_AllowedRepeats;
+			set
+			{
+				if (m_AllowedRepeats == value)
+				{
+					return;
+				}
+
+				m_AllowedRepeats = value;
+				m_sharedFilter = null;
+			}
+		}
+
+		private void OnValidate()
+		{
+			m_sharedFilter = null;
 		}
 	}
 }

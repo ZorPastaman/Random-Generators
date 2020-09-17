@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 using Zor.RandomGenerators.PropertyDrawerAttributes;
@@ -18,9 +19,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionModificators
 	{
 #pragma warning disable CS0649
 		[SerializeField, RequireDiscreteGenerator(typeof(int))]
-		private DiscreteGeneratorProviderReference m_DependedGenerator;
-		[SerializeField] private int m_Min;
-		[SerializeField] private int m_Max = 1;
+		private DiscreteGeneratorProviderReference m_DependedGeneratorProvider;
+		[SerializeField] private int m_Min = ClampModificatorDefaults.DefaultMin;
+		[SerializeField] private int m_Max = ClampModificatorDefaults.DefaultMax;
 #pragma warning restore CS0649
 
 		private ClampModificator<IDiscreteGenerator<int>> m_sharedGenerator;
@@ -32,7 +33,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionModificators
 		{
 			[Pure]
 			get => new ClampModificator<IDiscreteGenerator<int>>(
-				m_DependedGenerator.GetGenerator<int>(), m_Min, m_Max);
+				m_DependedGeneratorProvider.GetGenerator<int>(), m_Min, m_Max);
 		}
 
 		/// <summary>
@@ -40,7 +41,6 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionModificators
 		/// </summary>
 		public override IDiscreteGenerator<int> sharedGenerator
 		{
-			[Pure]
 			get
 			{
 				if (m_sharedGenerator == null)
@@ -60,7 +60,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionModificators
 		{
 			[Pure]
 			get => new ClampModificator<IDiscreteGenerator<int>>(
-				m_DependedGenerator.GetGenerator<int>(), m_Min, m_Max);
+				m_DependedGeneratorProvider.GetGenerator<int>(), m_Min, m_Max);
 		}
 
 		/// <summary>
@@ -69,7 +69,6 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionModificators
 		[NotNull]
 		public ClampModificator<IDiscreteGenerator<int>> sharedClampModificator
 		{
-			[Pure]
 			get
 			{
 				if (m_sharedGenerator == null)
@@ -79,6 +78,59 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionModificators
 
 				return m_sharedGenerator;
 			}
+		}
+
+		public DiscreteGeneratorProviderReference dependedGeneratorProvider
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_DependedGeneratorProvider;
+			set
+			{
+				if (m_DependedGeneratorProvider == value)
+				{
+					return;
+				}
+
+				m_DependedGeneratorProvider = value;
+				m_sharedGenerator = null;
+			}
+		}
+
+		public int min
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_Min;
+			set
+			{
+				if (m_Min == value)
+				{
+					return;
+				}
+
+				m_Min = value;
+				m_sharedGenerator = null;
+			}
+		}
+
+		public int max
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_Max;
+			set
+			{
+				if (m_Max == value)
+				{
+					return;
+				}
+
+				m_Max = value;
+				m_sharedGenerator = null;
+			}
+		}
+
+		private void OnValidate()
+		{
+			m_sharedGenerator = null;
 		}
 	}
 }

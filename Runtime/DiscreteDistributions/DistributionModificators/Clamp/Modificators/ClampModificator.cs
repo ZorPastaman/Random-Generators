@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -9,7 +10,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionModificators
 	/// Clamp Modificator for <see cref="IDiscreteGenerator{Int32}"/>.
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
-	public sealed class ClampModificator<T> : IDiscreteGenerator<int> where T : IDiscreteGenerator<int>
+	public sealed class ClampModificator<T> : IClampModificator<int> where T : IDiscreteGenerator<int>
 	{
 		[NotNull] private T m_dependedGenerator;
 		private int m_min;
@@ -42,27 +43,30 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionModificators
 		[NotNull]
 		public T dependedGenerator
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_dependedGenerator;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_dependedGenerator = value;
 		}
 
 		public int min
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_min;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_min = value;
 		}
 
 		public int max
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_max;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_max = value;
 		}
 
 		/// <inheritdoc/>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public int Generate()
 		{
 			return Mathf.Clamp(m_dependedGenerator.Generate(), m_min, m_max);

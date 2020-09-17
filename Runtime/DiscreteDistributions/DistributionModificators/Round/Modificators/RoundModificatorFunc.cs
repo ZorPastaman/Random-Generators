@@ -1,6 +1,7 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
 using System;
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -9,7 +10,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionModificators
 	/// <summary>
 	/// Round to int Modificator for <see cref="Func{Single}"/>.
 	/// </summary>
-	public sealed class RoundModificatorFunc : IDiscreteGenerator<int>
+	public sealed class RoundModificatorFunc : IRoundModificator<int>
 	{
 		[NotNull] private Func<float> m_dependedFunc;
 
@@ -34,13 +35,14 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionModificators
 		[NotNull]
 		public Func<float> dependedGenerator
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_dependedFunc;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_dependedFunc = value;
 		}
 
 		/// <inheritdoc/>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public int Generate()
 		{
 			return Mathf.RoundToInt(m_dependedFunc());

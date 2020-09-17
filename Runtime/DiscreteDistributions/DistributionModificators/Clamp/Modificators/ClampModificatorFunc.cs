@@ -1,6 +1,7 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
 using System;
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -9,7 +10,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionModificators
 	/// <summary>
 	/// Clamp Modificator for <see cref="Func{Int32}"/>.
 	/// </summary>
-	public sealed class ClampModificatorFunc : IDiscreteGenerator<int>
+	public sealed class ClampModificatorFunc : IClampModificator<int>
 	{
 		[NotNull] private Func<int> m_dependedFunc;
 		private int m_min;
@@ -42,27 +43,30 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionModificators
 		[NotNull]
 		public Func<int> dependedFunc
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_dependedFunc;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_dependedFunc = value;
 		}
 
 		public int min
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_min;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_min = value;
 		}
 
 		public int max
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_max;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_max = value;
 		}
 
 		/// <inheritdoc/>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public int Generate()
 		{
 			return Mathf.Clamp(m_dependedFunc(), m_min, m_max);

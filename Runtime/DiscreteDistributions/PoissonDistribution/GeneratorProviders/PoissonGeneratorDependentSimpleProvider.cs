@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 using Zor.RandomGenerators.ContinuousDistributions;
@@ -18,7 +19,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	{
 #pragma warning disable CS0649
 		[SerializeField] private ContinuousGeneratorProviderReference m_DependentGeneratorProvider;
-		[SerializeField] private float m_Lambda;
+		[SerializeField] private float m_Lambda = PoissonDistribution.DefaultLambda;
 #pragma warning restore CS0649
 
 		private PoissonGeneratorDependentSimple<IContinuousGenerator> m_sharedGenerator;
@@ -40,7 +41,6 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// </summary>
 		public override IDiscreteGenerator<int> sharedGenerator
 		{
-			[Pure]
 			get
 			{
 				if (m_sharedGenerator == null)
@@ -66,9 +66,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <summary>
 		/// Returns a shared <see cref="PoissonGeneratorDependentSimple{T}"/>.
 		/// </summary>
+		[NotNull]
 		public PoissonGeneratorDependentSimple<IContinuousGenerator> sharedPoissonGenerator
 		{
-			[Pure]
 			get
 			{
 				if (m_sharedGenerator == null)
@@ -78,6 +78,43 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 
 				return m_sharedGenerator;
 			}
+		}
+
+		public ContinuousGeneratorProviderReference dependentGeneratorProvider
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_DependentGeneratorProvider;
+			set
+			{
+				if (m_DependentGeneratorProvider == value)
+				{
+					return;
+				}
+
+				m_DependentGeneratorProvider = value;
+				m_sharedGenerator = null;
+			}
+		}
+
+		public float lambda
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_Lambda;
+			set
+			{
+				if (m_Lambda == value)
+				{
+					return;
+				}
+
+				m_Lambda = value;
+				m_sharedGenerator = null;
+			}
+		}
+
+		private void OnValidate()
+		{
+			m_sharedGenerator = null;
 		}
 	}
 }

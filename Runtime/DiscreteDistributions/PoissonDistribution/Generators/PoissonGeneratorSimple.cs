@@ -1,6 +1,7 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
 using System;
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -13,7 +14,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	public sealed class PoissonGeneratorSimple : IPoissonGenerator
 	{
 #pragma warning disable CS0649
-		[SerializeField] private float m_Lambda = 1f;
+		[SerializeField] private float m_Lambda = PoissonDistribution.DefaultLambda;
 #pragma warning restore CS0649
 
 		/// <summary>
@@ -43,19 +44,20 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 
 		public float lambda
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_Lambda;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_Lambda = value;
 		}
 
 		public int startPoint
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => PoissonDistribution.DefaultStartPoint;
 		}
 
 		/// <inheritdoc/>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public int Generate()
 		{
 			return PoissonDistribution.Generate(m_Lambda);

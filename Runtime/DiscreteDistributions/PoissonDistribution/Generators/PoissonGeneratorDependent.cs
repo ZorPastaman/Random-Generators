@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using Zor.RandomGenerators.ContinuousDistributions;
 
@@ -46,26 +47,30 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[NotNull]
 		public T iidGenerator
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_iidGenerator;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_iidGenerator = value;
 		}
 
 		public float lambda
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_lambda;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_lambda = value;
 		}
 
 		public int startPoint
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_startPoint;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_startPoint = value;
 		}
 
 		/// <inheritdoc/>
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public int Generate()
 		{
 			return PoissonDistribution.Generate(m_iidGenerator, m_lambda, m_startPoint);

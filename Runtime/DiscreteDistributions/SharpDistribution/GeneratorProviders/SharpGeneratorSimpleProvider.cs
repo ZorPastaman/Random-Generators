@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -16,8 +17,8 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	public sealed class SharpGeneratorSimpleProvider : DiscreteGeneratorProvider<int>
 	{
 #pragma warning disable CS0649
-		[SerializeField] private int m_Min;
-		[SerializeField] private int m_Max = 10;
+		[SerializeField] private int m_Min = SharpGeneratorDefaults.DefaultMin;
+		[SerializeField] private int m_Max = SharpGeneratorDefaults.DefaultMax;
 #pragma warning restore CS0649
 
 		private SharpGenerator m_sharedGenerator;
@@ -36,7 +37,6 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// </summary>
 		public override IDiscreteGenerator<int> sharedGenerator
 		{
-			[Pure]
 			get
 			{
 				if (m_sharedGenerator == null)
@@ -64,7 +64,6 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[NotNull]
 		public SharpGenerator sharedSharpGenerator
 		{
-			[Pure]
 			get
 			{
 				if (m_sharedGenerator == null)
@@ -78,7 +77,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 
 		public int min
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_Min;
 			set
 			{
@@ -94,7 +93,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 
 		public int max
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_Max;
 			set
 			{
@@ -106,6 +105,11 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 				m_Max = value;
 				m_sharedGenerator = null;
 			}
+		}
+
+		private void OnValidate()
+		{
+			m_sharedGenerator = null;
 		}
 	}
 }

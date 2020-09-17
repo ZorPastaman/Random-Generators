@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -16,8 +17,10 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	public sealed class PoissonGeneratorSimpleProvider : DiscreteGeneratorProvider<int>
 	{
 #pragma warning disable CS0649
-		[SerializeField] private PoissonGeneratorSimple m_PoissonGenerator;
+		[SerializeField] private float m_Lambda = PoissonDistribution.DefaultLambda;
 #pragma warning restore CS0649
+
+		private PoissonGeneratorSimple m_sharedGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="PoissonGeneratorSimple"/> and returns it as <see cref="IDiscreteGenerator{Int32}"/>.
@@ -25,7 +28,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		public override IDiscreteGenerator<int> generator
 		{
 			[Pure]
-			get => new PoissonGeneratorSimple(m_PoissonGenerator);
+			get => new PoissonGeneratorSimple(m_Lambda);
 		}
 
 		/// <summary>
@@ -33,8 +36,15 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// </summary>
 		public override IDiscreteGenerator<int> sharedGenerator
 		{
-			[Pure]
-			get => m_PoissonGenerator;
+			get
+			{
+				if (m_sharedGenerator == null)
+				{
+					m_sharedGenerator = poissonGenerator;
+				}
+
+				return m_sharedGenerator;
+			}
 		}
 
 		/// <summary>
@@ -44,7 +54,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		public PoissonGeneratorSimple poissonGenerator
 		{
 			[Pure]
-			get => new PoissonGeneratorSimple(m_PoissonGenerator);
+			get => new PoissonGeneratorSimple(m_Lambda);
 		}
 
 		/// <summary>
@@ -53,8 +63,36 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[NotNull]
 		public PoissonGeneratorSimple sharedPoissonGenerator
 		{
-			[Pure]
-			get => m_PoissonGenerator;
+			get
+			{
+				if (m_sharedGenerator == null)
+				{
+					m_sharedGenerator = poissonGenerator;
+				}
+
+				return m_sharedGenerator;
+			}
+		}
+
+		public float lambda
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_Lambda;
+			set
+			{
+				if (m_Lambda == value)
+				{
+					return;
+				}
+
+				m_Lambda = value;
+				m_sharedGenerator = null;
+			}
+		}
+
+		private void OnValidate()
+		{
+			m_sharedGenerator = null;
 		}
 	}
 }

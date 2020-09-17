@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using Zor.RandomGenerators.ContinuousDistributions;
 
@@ -14,8 +15,8 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		where TGenerator : IContinuousGenerator
 	{
 		[NotNull] private TGenerator m_dependedGenerator;
-		private readonly TValue[] m_values;
-		private readonly uint[] m_weights;
+		[NotNull] private readonly TValue[] m_values;
+		[NotNull] private readonly uint[] m_weights;
 		private readonly uint m_sum;
 		private readonly int m_count;
 
@@ -45,31 +46,32 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[NotNull]
 		public TGenerator dependedRandomGenerator
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_dependedGenerator;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_dependedGenerator = value;
 		}
 
 		public int weightsCount
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_count;
 		}
 
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public uint GetWeight(int index)
 		{
 			return m_weights[index];
 		}
 
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public TValue GetValue(int index)
 		{
 			return m_values[index];
 		}
 
 		/// <inheritdoc/>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public TValue Generate()
 		{
 			int index = WeightedDistribution.Generate(m_dependedGenerator, m_weights, m_sum, m_count);

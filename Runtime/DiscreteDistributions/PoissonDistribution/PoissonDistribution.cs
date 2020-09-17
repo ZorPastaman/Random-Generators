@@ -14,6 +14,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	/// </summary>
 	public static class PoissonDistribution
 	{
+		public const float DefaultLambda = 1f;
 		public const int DefaultStartPoint = 0;
 
 		/// <summary>
@@ -109,19 +110,19 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		}
 
 		/// <summary>
-		/// Pops a value that corresponds to <paramref name="u"/>.
+		/// Pops a value that corresponds to <paramref name="iid"/>.
 		/// </summary>
-		/// <param name="u">Iid in range [0, 1].</param>
+		/// <param name="iid">Iid in range [0, 1].</param>
 		/// <param name="lambda"></param>
 		/// <returns>Popped value.</returns>
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-		private static int Pop(float u, float lambda)
+		private static int Pop(float iid, float lambda)
 		{
 			int x = 0;
 			float p = Mathf.Exp(-lambda);
 			float s = p;
 
-			while (u > s)
+			while (iid > s)
 			{
 				++x;
 				p *= lambda / x;

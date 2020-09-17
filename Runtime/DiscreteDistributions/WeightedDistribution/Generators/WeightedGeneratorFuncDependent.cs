@@ -1,6 +1,7 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
 using System;
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 
 namespace Zor.RandomGenerators.DiscreteDistributions
@@ -11,8 +12,8 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	public sealed class WeightedGeneratorFuncDependent<T> : IWeightedGenerator<T>
 	{
 		[NotNull] private Func<float> m_iidFunc;
-		private readonly T[] m_values;
-		private readonly uint[] m_weights;
+		[NotNull] private readonly T[] m_values;
+		[NotNull] private readonly uint[] m_weights;
 		private readonly uint m_sum;
 		private readonly int m_count;
 
@@ -42,31 +43,32 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[NotNull]
 		public Func<float> iidFunc
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_iidFunc;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_iidFunc = value;
 		}
 
 		public int weightsCount
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_count;
 		}
 
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public uint GetWeight(int index)
 		{
 			return m_weights[index];
 		}
 
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public T GetValue(int index)
 		{
 			return m_values[index];
 		}
 
 		/// <inheritdoc/>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public T Generate()
 		{
 			int index = WeightedDistribution.Generate(m_iidFunc, m_weights, m_sum, m_count);

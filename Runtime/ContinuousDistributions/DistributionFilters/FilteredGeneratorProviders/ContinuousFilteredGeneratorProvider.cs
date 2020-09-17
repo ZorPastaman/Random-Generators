@@ -20,6 +20,8 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 #pragma warning disable CS0649
 		[SerializeField] private ContinuousGeneratorProviderReference m_FilteredGeneratorProvider;
 		[SerializeField] private ContinuousFilterProviderReference[] m_FilterProviders;
+		[SerializeField, Tooltip("How many times a value may be regenerated.")]
+		private byte m_RegenerateAttempts = 3;
 #pragma warning restore CS0649
 
 		private ContinuousFilteredGenerator<IContinuousGenerator> m_sharedFilteredGenerator;
@@ -33,7 +35,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		{
 			[Pure]
 			get => new ContinuousFilteredGenerator<IContinuousGenerator>(
-				m_FilteredGeneratorProvider.generator, filters);
+				m_FilteredGeneratorProvider.generator, filters, m_RegenerateAttempts);
 		}
 
 		/// <summary>
@@ -61,7 +63,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		{
 			[Pure]
 			get => new ContinuousFilteredGenerator<IContinuousGenerator>(
-				m_FilteredGeneratorProvider.generator, filters);
+				m_FilteredGeneratorProvider.generator, filters, m_RegenerateAttempts);
 		}
 
 		/// <summary>
@@ -93,6 +95,25 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 				}
 
 				m_FilteredGeneratorProvider = value;
+				m_sharedFilteredGenerator = null;
+			}
+		}
+
+		/// <summary>
+		/// How many times a value may be regenerated.
+		/// </summary>
+		public byte regenerateAttempts
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_RegenerateAttempts;
+			set
+			{
+				if (m_RegenerateAttempts == value)
+				{
+					return;
+				}
+
+				m_RegenerateAttempts = value;
 				m_sharedFilteredGenerator = null;
 			}
 		}

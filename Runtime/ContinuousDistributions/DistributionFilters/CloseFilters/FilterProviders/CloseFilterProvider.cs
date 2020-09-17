@@ -22,7 +22,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		Tooltip("How far from a reference value a value may be to be counted as close enough.")]
 		private float m_Range = CloseFiltering.DefaultRange;
 		[SerializeField, Tooltip("Allowed close sequence length.")]
-		private byte m_CloseSequenceLength = CloseFiltering.DefaultApproximateSequenceLength;
+		private byte m_CloseSequenceLength = CloseFiltering.DefaultCloseSequenceLength;
 #pragma warning restore CS0649
 
 		private CloseFilter m_sharedFilter;

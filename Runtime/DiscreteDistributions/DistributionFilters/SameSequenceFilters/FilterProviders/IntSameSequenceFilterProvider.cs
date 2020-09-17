@@ -8,8 +8,8 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 	/// Provides <see cref="SameSequenceFilter{Int32}"/>.
 	/// </summary>
 	[CreateAssetMenu(
-		menuName = CreateAssetMenuConstants.SameSequenceDiscreteFiltersFolder + "Int Same Sequence Discrete Filter",
-		fileName = "Int Same Sequence Discrete Filter",
+		menuName = CreateAssetMenuConstants.SameSequenceDiscreteFiltersFolder + "Int Same Sequence Filter",
+		fileName = "Int Same Sequence Filter",
 		order = CreateAssetMenuConstants.FilterOrder
 	)]
 	public sealed class IntSameSequenceFilterProvider : SameSequenceFilterProvider<int>

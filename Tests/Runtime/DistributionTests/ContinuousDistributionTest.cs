@@ -16,8 +16,8 @@ namespace Zor.RandomGenerators.Tests.DistributionTests
 		[SerializeField] private AnimationCurve m_Curve;
 		[SerializeField] private float m_StepLength = 0.1f;
 		[SerializeField] private ContinuousGeneratorProviderReference m_GeneratorProviderReference;
-		[SerializeField] private uint m_GenerationsPerFrame = 100;
-		[SerializeField] private uint m_PerformanceTestsCount = 10000;
+		[SerializeField] private uint m_GenerationsPerFrame = 100u;
+		[SerializeField] private uint m_PerformanceTestsCount = 10000u;
 #pragma warning restore CS0649
 
 		private IContinuousGenerator m_generator;
@@ -38,7 +38,7 @@ namespace Zor.RandomGenerators.Tests.DistributionTests
 			}
 
 			var stopWatch = Stopwatch.StartNew();
-			for (uint i = 0; i < m_PerformanceTestsCount; ++i)
+			for (uint i = 0u; i < m_PerformanceTestsCount; ++i)
 			{
 				m_generator.Generate();
 			}
@@ -48,7 +48,7 @@ namespace Zor.RandomGenerators.Tests.DistributionTests
 
 		private void Update()
 		{
-			for (uint generation = 0; generation < m_GenerationsPerFrame; ++generation)
+			for (uint generation = 0u; generation < m_GenerationsPerFrame; ++generation)
 			{
 				Profiler.BeginSample("ContinuousTest.Generate");
 

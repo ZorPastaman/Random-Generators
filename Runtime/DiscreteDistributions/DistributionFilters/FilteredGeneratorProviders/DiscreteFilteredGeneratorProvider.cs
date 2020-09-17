@@ -14,6 +14,8 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 #pragma warning disable CS0649
 		[SerializeField] private DiscreteGeneratorProviderReference m_FilteredGeneratorProvider;
 		[SerializeField] private DiscreteFilterProviderReference[] m_FilterProviders;
+		[SerializeField, Tooltip("How many times a value may be regenerated.")]
+		private byte m_RegenerateAttempts = 3;
 #pragma warning restore CS0649
 
 		private DiscreteFilteredGenerator<T, IDiscreteGenerator<T>> m_sharedFilteredGenerator;
@@ -27,7 +29,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		{
 			[Pure]
 			get => new DiscreteFilteredGenerator<T, IDiscreteGenerator<T>>(
-				m_FilteredGeneratorProvider.GetGenerator<T>(), filters);
+				m_FilteredGeneratorProvider.GetGenerator<T>(), filters, m_RegenerateAttempts);
 		}
 
 		/// <summary>
@@ -55,7 +57,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		{
 			[Pure]
 			get => new DiscreteFilteredGenerator<T, IDiscreteGenerator<T>>(
-				m_FilteredGeneratorProvider.GetGenerator<T>(), filters);
+				m_FilteredGeneratorProvider.GetGenerator<T>(), filters, m_RegenerateAttempts);
 		}
 
 		/// <summary>
@@ -87,6 +89,25 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 				}
 
 				m_FilteredGeneratorProvider = value;
+				m_sharedFilteredGenerator = null;
+			}
+		}
+
+		/// <summary>
+		/// How many times a value may be regenerated.
+		/// </summary>
+		public byte regenerateAttempts
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_RegenerateAttempts;
+			set
+			{
+				if (m_RegenerateAttempts == value)
+				{
+					return;
+				}
+
+				m_RegenerateAttempts = value;
 				m_sharedFilteredGenerator = null;
 			}
 		}

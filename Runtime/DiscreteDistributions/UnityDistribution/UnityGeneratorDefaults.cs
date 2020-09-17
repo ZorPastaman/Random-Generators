@@ -5,6 +5,6 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	public static class UnityGeneratorDefaults
 	{
 		public const int DefaultMin = 0;
-		public const int DefaultMax = 10;
+		public const int DefaultMax = 11;
 	}
 }

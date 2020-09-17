@@ -11,7 +11,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 	/// </summary>
 	/// <typeparam name="TValue"></typeparam>
 	/// <typeparam name="TGenerator"></typeparam>
-	public sealed class DiscreteFilteredGenerator<TValue, TGenerator> : IDiscreteGenerator<TValue>
+	public sealed class DiscreteFilteredGenerator<TValue, TGenerator> : IDiscreteFilteredGenerator<TValue, TGenerator>
 		where TGenerator : IDiscreteGenerator<TValue>
 	{
 		[NotNull] private TGenerator m_filteredGenerator;
@@ -20,17 +20,24 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		private TValue[] m_sequence;
 		private byte m_currentSequenceLength;
 
+		private byte m_regenerateAttempts;
+
 		/// <summary>
 		/// Creates a <see cref="DiscreteFilteredGenerator{TValue,TGenerator}"/> with the specified parameters.
 		/// </summary>
 		/// <param name="filteredGenerator"></param>
 		/// <param name="filters"></param>
+		/// <param name="regenerateAttempts">
+		/// <para>How many times a value may be regenerated.</para>
+		/// <para>If this value is exceeded, a last generated value is returned.</para>
+		/// </param>
 		public DiscreteFilteredGenerator([NotNull] TGenerator filteredGenerator,
-			[NotNull] params IDiscreteFilter<TValue>[] filters)
+			[NotNull] IDiscreteFilter<TValue>[] filters, byte regenerateAttempts)
 		{
 			m_filteredGenerator = filteredGenerator;
 			m_filters = filters;
 			InitializeSequence();
+			m_regenerateAttempts = regenerateAttempts;
 		}
 
 		/// <summary>
@@ -42,6 +49,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 			m_filteredGenerator = other.m_filteredGenerator;
 			m_filters = other.m_filters;
 			InitializeSequence();
+			m_regenerateAttempts = other.m_regenerateAttempts;
 		}
 
 		[NotNull]
@@ -51,6 +59,18 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 			get => m_filteredGenerator;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_filteredGenerator = value;
+		}
+
+		/// <summary>
+		/// <para>How many times a value may be regenerated.</para>
+		/// <para>If this value is exceeded, a last generated value is returned.</para>
+		/// </summary>
+		public byte regenerateAttempts
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_regenerateAttempts;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
+			set => m_regenerateAttempts = value;
 		}
 
 		/// <summary>
@@ -112,11 +132,13 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		public TValue Generate()
 		{
 			TValue generated;
+			byte currentRegenerateAttempts = 0;
 
 			do
 			{
 				generated = m_filteredGenerator.Generate();
-			} while (m_filters.NeedRegenerate(m_sequence, generated, m_currentSequenceLength));
+			} while (currentRegenerateAttempts++ < m_regenerateAttempts &&
+				m_filters.NeedRegenerate(m_sequence, generated, m_currentSequenceLength));
 
 			if (m_sequence.Length > m_currentSequenceLength)
 			{

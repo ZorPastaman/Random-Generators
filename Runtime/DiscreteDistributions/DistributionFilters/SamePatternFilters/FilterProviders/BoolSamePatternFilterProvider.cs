@@ -8,8 +8,8 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 	/// Provides <see cref="SamePatternFilter{Boolean}"/>.
 	/// </summary>
 	[CreateAssetMenu(
-		menuName = CreateAssetMenuConstants.SamePatternDiscreteFiltersFolder + "Bool Same Pattern Discrete Filter",
-		fileName = "Bool Same Pattern Discrete Filter",
+		menuName = CreateAssetMenuConstants.SamePatternDiscreteFiltersFolder + "Bool Same Pattern Filter",
+		fileName = "Bool Same Pattern Filter",
 		order = CreateAssetMenuConstants.FilterOrder
 	)]
 	public sealed class BoolSamePatternFilterProvider : SamePatterFilterProvider<bool>

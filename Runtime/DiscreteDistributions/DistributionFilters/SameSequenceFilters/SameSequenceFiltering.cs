@@ -7,7 +7,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 {
 	public static class SameSequenceFiltering
 	{
-		public const byte DefaultAllowedSequenceLength = 1;
+		public const byte DefaultAllowedSequenceLength = 4;
 
 		/// <summary>
 		/// Checks if the value <paramref name="newValue"/> continues the sequence <paramref name="sequence"/>

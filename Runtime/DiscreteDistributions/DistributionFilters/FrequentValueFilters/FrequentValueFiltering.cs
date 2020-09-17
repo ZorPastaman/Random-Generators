@@ -8,8 +8,8 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 {
 	public static class FrequentValueFiltering
 	{
-		public const byte DefaultControlledSequenceLength = 2;
-		public const byte DefaultAllowedRepeats = 1;
+		public const byte DefaultControlledSequenceLength = 9;
+		public const byte DefaultAllowedRepeats = 2;
 
 		/// <summary>
 		/// Checks if the value <paramref name="newValue"/> is contained in the sequence <paramref name="sequence"/>

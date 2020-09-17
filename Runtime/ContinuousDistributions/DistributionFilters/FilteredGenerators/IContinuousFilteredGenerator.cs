@@ -11,6 +11,12 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		T filteredGenerator { get; }
 
 		/// <summary>
+		/// <para>How many times a value may be regenerated.</para>
+		/// <para>If this value is exceeded, a last generated value is returned.</para>
+		/// </summary>
+		byte regenerateAttempts { get; }
+
+		/// <summary>
 		/// How many filters are used by this generator.
 		/// </summary>
 		int filtersCount { get; }

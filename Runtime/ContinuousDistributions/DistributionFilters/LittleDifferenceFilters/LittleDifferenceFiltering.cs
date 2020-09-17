@@ -8,7 +8,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 	public static class LittleDifferenceFiltering
 	{
 		public const float DefaultRequiredDifference = 0.02f;
-		public const byte DefaultLittleDifferenceSequenceLength = 2;
+		public const byte DefaultLittleDifferenceSequenceLength = 1;
 
 		/// <summary>
 		/// Checks if the value <paramref name="newValue"/> continues the sequence <paramref name="sequence"/>

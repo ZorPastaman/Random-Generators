@@ -16,10 +16,10 @@ namespace Zor.RandomGenerators.Tests.DistributionTests
 #pragma warning disable CS0649
 		[SerializeField, RequireDiscreteGenerator(typeof(uint))]
 		private DiscreteGeneratorProviderReference m_GeneratorProviderReference;
-		[SerializeField] private uint m_GenerationsPerFrame = 100;
+		[SerializeField] private uint m_GenerationsPerFrame = 100u;
 		[SerializeField] private List<ResultEntry> m_Results = new List<ResultEntry>();
 		[SerializeField] private AnimationCurve m_ResultsCurve;
-		[SerializeField] private uint m_PerformanceTestsCount = 10000;
+		[SerializeField] private uint m_PerformanceTestsCount = 10000u;
 #pragma warning restore CS0649
 
 		private IDiscreteGenerator<uint> m_generator;
@@ -37,7 +37,7 @@ namespace Zor.RandomGenerators.Tests.DistributionTests
 			}
 
 			var stopWatch = Stopwatch.StartNew();
-			for (uint i = 0; i < m_PerformanceTestsCount; ++i)
+			for (uint i = 0u; i < m_PerformanceTestsCount; ++i)
 			{
 				m_generator.Generate();
 			}
@@ -68,14 +68,14 @@ namespace Zor.RandomGenerators.Tests.DistributionTests
 					m_Results.Add(new ResultEntry
 					{
 						Element = generated,
-						Count = 1
+						Count = 1u
 					});
 				}
 			}
 
 			m_Results.Sort((lhs, rhs) => lhs.Element.CompareTo(rhs.Element));
 
-			uint sum = 0;
+			uint sum = 0u;
 			for (int i = 0, count = m_Results.Count; i < count; ++i)
 			{
 				sum += m_Results[i].Count;

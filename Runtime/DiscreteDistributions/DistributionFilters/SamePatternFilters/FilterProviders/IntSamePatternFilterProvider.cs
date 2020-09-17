@@ -8,8 +8,8 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 	/// Provides <see cref="SamePatternFilter{Int32}"/>.
 	/// </summary>
 	[CreateAssetMenu(
-		menuName = CreateAssetMenuConstants.SamePatternDiscreteFiltersFolder + "Int Same Pattern Discrete Filter",
-		fileName = "Int Same Pattern Discrete Filter",
+		menuName = CreateAssetMenuConstants.SamePatternDiscreteFiltersFolder + "Int Same Pattern Filter",
+		fileName = "Int Same Pattern Filter",
 		order = CreateAssetMenuConstants.FilterOrder
 	)]
 	public sealed class IntSamePatternFilterProvider : SamePatterFilterProvider<int>

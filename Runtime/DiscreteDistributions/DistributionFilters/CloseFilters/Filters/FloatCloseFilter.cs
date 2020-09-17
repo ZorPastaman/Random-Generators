@@ -15,7 +15,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 	public sealed class FloatCloseFilter : ICloseFilter<float>
 	{
 		public const float DefaultReferenceValue = 0f;
-		public const float DefaultRange = 5f;
+		public const float DefaultRange = 4f;
 		public const byte DefaultCloseSequenceLength = 6;
 
 #pragma warning disable CS0649

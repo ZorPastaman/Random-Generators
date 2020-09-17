@@ -9,7 +9,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 	{
 		public const float DefaultReferenceValue = 0f;
 		public const float DefaultRange = 1f;
-		public const byte DefaultApproximateSequenceLength = 6;
+		public const byte DefaultCloseSequenceLength = 4;
 
 		/// <summary>
 		/// Checks if the value <paramref name="newValue"/> continues the sequence <paramref name="sequence"/>

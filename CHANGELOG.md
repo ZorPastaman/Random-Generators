@@ -46,4 +46,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Same Pattern filter.
 - Same Sequence filter.
 
+#### Assets
+- Default Bates generator provider.
+- Default Bool Uniform generator provider.
+- Default Float Uniform generator provider.
+- Default Int Uniform generator provider.
+- Default Marsaglia generator provider.
+
 [unreleased]: https://github.com/ZorPastaman/Random-Generators

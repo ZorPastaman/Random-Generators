@@ -118,7 +118,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static uint ComputeSum([NotNull] uint[] weights, int count)
 		{
-			uint sum = 0;
+			uint sum = 0u;
 
 			for (int i = 0; i < count; ++i)
 			{
@@ -143,7 +143,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		private static int Pop([NotNull] uint[] weights, uint sum, int count, float iid)
 		{
 			uint random = (uint)(iid * sum);
-			sum = 0;
+			sum = 0u;
 			int i = 0;
 
 			for (; sum <= random & i < count; ++i)

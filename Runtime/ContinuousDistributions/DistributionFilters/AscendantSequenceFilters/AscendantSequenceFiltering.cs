@@ -6,7 +6,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 {
 	public static class AscendantSequenceFiltering
 	{
-		public const byte DefaultAscendantSequenceLength = 3;
+		public const byte DefaultAscendantSequenceLength = 4;
 
 		/// <summary>
 		/// Checks if the value <paramref name="newValue"/> continues the ascendant sequence <paramref name="sequence"/>

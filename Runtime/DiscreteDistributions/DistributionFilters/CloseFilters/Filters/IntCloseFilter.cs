@@ -15,7 +15,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 	public sealed class IntCloseFilter : ICloseFilter<int>
 	{
 		public const int DefaultReferenceValue = 0;
-		public const int DefaultRange = 5;
+		public const int DefaultRange = 4;
 		public const byte DefaultCloseSequenceLength = 6;
 
 #pragma warning disable CS0649

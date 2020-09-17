@@ -8,8 +8,8 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 	/// Provides <see cref="SamePatternFilter{Single}"/>.
 	/// </summary>
 	[CreateAssetMenu(
-		menuName = CreateAssetMenuConstants.SamePatternDiscreteFiltersFolder + "Float Same Pattern Discrete Filter",
-		fileName = "Float Same Pattern Discrete Filter",
+		menuName = CreateAssetMenuConstants.SamePatternDiscreteFiltersFolder + "Float Same Pattern Filter",
+		fileName = "Float Same Pattern Filter",
 		order = CreateAssetMenuConstants.FilterOrder
 	)]
 	public sealed class FloatSamePatternFilterProvider : SamePatterFilterProvider<float>

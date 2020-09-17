@@ -8,7 +8,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 {
 	public static class RepeatingPatternFiltering
 	{
-		public const byte DefaultControlledSequenceLength = 6;
+		public const byte DefaultControlledSequenceLength = 9;
 		public const byte DefaultPatternLength = 2;
 
 		/// <summary>

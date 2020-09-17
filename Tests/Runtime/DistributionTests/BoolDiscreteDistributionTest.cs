@@ -14,10 +14,10 @@ namespace Zor.RandomGenerators.Tests.DistributionTests
 #pragma warning disable CS0649
 		[SerializeField, RequireDiscreteGenerator(typeof(bool))]
 		private DiscreteGeneratorProviderReference m_GeneratorProviderReference;
-		[SerializeField] private uint m_GenerationsPerFrame = 100;
+		[SerializeField] private uint m_GenerationsPerFrame = 100u;
 		[SerializeField] private uint m_TrueCount;
 		[SerializeField] private uint m_FalseCount;
-		[SerializeField] private uint m_PerformanceTestsCount = 10000;
+		[SerializeField] private uint m_PerformanceTestsCount = 10000u;
 #pragma warning restore CS0649
 
 		private IDiscreteGenerator<bool> m_generator;
@@ -33,7 +33,7 @@ namespace Zor.RandomGenerators.Tests.DistributionTests
 			}
 
 			var stopWatch = Stopwatch.StartNew();
-			for (uint i = 0; i < m_PerformanceTestsCount; ++i)
+			for (uint i = 0u; i < m_PerformanceTestsCount; ++i)
 			{
 				m_generator.Generate();
 			}

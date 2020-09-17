@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fe21ba971a94891a025e58f642ad578, type: 3}
+  m_Name: DefaultFloatUniformGeneratorProvider
+  m_EditorClassIdentifier: 
+  m_FilteredGeneratorProvider:
+    m_ContinuousGeneratorProvider: {fileID: 11400000, guid: f8f3f33bee325d14fb3963dfd3de657a,
+      type: 2}
+    m_Shared: 1
+  m_FilterProviders:
+  - m_FilterProvider: {fileID: 11400000, guid: fc1cfd37c96099849b40ecc75636c8ba, type: 2}
+    m_Shared: 1
+  - m_FilterProvider: {fileID: 11400000, guid: 83f4bffbeb939df4d9690312e9d661a0, type: 2}
+    m_Shared: 1
+  - m_FilterProvider: {fileID: 11400000, guid: 0043e472e500a3e4c806c466b8df8507, type: 2}
+    m_Shared: 1
+  - m_FilterProvider: {fileID: 11400000, guid: 62196353bb39ea24b9d8baba77afd367, type: 2}
+    m_Shared: 1
+  - m_FilterProvider: {fileID: 11400000, guid: e7ccdc6c4cc11804887b3b56316f8cf0, type: 2}
+    m_Shared: 1
+  - m_FilterProvider: {fileID: 11400000, guid: d1884490ad250084db28359d29a50f03, type: 2}
+    m_Shared: 1
+  m_RegenerateAttempts: 3

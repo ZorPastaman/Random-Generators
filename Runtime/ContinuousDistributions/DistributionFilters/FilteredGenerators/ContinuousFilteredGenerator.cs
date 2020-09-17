@@ -18,17 +18,24 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		private float[] m_sequence;
 		private byte m_currentSequenceLength;
 
+		private byte m_regenerateAttempts;
+
 		/// <summary>
 		/// Creates a <see cref="ContinuousFilteredGenerator{T}"/> with the specified parameters.
 		/// </summary>
 		/// <param name="filteredGenerator"></param>
 		/// <param name="filters"></param>
+		/// <param name="regenerateAttempts">
+		/// <para>How many times a value may be regenerated.</para>
+		/// <para>If this value is exceeded, a last generated value is returned.</para>
+		/// </param>
 		public ContinuousFilteredGenerator([NotNull] T filteredGenerator,
-			[NotNull] params IContinuousFilter[] filters)
+			[NotNull] IContinuousFilter[] filters, byte regenerateAttempts)
 		{
 			m_filteredGenerator = filteredGenerator;
 			m_filters = filters;
 			InitializeSequence();
+			m_regenerateAttempts = regenerateAttempts;
 		}
 
 		/// <summary>
@@ -40,6 +47,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 			m_filteredGenerator = other.m_filteredGenerator;
 			m_filters = other.m_filters;
 			InitializeSequence();
+			m_regenerateAttempts = other.m_regenerateAttempts;
 		}
 
 		[NotNull]
@@ -49,6 +57,18 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 			get => m_filteredGenerator;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_filteredGenerator = value;
+		}
+
+		/// <summary>
+		/// <para>How many times a value may be regenerated.</para>
+		/// <para>If this value is exceeded, a last generated value is returned.</para>
+		/// </summary>
+		public byte regenerateAttempts
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => m_regenerateAttempts;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
+			set => m_regenerateAttempts = value;
 		}
 
 		/// <summary>
@@ -110,11 +130,13 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		public float Generate()
 		{
 			float generated;
+			byte currentRegenerateAttempts = 0;
 
 			do
 			{
 				generated = m_filteredGenerator.Generate();
-			} while (m_filters.NeedRegenerate(m_sequence, generated, m_currentSequenceLength));
+			} while (currentRegenerateAttempts++ < m_regenerateAttempts &&
+				m_filters.NeedRegenerate(m_sequence, generated, m_currentSequenceLength));
 
 			if (m_sequence.Length > m_currentSequenceLength)
 			{

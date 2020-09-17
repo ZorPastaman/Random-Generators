@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daf597b7997d4be7aa29c9676941a08a, type: 3}
+  m_Name: DefaultBoolUniformGeneratorProvider
+  m_EditorClassIdentifier: 
+  m_FilteredGeneratorProvider:
+    m_DiscreteGeneratorProvider: {fileID: 11400000, guid: 7bd5445682234d74384133769fcf5706,
+      type: 2}
+    m_Shared: 1
+  m_FilterProviders:
+  - m_FilterProvider: {fileID: 11400000, guid: 73821efc732297842a05e3e4b8f9f0c9, type: 2}
+    m_Shared: 1
+  - m_FilterProvider: {fileID: 11400000, guid: be0015940441f59429883ba843bd5548, type: 2}
+    m_Shared: 1
+  - m_FilterProvider: {fileID: 11400000, guid: 54285b77c3ecb65449bf73289fa7b6da, type: 2}
+    m_Shared: 1

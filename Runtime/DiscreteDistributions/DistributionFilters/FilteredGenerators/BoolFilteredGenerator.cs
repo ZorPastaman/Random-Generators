@@ -10,7 +10,8 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 	/// Random generator that takes a generated value from its depended generator filtered with its filters.
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
-	public sealed class BoolFilteredGenerator<T> : IDiscreteGenerator<bool> where T : IDiscreteGenerator<bool>
+	public sealed class BoolFilteredGenerator<T> : IDiscreteFilteredGenerator<bool, T>
+		where T : IDiscreteGenerator<bool>
 	{
 		[NotNull] private T m_filteredGenerator;
 		[NotNull] private IDiscreteFilter<bool>[] m_filters;
@@ -48,6 +49,12 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 			get => m_filteredGenerator;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_filteredGenerator = value;
+		}
+
+		public byte regenerateAttempts
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+			get => 0;
 		}
 
 		/// <summary>

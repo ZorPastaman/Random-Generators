@@ -1,4 +1,4 @@
-# Random-Generators
+# Random Generators
 Random generators for Unity is a collection of random generators, 
 different distributions, modificators and filters.
 
@@ -57,7 +57,7 @@ They wrap generators and provide unique and shared instances of them.
 
 #### List of continuous generator algorithms
 
-- [Acceptance Rejection](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/IndependentDistributions/AcceptanceRejectionDistribution) -
+- [Acceptance-Rejection](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/IndependentDistributions/AcceptanceRejectionDistribution) -
 [Wikipedia](https://en.wikipedia.org/wiki/Rejection_sampling);
 - [Bates](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/NormalDistributions/BatesDistribution) -
 [Wikipedia](https://en.wikipedia.org/wiki/Bates_distribution);

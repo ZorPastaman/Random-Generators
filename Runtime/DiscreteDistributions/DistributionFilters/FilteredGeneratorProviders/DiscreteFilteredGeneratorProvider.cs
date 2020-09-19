@@ -178,10 +178,10 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 			{
 				if (m_filtersCache == null)
 				{
-					int filtersCount = m_FilterProviders.Length;
-					m_filtersCache = new IDiscreteFilter<T>[filtersCount];
+					int count = m_FilterProviders.Length;
+					m_filtersCache = new IDiscreteFilter<T>[count];
 
-					for (int i = 0; i < filtersCount; ++i)
+					for (int i = 0; i < count; ++i)
 					{
 						m_filtersCache[i] = m_FilterProviders[i].GetFilter<T>();
 					}

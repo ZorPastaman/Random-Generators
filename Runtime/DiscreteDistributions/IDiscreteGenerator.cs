@@ -2,6 +2,9 @@
 
 namespace Zor.RandomGenerators.DiscreteDistributions
 {
+	/// <summary>
+	/// Discrete random generator.
+	/// </summary>
 	public interface IDiscreteGenerator<out T>
 	{
 		/// <summary>

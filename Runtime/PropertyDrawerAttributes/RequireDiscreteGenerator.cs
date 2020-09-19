@@ -7,9 +7,7 @@ using Zor.RandomGenerators.DiscreteDistributions;
 namespace Zor.RandomGenerators.PropertyDrawerAttributes
 {
 	/// <summary>
-	/// Property drawer attribute for
-	/// <see cref="DiscreteGeneratorProviderReference"/>
-	/// with value type restriction.
+	/// Property drawer attribute for <see cref="DiscreteGeneratorProviderReference"/> with value type restriction.
 	/// </summary>
 	public sealed class RequireDiscreteGenerator : PropertyAttribute
 	{

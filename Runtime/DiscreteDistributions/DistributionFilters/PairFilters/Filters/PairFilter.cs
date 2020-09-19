@@ -10,7 +10,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 	/// The filter recommends to regenerate a new value if a sequence has the same value some elements before.
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
-	public sealed class PairFilter<T> : IDiscreteFilter<T> where T : IEquatable<T>
+	public sealed class PairFilter<T> : IPairFilter<T> where T : IEquatable<T>
 	{
 		private byte m_elementsBetweenPair;
 

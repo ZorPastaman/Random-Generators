@@ -2,9 +2,13 @@
 
 using System;
 using UnityEngine;
+using Zor.RandomGenerators.DiscreteDistributions.DistributionFilters;
 
 namespace Zor.RandomGenerators.PropertyDrawerAttributes
 {
+	/// <summary>
+	/// Property drawer attribute for <see cref="DiscreteFilterProviderReference"/> with value type restriction.
+	/// </summary>
 	public sealed class RequireDiscreteFilter : PropertyAttribute
 	{
 		public readonly Type valueType;

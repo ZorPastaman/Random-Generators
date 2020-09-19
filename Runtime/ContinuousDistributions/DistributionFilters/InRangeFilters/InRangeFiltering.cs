@@ -11,7 +11,8 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		public const byte DefaultInRangeSequenceLength = 3;
 
 		/// <summary>
-		/// Checks if the value <paramref name="newValue"/> continues the in range sequence <paramref name="sequence"/>
+		/// Checks if the value <paramref name="newValue"/> continues the sequence <paramref name="sequence"/>
+		/// where every value is in range between the minimum <paramref name="min"/> and maximum <paramref name="max"/>
 		/// and needs to be regenerated.
 		/// </summary>
 		/// <param name="sequence">Sequence of generated and already applied values.</param>

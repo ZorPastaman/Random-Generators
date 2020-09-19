@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.0.0] - 2020-09-19
+
 ### Added
 
 #### Distributions
@@ -53,4 +55,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Default Int Uniform generator provider.
 - Default Marsaglia generator provider.
 
-[unreleased]: https://github.com/ZorPastaman/Random-Generators
+[unreleased]: https://github.com/ZorPastaman/Random-Generators/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/ZorPastaman/Random-Generators/releases/tag/v1.0.0

@@ -57,8 +57,6 @@ They wrap generators and provide unique and shared instances of them.
 
 #### List of continuous generator algorithms
 
-- [Acceptance-Rejection](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/IndependentDistributions/AcceptanceRejectionDistribution) -
-[Wikipedia](https://en.wikipedia.org/wiki/Rejection_sampling);
 - [Bates](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/NormalDistributions/BatesDistribution) -
 [Wikipedia](https://en.wikipedia.org/wiki/Bates_distribution);
 - [Box-Muller](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/NormalDistributions/BoxMullerDistribution) -
@@ -67,6 +65,8 @@ They wrap generators and provide unique and shared instances of them.
 [Wikipedia](https://en.wikipedia.org/wiki/Irwin%E2%80%93Hall_distribution);
 - [Marsaglia](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/NormalDistributions/MarsagliaDistribution) -
 [Wikipedia](https://en.wikipedia.org/wiki/Marsaglia_polar_method);
+- [Rejection](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/IndependentDistributions/AcceptanceRejectionDistribution) -
+[Wikipedia](https://en.wikipedia.org/wiki/Rejection_sampling);
 - [C# Random Generator Wrapper](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/UniformDistributions/SharpDistribution) -
 [Microsoft Docs](https://docs.microsoft.com/en-us/dotnet/api/system.random?view=netframework-4.8);
 - [Unity Random Generator Wrapper](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/UniformDistributions/UnityDistribution) -

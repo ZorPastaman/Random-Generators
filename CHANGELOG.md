@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.0.1] - 2020-09-23
+
+### Changed
+
+- Project structure is changed to shorten paths to avoid long paths.
+- AcceptanceRejection... names are renamed to Rejection... names.
+- Namespace Zor.RandomGenerators.ContinuousDistributions.IndependentDistributions is shortened to Zor.RandomGenerators.ContinuousDistributions.
+- Namespace Zor.RandomGenerators.ContinuousDistributions.NormalDistributions is shortened to Zor.RandomGenerators.ContinuousDistributions.
+- Namespace Zor.RandomGenerators.ContinuousDistributions.UniformDistributions is shortened to namespace Zor.RandomGenerators.ContinuousDistributions.
+
 ## [1.0.0] - 2020-09-19
 
 ### Added
@@ -55,5 +65,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Default Int Uniform generator provider.
 - Default Marsaglia generator provider.
 
-[unreleased]: https://github.com/ZorPastaman/Random-Generators/compare/v1.0.0...HEAD
+[unreleased]: https://github.com/ZorPastaman/Random-Generators/compare/v1.0.1...HEAD
+[1.0.1]: https://github.com/ZorPastaman/Random-Generators/releases/tag/v1.0.1
 [1.0.0]: https://github.com/ZorPastaman/Random-Generators/releases/tag/v1.0.0

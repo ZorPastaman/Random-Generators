@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- DropSharedGenerator() and DropSharedFilter() methods. They allow to drop a current generator/filter and create a new one on a next call of sharedGenerator/sharedFilter property.
+- Editable Weighted generator providers.
+
 ## [1.0.1] - 2020-09-23
 
 ### Changed

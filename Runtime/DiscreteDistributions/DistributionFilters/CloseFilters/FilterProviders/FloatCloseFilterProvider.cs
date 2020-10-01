@@ -133,6 +133,13 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 			}
 		}
 
+		/// <inheritdoc/>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public override void DropSharedFilter()
+		{
+			m_sharedFilter = null;
+		}
+
 		private void OnValidate()
 		{
 			m_sharedFilter = null;

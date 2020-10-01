@@ -21,5 +21,10 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// </summary>
 		[NotNull]
 		public abstract IContinuousGenerator sharedGenerator { get; }
+
+		/// <summary>
+		/// Drops a current shared generator so that a new shared generator is created on <see cref="sharedGenerator"/>.
+		/// </summary>
+		public abstract void DropSharedGenerator();
 	}
 }

@@ -21,5 +21,10 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		/// </summary>
 		[NotNull]
 		public abstract IContinuousFilter sharedFilter { get; }
+
+		/// <summary>
+		/// Drops a current shared filter so that a new shared filter is created on <see cref="sharedFilter"/>.
+		/// </summary>
+		public abstract void DropSharedFilter();
 	}
 }

@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -68,6 +69,13 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 
 				return m_sharedGenerator;
 			}
+		}
+
+		/// <inheritdoc/>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public override void DropSharedGenerator()
+		{
+			m_sharedGenerator = null;
 		}
 
 		private void OnValidate()

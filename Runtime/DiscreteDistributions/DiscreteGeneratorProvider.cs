@@ -21,5 +21,10 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// </summary>
 		[NotNull]
 		public abstract IDiscreteGenerator<T> sharedGenerator { get; }
+
+		/// <summary>
+		/// Drops a current shared generator so that a new shared generator is created on <see cref="sharedGenerator"/>.
+		/// </summary>
+		public abstract void DropSharedGenerator();
 	}
 }

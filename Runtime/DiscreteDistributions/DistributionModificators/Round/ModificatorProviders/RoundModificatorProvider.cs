@@ -21,7 +21,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionModificators
 		[SerializeField] private ContinuousGeneratorProviderReference m_DependedGeneratorProvider;
 #pragma warning restore CS0649
 
-		private RoundModificator<IContinuousGenerator> m_sharedGenerator;
+		private RoundModificator<IContinuousGenerator> m_sharedModificator;
 
 		/// <summary>
 		/// Creates a new <see cref="RoundModificator{T}"/> and returns it as <see cref="IDiscreteGenerator{Int32}"/>.
@@ -39,12 +39,12 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionModificators
 		{
 			get
 			{
-				if (m_sharedGenerator == null)
+				if (m_sharedModificator == null)
 				{
-					m_sharedGenerator = roundModificator;
+					m_sharedModificator = roundModificator;
 				}
 
-				return m_sharedGenerator;
+				return m_sharedModificator;
 			}
 		}
 
@@ -66,12 +66,12 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionModificators
 		{
 			get
 			{
-				if (m_sharedGenerator == null)
+				if (m_sharedModificator == null)
 				{
-					m_sharedGenerator = roundModificator;
+					m_sharedModificator = roundModificator;
 				}
 
-				return m_sharedGenerator;
+				return m_sharedModificator;
 			}
 		}
 
@@ -87,13 +87,20 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionModificators
 				}
 
 				m_DependedGeneratorProvider = value;
-				m_sharedGenerator = null;
+				m_sharedModificator = null;
 			}
+		}
+
+		/// <inheritdoc/>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public override void DropSharedGenerator()
+		{
+			m_sharedModificator = null;
 		}
 
 		private void OnValidate()
 		{
-			m_sharedGenerator = null;
+			m_sharedModificator = null;
 		}
 	}
 }

@@ -24,7 +24,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionModificators
 		[SerializeField] private int m_Max = ClampModificatorDefaults.DefaultMax;
 #pragma warning restore CS0649
 
-		private ClampModificator<IDiscreteGenerator<int>> m_sharedGenerator;
+		private ClampModificator<IDiscreteGenerator<int>> m_sharedModificator;
 
 		/// <summary>
 		/// Creates a new <see cref="ClampModificator{T}"/> and returns it as <see cref="IDiscreteGenerator{Int32}"/>.
@@ -43,12 +43,12 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionModificators
 		{
 			get
 			{
-				if (m_sharedGenerator == null)
+				if (m_sharedModificator == null)
 				{
-					m_sharedGenerator = clampModificator;
+					m_sharedModificator = clampModificator;
 				}
 
-				return m_sharedGenerator;
+				return m_sharedModificator;
 			}
 		}
 
@@ -71,12 +71,12 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionModificators
 		{
 			get
 			{
-				if (m_sharedGenerator == null)
+				if (m_sharedModificator == null)
 				{
-					m_sharedGenerator = clampModificator;
+					m_sharedModificator = clampModificator;
 				}
 
-				return m_sharedGenerator;
+				return m_sharedModificator;
 			}
 		}
 
@@ -92,7 +92,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionModificators
 				}
 
 				m_DependedGeneratorProvider = value;
-				m_sharedGenerator = null;
+				m_sharedModificator = null;
 			}
 		}
 
@@ -108,7 +108,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionModificators
 				}
 
 				m_Min = value;
-				m_sharedGenerator = null;
+				m_sharedModificator = null;
 			}
 		}
 
@@ -124,13 +124,20 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionModificators
 				}
 
 				m_Max = value;
-				m_sharedGenerator = null;
+				m_sharedModificator = null;
 			}
+		}
+
+		/// <inheritdoc/>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public override void DropSharedGenerator()
+		{
+			m_sharedModificator = null;
 		}
 
 		private void OnValidate()
 		{
-			m_sharedGenerator = null;
+			m_sharedModificator = null;
 		}
 	}
 }

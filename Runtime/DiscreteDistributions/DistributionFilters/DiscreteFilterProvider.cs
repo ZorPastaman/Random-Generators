@@ -21,5 +21,10 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		/// </summary>
 		[NotNull]
 		public abstract IDiscreteFilter<T> sharedFilter { get; }
+
+		/// <summary>
+		/// Drops a current shared filter so that a new shared filter is created on <see cref="sharedFilter"/>.
+		/// </summary>
+		public abstract void DropSharedFilter();
 	}
 }

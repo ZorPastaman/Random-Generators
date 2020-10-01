@@ -175,6 +175,22 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 			}
 		}
 
+		/// <inheritdoc/>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public override void DropSharedGenerator()
+		{
+			m_sharedFilteredGenerator = null;
+		}
+
+		/// <summary>
+		/// Drops a current filters cache so that a new filters cache is created on <see cref="filters"/>.
+		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public void DropFiltersCache()
+		{
+			m_filtersCache = null;
+		}
+
 		private void OnValidate()
 		{
 			m_sharedFilteredGenerator = null;

@@ -15,13 +15,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 	public sealed class OppositePatternFilter<T> : IOppositePatternFilter<T> where T : IEquatable<T>
 	{
 		private byte m_patternLength;
-
-		/// <summary>
-		/// Creates an <see cref="OppositePatternFilter{T}"/> with the default parameters.
-		/// </summary>
-		public OppositePatternFilter()
-		{
-		}
+		private byte m_requiredSequenceLength;
 
 		/// <summary>
 		/// Creates a <see cref="OppositePatternFilter{T}"/> with the specified parameters.
@@ -30,6 +24,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		public OppositePatternFilter(byte patternLength)
 		{
 			m_patternLength = patternLength;
+			ComputeRequiredSequenceLength();
 		}
 
 		/// <summary>
@@ -39,6 +34,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		public OppositePatternFilter([NotNull] OppositePatternFilter<T> other)
 		{
 			m_patternLength = other.m_patternLength;
+			m_requiredSequenceLength = other.m_requiredSequenceLength;
 		}
 
 		public byte patternLength
@@ -46,14 +42,18 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_patternLength;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_patternLength = value;
+			set
+			{
+				m_patternLength = value;
+				ComputeRequiredSequenceLength();
+			}
 		}
 
 		/// <inheritdoc/>
 		public byte requiredSequenceLength
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => (byte)(m_patternLength * 2 - 1);
+			get => m_requiredSequenceLength;
 		}
 
 		/// <inheritdoc/>
@@ -61,6 +61,12 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		public bool NeedRegenerate(T[] sequence, T newValue, byte sequenceLength)
 		{
 			return OppositePatternFiltering.NeedRegenerate(sequence, newValue, sequenceLength, m_patternLength);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		private void ComputeRequiredSequenceLength()
+		{
+			m_requiredSequenceLength = (byte)(m_patternLength * 2 - 1);
 		}
 	}
 }

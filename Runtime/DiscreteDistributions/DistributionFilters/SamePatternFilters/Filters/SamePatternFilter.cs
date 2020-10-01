@@ -14,6 +14,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 	public sealed class SamePatternFilter<T> : ISamePatternFilter<T> where T : IEquatable<T>
 	{
 		private byte m_patternLength;
+		private byte m_requiredSequenceLength;
 
 		/// <summary>
 		/// Creates a <see cref="SamePatternFilter{T}"/> with the specified parameters.
@@ -22,6 +23,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		public SamePatternFilter(byte patternLength)
 		{
 			m_patternLength = patternLength;
+			ComputeRequiredSequenceLength();
 		}
 
 		/// <summary>
@@ -31,6 +33,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		public SamePatternFilter([NotNull] SamePatternFilter<T> other)
 		{
 			m_patternLength = other.m_patternLength;
+			m_requiredSequenceLength = other.m_requiredSequenceLength;
 		}
 
 		public byte patternLength
@@ -38,14 +41,18 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_patternLength;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_patternLength = value;
+			set
+			{
+				m_patternLength = value;
+				ComputeRequiredSequenceLength();
+			}
 		}
 
 		/// <inheritdoc/>
 		public byte requiredSequenceLength
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => (byte)(m_patternLength * 2 - 1);
+			get => m_requiredSequenceLength;
 		}
 
 		/// <inheritdoc/>
@@ -53,6 +60,12 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		public bool NeedRegenerate(T[] sequence, T newValue, byte sequenceLength)
 		{
 			return SamePatternFiltering.NeedRegenerate(sequence, newValue, sequenceLength, m_patternLength);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		private void ComputeRequiredSequenceLength()
+		{
+			m_requiredSequenceLength = (byte)(m_patternLength * 2 - 1);
 		}
 	}
 }

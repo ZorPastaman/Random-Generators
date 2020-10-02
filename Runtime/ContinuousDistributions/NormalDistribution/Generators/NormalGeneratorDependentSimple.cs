@@ -6,34 +6,32 @@ using JetBrains.Annotations;
 namespace Zor.RandomGenerators.ContinuousDistributions
 {
 	/// <summary>
-	/// Box-Muller Random Generator using <see cref="BoxMullerDistribution.Generate{T}(T)"/>.
+	/// Normal Random Generator using <see cref="NormalDistribution.Generate{T}(T)"/>.
 	/// </summary>
-	public sealed class BoxMullerGeneratorDependentSimple<T> : IBoxMullerGenerator
+	public sealed class NormalGeneratorDependentSimple<T> : INormalGenerator
 		where T : IContinuousGenerator
 	{
-		[NotNull] private T m_dependedGenerator;
+		[NotNull] private T m_iidGenerator;
 
 		private float m_spared;
 		private bool m_hasSpared;
 
 		/// <summary>
-		/// Creates a new <see cref="BoxMullerGeneratorDependentSimple{T}"/> with
-		/// the specified parameter.
+		/// Creates a <see cref="NormalGeneratorDependentSimple{T}"/>
+		/// with the specified parameters.
 		/// </summary>
-		/// <param name="dependedGenerator">
-		/// Random generator that returns independent and identically distributed random variable in range [0, 1].
-		/// </param>
-		public BoxMullerGeneratorDependentSimple([NotNull] T dependedGenerator)
+		/// <param name="iidGenerator"></param>
+		public NormalGeneratorDependentSimple([NotNull] T iidGenerator)
 		{
-			m_dependedGenerator = dependedGenerator;
+			m_iidGenerator = iidGenerator;
 		}
 
 		/// <summary>
 		/// Copy constructor.
 		/// </summary>
-		public BoxMullerGeneratorDependentSimple([NotNull] BoxMullerGeneratorDependentSimple<T> other)
+		public NormalGeneratorDependentSimple([NotNull] NormalGeneratorDependentSimple<T> other)
 		{
-			m_dependedGenerator = other.m_dependedGenerator;
+			m_iidGenerator = other.m_iidGenerator;
 		}
 
 		/// <summary>
@@ -43,11 +41,11 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		public T dependedRandomGenerator
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_dependedGenerator;
+			get => m_iidGenerator;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set
 			{
-				m_dependedGenerator = value;
+				m_iidGenerator = value;
 				m_hasSpared = false;
 			}
 		}
@@ -55,13 +53,13 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		public float mean
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => BoxMullerDistribution.DefaultMean;
+			get => NormalDistribution.DefaultMean;
 		}
 
 		public float deviation
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => BoxMullerDistribution.DefaultDeviation;
+			get => NormalDistribution.DefaultDeviation;
 		}
 
 		/// <inheritdoc/>
@@ -75,7 +73,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 			}
 
 			float answer;
-			(answer, m_spared) = BoxMullerDistribution.Generate(m_dependedGenerator);
+			(answer, m_spared) = NormalDistribution.Generate(m_iidGenerator);
 			m_hasSpared = true;
 
 			return answer;

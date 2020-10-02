@@ -13,6 +13,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Editable Weighted generator providers.
 - Negative Binomial distribution.
 
+### Changed
+
+- Marsaglia distribution is renamed to Normal distribution.
+
+### Removed
+
+- Box-Muller distribution. If you used it, start to use Normal distribution.
+
 ## [1.0.1] - 2020-09-23
 
 ### Changed

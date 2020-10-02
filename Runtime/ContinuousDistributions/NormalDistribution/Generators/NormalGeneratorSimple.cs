@@ -7,10 +7,10 @@ using JetBrains.Annotations;
 namespace Zor.RandomGenerators.ContinuousDistributions
 {
 	/// <summary>
-	/// Marsaglia Random Generator using <see cref="MarsagliaDistribution.Generate()"/>.
+	/// Normal Random Generator using <see cref="NormalDistribution.Generate()"/>.
 	/// </summary>
 	[Serializable]
-	public sealed class MarsagliaGeneratorSimple : IMarsagliaGenerator
+	public sealed class NormalGeneratorSimple : INormalGenerator
 	{
 		private float m_spared;
 		private bool m_hasSpared;
@@ -18,13 +18,13 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		public float mean
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => MarsagliaDistribution.DefaultMean;
+			get => NormalDistribution.DefaultMean;
 		}
 
 		public float deviation
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => MarsagliaDistribution.DefaultDeviation;
+			get => NormalDistribution.DefaultDeviation;
 		}
 
 		/// <inheritdoc/>
@@ -38,7 +38,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 			}
 
 			float answer;
-			(answer, m_spared) = MarsagliaDistribution.Generate();
+			(answer, m_spared) = NormalDistribution.Generate();
 			m_hasSpared = true;
 
 			return answer;

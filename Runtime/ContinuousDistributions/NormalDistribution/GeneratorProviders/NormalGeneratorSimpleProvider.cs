@@ -7,29 +7,29 @@ using UnityEngine;
 namespace Zor.RandomGenerators.ContinuousDistributions
 {
 	/// <summary>
-	/// Provides <see cref="BoxMullerGeneratorSimple"/>.
+	/// Provides <see cref="NormalGeneratorSimple"/>.
 	/// </summary>
 	[CreateAssetMenu(
-		menuName = CreateAssetMenuConstants.BoxMullerDistributionFolder + "Box-Muller Generator Simple Provider",
-		fileName = "Box-Muller Generator Simple Provider",
+		menuName = CreateAssetMenuConstants.NormalDistributionFolder + "Normal Generator Simple Provider",
+		fileName = "Normal Generator Simple Provider",
 		order = CreateAssetMenuConstants.DistributionOrder
 	)]
-	public sealed class BoxMullerGeneratorSimpleProvider : ContinuousGeneratorProvider
+	public sealed class NormalGeneratorSimpleProvider : ContinuousGeneratorProvider
 	{
-		private BoxMullerGeneratorSimple m_sharedGenerator;
+		private NormalGeneratorSimple m_sharedGenerator;
 
 		/// <summary>
-		/// Creates a new <see cref="BoxMullerGeneratorSimple"/> and returns it
-		/// as <see cref="IContinuousGenerator"/>
+		/// Creates a new <see cref="NormalGeneratorSimple"/> and returns it
+		/// as <see cref="IContinuousGenerator"/>.
 		/// </summary>
 		public override IContinuousGenerator generator
 		{
 			[Pure]
-			get => new BoxMullerGeneratorSimple();
+			get => new NormalGeneratorSimple();
 		}
 
 		/// <summary>
-		/// Returns a shared <see cref="BoxMullerGeneratorSimple"/> as <see cref="IContinuousGenerator"/>.
+		/// Returns a shared <see cref="NormalGeneratorSimple"/> as <see cref="IContinuousGenerator"/>.
 		/// </summary>
 		public override IContinuousGenerator sharedGenerator
 		{
@@ -37,7 +37,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 			{
 				if (m_sharedGenerator == null)
 				{
-					m_sharedGenerator = new BoxMullerGeneratorSimple();
+					m_sharedGenerator = normalGenerator;
 				}
 
 				return m_sharedGenerator;
@@ -45,26 +45,26 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		}
 
 		/// <summary>
-		/// Creates a new <see cref="BoxMullerGeneratorSimple"/> and returns it.
+		/// Creates a new <see cref="NormalGeneratorSimple"/> and returns it.
 		/// </summary>
 		[NotNull]
-		public BoxMullerGeneratorSimple boxMullerGenerator
+		public NormalGeneratorSimple normalGenerator
 		{
 			[Pure]
-			get => new BoxMullerGeneratorSimple();
+			get => new NormalGeneratorSimple();
 		}
 
 		/// <summary>
-		/// Returns a shared <see cref="BoxMullerGeneratorSimple"/>.
+		/// Returns a shared <see cref="NormalGeneratorSimple"/>.
 		/// </summary>
 		[NotNull]
-		public BoxMullerGeneratorSimple sharedBoxMullerGenerator
+		public NormalGeneratorSimple sharedNormalGenerator
 		{
 			get
 			{
 				if (m_sharedGenerator == null)
 				{
-					m_sharedGenerator = new BoxMullerGeneratorSimple();
+					m_sharedGenerator = normalGenerator;
 				}
 
 				return m_sharedGenerator;

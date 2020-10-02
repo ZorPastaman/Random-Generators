@@ -7,34 +7,34 @@ using UnityEngine;
 namespace Zor.RandomGenerators.ContinuousDistributions
 {
 	/// <summary>
-	/// Provides <see cref="MarsagliaGenerator"/>.
+	/// Provides <see cref="NormalGenerator"/>.
 	/// </summary>
 	[CreateAssetMenu(
-		menuName = CreateAssetMenuConstants.MarsagliaDistributionFolder + "Marsaglia Generator Provider",
-		fileName = "Marsaglia Generator Provider",
+		menuName = CreateAssetMenuConstants.NormalDistributionFolder + "Normal Generator Provider",
+		fileName = "Normal Generator Provider",
 		order = CreateAssetMenuConstants.DistributionOrder
 	)]
-	public sealed class MarsagliaGeneratorProvider : ContinuousGeneratorProvider
+	public sealed class NormalGeneratorProvider : ContinuousGeneratorProvider
 	{
 #pragma warning disable CS0649
-		[SerializeField] private float m_Mean = MarsagliaDistribution.DefaultMean;
-		[SerializeField] private float m_Deviation = MarsagliaDistribution.DefaultDeviation;
+		[SerializeField] private float m_Mean = NormalDistribution.DefaultMean;
+		[SerializeField] private float m_Deviation = NormalDistribution.DefaultDeviation;
 #pragma warning restore CS0649
 
-		private MarsagliaGenerator m_sharedGenerator;
+		private NormalGenerator m_sharedGenerator;
 
 		/// <summary>
-		/// Creates a new <see cref="MarsagliaGenerator"/> and returns it
+		/// Creates a new <see cref="NormalGenerator"/> and returns it
 		/// as <see cref="IContinuousGenerator"/>.
 		/// </summary>
 		public override IContinuousGenerator generator
 		{
 			[Pure]
-			get => new MarsagliaGenerator(m_Mean, m_Deviation);
+			get => new NormalGenerator(m_Mean, m_Deviation);
 		}
 
 		/// <summary>
-		/// Returns a shared <see cref="MarsagliaGenerator"/> as <see cref="IContinuousGenerator"/>.
+		/// Returns a shared <see cref="NormalGenerator"/> as <see cref="IContinuousGenerator"/>.
 		/// </summary>
 		public override IContinuousGenerator sharedGenerator
 		{
@@ -42,7 +42,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 			{
 				if (m_sharedGenerator == null)
 				{
-					m_sharedGenerator = marsagliaGenerator;
+					m_sharedGenerator = normalGenerator;
 				}
 
 				return m_sharedGenerator;
@@ -50,26 +50,26 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		}
 
 		/// <summary>
-		/// Creates a new <see cref="MarsagliaGenerator"/> and returns it.
+		/// Creates a new <see cref="NormalGenerator"/> and returns it.
 		/// </summary>
 		[NotNull]
-		public MarsagliaGenerator marsagliaGenerator
+		public NormalGenerator normalGenerator
 		{
 			[Pure]
-			get => new MarsagliaGenerator(m_Mean, m_Deviation);
+			get => new NormalGenerator(m_Mean, m_Deviation);
 		}
 
 		/// <summary>
-		/// Returns a shared <see cref="MarsagliaGenerator"/>.
+		/// Returns a shared <see cref="NormalGenerator"/>.
 		/// </summary>
 		[NotNull]
-		public MarsagliaGenerator sharedMarsagliaGenerator
+		public NormalGenerator sharedNormalGenerator
 		{
 			get
 			{
 				if (m_sharedGenerator == null)
 				{
-					m_sharedGenerator = marsagliaGenerator;
+					m_sharedGenerator = normalGenerator;
 				}
 
 				return m_sharedGenerator;

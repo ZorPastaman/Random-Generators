@@ -7,34 +7,36 @@ using UnityEngine;
 namespace Zor.RandomGenerators.ContinuousDistributions
 {
 	/// <summary>
-	/// Provides <see cref="BoxMullerGeneratorDependentSimple{T}"/>.
+	/// Provides <see cref="NormalGeneratorDependentSimple{T}"/>.
 	/// </summary>
 	[CreateAssetMenu(
-		menuName = CreateAssetMenuConstants.BoxMullerDistributionFolder + "Box-Muller Generator Dependent Simple Provider",
-		fileName = "Box-Muller Generator Dependent Simple Provider",
+		menuName = CreateAssetMenuConstants.NormalDistributionFolder + "Normal Generator Depended Simple Provider",
+		fileName = "Normal Generator Depended Simple Provider",
 		order = CreateAssetMenuConstants.DistributionOrder
 	)]
-	public sealed class BoxMullerGeneratorDependentSimpleProvider : ContinuousGeneratorProvider
+	public sealed class NormalGeneratorDependentSimpleProvider : ContinuousGeneratorProvider
 	{
+#pragma warning disable CS0649
 		[SerializeField] private ContinuousGeneratorProviderReference m_DependedGeneratorProvider;
+#pragma warning restore CS0649
 
-		private BoxMullerGeneratorDependentSimple<IContinuousGenerator> m_sharedGenerator;
+		private NormalGeneratorDependentSimple<IContinuousGenerator> m_sharedGenerator;
 
 		/// <summary>
 		/// Creates a new
-		/// <see cref="BoxMullerGeneratorDependentSimple{T}"/>
+		/// <see cref="NormalGeneratorDependentSimple{T}"/>
 		/// and returns it as <see cref="IContinuousGenerator"/>.
 		/// </summary>
 		public override IContinuousGenerator generator
 		{
 			[Pure]
-			get => new BoxMullerGeneratorDependentSimple<IContinuousGenerator>(
+			get => new NormalGeneratorDependentSimple<IContinuousGenerator>(
 				m_DependedGeneratorProvider.generator);
 		}
 
 		/// <summary>
 		/// Returns a shared
-		/// <see cref="BoxMullerGeneratorDependentSimple{T}"/>
+		/// <see cref="NormalGeneratorDependentSimple{T}"/>
 		/// as <see cref="IContinuousGenerator"/>.
 		/// </summary>
 		public override IContinuousGenerator sharedGenerator
@@ -43,7 +45,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 			{
 				if (m_sharedGenerator == null)
 				{
-					m_sharedGenerator = boxMullerGenerator;
+					m_sharedGenerator = normalGenerator;
 				}
 
 				return m_sharedGenerator;
@@ -52,29 +54,29 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 
 		/// <summary>
 		/// Creates a new
-		/// <see cref="BoxMullerGeneratorDependentSimple{T}"/>
+		/// <see cref="NormalGeneratorDependentSimple{T}"/>
 		/// and returns it.
 		/// </summary>
 		[NotNull]
-		public BoxMullerGeneratorDependentSimple<IContinuousGenerator> boxMullerGenerator
+		public NormalGeneratorDependentSimple<IContinuousGenerator> normalGenerator
 		{
 			[Pure]
-			get => new BoxMullerGeneratorDependentSimple<IContinuousGenerator>(
+			get => new NormalGeneratorDependentSimple<IContinuousGenerator>(
 				m_DependedGeneratorProvider.generator);
 		}
 
 		/// <summary>
 		/// Returns a shared
-		/// <see cref="BoxMullerGeneratorDependentSimple{T}"/>.
+		/// <see cref="NormalGeneratorDependentSimple{T}"/>.
 		/// </summary>
 		[NotNull]
-		public BoxMullerGeneratorDependentSimple<IContinuousGenerator> sharedBoxMullerGenerator
+		public NormalGeneratorDependentSimple<IContinuousGenerator> sharedNormalGenerator
 		{
 			get
 			{
 				if (m_sharedGenerator == null)
 				{
-					m_sharedGenerator = boxMullerGenerator;
+					m_sharedGenerator = normalGenerator;
 				}
 
 				return m_sharedGenerator;

@@ -17,7 +17,7 @@ More here: https://docs.unity3d.com/Manual/upm-dependencies.html.
 1. Create a provider from **Assets/Create/Random Generator Providers/** or choose one of
 pre-made providers among 
 **DefaultBoolUniformGeneratorProvider**, **DefaultIntUniformGeneratorProvider**,
-**DefaultFloatUniformGeneratorProvider**, **DefaultMarsagliaGeneratorProvider** and
+**DefaultFloatUniformGeneratorProvider**, **DefaultNormalGeneratorProvider** and
 **DefaultBatesGeneratorProvider**.
 2. Add **ContinuousGeneratorProviderReference** for continuous distributions or
 **DiscreteGeneratorProviderReference** for discrete distributions as a serialize field
@@ -57,19 +57,17 @@ They wrap generators and provide unique and shared instances of them.
 
 #### List of continuous generator algorithms
 
-- [Bates](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/NormalDistributions/BatesDistribution) -
+- [Bates](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/BatesDistribution) -
 [Wikipedia](https://en.wikipedia.org/wiki/Bates_distribution);
-- [Box-Muller](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/NormalDistributions/BoxMullerDistribution) -
-[Wikipedia](https://en.wikipedia.org/wiki/Box%E2%80%93Muller_transform);
-- [Irwin-Hall](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/NormalDistributions/IrwinHallDistribution) -
+- [Irwin-Hall](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/IrwinHallDistribution) -
 [Wikipedia](https://en.wikipedia.org/wiki/Irwin%E2%80%93Hall_distribution);
-- [Marsaglia](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/NormalDistributions/MarsagliaDistribution) -
-[Wikipedia](https://en.wikipedia.org/wiki/Marsaglia_polar_method);
-- [Rejection](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/IndependentDistributions/AcceptanceRejectionDistribution) -
+- [Normal](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/NormalDistribution) -
+[Wikipedia](https://en.wikipedia.org/wiki/Normal_distribution);
+- [Rejection](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/RejectionDistribution) -
 [Wikipedia](https://en.wikipedia.org/wiki/Rejection_sampling);
-- [C# Random Generator Wrapper](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/UniformDistributions/SharpDistribution) -
+- [C# Random Generator Wrapper](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/SharpDistribution) -
 [Microsoft Docs](https://docs.microsoft.com/en-us/dotnet/api/system.random?view=netframework-4.8);
-- [Unity Random Generator Wrapper](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/UniformDistributions/UnityDistribution) -
+- [Unity Random Generator Wrapper](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/UnityDistribution) -
 [Unity Docs](https://docs.unity3d.com/ScriptReference/Random.html).
 
 #### List of discrete generator algorithms

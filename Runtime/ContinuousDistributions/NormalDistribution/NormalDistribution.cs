@@ -9,16 +9,15 @@ using Random = UnityEngine.Random;
 namespace Zor.RandomGenerators.ContinuousDistributions
 {
 	/// <summary>
-	/// Collection of methods that generate a random value using Box-Muller distribution algorithms.
+	/// Collection of methods that generate a random value using Normal distribution algorithms.
 	/// </summary>
-	public static class BoxMullerDistribution
+	/// <remarks>
+	/// Marsaglia polar method is used here.
+	/// </remarks>
+	public static class NormalDistribution
 	{
 		public const float DefaultMean = 0f;
 		public const float DefaultDeviation = 1f;
-
-		private const float TwoPI = Mathf.PI * 2f;
-
-		private static readonly float s_epsilon = Mathf.Epsilon;
 
 		/// <summary>
 		/// Generates a random value using <see cref="Random.value"/> as an iid source.
@@ -29,15 +28,21 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		[Pure]
 		public static (float, float) Generate()
 		{
-			float u1;
+			float u, v, s;
+
 			do
 			{
-				u1 = Random.value;
-			} while (u1 <= s_epsilon);
+				u = Random.value * 2f - 1f;
+				v = Random.value * 2f - 1f;
+				s = u * u + v * v;
+			} while (s >= 1f | s <= 0f);
 
-			float u2 = Random.value;
+			s = Mathf.Sqrt(-2f * Mathf.Log(s) / s);
 
-			return Compute(u1, u2);
+			float z0 = u * s;
+			float z1 = v * s;
+
+			return (z0, z1);
 		}
 
 		/// <summary>
@@ -63,15 +68,21 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		[Pure]
 		public static (float, float) Generate([NotNull] Func<float> iidFunc)
 		{
-			float u1;
+			float u, v, s;
+
 			do
 			{
-				u1 = iidFunc();
-			} while (u1 <= s_epsilon);
+				u = iidFunc() * 2f - 1f;
+				v = iidFunc() * 2f - 1f;
+				s = u * u + v * v;
+			} while (s >= 1f | s <= 0f);
 
-			float u2 = iidFunc();
+			s = Mathf.Sqrt(-2f * Mathf.Log(s) / s);
 
-			return Compute(u1, u2);
+			float z0 = u * s;
+			float z1 = v * s;
+
+			return (z0, z1);
 		}
 
 		/// <summary>
@@ -100,15 +111,21 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		[Pure]
 		public static (float, float) Generate<T>([NotNull] T iidGenerator) where T : IContinuousGenerator
 		{
-			float u1;
+			float u, v, s;
+
 			do
 			{
-				u1 = iidGenerator.Generate();
-			} while (u1 <= s_epsilon);
+				u = iidGenerator.Generate() * 2f - 1f;
+				v = iidGenerator.Generate() * 2f - 1f;
+				s = u * u + v * v;
+			} while (s >= 1f | s <= 0f);
 
-			float u2 = iidGenerator.Generate();
+			s = Mathf.Sqrt(-2f * Mathf.Log(s) / s);
 
-			return Compute(u1, u2);
+			float z0 = u * s;
+			float z1 = v * s;
+
+			return (z0, z1);
 		}
 
 		/// <summary>
@@ -126,27 +143,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		{
 			(float z0, float z1) = Generate(iidGenerator);
 			return Modify(z0, z1, mean, deviation);
-		}
-
-		/// <summary>
-		/// Computes generated values using <paramref name="u1"/> and <paramref name="u2"/> as iids.
-		/// </summary>
-		/// <param name="u1">Iid in range [0, 1].</param>
-		/// <param name="u2">Iid in range [0, 1].</param>
-		/// <returns>
-		/// Two generated values.
-		/// </returns>
-		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-		private static (float, float) Compute(float u1, float u2)
-		{
-			float sqrt = Mathf.Sqrt(-2f * Mathf.Log(u1));
-			float cos = Mathf.Cos(TwoPI * u2);
-			float sin = Mathf.Sign(cos) * Mathf.Sqrt(1f - cos * cos);
-
-			float z0 = sqrt * cos;
-			float z1 = sqrt * sin;
-
-			return (z0, z1);
 		}
 
 		/// <summary>

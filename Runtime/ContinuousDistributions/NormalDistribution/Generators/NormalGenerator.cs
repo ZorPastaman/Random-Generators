@@ -8,30 +8,32 @@ using UnityEngine;
 namespace Zor.RandomGenerators.ContinuousDistributions
 {
 	/// <summary>
-	/// Marsaglia Random Generator using <see cref="MarsagliaDistribution.Generate(float,float)"/>.
+	/// Normal Random Generator using <see cref="NormalDistribution.Generate(float,float)"/>.
 	/// </summary>
 	[Serializable]
-	public sealed class MarsagliaGenerator : IMarsagliaGenerator
+	public sealed class NormalGenerator : INormalGenerator
 	{
 #pragma warning disable CS0649
-		[SerializeField] private float m_Mean = MarsagliaDistribution.DefaultMean;
-		[SerializeField] private float m_Deviation = MarsagliaDistribution.DefaultDeviation;
+		[SerializeField] private float m_Mean = NormalDistribution.DefaultMean;
+		[SerializeField] private float m_Deviation = NormalDistribution.DefaultDeviation;
 #pragma warning restore CS0649
 
 		private float m_spared;
 		private bool m_hasSpared;
 
 		/// <summary>
-		/// Creates a <see cref="MarsagliaGenerator"/> with the default parameters.
+		/// Creates a <see cref="NormalGenerator"/> with the default parameters.
 		/// </summary>
-		public MarsagliaGenerator()
+		public NormalGenerator()
 		{
 		}
 
 		/// <summary>
-		/// Creates a <see cref="MarsagliaGenerator"/> with the specified parameters.
+		/// Creates a <see cref="NormalGenerator"/> with the specified parameters.
 		/// </summary>
-		public MarsagliaGenerator(float mean, float deviation)
+		/// <param name="mean"></param>
+		/// <param name="deviation"></param>
+		public NormalGenerator(float mean, float deviation)
 		{
 			m_Mean = mean;
 			m_Deviation = deviation;
@@ -40,7 +42,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// <summary>
 		/// Copy constructor.
 		/// </summary>
-		public MarsagliaGenerator([NotNull] MarsagliaGenerator other)
+		public NormalGenerator([NotNull] NormalGenerator other)
 		{
 			m_Mean = other.m_Mean;
 			m_Deviation = other.m_Deviation;
@@ -81,7 +83,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 			}
 
 			float answer;
-			(answer, m_spared) = MarsagliaDistribution.Generate();
+			(answer, m_spared) = NormalDistribution.Generate();
 			m_hasSpared = true;
 
 			return answer;

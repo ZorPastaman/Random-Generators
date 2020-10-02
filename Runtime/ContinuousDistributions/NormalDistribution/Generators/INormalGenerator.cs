@@ -3,9 +3,9 @@
 namespace Zor.RandomGenerators.ContinuousDistributions
 {
 	/// <summary>
-	/// A <see cref="IContinuousGenerator"/> using functions from <see cref="BoxMullerDistribution"/>.
+	/// A <see cref="IContinuousGenerator"/> using functions from <see cref="NormalDistribution"/>.
 	/// </summary>
-	public interface IBoxMullerGenerator : IContinuousGenerator
+	public interface INormalGenerator : IContinuousGenerator
 	{
 		float mean { get; }
 		float deviation { get; }

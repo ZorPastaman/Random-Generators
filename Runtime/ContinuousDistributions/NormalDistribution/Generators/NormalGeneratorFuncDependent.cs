@@ -7,9 +7,9 @@ using JetBrains.Annotations;
 namespace Zor.RandomGenerators.ContinuousDistributions
 {
 	/// <summary>
-	/// Marsaglia Random Generator using <see cref="MarsagliaDistribution.Generate(Func{float},float,float)"/>.
+	/// Normal Random Generator using <see cref="NormalDistribution.Generate(Func{float},float,float)"/>.
 	/// </summary>
-	public sealed class MarsagliaGeneratorFuncDependent : IMarsagliaGenerator
+	public sealed class NormalGeneratorFuncDependent : INormalGenerator
 	{
 		[NotNull] private Func<float> m_iidFunc;
 		private float m_mean;
@@ -19,14 +19,14 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		private bool m_hasSpared;
 
 		/// <summary>
-		/// Creates a <see cref="MarsagliaGeneratorFuncDependent"/> with the specified parameters.
+		/// Creates a <see cref="NormalGeneratorFuncDependent"/> with the specified parameters.
 		/// </summary>
 		/// <param name="iidFunc">
 		/// Function that returns independent and identically distributed random variable in range [0, 1].
 		/// </param>
 		/// <param name="mean"></param>
 		/// <param name="deviation"></param>
-		public MarsagliaGeneratorFuncDependent([NotNull] Func<float> iidFunc, float mean, float deviation)
+		public NormalGeneratorFuncDependent([NotNull] Func<float> iidFunc, float mean, float deviation)
 		{
 			m_iidFunc = iidFunc;
 			m_mean = mean;
@@ -36,7 +36,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// <summary>
 		/// Copy constructor.
 		/// </summary>
-		public MarsagliaGeneratorFuncDependent([NotNull] MarsagliaGeneratorFuncDependent other)
+		public NormalGeneratorFuncDependent([NotNull] NormalGeneratorFuncDependent other)
 		{
 			m_iidFunc = other.m_iidFunc;
 			m_mean = other.m_mean;
@@ -94,7 +94,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 			}
 
 			float answer;
-			(answer, m_spared) = MarsagliaDistribution.Generate(m_iidFunc, m_mean, m_deviation);
+			(answer, m_spared) = NormalDistribution.Generate(m_iidFunc, m_mean, m_deviation);
 			m_hasSpared = true;
 
 			return answer;

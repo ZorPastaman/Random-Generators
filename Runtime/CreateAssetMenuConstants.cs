@@ -10,9 +10,8 @@ namespace Zor.RandomGenerators
 			RandomGeneratorProvidersFolder + "Continuous Distributions/";
 
 		public const string BatesDistributionFolder = ContinuousDistributionsFolder + "Bates Distribution/";
-		public const string BoxMullerDistributionFolder = ContinuousDistributionsFolder + "Box-Muller Distibution/";
 		public const string IrwinHallDistributionFolder = ContinuousDistributionsFolder + "Irwin-Hall Distribution/";
-		public const string MarsagliaDistributionFolder = ContinuousDistributionsFolder + "Marsaglia Distribution/";
+		public const string NormalDistributionFolder = ContinuousDistributionsFolder + "Normal Distribution/";
 		public const string RejectionDistributionFolder = ContinuousDistributionsFolder + "Rejection Distribution/";
 		public const string SharpContinuousDistributionFolder = ContinuousDistributionsFolder + "Sharp Distribution/";
 		public const string UnityContinuousDistributionFolder = ContinuousDistributionsFolder + "Unity Distribution/";

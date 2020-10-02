@@ -85,7 +85,7 @@ They wrap generators and provide unique and shared instances of them.
 - [Unity Random Generator Wrapper](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/DiscreteDistributions/UnityDistribution) -
 [Unity Docs](https://docs.unity3d.com/ScriptReference/Random.html);
 - [Weighted](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/DiscreteDistributions/WeightedDistribution) -
-[Wikipedia](https://en.wikipedia.org/wiki/Weight_function).
+distribution where every value has a weight and its probability is a ratio of its weight to a sum of all weights.
 
 ### Modificators
 

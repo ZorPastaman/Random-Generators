@@ -78,6 +78,8 @@ They wrap generators and provide unique and shared instances of them.
 [Wikipedia](https://en.wikipedia.org/wiki/Bernoulli_distribution);
 - [Binomial](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/DiscreteDistributions/BinomialDistribution) -
 [Wikipedia](https://en.wikipedia.org/wiki/Binomial_distribution);
+- [Negative Binomial](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/DiscreteDistributions/NegativeBinomialDistribution) -
+[Wikipedia](https://en.wikipedia.org/wiki/Negative_binomial_distribution)
 - [Poisson](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/DiscreteDistributions/PoissonDistribution) -
 [Wikipedia](https://en.wikipedia.org/wiki/Poisson_distribution);
 - [C# Random Generator Wrapper](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/DiscreteDistributions/SharpDistribution) -

@@ -12,6 +12,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	/// <summary>
 	/// Collection of methods that generate a random value using Poisson distribution algorithms.
 	/// </summary>
+	/// <remarks>
+	/// Algorithm from Luc Devroye (1986) "Non-Uniform Random Variate Generation" Chapter X.3 is used here.
+	/// </remarks>
 	public static class PoissonDistribution
 	{
 		public const float DefaultLambda = 1f;

@@ -1,6 +1,7 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
 using System;
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using Zor.RandomGenerators.ContinuousDistributions;
 using Random = UnityEngine.Random;
@@ -10,6 +11,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	/// <summary>
 	/// Collection of methods that generate a random value using Binomial distribution algorithms.
 	/// </summary>
+	/// <remarks>
+	/// Algorithm from Luc Devroye (1986) "Non-Uniform Random Variate Generation" Chapter X.4 is used here.
+	/// </remarks>
 	public static unsafe class BinomialDistribution
 	{
 		public const int DefaultStartPoint = 0;
@@ -25,20 +29,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[Pure]
 		public static int Generate(float probability, byte upperBound)
 		{
-			int x = 0;
-
-			if (probability <= 0f)
-			{
-				return x;
-			}
-
-			for (; upperBound > 0; --upperBound)
-			{
-				bool result = Random.value <= probability;
-				x += *(byte*)&result;
-			}
-
-			return x;
+			return Pop(Random.value, probability, upperBound);
 		}
 
 		/// <summary>
@@ -52,7 +43,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[Pure]
 		public static int Generate(int startPoint, float probability, byte upperBound)
 		{
-			return Generate(probability, upperBound) + startPoint;
+			return Pop(Random.value, probability, upperBound) + startPoint;
 		}
 
 		/// <summary>
@@ -65,20 +56,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[Pure]
 		public static int Generate([NotNull] Func<float> iidFunc, float probability, byte upperBound)
 		{
-			int x = 0;
-
-			if (probability <= 0f)
-			{
-				return x;
-			}
-
-			for (; upperBound > 0; --upperBound)
-			{
-				bool result = iidFunc() <= probability;
-				x += *(byte*)&result;
-			}
-
-			return x;
+			return Pop(iidFunc(), probability, upperBound);
 		}
 
 		/// <summary>
@@ -93,7 +71,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[Pure]
 		public static int Generate([NotNull] Func<float> iidFunc, int startPoint, float probability, byte upperBound)
 		{
-			return Generate(iidFunc, probability, upperBound) + startPoint;
+			return Pop(iidFunc(), probability, upperBound) + startPoint;
 		}
 
 		/// <summary>
@@ -107,20 +85,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		public static int Generate<T>([NotNull] T iidGenerator, float probability, byte upperBound)
 			where T : IContinuousGenerator
 		{
-			int x = 0;
-
-			if (probability <= 0f)
-			{
-				return x;
-			}
-
-			for (; upperBound > 0; --upperBound)
-			{
-				bool result = iidGenerator.Generate() <= probability;
-				x += *(byte*)&result;
-			}
-
-			return x;
+			return Pop(iidGenerator.Generate(), probability, upperBound);
 		}
 
 		/// <summary>
@@ -136,7 +101,39 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		public static int Generate<T>([NotNull] T iidGenerator, int startPoint, float probability, byte upperBound)
 			where T : IContinuousGenerator
 		{
-			return Generate(iidGenerator, probability, upperBound) + startPoint;
+			return Pop(iidGenerator.Generate(), probability, upperBound) + startPoint;
+		}
+
+		/// <summary>
+		/// Pops a value that corresponds to <paramref name="iid"/>.
+		/// </summary>
+		/// <param name="iid">Iid in range [0, 1].</param>
+		/// <param name="probability"></param>
+		/// <param name="upperBound"></param>
+		/// <returns>Popped value.</returns>
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+		private static int Pop(float iid, float probability, byte upperBound)
+		{
+			bool probabilityChanged = false;
+
+			if (probability > 0.5f)
+			{
+				probability = 1f - probability;
+				probabilityChanged = true;
+			}
+
+			int x = 0;
+			float q = 1f - probability;
+
+			for (byte i = 0; i < upperBound; ++i)
+			{
+				bool condition = iid > q;
+				int b = *(byte*)&condition;
+				iid = (iid - q * b) / (probability * b + q * (1 - b));
+				x += b;
+			}
+
+			return probabilityChanged ? upperBound - x : x;
 		}
 	}
 }

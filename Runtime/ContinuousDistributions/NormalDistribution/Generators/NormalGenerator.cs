@@ -83,7 +83,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 			}
 
 			float answer;
-			(answer, m_spared) = NormalDistribution.Generate();
+			(answer, m_spared) = NormalDistribution.Generate(m_Mean, m_Deviation);
 			m_hasSpared = true;
 
 			return answer;

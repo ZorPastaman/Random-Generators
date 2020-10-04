@@ -22,6 +22,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Box-Muller distribution. If you use it, start to use Normal distribution.
 
+### Fixed
+
+- NormalGenerator didn't use its parameters.
+
 ## [1.0.1] - 2020-09-23
 
 ### Changed

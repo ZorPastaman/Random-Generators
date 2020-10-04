@@ -13,8 +13,10 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 	[Serializable]
 	public sealed class BatesGeneratorSimple : IBatesGenerator
 	{
+#pragma warning disable CS0649
 		[SerializeField, Tooltip("How many independent and identically distributed random variables are generated.")]
 		private byte m_Iids = BatesDistribution.DefaultIids;
+#pragma warning restore CS0649
 
 		/// <summary>
 		/// Creates a <see cref="BatesGeneratorSimple"/> with the default iids.

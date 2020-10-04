@@ -19,7 +19,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	public sealed class BernoulliGeneratorDependentProvider : DiscreteGeneratorProvider<bool>
 	{
 #pragma warning disable CS0649
-		[SerializeField, Tooltip("Independent and identically distributed random variable in range [0, 1] source.")]
+		[SerializeField, Tooltip("Random generator that returns an independent and identically distributed random value in range [0, 1].")]
 		private ContinuousGeneratorProviderReference m_DependedGeneratorProvider;
 		[SerializeField, Range(0f, 1f)] private float m_Probability = BernoulliDistribution.DefaultProbability;
 #pragma warning restore CS0649
@@ -82,7 +82,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		}
 
 		/// <summary>
-		/// Independent and identically distributed random variable in range [0, 1] source.
+		/// Random generator that returns an independent and identically distributed random value in range [0, 1].
 		/// </summary>
 		public ContinuousGeneratorProviderReference dependedGeneratorProvider
 		{

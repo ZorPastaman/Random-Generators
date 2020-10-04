@@ -19,10 +19,10 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// Creates an <see cref="IrwinHallGeneratorDependent{T}"/> with the specified parameters.
 		/// </summary>
 		/// <param name="dependedGenerator">
-		/// Random generator that returns independent and identically distributed random variable in range [0, 1].
+		/// Random generator that returns an independent and identically distributed random value in range [0, 1].
 		/// </param>
 		/// <param name="startPoint"></param>
-		/// <param name="iids">How many independent and identically distributed random variables are generated.</param>
+		/// <param name="iids">How many independent and identically distributed random values are generated.</param>
 		public IrwinHallGeneratorDependent([NotNull] T dependedGenerator, float startPoint, byte iids)
 		{
 			m_dependedGenerator = dependedGenerator;
@@ -41,7 +41,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		}
 
 		/// <summary>
-		/// Random generator that returns independent and identically distributed random variable in range [0, 1].
+		/// Random generator that returns an independent and identically distributed random value in range [0, 1].
 		/// </summary>
 		[NotNull]
 		public T dependedRandomGenerator

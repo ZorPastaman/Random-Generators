@@ -19,10 +19,10 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// Creates an <see cref="IrwinHallGeneratorFuncDependent"/> with the specified parameters.
 		/// </summary>
 		/// <param name="iidFunc">
-		/// Function that returns independent and identically distributed random variable in range [0, 1].
+		/// Function that returns an independent and identically distributed random value in range [0, 1].
 		/// </param>
 		/// <param name="startPoint"></param>
-		/// <param name="iids">How many independent and identically distributed random variables are generated.</param>
+		/// <param name="iids">How many independent and identically distributed random values are generated.</param>
 		public IrwinHallGeneratorFuncDependent([NotNull] Func<float> iidFunc, float startPoint, byte iids)
 		{
 			m_iidFunc = iidFunc;
@@ -42,7 +42,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		}
 
 		/// <summary>
-		/// Function that returns independent and identically distributed random variable in range [0, 1].
+		/// Function that returns an independent and identically distributed random value in range [0, 1].
 		/// </summary>
 		[NotNull]
 		public Func<float> iidFunc

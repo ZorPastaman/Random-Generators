@@ -15,7 +15,8 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	public abstract class WeightedGeneratorDependentProvider<T> : DiscreteGeneratorProvider<T>
 	{
 #pragma warning disable CS0649
-		[SerializeField] private ContinuousGeneratorProviderReference m_DependedGeneratorProvider;
+		[SerializeField, Tooltip("Random generator that returns an independent and identically distributed random value in range [0, 1].")]
+		private ContinuousGeneratorProviderReference m_DependedGeneratorProvider;
 		[SerializeField, Tooltip("Counts of Values and Weights must be the same.")]
 		private T[] m_Values;
 		[SerializeField, Tooltip("Counts of Values and Weights must be the same.")]
@@ -83,6 +84,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 			}
 		}
 
+		/// <summary>
+		/// Random generator that returns an independent and identically distributed random value in range [0, 1].
+		/// </summary>
 		public ContinuousGeneratorProviderReference dependedGeneratorProvider
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]

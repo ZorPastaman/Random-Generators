@@ -46,13 +46,11 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <summary>
 		/// Generates a random value using <paramref name="iidFunc"/> as an iid source.
 		/// </summary>
-		/// <param name="iidFunc">Iid source.</param>
+		/// <param name="iidFunc">
+		/// Function that returns an independent and identically distributed random value in range [0, 1].
+		/// </param>
 		/// <param name="lambda"></param>
 		/// <returns>Generated value in range [0, infinity].</returns>
-		/// <remarks>
-		/// <paramref name="iidFunc"/> must return independent and identically distributed random variable
-		/// in range [0, 1].
-		/// </remarks>
 		[Pure]
 		public static int Generate([NotNull] Func<float> iidFunc, float lambda)
 		{
@@ -62,14 +60,12 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <summary>
 		/// Generates a random value using <paramref name="iidFunc"/> as an iid source.
 		/// </summary>
-		/// <param name="iidFunc">Iid source.</param>
+		/// <param name="iidFunc">
+		/// Function that returns an independent and identically distributed random value in range [0, 1].
+		/// </param>
 		/// <param name="lambda"></param>
 		/// <param name="startPoint"></param>
 		/// <returns>Generated value in range [<paramref name="startPoint"/>, infinity].</returns>
-		/// <remarks>
-		/// <paramref name="iidFunc"/> must return independent and identically distributed random variable
-		/// in range [0, 1].
-		/// </remarks>
 		[Pure]
 		public static int Generate([NotNull] Func<float> iidFunc, float lambda, int startPoint)
 		{
@@ -79,14 +75,12 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <summary>
 		/// Generates a random value using <paramref name="iidGenerator"/> as an iid source.
 		/// </summary>
-		/// <param name="iidGenerator">Iid source.</param>
+		/// <param name="iidGenerator">
+		/// Random generator that returns an independent and identically distributed random value in range [0, 1].
+		/// </param>
 		/// <param name="lambda"></param>
 		/// <typeparam name="T"></typeparam>
 		/// <returns>Generated value in range [0, infinity].</returns>
-		/// <remarks>
-		/// <paramref name="iidGenerator"/> must return independent and identically distributed random variable
-		/// in range [0, 1].
-		/// </remarks>
 		[Pure]
 		public static int Generate<T>([NotNull] T iidGenerator, float lambda) where T : IContinuousGenerator
 		{
@@ -96,15 +90,13 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <summary>
 		/// Generates a random value using <paramref name="iidGenerator"/> as an iid source.
 		/// </summary>
-		/// <param name="iidGenerator">Iid source.</param>
+		/// <param name="iidGenerator">
+		/// Random generator that returns an independent and identically distributed random value in range [0, 1].
+		/// </param>
 		/// <param name="lambda"></param>
 		/// <param name="startPoint"></param>
 		/// <typeparam name="T"></typeparam>
 		/// <returns>Generated value in range [<paramref name="startPoint"/>, infinity].</returns>
-		/// <remarks>
-		/// <paramref name="iidGenerator"/> must return independent and identically distributed random variable
-		/// in range [0, 1].
-		/// </remarks>
 		[Pure]
 		public static int Generate<T>([NotNull] T iidGenerator, float lambda, int startPoint)
 			where T : IContinuousGenerator

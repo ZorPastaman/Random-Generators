@@ -10,7 +10,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		float startPoint { get; }
 
 		/// <summary>
-		/// How many independent and identically distributed random variables are generated.
+		/// How many independent and identically distributed random values are generated.
 		/// </summary>
 		byte iids { get; }
 	}

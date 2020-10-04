@@ -20,7 +20,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <summary>
 		/// Creates a <see cref="NegativeBinomialGeneratorFuncDependent"/> with the specified parameters.
 		/// </summary>
-		/// <param name="iidFunc"></param>
+		/// <param name="iidFunc">
+		/// Function that returns an independent and identically distributed random value in range [0, 1].
+		/// </param>
 		/// <param name="startPoint"></param>
 		/// <param name="probability">True threshold in range [0, 1].</param>
 		/// <param name="failures"></param>
@@ -45,6 +47,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 			m_failures = other.m_failures;
 		}
 
+		/// <summary>
+		/// Function that returns an independent and identically distributed random value in range [0, 1].
+		/// </summary>
 		[NotNull]
 		public Func<float> iidFunc
 		{

@@ -22,7 +22,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// with the specified parameters.
 		/// </summary>
 		/// <param name="iidFunc">
-		/// Function that returns independent and identically distributed random variable in range [0, 1].
+		/// Function that returns an independent and identically distributed random value in range [0, 1].
 		/// </param>
 		/// <param name="values"></param>
 		/// <param name="weights"></param>
@@ -40,6 +40,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 			m_sum = WeightedDistribution.ComputeSum(weights, m_count);
 		}
 
+		/// <summary>
+		/// Function that returns an independent and identically distributed random value in range [0, 1].
+		/// </summary>
 		[NotNull]
 		public Func<float> iidFunc
 		{

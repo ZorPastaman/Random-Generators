@@ -18,7 +18,8 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 	public sealed class NormalGeneratorDependentProvider : ContinuousGeneratorProvider
 	{
 #pragma warning disable CS0649
-		[SerializeField] private ContinuousGeneratorProviderReference m_DependedGeneratorProvider;
+		[SerializeField, Tooltip("Random generator that returns an independent and identically distributed random value in range [0, 1].")]
+		private ContinuousGeneratorProviderReference m_DependedGeneratorProvider;
 		[SerializeField] private float m_Mean = NormalDistribution.DefaultMean;
 		[SerializeField] private float m_Deviation = NormalDistribution.DefaultDeviation;
 #pragma warning restore CS0649
@@ -82,6 +83,9 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 			}
 		}
 
+		/// <summary>
+		/// Random generator that returns an independent and identically distributed random value in range [0, 1].
+		/// </summary>
 		public ContinuousGeneratorProviderReference dependedGeneratorProvider
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]

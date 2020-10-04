@@ -15,7 +15,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 	{
 #pragma warning disable CS0649
 		[SerializeField] private float m_StartPoint = IrwinHallDistribution.DefaultStartPoint;
-		[SerializeField, Tooltip("How many independent and identically distributed random variables are generated.")]
+		[SerializeField, Tooltip("How many independent and identically distributed random values are generated.")]
 		private byte m_Iids = IrwinHallDistribution.DefaultIids;
 #pragma warning restore CS0649
 
@@ -30,7 +30,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// Creates an <see cref="IrwinHallGenerator"/> with the specified parameters.
 		/// </summary>
 		/// <param name="startPoint"></param>
-		/// <param name="iids">How many independent and identically distributed random variables are generated.</param>
+		/// <param name="iids">How many independent and identically distributed random values are generated.</param>
 		public IrwinHallGenerator(float startPoint, byte iids)
 		{
 			m_StartPoint = startPoint;

@@ -18,7 +18,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <summary>
 		/// Creates a <see cref="BinomialGeneratorFuncDependentSimple"/> with the specified parameters.
 		/// </summary>
-		/// <param name="iidFunc">Iid source in range [0, 1].</param>
+		/// <param name="iidFunc">
+		/// Function that returns an independent and identically distributed random value in range [0, 1].
+		/// </param>
 		/// <param name="probability">True threshold in range [0, 1].</param>
 		/// <param name="upperBound"></param>
 		public BinomialGeneratorFuncDependentSimple([NotNull] Func<float> iidFunc, float probability, byte upperBound)
@@ -40,7 +42,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		}
 
 		/// <summary>
-		/// Iid source in range [0, 1].
+		/// Function that returns an independent and identically distributed random value in range [0, 1].
 		/// </summary>
 		[NotNull]
 		public Func<float> iidGenerator

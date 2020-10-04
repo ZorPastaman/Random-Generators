@@ -14,7 +14,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 	public sealed class BatesGeneratorSimple : IBatesGenerator
 	{
 #pragma warning disable CS0649
-		[SerializeField, Tooltip("How many independent and identically distributed random variables are generated.")]
+		[SerializeField, Tooltip("How many independent and identically distributed random values are generated.")]
 		private byte m_Iids = BatesDistribution.DefaultIids;
 #pragma warning restore CS0649
 
@@ -29,8 +29,11 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// Creates a <see cref="BatesGeneratorSimple"/> with the specified iids.
 		/// </summary>
 		/// <param name="iids">
-		/// How many independent and identically distributed random variables are generated.
+		/// How many independent and identically distributed random values are generated.
 		/// </param>
+		/// <remarks>
+		/// <paramref name="iids"/> must be greater than 0.
+		/// </remarks>
 		public BatesGeneratorSimple(byte iids)
 		{
 			m_Iids = iids;
@@ -57,6 +60,9 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		}
 
 		/// <inheritdoc/>
+		/// <remarks>
+		/// <paramref name="value"/> must be greater than 0.
+		/// </remarks>
 		public byte iids
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]

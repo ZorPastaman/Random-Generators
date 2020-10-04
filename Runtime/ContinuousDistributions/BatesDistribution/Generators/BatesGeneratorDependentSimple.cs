@@ -18,9 +18,12 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// Creates a <see cref="BatesGeneratorDependentSimple{T}"/> with the specified parameters.
 		/// </summary>
 		/// <param name="dependedGenerator">
-		/// Random generator that returns independent and identically distributed random variable in range [0, 1].
+		/// Random generator that returns an independent and identically distributed random value in range [0, 1].
 		/// </param>
-		/// <param name="iids">How many independent and identically distributed random variables are generated.</param>
+		/// <param name="iids">How many independent and identically distributed random values are generated.</param>
+		/// <remarks>
+		/// <paramref name="iids"/> must be greater than 0.
+		/// </remarks>
 		public BatesGeneratorDependentSimple([NotNull] T dependedGenerator, byte iids)
 		{
 			m_dependedGenerator = dependedGenerator;
@@ -37,7 +40,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		}
 
 		/// <summary>
-		/// Random generator that returns independent and identically distributed random variable in range [0, 1].
+		/// Random generator that returns an independent and identically distributed random value in range [0, 1].
 		/// </summary>
 		[NotNull]
 		public T dependedRandomGenerator
@@ -61,6 +64,9 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		}
 
 		/// <inheritdoc/>
+		/// <remarks>
+		/// <paramref name="value"/> must be greater than 0.
+		/// </remarks>
 		public byte iids
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]

@@ -11,7 +11,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		float deviation { get; }
 
 		/// <summary>
-		/// How many independent and identically distributed random variables are generated.
+		/// How many independent and identically distributed random values are generated.
 		/// </summary>
 		byte iids { get; }
 	}

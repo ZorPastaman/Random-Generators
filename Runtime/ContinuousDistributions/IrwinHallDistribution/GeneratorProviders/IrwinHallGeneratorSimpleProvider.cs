@@ -18,7 +18,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 	public sealed class IrwinHallGeneratorSimpleProvider : ContinuousGeneratorProvider
 	{
 #pragma warning disable CS0649
-		[SerializeField, Tooltip("How many independent and identically distributed random variables are generated.")]
+		[SerializeField, Tooltip("How many independent and identically distributed random values are generated.")]
 		private byte m_Iids = IrwinHallDistribution.DefaultIids;
 #pragma warning restore CS0649
 
@@ -78,7 +78,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		}
 
 		/// <summary>
-		/// How many independent and identically distributed random variables are generated.
+		/// How many independent and identically distributed random values are generated.
 		/// </summary>
 		public byte iids
 		{

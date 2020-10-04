@@ -20,7 +20,9 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// Creates a <see cref="NormalGeneratorDependentSimple{T}"/>
 		/// with the specified parameters.
 		/// </summary>
-		/// <param name="iidGenerator"></param>
+		/// <param name="iidGenerator">
+		/// Random generator that returns an independent and identically distributed random value in range [0, 1].
+		/// </param>
 		public NormalGeneratorDependentSimple([NotNull] T iidGenerator)
 		{
 			m_iidGenerator = iidGenerator;
@@ -35,7 +37,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		}
 
 		/// <summary>
-		/// Random generator that returns independent and identically distributed random variable in range [0, 1].
+		/// Random generator that returns an independent and identically distributed random value in range [0, 1].
 		/// </summary>
 		[NotNull]
 		public T dependedRandomGenerator

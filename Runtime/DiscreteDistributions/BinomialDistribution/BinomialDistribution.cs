@@ -49,7 +49,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <summary>
 		/// Generates a random value using <paramref name="iidFunc"/> as an iid source.
 		/// </summary>
-		/// <param name="iidFunc">Iid source in range [0, 1].</param>
+		/// <param name="iidFunc">
+		/// Function that returns an independent and identically distributed random value in range [0, 1].
+		/// </param>
 		/// <param name="probability">True threshold in range [0, 1].</param>
 		/// <param name="upperBound"></param>
 		/// <returns>Generated value in range [0, <paramref name="upperBound"/>].</returns>
@@ -62,7 +64,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <summary>
 		/// Generates a random value using <paramref name="iidFunc"/> as an iid source.
 		/// </summary>
-		/// <param name="iidFunc">Iid source in range [0, 1].</param>
+		/// <param name="iidFunc">
+		/// Function that returns an independent and identically distributed random value in range [0, 1].
+		/// </param>
 		/// <param name="startPoint"></param>
 		/// <param name="probability">True threshold in range [0, 1].</param>
 		/// <param name="upperBound"></param>
@@ -77,7 +81,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <summary>
 		/// Generates a random value using <paramref name="iidGenerator"/> as an iid source.
 		/// </summary>
-		/// <param name="iidGenerator">Iid source in range [0, 1].</param>
+		/// <param name="iidGenerator">
+		/// Random generator that returns an independent and identically distributed random value in range [0, 1].
+		/// </param>
 		/// <param name="probability">True threshold in range [0, 1].</param>
 		/// <param name="upperBound"></param>
 		/// <returns>Generated value in range [0, <paramref name="upperBound"/>].</returns>
@@ -91,7 +97,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <summary>
 		/// Generates a random value using <paramref name="iidGenerator"/> as an iid source.
 		/// </summary>
-		/// <param name="iidGenerator">Iid source in range [0, 1].</param>
+		/// <param name="iidGenerator">
+		/// Random generator that returns an independent and identically distributed random value in range [0, 1].
+		/// </param>
 		/// <param name="startPoint"></param>
 		/// <param name="probability">True threshold in range [0, 1].</param>
 		/// <param name="upperBound"></param>

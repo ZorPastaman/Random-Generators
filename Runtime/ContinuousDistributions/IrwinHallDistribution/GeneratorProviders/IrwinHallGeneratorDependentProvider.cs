@@ -18,9 +18,10 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 	public sealed class IrwinHallGeneratorDependentProvider : ContinuousGeneratorProvider
 	{
 #pragma warning disable CS0649
-		[SerializeField] private ContinuousGeneratorProviderReference m_DependedGeneratorProvider;
+		[SerializeField, Tooltip("Random generator that returns an independent and identically distributed random value in range [0, 1].")]
+		private ContinuousGeneratorProviderReference m_DependedGeneratorProvider;
 		[SerializeField] private float m_StartPoint = IrwinHallDistribution.DefaultStartPoint;
-		[SerializeField, Tooltip("How many independent and identically distributed random variables are generated.")]
+		[SerializeField, Tooltip("How many independent and identically distributed random values are generated.")]
 		private byte m_Iids = IrwinHallDistribution.DefaultIids;
 #pragma warning restore CS0649
 
@@ -82,6 +83,9 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 			}
 		}
 
+		/// <summary>
+		/// Random generator that returns an independent and identically distributed random value in range [0, 1].
+		/// </summary>
 		public ContinuousGeneratorProviderReference dependedGeneratorProvider
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
@@ -115,7 +119,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		}
 
 		/// <summary>
-		/// How many independent and identically distributed random variables are generated.
+		/// How many independent and identically distributed random values are generated.
 		/// </summary>
 		public byte iids
 		{

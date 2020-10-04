@@ -20,7 +20,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <summary>
 		/// Creates a <see cref="NegativeBinomialGeneratorDependentSimple{T}"/> with the specified parameters.
 		/// </summary>
-		/// <param name="iidGenerator"></param>
+		/// <param name="iidGenerator">
+		/// Random generator that returns an independent and identically distributed random value in range [0, 1].
+		/// </param>
 		/// <param name="probability">True threshold in range [0, 1].</param>
 		/// <param name="failures"></param>
 		public NegativeBinomialGeneratorDependentSimple([NotNull] T iidGenerator, float probability, byte failures)
@@ -41,6 +43,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 			m_failures = other.m_failures;
 		}
 
+		/// <summary>
+		/// Random generator that returns an independent and identically distributed random value in range [0, 1].
+		/// </summary>
 		[NotNull]
 		public T iidGenerator
 		{

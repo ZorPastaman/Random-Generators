@@ -19,7 +19,8 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	public sealed class PoissonGeneratorDependentSimpleProvider : DiscreteGeneratorProvider<int>
 	{
 #pragma warning disable CS0649
-		[SerializeField] private ContinuousGeneratorProviderReference m_DependentGeneratorProvider;
+		[SerializeField, Tooltip("Random generator that returns an independent and identically distributed random value in range [0, 1].")]
+		private ContinuousGeneratorProviderReference m_DependentGeneratorProvider;
 		[SerializeField] private float m_Lambda = PoissonDistribution.DefaultLambda;
 #pragma warning restore CS0649
 
@@ -81,6 +82,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 			}
 		}
 
+		/// <summary>
+		/// Random generator that returns an independent and identically distributed random value in range [0, 1].
+		/// </summary>
 		public ContinuousGeneratorProviderReference dependentGeneratorProvider
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]

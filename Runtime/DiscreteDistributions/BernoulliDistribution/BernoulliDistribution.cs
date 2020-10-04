@@ -29,13 +29,11 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <summary>
 		/// Generates a random value using <paramref name="iidFunc"/> as an iid source.
 		/// </summary>
-		/// <param name="iidFunc">Iid source.</param>
+		/// <param name="iidFunc">
+		/// Function that returns an independent and identically distributed random value in range [0, 1].
+		/// </param>
 		/// <param name="probability">True threshold in range [0, 1].</param>
 		/// <returns>Generated value</returns>
-		/// <remarks>
-		/// <paramref name="iidFunc"/> must return independent and identically distributed random variable
-		/// in range [0, 1].
-		/// </remarks>
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static bool Generate([NotNull] Func<float> iidFunc, float probability)
 		{
@@ -45,13 +43,11 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <summary>
 		/// Generates a random value using <paramref name="iidGenerator"/> as an iid source.
 		/// </summary>
-		/// <param name="iidGenerator">Iid source.</param>
+		/// <param name="iidGenerator">
+		/// Random generator that returns an independent and identically distributed random value in range [0, 1].
+		/// </param>
 		/// <param name="probability">True threshold in range [0, 1].</param>
 		/// <returns>Generated value</returns>
-		/// <remarks>
-		/// <paramref name="iidGenerator"/> must return independent and identically distributed random variable
-		/// in range [0, 1].
-		/// </remarks>
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static bool Generate<T>([NotNull] T iidGenerator, float probability) where T : IContinuousGenerator
 		{

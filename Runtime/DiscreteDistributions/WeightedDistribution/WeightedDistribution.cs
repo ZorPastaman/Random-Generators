@@ -18,6 +18,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// </summary>
 		/// <param name="weights">Weights array.</param>
 		/// <returns>Index of a gotten value from <paramref name="weights"/>.</returns>
+		/// <remarks>
+		/// Count of <paramref name="weights"/> must be greater than 0.
+		/// </remarks>
 		[Pure]
 		public static int Generate([NotNull] uint[] weights)
 		{
@@ -46,9 +49,14 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <summary>
 		/// Generates a random value using <paramref name="iidFunc"/> as an iid source.
 		/// </summary>
-		/// <param name="iidFunc">Iid in range [0, 1] source.</param>
+		/// <param name="iidFunc">
+		/// Function that returns an independent and identically distributed random value in range [0, 1].
+		/// </param>
 		/// <param name="weights">Weights array.</param>
 		/// <returns>Index of a gotten value from <paramref name="weights"/>.</returns>
+		/// <remarks>
+		/// Count of <paramref name="weights"/> must be greater than 0.
+		/// </remarks>
 		[Pure]
 		public static int Generate([NotNull] Func<float> iidFunc, [NotNull] uint[] weights)
 		{
@@ -61,7 +69,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <summary>
 		/// Generates a random value using <paramref name="iidFunc"/> as an iid source.
 		/// </summary>
-		/// <param name="iidFunc">Iid in range [0, 1] source.</param>
+		/// <param name="iidFunc">
+		/// Function that returns an independent and identically distributed random value in range [0, 1].
+		/// </param>
 		/// <param name="weights">Weights array.</param>
 		/// <param name="sum">Sum of weights in <paramref name="weights"/>.</param>
 		/// <param name="count">Count of <paramref name="weights"/>.</param>
@@ -78,9 +88,14 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <summary>
 		/// Generates a random value using <paramref name="iidGenerator"/> as an iid source.
 		/// </summary>
-		/// <param name="iidGenerator">Iid in range [0, 1] source.</param>
+		/// <param name="iidGenerator">
+		/// Random generator that returns an independent and identically distributed random value in range [0, 1].
+		/// </param>
 		/// <param name="weights">Weights array.</param>
 		/// <returns>Index of a gotten value from <paramref name="weights"/>.</returns>
+		/// <remarks>
+		/// Count of <paramref name="weights"/> must be greater than 0.
+		/// </remarks>
 		[Pure]
 		public static int Generate<T>([NotNull] T iidGenerator, [NotNull] uint[] weights)
 			where T : IContinuousGenerator
@@ -94,7 +109,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <summary>
 		/// Generates a random value using <paramref name="iidGenerator"/> as an iid source.
 		/// </summary>
-		/// <param name="iidGenerator">Iid in range [0, 1] source.</param>
+		/// <param name="iidGenerator">
+		/// Random generator that returns an independent and identically distributed random value in range [0, 1].
+		/// </param>
 		/// <param name="weights">Weights array.</param>
 		/// <param name="sum">Sum of weights in <paramref name="weights"/>.</param>
 		/// <param name="count">Count of <paramref name="weights"/>.</param>

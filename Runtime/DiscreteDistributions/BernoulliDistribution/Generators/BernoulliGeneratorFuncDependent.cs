@@ -17,12 +17,10 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <summary>
 		/// Creates a <see cref="BernoulliGeneratorDependent{T}"/> with the specified parameters.
 		/// </summary>
-		/// <param name="iidFunc">Iid source.</param>
+		/// <param name="iidFunc">
+		/// Function that returns an independent and identically distributed random value in range [0, 1].
+		/// </param>
 		/// <param name="probability">True threshold in range [0, 1].</param>
-		/// <remarks>
-		/// <paramref name="iidFunc"/> must return independent and identically distributed random variable
-		/// in range [0, 1].
-		/// </remarks>
 		public BernoulliGeneratorFuncDependent([NotNull] Func<float> iidFunc, float probability)
 		{
 			m_iidFunc = iidFunc;
@@ -40,7 +38,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		}
 
 		/// <summary>
-		/// Independent and identically distributed random variable in range [0, 1] source.
+		/// Function that returns an independent and identically distributed random value in range [0, 1].
 		/// </summary>
 		[NotNull]
 		public Func<float> iidGenerator

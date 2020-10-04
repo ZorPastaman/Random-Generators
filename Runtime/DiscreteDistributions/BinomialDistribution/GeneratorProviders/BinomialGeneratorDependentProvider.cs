@@ -19,7 +19,8 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	public sealed class BinomialGeneratorDependentProvider : DiscreteGeneratorProvider<int>
 	{
 #pragma warning disable CS0649
-		[SerializeField] private ContinuousGeneratorProviderReference m_DependedGeneratorProvider;
+		[SerializeField, Tooltip("Random generator that returns an independent and identically distributed random value in range [0, 1].")]
+		private ContinuousGeneratorProviderReference m_DependedGeneratorProvider;
 		[SerializeField] private int m_StartPoint = BinomialDistribution.DefaultStartPoint;
 		[SerializeField, Range(0f, 1f)] private float m_Probability = BinomialDistribution.DefaultProbability;
 		[SerializeField] private byte m_UpperBound = BinomialDistribution.DefaultUpperBound;
@@ -83,6 +84,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 			}
 		}
 
+		/// <summary>
+		/// Random generator that returns an independent and identically distributed random value in range [0, 1].
+		/// </summary>
 		public ContinuousGeneratorProviderReference dependedGeneratorProvider
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]

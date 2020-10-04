@@ -22,7 +22,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// Creates a <see cref="NormalGeneratorFuncDependent"/> with the specified parameters.
 		/// </summary>
 		/// <param name="iidFunc">
-		/// Function that returns independent and identically distributed random variable in range [0, 1].
+		/// Function that returns an independent and identically distributed random value in range [0, 1].
 		/// </param>
 		/// <param name="mean"></param>
 		/// <param name="deviation"></param>
@@ -44,7 +44,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		}
 
 		/// <summary>
-		/// Function that returns independent and identically distributed random variable in range [0, 1].
+		/// Function that returns an independent and identically distributed random value in range [0, 1].
 		/// </summary>
 		[NotNull]
 		public Func<float> iidFunc

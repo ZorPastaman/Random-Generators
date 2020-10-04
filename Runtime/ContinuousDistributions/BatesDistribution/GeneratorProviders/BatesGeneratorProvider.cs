@@ -20,7 +20,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 #pragma warning disable CS0649
 		[SerializeField] private float m_Mean = BatesDistribution.DefaultMean;
 		[SerializeField] private float m_Deviation = BatesDistribution.DefaultDeviation;
-		[SerializeField, Tooltip("How many independent and identically distributed random variables are generated.")]
+		[SerializeField, Tooltip("How many independent and identically distributed random values are generated.\nMust be greater than 0.")]
 		private byte m_Iids = BatesDistribution.DefaultIids;
 #pragma warning restore CS0649
 
@@ -111,7 +111,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		}
 
 		/// <summary>
-		/// How many independent and identically distributed random variables are generated.
+		/// How many independent and identically distributed random values are generated.
 		/// </summary>
 		public byte iids
 		{

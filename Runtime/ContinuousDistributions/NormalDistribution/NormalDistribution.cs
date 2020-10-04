@@ -61,7 +61,9 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// <summary>
 		/// Generates a random value using <paramref name="iidFunc"/> as an iid source.
 		/// </summary>
-		/// <param name="iidFunc">Iid in range [0, 1] source.</param>
+		/// <param name="iidFunc">
+		/// Function that returns an independent and identically distributed random value in range [0, 1].
+		/// </param>
 		/// <returns>
 		/// Two generated values.
 		/// </returns>
@@ -88,7 +90,9 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// <summary>
 		/// Generates a random value using <paramref name="iidFunc"/> as an iid source.
 		/// </summary>
-		/// <param name="iidFunc">Iid in range [0, 1] source.</param>
+		/// <param name="iidFunc">
+		/// Function that returns an independent and identically distributed random value in range [0, 1].
+		/// </param>
 		/// <param name="mean"></param>
 		/// <param name="deviation"></param>
 		/// <returns>
@@ -104,7 +108,9 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// <summary>
 		/// Generates a random value using <paramref name="iidGenerator"/> as an iid source.
 		/// </summary>
-		/// <param name="iidGenerator">Iid in range [0, 1] source.</param>
+		/// <param name="iidGenerator">
+		/// Random generator that returns an independent and identically distributed random value in range [0, 1].
+		/// </param>
 		/// <returns>
 		/// Two generated values.
 		/// </returns>
@@ -131,7 +137,9 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// <summary>
 		/// Generates a random value using <paramref name="iidGenerator"/> as an iid source.
 		/// </summary>
-		/// <param name="iidGenerator">Iid in range [0, 1] source.</param>
+		/// <param name="iidGenerator">
+		/// Random generator that returns an independent and identically distributed random value in range [0, 1].
+		/// </param>
 		/// <param name="mean"></param>
 		/// <param name="deviation"></param>
 		/// <returns>

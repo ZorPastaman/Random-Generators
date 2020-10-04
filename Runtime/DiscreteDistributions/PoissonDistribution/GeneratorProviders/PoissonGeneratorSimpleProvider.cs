@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using System;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -20,7 +21,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[SerializeField] private float m_Lambda = PoissonDistribution.DefaultLambda;
 #pragma warning restore CS0649
 
-		private PoissonGeneratorSimple m_sharedGenerator;
+		[NonSerialized] private PoissonGeneratorSimple m_sharedGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="PoissonGeneratorSimple"/> and returns it as <see cref="IDiscreteGenerator{Int32}"/>.

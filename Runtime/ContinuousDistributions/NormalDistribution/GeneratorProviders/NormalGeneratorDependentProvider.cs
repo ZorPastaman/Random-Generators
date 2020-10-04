@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using System;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -22,7 +23,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		[SerializeField] private float m_Deviation = NormalDistribution.DefaultDeviation;
 #pragma warning restore CS0649
 
-		private NormalGeneratorDependent<IContinuousGenerator> m_sharedGenerator;
+		[NonSerialized] private NormalGeneratorDependent<IContinuousGenerator> m_sharedGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="NormalGeneratorDependent{T}"/>

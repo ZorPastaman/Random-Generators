@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using System;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -21,7 +22,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[SerializeField] private int m_Max = UnityGeneratorDefaults.DefaultMax;
 #pragma warning restore CS0649
 
-		private UnityGenerator m_sharedGenerator;
+		[NonSerialized] private UnityGenerator m_sharedGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="UnityGenerator"/> and returns it as <see cref="IDiscreteGenerator{T}"/>.

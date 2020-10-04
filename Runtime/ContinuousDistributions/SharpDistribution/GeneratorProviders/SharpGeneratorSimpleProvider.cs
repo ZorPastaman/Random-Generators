@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using System;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -16,7 +17,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 	)]
 	public sealed class SharpGeneratorSimpleProvider : ContinuousGeneratorProvider
 	{
-		private SharpGenerator m_sharedGenerator;
+		[NonSerialized] private SharpGenerator m_sharedGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="SharpGenerator"/> and returns it as <see cref="IContinuousGenerator"/>.

@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using System;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -25,7 +26,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		private AnimationCurve m_ProbabilityCurve;
 #pragma warning restore CS0649
 
-		private RejectionCurveGeneratorDependentSimple<IContinuousGenerator>
+		[NonSerialized] private RejectionCurveGeneratorDependentSimple<IContinuousGenerator>
 			m_sharedGenerator;
 
 		/// <summary>

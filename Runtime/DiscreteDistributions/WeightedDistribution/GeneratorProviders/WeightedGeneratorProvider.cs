@@ -1,5 +1,6 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using System;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -19,7 +20,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		private uint[] m_Weights;
 #pragma warning restore CS0649
 
-		private WeightedGenerator<T> m_sharedGenerator;
+		[NonSerialized] private WeightedGenerator<T> m_sharedGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="WeightedGenerator{T}"/> and returns it

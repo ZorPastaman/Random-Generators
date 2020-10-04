@@ -136,7 +136,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		}
 
 		/// <summary>
-		/// How many independent and identically distributed random values are generated.
+		/// How many independent and identically distributed random values are generated. Must be greater than 0.
 		/// </summary>
 		public byte iids
 		{

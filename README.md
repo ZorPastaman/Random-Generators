@@ -59,6 +59,8 @@ They wrap generators and provide unique and shared instances of them.
 
 - [Bates](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/BatesDistribution) -
 [Wikipedia](https://en.wikipedia.org/wiki/Bates_distribution);
+- [Gamma](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/GammaDistribution) -
+[Wikipedia](https://en.wikipedia.org/wiki/Gamma_distribution);
 - [Irwin-Hall](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/IrwinHallDistribution) -
 [Wikipedia](https://en.wikipedia.org/wiki/Irwin%E2%80%93Hall_distribution);
 - [Normal](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/NormalDistribution) -
@@ -77,7 +79,7 @@ They wrap generators and provide unique and shared instances of them.
 - [Binomial](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/DiscreteDistributions/BinomialDistribution) -
 [Wikipedia](https://en.wikipedia.org/wiki/Binomial_distribution);
 - [Negative Binomial](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/DiscreteDistributions/NegativeBinomialDistribution) -
-[Wikipedia](https://en.wikipedia.org/wiki/Negative_binomial_distribution)
+[Wikipedia](https://en.wikipedia.org/wiki/Negative_binomial_distribution);
 - [Poisson](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/DiscreteDistributions/PoissonDistribution) -
 [Wikipedia](https://en.wikipedia.org/wiki/Poisson_distribution);
 - [C# Random Generator Wrapper](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/DiscreteDistributions/SharpDistribution) -

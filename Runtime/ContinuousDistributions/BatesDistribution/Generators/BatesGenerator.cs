@@ -4,6 +4,7 @@ using System;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
+using Zor.RandomGenerators.PropertyDrawerAttributes;
 
 namespace Zor.RandomGenerators.ContinuousDistributions
 {
@@ -16,7 +17,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 #pragma warning disable CS0649
 		[SerializeField] private float m_Mean = BatesDistribution.DefaultMean;
 		[SerializeField] private float m_Deviation = BatesDistribution.DefaultDeviation;
-		[SerializeField, Tooltip("How many independent and identically distributed random values are generated.")]
+		[SerializeField, SimpleRangeInt(1, 255), Tooltip("How many independent and identically distributed random values are generated.")]
 		private byte m_Iids = BatesDistribution.DefaultIids;
 #pragma warning restore CS0649
 

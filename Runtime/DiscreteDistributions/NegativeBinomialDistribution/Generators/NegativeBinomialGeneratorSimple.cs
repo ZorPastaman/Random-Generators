@@ -4,6 +4,7 @@ using System;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
+using Zor.RandomGenerators.PropertyDrawerAttributes;
 
 namespace Zor.RandomGenerators.DiscreteDistributions
 {
@@ -16,7 +17,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 #pragma warning disable CS0649
 		[SerializeField, Range(1.19E-07f, 1f)]
 		private float m_Probability = NegativeBinomialDistribution.DefaultProbability;
-		[SerializeField, Range(1, 255)]
+		[SerializeField, SimpleRangeInt(1, 255)]
 		private byte m_Failures = NegativeBinomialDistribution.DefaultFailures;
 #pragma warning restore CS0649
 

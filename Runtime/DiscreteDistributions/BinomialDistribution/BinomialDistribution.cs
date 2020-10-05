@@ -12,7 +12,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	/// Collection of methods that generate a random value using Binomial distribution algorithms.
 	/// </summary>
 	/// <remarks>
-	/// Algorithm from Luc Devroye (1986) "Non-Uniform Random Variate Generation" Chapter X.4 is used here.
+	/// Algorithm from Luc Devroye (1986) "Non-Uniform Random Variate Generation" Section X.4.3 is used here.
 	/// </remarks>
 	public static unsafe class BinomialDistribution
 	{
@@ -23,7 +23,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <summary>
 		/// Generates a random value using <see cref="Random.value"/> as an iid source.
 		/// </summary>
-		/// <param name="probability">True threshold in range [0, 1].</param>
+		/// <param name="probability">True threshold in range (0, 1].</param>
 		/// <param name="upperBound"></param>
 		/// <returns>Generated value in range [0, <paramref name="upperBound"/>].</returns>
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
@@ -36,7 +36,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// Generates a random value using <see cref="Random.value"/> as an iid source.
 		/// </summary>
 		/// <param name="startPoint"></param>
-		/// <param name="probability">True threshold in range [0, 1].</param>
+		/// <param name="probability">True threshold in range (0, 1].</param>
 		/// <param name="upperBound"></param>
 		/// <returns>Generated value in range
 		/// [<paramref name="startPoint"/>, <paramref name="startPoint"/> + <paramref name="upperBound"/>].</returns>
@@ -52,7 +52,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="iidFunc">
 		/// Function that returns an independent and identically distributed random value in range [0, 1].
 		/// </param>
-		/// <param name="probability">True threshold in range [0, 1].</param>
+		/// <param name="probability">True threshold in range (0, 1].</param>
 		/// <param name="upperBound"></param>
 		/// <returns>Generated value in range [0, <paramref name="upperBound"/>].</returns>
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
@@ -68,7 +68,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// Function that returns an independent and identically distributed random value in range [0, 1].
 		/// </param>
 		/// <param name="startPoint"></param>
-		/// <param name="probability">True threshold in range [0, 1].</param>
+		/// <param name="probability">True threshold in range (0, 1].</param>
 		/// <param name="upperBound"></param>
 		/// <returns>Generated value in range
 		/// [<paramref name="startPoint"/>, <paramref name="startPoint"/> + <paramref name="upperBound"/>].</returns>
@@ -84,7 +84,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="iidGenerator">
 		/// Random generator that returns an independent and identically distributed random value in range [0, 1].
 		/// </param>
-		/// <param name="probability">True threshold in range [0, 1].</param>
+		/// <param name="probability">True threshold in range (0, 1].</param>
 		/// <param name="upperBound"></param>
 		/// <returns>Generated value in range [0, <paramref name="upperBound"/>].</returns>
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
@@ -101,7 +101,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// Random generator that returns an independent and identically distributed random value in range [0, 1].
 		/// </param>
 		/// <param name="startPoint"></param>
-		/// <param name="probability">True threshold in range [0, 1].</param>
+		/// <param name="probability">True threshold in range (0, 1].</param>
 		/// <param name="upperBound"></param>
 		/// <returns>Generated value in range
 		/// [<paramref name="startPoint"/>, <paramref name="startPoint"/> + <paramref name="upperBound"/>].</returns>

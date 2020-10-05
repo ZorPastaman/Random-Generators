@@ -22,7 +22,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="iidGenerator">
 		/// Random generator that returns an independent and identically distributed random value in range [0, 1].
 		/// </param>
-		/// <param name="probability">True threshold in range [0, 1].</param>
+		/// <param name="probability">True threshold in range (0, 1].</param>
 		/// <param name="upperBound"></param>
 		public BinomialGeneratorDependentSimple([NotNull] T iidGenerator, float probability, byte upperBound)
 		{

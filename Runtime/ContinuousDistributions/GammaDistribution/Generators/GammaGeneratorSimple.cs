@@ -4,6 +4,7 @@ using System;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
+using Zor.RandomGenerators.PropertyDrawerAttributes;
 
 namespace Zor.RandomGenerators.ContinuousDistributions
 {
@@ -14,8 +15,10 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 	public sealed class GammaGeneratorSimple : IGammaGenerator
 	{
 #pragma warning disable CS0649
-		[SerializeField] private float m_Alpha = GammaDistribution.DefaultAlpha;
-		[SerializeField] private float m_Beta = GammaDistribution.DefaultBeta;
+		[SerializeField, SimpleRangeFloat(1.19E-07f, float.MaxValue), Tooltip("Shape.")]
+		private float m_Alpha = GammaDistribution.DefaultAlpha;
+		[SerializeField, Tooltip("Scale.")]
+		private float m_Beta = GammaDistribution.DefaultBeta;
 #pragma warning restore CS0649
 
 		/// <summary>

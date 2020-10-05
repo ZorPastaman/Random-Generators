@@ -23,8 +23,11 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="iidGenerator">
 		/// Random generator that returns an independent and identically distributed random value in range [0, 1].
 		/// </param>
-		/// <param name="probability">True threshold in range [0, 1].</param>
+		/// <param name="probability">True threshold in range (0, 1].</param>
 		/// <param name="failures"></param>
+		/// <remarks>
+		/// <paramref name="failures"/> must be greater than 0.
+		/// </remarks>
 		public NegativeBinomialGeneratorDependentSimple([NotNull] T iidGenerator, float probability, byte failures)
 		{
 			m_iidGenerator = iidGenerator;
@@ -70,6 +73,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 			set => m_probability = value;
 		}
 
+		/// <remarks>
+		/// <paramref name="value"/> must be greater than 0.
+		/// </remarks>
 		public byte failures
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]

@@ -24,8 +24,11 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// Function that returns an independent and identically distributed random value in range [0, 1].
 		/// </param>
 		/// <param name="startPoint"></param>
-		/// <param name="probability">True threshold in range [0, 1].</param>
+		/// <param name="probability">True threshold in range (0, 1].</param>
 		/// <param name="failures"></param>
+		/// <remarks>
+		/// <paramref name="failures"/> must be greater than 0.
+		/// </remarks>
 		public NegativeBinomialGeneratorFuncDependent([NotNull] Func<float> iidFunc,
 			int startPoint, float probability, byte failures)
 		{
@@ -76,6 +79,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 			set => m_probability = value;
 		}
 
+		/// <remarks>
+		/// <paramref name="value"/> must be greater than 0.
+		/// </remarks>
 		public byte failures
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]

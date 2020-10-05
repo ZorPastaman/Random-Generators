@@ -14,8 +14,10 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	public sealed class NegativeBinomialGeneratorSimple : INegativeBinomialGenerator
 	{
 #pragma warning disable CS0649
-		[SerializeField, Range(0f, 1f)] private float m_Probability = NegativeBinomialDistribution.DefaultProbability;
-		[SerializeField] private byte m_Failures = NegativeBinomialDistribution.DefaultFailures;
+		[SerializeField, Range(1.19E-07f, 1f)]
+		private float m_Probability = NegativeBinomialDistribution.DefaultProbability;
+		[SerializeField, Range(1, 255)]
+		private byte m_Failures = NegativeBinomialDistribution.DefaultFailures;
 #pragma warning restore CS0649
 
 		/// <summary>
@@ -28,8 +30,11 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <summary>
 		/// Creates a <see cref="NegativeBinomialGeneratorSimple"/> with the specified parameters.
 		/// </summary>
-		/// <param name="probability">True threshold in range [0, 1].</param>
+		/// <param name="probability">True threshold in range (0, 1].</param>
 		/// <param name="failures"></param>
+		/// <remarks>
+		/// <paramref name="failures"/> must be greater than 0.
+		/// </remarks>
 		public NegativeBinomialGeneratorSimple(float probability, byte failures)
 		{
 			m_Probability = probability;
@@ -61,6 +66,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 			set => m_Probability = value;
 		}
 
+		/// <remarks>
+		/// <paramref name="value"/> must be greater than 0.
+		/// </remarks>
 		public byte failures
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]

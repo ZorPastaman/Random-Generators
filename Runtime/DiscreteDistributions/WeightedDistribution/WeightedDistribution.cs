@@ -40,7 +40,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <remarks>
 		/// <paramref name="count"/> must be greater than 0.
 		/// </remarks>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static int Generate([NotNull] uint[] weights, uint sum, int count)
 		{
 			return Pop(weights, sum, count, Random.value);
@@ -79,7 +79,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <remarks>
 		/// <paramref name="count"/> must be greater than 0.
 		/// </remarks>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static int Generate([NotNull] Func<float> iidFunc, [NotNull] uint[] weights, uint sum, int count)
 		{
 			return Pop(weights, sum, count, iidFunc());
@@ -119,7 +119,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <remarks>
 		/// <paramref name="count"/> must be greater than 0.
 		/// </remarks>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static int Generate<T>([NotNull] T iidGenerator, [NotNull] uint[] weights, uint sum, int count)
 			where T : IContinuousGenerator
 		{
@@ -132,7 +132,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="weights">Weights array.</param>
 		/// <param name="count">How many first elements are summed.</param>
 		/// <returns>Computed sum.</returns>
-		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+		[Pure]
 		public static uint ComputeSum([NotNull] uint[] weights, int count)
 		{
 			uint sum = 0u;
@@ -156,7 +156,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <remarks>
 		/// <paramref name="count"/> must be greater than 0.
 		/// </remarks>
-		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+		[Pure]
 		private static int Pop([NotNull] uint[] weights, uint sum, int count, float iid)
 		{
 			uint random = (uint)(iid * sum);

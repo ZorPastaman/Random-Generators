@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Marsaglia distribution is renamed to Normal distribution.
 - Binomial distribution is rewritten and became much faster.
+- Inlining of some methods is changed for performance reasons and more compact assemblies.
 
 ### Removed
 

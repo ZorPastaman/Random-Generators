@@ -25,7 +25,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// </summary>
 		/// <param name="lambda"></param>
 		/// <returns>Generated value in range [0, infinity].</returns>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static int Generate(float lambda)
 		{
 			return Pop(Random.value, lambda);
@@ -37,7 +37,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="lambda"></param>
 		/// <param name="startPoint"></param>
 		/// <returns>Generated value in range [<paramref name="startPoint"/>, infinity].</returns>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static int Generate(float lambda, int startPoint)
 		{
 			return Pop(Random.value, lambda) + startPoint;
@@ -51,7 +51,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// </param>
 		/// <param name="lambda"></param>
 		/// <returns>Generated value in range [0, infinity].</returns>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static int Generate([NotNull] Func<float> iidFunc, float lambda)
 		{
 			return Pop(iidFunc(), lambda);
@@ -66,7 +66,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="lambda"></param>
 		/// <param name="startPoint"></param>
 		/// <returns>Generated value in range [<paramref name="startPoint"/>, infinity].</returns>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static int Generate([NotNull] Func<float> iidFunc, float lambda, int startPoint)
 		{
 			return Pop(iidFunc(), lambda) + startPoint;
@@ -81,7 +81,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="lambda"></param>
 		/// <typeparam name="T"></typeparam>
 		/// <returns>Generated value in range [0, infinity].</returns>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static int Generate<T>([NotNull] T iidGenerator, float lambda) where T : IContinuousGenerator
 		{
 			return Pop(iidGenerator.Generate(), lambda);
@@ -97,7 +97,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="startPoint"></param>
 		/// <typeparam name="T"></typeparam>
 		/// <returns>Generated value in range [<paramref name="startPoint"/>, infinity].</returns>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static int Generate<T>([NotNull] T iidGenerator, float lambda, int startPoint)
 			where T : IContinuousGenerator
 		{
@@ -110,7 +110,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="iid">Iid in range [0, 1].</param>
 		/// <param name="lambda"></param>
 		/// <returns>Popped value.</returns>
-		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+		[Pure]
 		private static int Pop(float iid, float lambda)
 		{
 			int x = 0;

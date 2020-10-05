@@ -136,6 +136,8 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 			}
 		}
 
+		/// <inheritdoc/>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public override void DropSharedGenerator()
 		{
 			m_sharedGenerator = null;

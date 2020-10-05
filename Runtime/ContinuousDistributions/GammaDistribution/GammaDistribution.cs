@@ -1,6 +1,7 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
 using System;
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -29,6 +30,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// <remarks>
 		/// <paramref name="alpha"/> must be greater than 0.
 		/// </remarks>
+		[Pure]
 		public static float Generate(float alpha, float beta)
 		{
 			bool alphaChanged = false;
@@ -86,6 +88,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// <remarks>
 		/// <paramref name="alpha"/> must be greater than 0.
 		/// </remarks>
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static float Generate(float alpha, float beta, float startPoint)
 		{
 			return Generate(alpha, beta) + startPoint;
@@ -103,6 +106,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// <remarks>
 		/// <paramref name="alpha"/> must be greater than 0.
 		/// </remarks>
+		[Pure]
 		public static float Generate([NotNull] Func<float> iidFunc, float alpha, float beta)
 		{
 			bool alphaChanged = false;
@@ -163,6 +167,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// <remarks>
 		/// <paramref name="alpha"/> must be greater than 0.
 		/// </remarks>
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static float Generate([NotNull] Func<float> iidFunc, float alpha, float beta, float startPoint)
 		{
 			return Generate(iidFunc, alpha, beta) + startPoint;
@@ -180,6 +185,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// <remarks>
 		/// <paramref name="alpha"/> must be greater than 0.
 		/// </remarks>
+		[Pure]
 		public static float Generate<T>([NotNull] T iidGenerator, float alpha, float beta)
 			where T : IContinuousGenerator
 		{
@@ -241,6 +247,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// <remarks>
 		/// <paramref name="alpha"/> must be greater than 0.
 		/// </remarks>
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static float Generate<T>([NotNull] T iidGenerator, float alpha, float beta, float startPoint)
 			where T : IContinuousGenerator
 		{

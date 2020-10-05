@@ -38,8 +38,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// <summary>
 		/// Copy constructor.
 		/// </summary>
-		public RejectionCurveGeneratorDependent(
-			[NotNull] RejectionCurveGeneratorDependent<TValue, TCheck> other)
+		public RejectionCurveGeneratorDependent([NotNull] RejectionCurveGeneratorDependent<TValue, TCheck> other)
 		{
 			m_valueGenerator = other.m_valueGenerator;
 			m_checkGenerator = other.m_checkGenerator;

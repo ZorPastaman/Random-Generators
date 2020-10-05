@@ -102,8 +102,11 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		}
 
 		/// <summary>
-		/// How many independent and identically distributed random values are generated. Must be greater than 0.
+		/// How many independent and identically distributed random values are generated.
 		/// </summary>
+		/// <remarks>
+		/// <paramref name="value"/> must be greater than 0.
+		/// </remarks>
 		public byte iids
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]

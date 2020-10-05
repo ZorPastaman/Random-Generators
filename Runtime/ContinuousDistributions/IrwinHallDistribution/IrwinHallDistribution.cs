@@ -1,6 +1,7 @@
 // Copyright (c) 2020 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
 using System;
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using Random = UnityEngine.Random;
 
@@ -48,7 +49,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// Generated value in range
 		/// [<paramref name="startPoint"/>, <paramref name="startPoint"/> + <paramref name="iids"/>].
 		/// </returns>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static float Generate(float startPoint, byte iids)
 		{
 			return Generate(iids) + startPoint;
@@ -91,7 +92,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// Generated value in range
 		/// [<paramref name="startPoint"/>, <paramref name="startPoint"/> + <paramref name="iids"/>].
 		/// </returns>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static float Generate([NotNull] Func<float> iidFunc, float startPoint, byte iids)
 		{
 			return Generate(iidFunc, iids) + startPoint;
@@ -135,7 +136,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// Generated value in range
 		/// [<paramref name="startPoint"/>, <paramref name="startPoint"/> + <paramref name="iids"/>].
 		/// </returns>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static float Generate<T>([NotNull] T iidGenerator, float startPoint, byte iids)
 			where T : IContinuousGenerator
 		{

@@ -34,8 +34,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// <summary>
 		/// Copy constructor.
 		/// </summary>
-		public RejectionFuncGeneratorFuncDependentSimple(
-			[NotNull] RejectionFuncGeneratorFuncDependentSimple other)
+		public RejectionFuncGeneratorFuncDependentSimple([NotNull] RejectionFuncGeneratorFuncDependentSimple other)
 		{
 			m_valueFunc = other.m_valueFunc;
 			m_probabilityFunc = other.m_probabilityFunc;

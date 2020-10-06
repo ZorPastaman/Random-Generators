@@ -14,9 +14,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	public abstract class WeightedGeneratorProvider<T> : DiscreteGeneratorProvider<T>
 	{
 #pragma warning disable CS0649
-		[SerializeField, Tooltip("Counts of Values and Weights must be the same.")]
+		[SerializeField, HideInInspector]
 		private T[] m_Values;
-		[SerializeField, Tooltip("Counts of Values and Weights must be the same.")]
+		[SerializeField, HideInInspector]
 		private uint[] m_Weights;
 #pragma warning restore CS0649
 

@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Editable Weighted generator providers.
 - Gamma distribution.
 - Negative Binomial distribution.
+- Weighted distribution editor.
 
 ### Changed
 

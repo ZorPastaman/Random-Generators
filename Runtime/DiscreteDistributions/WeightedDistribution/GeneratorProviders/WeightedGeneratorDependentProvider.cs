@@ -17,9 +17,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 #pragma warning disable CS0649
 		[SerializeField, Tooltip("Random generator that returns an independent and identically distributed random value in range [0, 1].")]
 		private ContinuousGeneratorProviderReference m_DependedGeneratorProvider;
-		[SerializeField, Tooltip("Counts of Values and Weights must be the same.")]
+		[SerializeField, HideInInspector]
 		private T[] m_Values;
-		[SerializeField, Tooltip("Counts of Values and Weights must be the same.")]
+		[SerializeField, HideInInspector]
 		private uint[] m_Weights;
 #pragma warning restore CS0649
 

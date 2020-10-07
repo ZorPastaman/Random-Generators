@@ -23,7 +23,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// Function that returns an independent and identically distributed random value in range [0, 1].
 		/// </param>
 		/// <param name="startPoint"></param>
-		/// <param name="probability">True threshold in range (0, 1].</param>
+		/// <param name="probability">True threshold in range [0, 1).</param>
 		/// <param name="upperBound"></param>
 		public BinomialGeneratorFuncDependent([NotNull] Func<float> iidFunc, int startPoint, float probability,
 			byte upperBound)

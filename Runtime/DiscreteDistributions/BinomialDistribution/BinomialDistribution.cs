@@ -24,20 +24,12 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <summary>
 		/// Generates a random value using <see cref="Random.value"/> as an iid source.
 		/// </summary>
-		/// <param name="probability">True threshold in range (0, 1].</param>
+		/// <param name="probability">True threshold in range [0, 1).</param>
 		/// <param name="upperBound"></param>
 		/// <returns>Generated value in range [0, <paramref name="upperBound"/>].</returns>
 		[Pure]
 		public static int Generate(float probability, byte upperBound)
 		{
-			bool probabilityChanged = false;
-
-			if (probability > 0.5f)
-			{
-				probability = 1f - probability;
-				probabilityChanged = true;
-			}
-
 			float q = -Mathf.Log(1f - probability);
 			float sum = 0f;
 			int x = 0;
@@ -49,16 +41,14 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 				++x;
 			} while (sum <= q);
 
-			--x;
-
-			return probabilityChanged ? upperBound - x : x;
+			return x - 1;
 		}
 
 		/// <summary>
 		/// Generates a random value using <see cref="Random.value"/> as an iid source.
 		/// </summary>
 		/// <param name="startPoint"></param>
-		/// <param name="probability">True threshold in range (0, 1].</param>
+		/// <param name="probability">True threshold in range [0, 1).</param>
 		/// <param name="upperBound"></param>
 		/// <returns>Generated value in range
 		/// [<paramref name="startPoint"/>, <paramref name="startPoint"/> + <paramref name="upperBound"/>].</returns>
@@ -74,20 +64,12 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="iidFunc">
 		/// Function that returns an independent and identically distributed random value in range [0, 1].
 		/// </param>
-		/// <param name="probability">True threshold in range (0, 1].</param>
+		/// <param name="probability">True threshold in range [0, 1).</param>
 		/// <param name="upperBound"></param>
 		/// <returns>Generated value in range [0, <paramref name="upperBound"/>].</returns>
 		[Pure]
 		public static int Generate([NotNull] Func<float> iidFunc, float probability, byte upperBound)
 		{
-			bool probabilityChanged = false;
-
-			if (probability > 0.5f)
-			{
-				probability = 1f - probability;
-				probabilityChanged = true;
-			}
-
 			float q = -Mathf.Log(1f - probability);
 			float sum = 0f;
 			int x = 0;
@@ -99,9 +81,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 				++x;
 			} while (sum <= q);
 
-			--x;
-
-			return probabilityChanged ? upperBound - x : x;
+			return x - 1;
 		}
 
 		/// <summary>
@@ -111,7 +91,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// Function that returns an independent and identically distributed random value in range [0, 1].
 		/// </param>
 		/// <param name="startPoint"></param>
-		/// <param name="probability">True threshold in range (0, 1].</param>
+		/// <param name="probability">True threshold in range [0, 1).</param>
 		/// <param name="upperBound"></param>
 		/// <returns>Generated value in range
 		/// [<paramref name="startPoint"/>, <paramref name="startPoint"/> + <paramref name="upperBound"/>].</returns>
@@ -127,21 +107,13 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="iidGenerator">
 		/// Random generator that returns an independent and identically distributed random value in range [0, 1].
 		/// </param>
-		/// <param name="probability">True threshold in range (0, 1].</param>
+		/// <param name="probability">True threshold in range [0, 1).</param>
 		/// <param name="upperBound"></param>
 		/// <returns>Generated value in range [0, <paramref name="upperBound"/>].</returns>
 		[Pure]
 		public static int Generate<T>([NotNull] T iidGenerator, float probability, byte upperBound)
 			where T : IContinuousGenerator
 		{
-			bool probabilityChanged = false;
-
-			if (probability > 0.5f)
-			{
-				probability = 1f - probability;
-				probabilityChanged = true;
-			}
-
 			float q = -Mathf.Log(1f - probability);
 			float sum = 0f;
 			int x = 0;
@@ -153,9 +125,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 				++x;
 			} while (sum <= q);
 
-			--x;
-
-			return probabilityChanged ? upperBound - x : x;
+			return x - 1;
 		}
 
 		/// <summary>
@@ -165,7 +135,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// Random generator that returns an independent and identically distributed random value in range [0, 1].
 		/// </param>
 		/// <param name="startPoint"></param>
-		/// <param name="probability">True threshold in range (0, 1].</param>
+		/// <param name="probability">True threshold in range [0, 1).</param>
 		/// <param name="upperBound"></param>
 		/// <returns>Generated value in range
 		/// [<paramref name="startPoint"/>, <paramref name="startPoint"/> + <paramref name="upperBound"/>].</returns>

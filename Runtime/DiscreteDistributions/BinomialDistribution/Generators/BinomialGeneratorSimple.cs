@@ -14,7 +14,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	public sealed class BinomialGeneratorSimple : IBinomialGenerator
 	{
 #pragma warning disable CS0649
-		[SerializeField, Range(1.19E-07f, 1f)] private float m_Probability = BinomialDistribution.DefaultProbability;
+		[SerializeField, Range(0f, 0.999999881f)] private float m_Probability = BinomialDistribution.DefaultProbability;
 		[SerializeField] private byte m_UpperBound = BinomialDistribution.DefaultUpperBound;
 #pragma warning restore CS0649
 
@@ -28,7 +28,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <summary>
 		/// Creates a <see cref="BinomialGeneratorSimple"/> with the specified parameters.
 		/// </summary>
-		/// <param name="probability">True threshold in range [0, 1].</param>
+		/// <param name="probability">True threshold in range [0, 1).</param>
 		/// <param name="upperBound"></param>
 		public BinomialGeneratorSimple(float probability, byte upperBound)
 		{

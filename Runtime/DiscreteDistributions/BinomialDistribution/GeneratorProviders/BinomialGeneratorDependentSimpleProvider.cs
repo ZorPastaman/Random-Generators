@@ -21,7 +21,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 #pragma warning disable CS0649
 		[SerializeField, Tooltip("Random generator that returns an independent and identically distributed random value in range [0, 1].")]
 		private ContinuousGeneratorProviderReference m_DependedGeneratorProvider;
-		[SerializeField, Range(1.19E-07f, 1f)] private float m_Probability = BinomialDistribution.DefaultProbability;
+		[SerializeField, Range(0f, 0.999999881f)] private float m_Probability = BinomialDistribution.DefaultProbability;
 		[SerializeField] private byte m_UpperBound = BinomialDistribution.DefaultUpperBound;
 #pragma warning restore CS0649
 
@@ -103,7 +103,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		}
 
 		/// <summary>
-		/// True threshold in range (0, 1].
+		/// True threshold in range [0, 1).
 		/// </summary>
 		public float probability
 		{

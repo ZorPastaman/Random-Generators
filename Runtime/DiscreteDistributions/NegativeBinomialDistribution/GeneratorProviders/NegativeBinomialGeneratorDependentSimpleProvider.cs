@@ -26,7 +26,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[SerializeField, Range(1.19E-07f, 1f)]
 		private float m_Probability = NegativeBinomialDistribution.DefaultProbability;
 		[SerializeField, SimpleRangeInt(1, 255)]
-		private byte m_Failures = NegativeBinomialDistribution.DefaultFailures;
+		private byte m_Successes = NegativeBinomialDistribution.DefaultSuccesses;
 #pragma warning restore CS0649
 
 		[NonSerialized] private NegativeBinomialGeneratorDependentSimple<IContinuousGenerator> m_sharedGenerator;
@@ -39,7 +39,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		{
 			[Pure]
 			get => new NegativeBinomialGeneratorDependentSimple<IContinuousGenerator>(
-				m_DependedGeneratorProvider.generator, m_Probability, m_Failures);
+				m_DependedGeneratorProvider.generator, m_Probability, m_Successes);
 		}
 
 		/// <summary>
@@ -67,7 +67,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		{
 			[Pure]
 			get => new NegativeBinomialGeneratorDependentSimple<IContinuousGenerator>(
-				m_DependedGeneratorProvider.generator, m_Probability, m_Failures);
+				m_DependedGeneratorProvider.generator, m_Probability, m_Successes);
 		}
 
 		/// <summary>
@@ -128,18 +128,18 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <remarks>
 		/// <paramref name="value"/> must be greater than 0.
 		/// </remarks>
-		public byte failures
+		public byte successes
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_Failures;
+			get => m_Successes;
 			set
 			{
-				if (m_Failures == value)
+				if (m_Successes == value)
 				{
 					return;
 				}
 
-				m_Failures = value;
+				m_Successes = value;
 				m_sharedGenerator = null;
 			}
 		}

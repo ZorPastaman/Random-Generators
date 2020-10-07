@@ -14,6 +14,6 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// </summary>
 		float probability { get; }
 
-		byte failures { get; }
+		byte successes { get; }
 	}
 }

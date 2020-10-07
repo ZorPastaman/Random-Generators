@@ -15,7 +15,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[NotNull] private Func<float> m_iidFunc;
 		private int m_startPoint;
 		private float m_probability;
-		private byte m_failures;
+		private byte m_successes;
 
 		/// <summary>
 		/// Creates a <see cref="NegativeBinomialGeneratorFuncDependent"/> with the specified parameters.
@@ -25,17 +25,17 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// </param>
 		/// <param name="startPoint"></param>
 		/// <param name="probability">True threshold in range (0, 1].</param>
-		/// <param name="failures"></param>
+		/// <param name="successes"></param>
 		/// <remarks>
-		/// <paramref name="failures"/> must be greater than 0.
+		/// <paramref name="successes"/> must be greater than 0.
 		/// </remarks>
 		public NegativeBinomialGeneratorFuncDependent([NotNull] Func<float> iidFunc,
-			int startPoint, float probability, byte failures)
+			int startPoint, float probability, byte successes)
 		{
 			m_iidFunc = iidFunc;
 			m_startPoint = startPoint;
 			m_probability = probability;
-			m_failures = failures;
+			m_successes = successes;
 		}
 
 		/// <summary>
@@ -47,7 +47,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 			m_iidFunc = other.m_iidFunc;
 			m_startPoint = other.m_startPoint;
 			m_probability = other.m_probability;
-			m_failures = other.m_failures;
+			m_successes = other.m_successes;
 		}
 
 		/// <summary>
@@ -82,19 +82,19 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <remarks>
 		/// <paramref name="value"/> must be greater than 0.
 		/// </remarks>
-		public byte failures
+		public byte successes
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_failures;
+			get => m_successes;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_failures = value;
+			set => m_successes = value;
 		}
 
 		/// <inheritdoc/>
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public int Generate()
 		{
-			return NegativeBinomialDistribution.Generate(m_iidFunc, m_startPoint, m_probability, m_failures);
+			return NegativeBinomialDistribution.Generate(m_iidFunc, m_startPoint, m_probability, m_successes);
 		}
 	}
 }

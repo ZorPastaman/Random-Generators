@@ -24,11 +24,21 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// Generates a random value using <see cref="Random.value"/> as an iid source.
 		/// </summary>
 		/// <param name="lambda"></param>
-		/// <returns>Generated value in range [0, infinity].</returns>
-		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+		/// <returns>Generated value.</returns>
+		[Pure]
 		public static int Generate(float lambda)
 		{
-			return Pop(Random.value, lambda);
+			int x = 0;
+			float p = 1f;
+			float e = Mathf.Exp(-lambda);
+
+			do
+			{
+				++x;
+				p *= Random.value;
+			} while (p > e);
+
+			return x - 1;
 		}
 
 		/// <summary>
@@ -36,11 +46,11 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// </summary>
 		/// <param name="lambda"></param>
 		/// <param name="startPoint"></param>
-		/// <returns>Generated value in range [<paramref name="startPoint"/>, infinity].</returns>
+		/// <returns>Generated value.</returns>
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static int Generate(float lambda, int startPoint)
 		{
-			return Pop(Random.value, lambda) + startPoint;
+			return Generate(lambda) + startPoint;
 		}
 
 		/// <summary>
@@ -50,11 +60,21 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// Function that returns an independent and identically distributed random value in range [0, 1].
 		/// </param>
 		/// <param name="lambda"></param>
-		/// <returns>Generated value in range [0, infinity].</returns>
-		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+		/// <returns>Generated value.</returns>
+		[Pure]
 		public static int Generate([NotNull] Func<float> iidFunc, float lambda)
 		{
-			return Pop(iidFunc(), lambda);
+			int x = 0;
+			float p = 1f;
+			float e = Mathf.Exp(-lambda);
+
+			do
+			{
+				++x;
+				p *= iidFunc();
+			} while (p > e);
+
+			return x - 1;
 		}
 
 		/// <summary>
@@ -65,11 +85,11 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// </param>
 		/// <param name="lambda"></param>
 		/// <param name="startPoint"></param>
-		/// <returns>Generated value in range [<paramref name="startPoint"/>, infinity].</returns>
+		/// <returns>Generated value.</returns>
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static int Generate([NotNull] Func<float> iidFunc, float lambda, int startPoint)
 		{
-			return Pop(iidFunc(), lambda) + startPoint;
+			return Generate(iidFunc, lambda) + startPoint;
 		}
 
 		/// <summary>
@@ -80,11 +100,21 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// </param>
 		/// <param name="lambda"></param>
 		/// <typeparam name="T"></typeparam>
-		/// <returns>Generated value in range [0, infinity].</returns>
-		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+		/// <returns>Generated value.</returns>
+		[Pure]
 		public static int Generate<T>([NotNull] T iidGenerator, float lambda) where T : IContinuousGenerator
 		{
-			return Pop(iidGenerator.Generate(), lambda);
+			int x = 0;
+			float p = 1f;
+			float e = Mathf.Exp(-lambda);
+
+			do
+			{
+				++x;
+				p *= iidGenerator.Generate();
+			} while (p > e);
+
+			return x - 1;
 		}
 
 		/// <summary>
@@ -96,35 +126,12 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="lambda"></param>
 		/// <param name="startPoint"></param>
 		/// <typeparam name="T"></typeparam>
-		/// <returns>Generated value in range [<paramref name="startPoint"/>, infinity].</returns>
+		/// <returns>Generated value.</returns>
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static int Generate<T>([NotNull] T iidGenerator, float lambda, int startPoint)
 			where T : IContinuousGenerator
 		{
-			return Pop(iidGenerator.Generate(), lambda) + startPoint;
-		}
-
-		/// <summary>
-		/// Pops a value that corresponds to <paramref name="iid"/>.
-		/// </summary>
-		/// <param name="iid">Iid in range [0, 1].</param>
-		/// <param name="lambda"></param>
-		/// <returns>Popped value.</returns>
-		[Pure]
-		private static int Pop(float iid, float lambda)
-		{
-			int x = 0;
-			float p = Mathf.Exp(-lambda);
-			float s = p;
-
-			while (iid > s)
-			{
-				++x;
-				p *= lambda / x;
-				s += p;
-			}
-
-			return x;
+			return Generate(iidGenerator, lambda) + startPoint;
 		}
 	}
 }

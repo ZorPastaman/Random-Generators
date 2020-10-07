@@ -58,11 +58,11 @@ namespace Zor.RandomGenerators.DiscreteProviderEditors
 			SerializedProperty weightProperty = m_weightsProperty.GetArrayElementAtIndex(index);
 
 			rect.y += EditorGUIUtility.standardVerticalSpacing;
-			rect.height = EditorGUI.GetPropertyHeight(valueProperty);
+			rect.height = EditorGUI.GetPropertyHeight(valueProperty, true);
 			EditorGUI.PropertyField(rect, valueProperty, s_valueGuiContent, true);
 
 			rect.y += rect.height + EditorGUIUtility.standardVerticalSpacing;
-			rect.height = EditorGUI.GetPropertyHeight(weightProperty);
+			rect.height = EditorGUI.GetPropertyHeight(weightProperty, true);
 			EditorGUI.PropertyField(rect, weightProperty, s_weightGuiContent, true);
 
 			rect.y += rect.height + EditorGUIUtility.standardVerticalSpacing;
@@ -78,8 +78,9 @@ namespace Zor.RandomGenerators.DiscreteProviderEditors
 			SerializedProperty valueProperty = m_valuesProperty.GetArrayElementAtIndex(index);
 			SerializedProperty weightProperty = m_weightsProperty.GetArrayElementAtIndex(index);
 
-			return EditorGUI.GetPropertyHeight(valueProperty) + EditorGUI.GetPropertyHeight(weightProperty)
-				+ EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing * 4f;
+			return EditorGUI.GetPropertyHeight(valueProperty, true) +
+				EditorGUI.GetPropertyHeight(weightProperty, true) +
+				EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing * 4f;
 		}
 
 		private void OnReorder(ReorderableList list, int oldIndex, int newIndex)

@@ -163,6 +163,16 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		private void OnValidate()
 		{
 			m_sharedGenerator = null;
+
+			int valuesLength = m_Values.Length;
+			int weightsLength = m_Weights.Length;
+
+			if (valuesLength != weightsLength)
+			{
+				int length = Mathf.Min(valuesLength, weightsLength);
+				Array.Resize(ref m_Values, length);
+				Array.Resize(ref m_Weights, length);
+			}
 		}
 	}
 }

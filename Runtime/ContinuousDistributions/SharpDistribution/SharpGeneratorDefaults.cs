@@ -4,6 +4,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 {
 	public static class SharpGeneratorDefaults
 	{
+		public const int DefaultSeed = 123456789;
 		public const float DefaultMin = 0f;
 		public const float DefaultMax = 1f;
 	}

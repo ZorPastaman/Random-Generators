@@ -18,7 +18,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 	public sealed class SharpGeneratorProvider : ContinuousGeneratorProvider
 	{
 #pragma warning disable CS0649
-		[SerializeField] private int m_Seed;
+		[SerializeField] private int m_Seed = SharpGeneratorDefaults.DefaultSeed;
 #pragma warning restore CS0649
 
 		[NonSerialized] private SharpGenerator m_sharedGenerator;

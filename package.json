@@ -1,6 +1,6 @@
 {
   "name": "com.zor.random-generators",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "displayName": "Random Generators",
   "description": "A collection of random generators. The library contains different distributions, modificators and filters.",
   "unity": "2018.4",

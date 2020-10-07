@@ -3,6 +3,7 @@
 using System;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
+using UnityEngine;
 using Zor.RandomGenerators.ContinuousDistributions;
 using Random = UnityEngine.Random;
 
@@ -14,7 +15,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	/// <remarks>
 	/// Algorithm from Luc Devroye (1986) "Non-Uniform Random Variate Generation" Section X.4.3 is used here.
 	/// </remarks>
-	public static unsafe class BinomialDistribution
+	public static class BinomialDistribution
 	{
 		public const int DefaultStartPoint = 0;
 		public const float DefaultProbability = 0.5f;
@@ -26,10 +27,31 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="probability">True threshold in range (0, 1].</param>
 		/// <param name="upperBound"></param>
 		/// <returns>Generated value in range [0, <paramref name="upperBound"/>].</returns>
-		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+		[Pure]
 		public static int Generate(float probability, byte upperBound)
 		{
-			return Pop(Random.value, probability, upperBound);
+			bool probabilityChanged = false;
+
+			if (probability > 0.5f)
+			{
+				probability = 1f - probability;
+				probabilityChanged = true;
+			}
+
+			float q = -Mathf.Log(1f - probability);
+			float sum = 0f;
+			int x = 0;
+
+			do
+			{
+				float e = -Mathf.Log(Random.value);
+				sum += e / (upperBound - x);
+				++x;
+			} while (sum <= q);
+
+			--x;
+
+			return probabilityChanged ? upperBound - x : x;
 		}
 
 		/// <summary>
@@ -43,7 +65,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static int Generate(int startPoint, float probability, byte upperBound)
 		{
-			return Pop(Random.value, probability, upperBound) + startPoint;
+			return Generate(probability, upperBound) + startPoint;
 		}
 
 		/// <summary>
@@ -55,10 +77,31 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="probability">True threshold in range (0, 1].</param>
 		/// <param name="upperBound"></param>
 		/// <returns>Generated value in range [0, <paramref name="upperBound"/>].</returns>
-		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+		[Pure]
 		public static int Generate([NotNull] Func<float> iidFunc, float probability, byte upperBound)
 		{
-			return Pop(iidFunc(), probability, upperBound);
+			bool probabilityChanged = false;
+
+			if (probability > 0.5f)
+			{
+				probability = 1f - probability;
+				probabilityChanged = true;
+			}
+
+			float q = -Mathf.Log(1f - probability);
+			float sum = 0f;
+			int x = 0;
+
+			do
+			{
+				float e = -Mathf.Log(iidFunc());
+				sum += e / (upperBound - x);
+				++x;
+			} while (sum <= q);
+
+			--x;
+
+			return probabilityChanged ? upperBound - x : x;
 		}
 
 		/// <summary>
@@ -75,7 +118,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static int Generate([NotNull] Func<float> iidFunc, int startPoint, float probability, byte upperBound)
 		{
-			return Pop(iidFunc(), probability, upperBound) + startPoint;
+			return Generate(iidFunc, probability, upperBound) + startPoint;
 		}
 
 		/// <summary>
@@ -87,11 +130,32 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="probability">True threshold in range (0, 1].</param>
 		/// <param name="upperBound"></param>
 		/// <returns>Generated value in range [0, <paramref name="upperBound"/>].</returns>
-		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+		[Pure]
 		public static int Generate<T>([NotNull] T iidGenerator, float probability, byte upperBound)
 			where T : IContinuousGenerator
 		{
-			return Pop(iidGenerator.Generate(), probability, upperBound);
+			bool probabilityChanged = false;
+
+			if (probability > 0.5f)
+			{
+				probability = 1f - probability;
+				probabilityChanged = true;
+			}
+
+			float q = -Mathf.Log(1f - probability);
+			float sum = 0f;
+			int x = 0;
+
+			do
+			{
+				float e = -Mathf.Log(iidGenerator.Generate());
+				sum += e / (upperBound - x);
+				++x;
+			} while (sum <= q);
+
+			--x;
+
+			return probabilityChanged ? upperBound - x : x;
 		}
 
 		/// <summary>
@@ -109,39 +173,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		public static int Generate<T>([NotNull] T iidGenerator, int startPoint, float probability, byte upperBound)
 			where T : IContinuousGenerator
 		{
-			return Pop(iidGenerator.Generate(), probability, upperBound) + startPoint;
-		}
-
-		/// <summary>
-		/// Pops a value that corresponds to <paramref name="iid"/>.
-		/// </summary>
-		/// <param name="iid">Iid in range [0, 1].</param>
-		/// <param name="probability"></param>
-		/// <param name="upperBound"></param>
-		/// <returns>Popped value.</returns>
-		[Pure]
-		private static int Pop(float iid, float probability, byte upperBound)
-		{
-			bool probabilityChanged = false;
-
-			if (probability > 0.5f)
-			{
-				probability = 1f - probability;
-				probabilityChanged = true;
-			}
-
-			int x = 0;
-			float q = 1f - probability;
-
-			for (byte i = 0; i < upperBound; ++i)
-			{
-				bool condition = iid > q;
-				int b = *(byte*)&condition;
-				iid = (iid - q * b) / (probability * b + q * (1 - b));
-				x += b;
-			}
-
-			return probabilityChanged ? upperBound - x : x;
+			return Generate(iidGenerator, probability, upperBound) + startPoint;
 		}
 	}
 }

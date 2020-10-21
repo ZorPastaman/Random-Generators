@@ -11,10 +11,10 @@ using Debug = UnityEngine.Debug;
 
 namespace Zor.RandomGenerators.Tests.DistributionTests
 {
-	public sealed class UintDiscreteDistributionTest : MonoBehaviour
+	public sealed class FloatDiscreteDistributionTest : MonoBehaviour
 	{
 #pragma warning disable CS0649
-		[SerializeField, RequireDiscreteGenerator(typeof(uint))]
+		[SerializeField, RequireDiscreteGenerator(typeof(float))]
 		private DiscreteGeneratorProviderReference m_GeneratorProviderReference;
 		[SerializeField] private uint m_GenerationsPerFrame = 100u;
 		[SerializeField] private List<ResultEntry> m_Results = new List<ResultEntry>();
@@ -22,13 +22,13 @@ namespace Zor.RandomGenerators.Tests.DistributionTests
 		[SerializeField] private uint m_PerformanceTestsCount = 10000u;
 #pragma warning restore CS0649
 
-		private IDiscreteGenerator<uint> m_generator;
+		private IDiscreteGenerator<float> m_generator;
 
 		private Keyframe[] m_keyframes;
 
 		private void Start()
 		{
-			m_generator = m_GeneratorProviderReference.GetGenerator<uint>();
+			m_generator = m_GeneratorProviderReference.GetGenerator<float>();
 
 			if (m_generator == null)
 			{
@@ -42,16 +42,16 @@ namespace Zor.RandomGenerators.Tests.DistributionTests
 				m_generator.Generate();
 			}
 			stopWatch.Stop();
-			Debug.Log($"[UintDiscreteDistributionTest] Performance test. Ticks: {stopWatch.ElapsedTicks}, Milliseconds: {stopWatch.ElapsedMilliseconds}");
+			Debug.Log($"[FloatDiscreteDistributionTest] Performance test. Ticks: {stopWatch.ElapsedTicks}, Milliseconds: {stopWatch.ElapsedMilliseconds}");
 		}
 
 		private void Update()
 		{
 			for (int i = 0; i < m_GenerationsPerFrame; ++i)
 			{
-				Profiler.BeginSample("UintDiscreteTest.Generate");
+				Profiler.BeginSample("FloatDiscreteTest.Generate");
 
-				uint generated = m_generator.Generate();
+				float generated = m_generator.Generate();
 
 				Profiler.EndSample();
 
@@ -84,7 +84,7 @@ namespace Zor.RandomGenerators.Tests.DistributionTests
 			for (int i = 0, count = m_Results.Count; i < count; ++i)
 			{
 				ResultEntry entry = m_Results[i];
-				entry.Possibility = (float)entry.Count / sum;
+				entry.Possibility = entry.Count / sum;
 				m_Results[i] = entry;
 			}
 
@@ -113,7 +113,7 @@ namespace Zor.RandomGenerators.Tests.DistributionTests
 			m_ResultsCurve.keys = m_keyframes;
 		}
 
-		private int FindGeneratedIndex(uint generated)
+		private int FindGeneratedIndex(float generated)
 		{
 			for (int i = 0, count = m_Results.Count; i < count; ++i)
 			{
@@ -129,7 +129,7 @@ namespace Zor.RandomGenerators.Tests.DistributionTests
 		[Serializable]
 		private struct ResultEntry
 		{
-			public uint Element;
+			public float Element;
 			public uint Count;
 			public float Possibility;
 		}

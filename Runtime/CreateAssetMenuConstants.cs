@@ -17,6 +17,8 @@ namespace Zor.RandomGenerators
 		public const string RejectionDistributionFolder = ContinuousDistributionsFolder + "Rejection Distribution/";
 		public const string SharpContinuousDistributionFolder = ContinuousDistributionsFolder + "Sharp Distribution/";
 		public const string UnityContinuousDistributionFolder = ContinuousDistributionsFolder + "Unity Distribution/";
+		public const string XorShift32ContinuousDistributionFolder = ContinuousDistributionsFolder +
+			"XorShift32 Distribution/";
 
 		public const string ContinuousModificatorsFolder = ContinuousDistributionsFolder + "Modificators/";
 

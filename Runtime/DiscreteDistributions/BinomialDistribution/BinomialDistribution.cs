@@ -36,7 +36,13 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 
 			do
 			{
-				float e = -Mathf.Log(Random.value);
+				float iid;
+				do
+				{
+					iid = Random.value;
+				} while (iid <= 0f);
+
+				float e = -Mathf.Log(iid);
 				sum += e / (upperBound - x);
 				++x;
 			} while (sum <= q);
@@ -76,7 +82,13 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 
 			do
 			{
-				float e = -Mathf.Log(iidFunc());
+				float iid;
+				do
+				{
+					iid = iidFunc();
+				} while (iid <= 0f);
+
+				float e = -Mathf.Log(iid);
 				sum += e / (upperBound - x);
 				++x;
 			} while (sum <= q);
@@ -120,7 +132,13 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 
 			do
 			{
-				float e = -Mathf.Log(iidGenerator.Generate());
+				float iid;
+				do
+				{
+					iid = iidGenerator.Generate();
+				} while (iid <= 0f);
+
+				float e = -Mathf.Log(iid);
 				sum += e / (upperBound - x);
 				++x;
 			} while (sum <= q);

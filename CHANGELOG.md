@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Exponential distribution.
 
+### Fixed
+
+- Binomial distribution became more correct.
+
 ## [1.1.0] - 2020-10-07
 
 ### Added

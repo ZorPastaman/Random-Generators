@@ -2,6 +2,7 @@
 
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
+using Zor.RandomGenerators.BitwiseConverters;
 
 namespace Zor.RandomGenerators.RandomEngines
 {
@@ -47,7 +48,7 @@ namespace Zor.RandomGenerators.RandomEngines
 		public bool NextBool()
 		{
 			NextState();
-			return (m_state & 0b_10000000_00000000_00000000_00000000) != 0u;
+			return (m_state & 1u) != 0u;
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -165,7 +166,7 @@ namespace Zor.RandomGenerators.RandomEngines
 		public float NextFloat()
 		{
 			NextState();
-			return (float)~m_state / uint.MaxValue;
+			return new Converter32{uintValue = (~m_state >> 9) | 0x3F800000u}.floatValue - 1f;
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]

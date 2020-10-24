@@ -2,11 +2,10 @@
 
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
-using Zor.RandomGenerators.BitwiseConverters;
 
 namespace Zor.RandomGenerators.RandomEngines
 {
-	public struct XorShift32
+	public unsafe struct XorShift32
 	{
 		private uint m_state;
 
@@ -34,7 +33,7 @@ namespace Zor.RandomGenerators.RandomEngines
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public unsafe bool NextBool()
+		public bool NextBool()
 		{
 			NextState();
 			uint answer = m_state & 1u;
@@ -173,14 +172,16 @@ namespace Zor.RandomGenerators.RandomEngines
 		public float NextFloat01()
 		{
 			NextState();
-			return new Converter32{uintValue = (m_state >> 9) | 0x3F800000u}.floatValue - 1f;
+			uint answer = (m_state >> 9) | 0x3F800000u;
+			return *(float*)&answer - 1f;
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public float NextFloat()
 		{
 			NextState();
-			return new Converter32{uintValue = ~m_state}.floatValue;
+			uint answer = m_state;
+			return *(float*)&answer;
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -192,13 +193,15 @@ namespace Zor.RandomGenerators.RandomEngines
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public double NextDouble01()
 		{
-			return new Converter64{ulongValue = (NextUlong() >> 12) | 0x3FF0000000000000UL}.doubleValue - 1D;
+			ulong answer = (NextUlong() >> 12) | 0x3FF0000000000000UL;
+			return *(double*)&answer - 1D;
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public double NextDouble()
 		{
-			return new Converter64 {ulongValue = NextUlong()}.doubleValue;
+			ulong answer = NextUlong();
+			return *(double*)&answer;
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]

@@ -151,7 +151,7 @@ namespace Zor.RandomGenerators.RandomEngines
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public long NextLong(long min, long max)
 		{
-			return (long)((max - min) * NextDouble()) + min;
+			return (long)((max - min) * NextDouble01()) + min;
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -166,7 +166,7 @@ namespace Zor.RandomGenerators.RandomEngines
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public ulong NextUlong(ulong min, ulong max)
 		{
-			return (ulong)((max - min) * NextDouble()) + min;
+			return (ulong)((max - min) * NextDouble01()) + min;
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -190,16 +190,21 @@ namespace Zor.RandomGenerators.RandomEngines
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public double NextDouble01()
+		{
+			return new Converter64{ulongValue = (NextUlong() >> 12) | 0x3FF0000000000000UL}.doubleValue - 1D;
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public double NextDouble()
 		{
-			NextState();
-			return (double)~m_state / uint.MaxValue;
+			return new Converter64 {ulongValue = NextUlong()}.doubleValue;
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public double NextDouble(double min, double max)
 		{
-			return (max - min) * NextDouble() + min;
+			return (max - min) * NextDouble01() + min;
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]

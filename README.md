@@ -59,6 +59,8 @@ They wrap generators and provide unique and shared instances of them.
 
 - [Bates](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/BatesDistribution) -
 [Wikipedia](https://en.wikipedia.org/wiki/Bates_distribution);
+- [Exponential](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/ExponentialDistribution) -
+[Wikipedia](https://en.wikipedia.org/wiki/Exponential_distribution);
 - [Gamma](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/GammaDistribution) -
 [Wikipedia](https://en.wikipedia.org/wiki/Gamma_distribution);
 - [Irwin-Hall](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/IrwinHallDistribution) -

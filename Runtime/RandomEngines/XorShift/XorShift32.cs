@@ -5,16 +5,27 @@ using JetBrains.Annotations;
 
 namespace Zor.RandomGenerators.RandomEngines
 {
+	/// <summary>
+	/// Pseudo-random number generator using XorShift32 algorithm.
+	/// </summary>
 	public unsafe struct XorShift32
 	{
 		private uint m_state;
 
+		/// <summary>
+		/// Creates a <see cref="XorShift32"/> with the specified initial state.
+		/// </summary>
+		/// <param name="state">Initial state. Must be non-zero.</param>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public XorShift32(uint state)
 		{
 			m_state = state;
 		}
 
+		/// <summary>
+		/// Creates a <see cref="XorShift32"/> with the specified seed.
+		/// </summary>
+		/// <param name="seed">Seed. Used as initial state. Must be non-zero.</param>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public XorShift32(int seed)
 		{
@@ -24,6 +35,9 @@ namespace Zor.RandomGenerators.RandomEngines
 			}
 		}
 
+		/// <summary>
+		/// Current state. Must be non-zero.
+		/// </summary>
 		public uint state
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
@@ -32,6 +46,10 @@ namespace Zor.RandomGenerators.RandomEngines
 			set => m_state = value;
 		}
 
+		/// <summary>
+		/// Generates a pseudo-random <see cref="bool"/> value.
+		/// </summary>
+		/// <returns>Generated <see cref="bool"/> value.</returns>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public bool NextBool()
 		{
@@ -40,6 +58,11 @@ namespace Zor.RandomGenerators.RandomEngines
 			return *(bool*)&answer;
 		}
 
+		/// <summary>
+		/// Generates a pseudo-random <see cref="byte"/> value
+		/// in range [<see cref="byte.MinValue"/>, <see cref="byte.MaxValue"/>].
+		/// </summary>
+		/// <returns>Generated <see cref="byte"/> value.</returns>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public byte NextByte()
 		{
@@ -51,12 +74,24 @@ namespace Zor.RandomGenerators.RandomEngines
 			}
 		}
 
+		/// <summary>
+		/// Generates a pseudo-random <see cref="byte"/> value
+		/// in range [<paramref name="min"/>, <paramref name="max"/>).
+		/// </summary>
+		/// <param name="min"></param>
+		/// <param name="max"></param>
+		/// <returns>Generated <see cref="byte"/> value.</returns>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public byte NextByte(byte min, byte max)
 		{
-			return (byte)((max - min) * NextFloat01() + min);
+			return (byte)((max - min) * NextFloat() + min);
 		}
 
+		/// <summary>
+		/// Generates a pseudo-random <see cref="sbyte"/> value
+		/// in range [<see cref="sbyte.MinValue"/>, <see cref="sbyte.MaxValue"/>).
+		/// </summary>
+		/// <returns>Generated <see cref="sbyte"/> value.</returns>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public sbyte NextSbyte()
 		{
@@ -68,12 +103,24 @@ namespace Zor.RandomGenerators.RandomEngines
 			}
 		}
 
+		/// <summary>
+		/// Generates a pseudo-random <see cref="sbyte"/> value
+		/// in range [<paramref name="min"/>, <paramref name="max"/>).
+		/// </summary>
+		/// <param name="min"></param>
+		/// <param name="max"></param>
+		/// <returns>Generated <see cref="sbyte"/> value.</returns>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public sbyte NextSbyte(sbyte min, sbyte max)
 		{
-			return (sbyte)((max - min) * NextFloat01() + min);
+			return (sbyte)((max - min) * NextFloat() + min);
 		}
 
+		/// <summary>
+		/// Generates a pseudo-random <see cref="short"/> value
+		/// in range [<see cref="short.MinValue"/>, <see cref="short.MaxValue"/>].
+		/// </summary>
+		/// <returns>Generated <see cref="short"/> value.</returns>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public short NextShort()
 		{
@@ -85,12 +132,24 @@ namespace Zor.RandomGenerators.RandomEngines
 			}
 		}
 
+		/// <summary>
+		/// Generates a pseudo-random <see cref="short"/> value
+		/// in range [<paramref name="min"/>, <paramref name="max"/>).
+		/// </summary>
+		/// <param name="min"></param>
+		/// <param name="max"></param>
+		/// <returns>Generated <see cref="short"/> value.</returns>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public short NextShort(short min, short max)
 		{
-			return (short)((max - min) * NextFloat01() + min);
+			return (short)((max - min) * NextFloat() + min);
 		}
 
+		/// <summary>
+		/// Generates a pseudo-random <see cref="ushort"/> value
+		/// in range [<see cref="ushort.MinValue"/>, <see cref="ushort.MaxValue"/>].
+		/// </summary>
+		/// <returns>Generated <see cref="ushort"/> value.</returns>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public ushort NextUshort()
 		{
@@ -102,12 +161,24 @@ namespace Zor.RandomGenerators.RandomEngines
 			}
 		}
 
+		/// <summary>
+		/// Generates a pseudo-random <see cref="ushort"/> value
+		/// in range [<paramref name="min"/>, <paramref name="max"/>).
+		/// </summary>
+		/// <param name="min"></param>
+		/// <param name="max"></param>
+		/// <returns>Generated <see cref="ushort"/> value.</returns>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public ushort NextUshort(ushort min, ushort max)
 		{
-			return (ushort)((max - min) * NextFloat01() + min);
+			return (ushort)((max - min) * NextFloat() + min);
 		}
 
+		/// <summary>
+		/// Generates a pseudo-random <see cref="int"/> value
+		/// in range (<see cref="int.MinValue"/>, <see cref="int.MaxValue"/>].
+		/// </summary>
+		/// <returns>Generated <see cref="int"/> value.</returns>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public int NextInt()
 		{
@@ -115,16 +186,28 @@ namespace Zor.RandomGenerators.RandomEngines
 
 			unchecked
 			{
-				return (int)~m_state;
+				return (int)m_state ^ int.MinValue;
 			}
 		}
 
+		/// <summary>
+		/// Generates a pseudo-random <see cref="int"/> value
+		/// in range [<paramref name="min"/>, <paramref name="max"/>).
+		/// </summary>
+		/// <param name="min"></param>
+		/// <param name="max"></param>
+		/// <returns>Generated <see cref="int"/> value.</returns>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public int NextInt(int min, int max)
 		{
-			return (int)((max - min) * NextFloat01()) + min;
+			return (int)((max - min) * NextFloat()) + min;
 		}
 
+		/// <summary>
+		/// Generates a pseudo-random <see cref="uint"/> value
+		/// in range [<see cref="uint.MinValue"/>, <see cref="uint.MaxValue"/>).
+		/// </summary>
+		/// <returns>Generated <see cref="uint"/> value.</returns>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public uint NextUint()
 		{
@@ -132,27 +215,51 @@ namespace Zor.RandomGenerators.RandomEngines
 			return ~m_state;
 		}
 
+		/// <summary>
+		/// Generates a pseudo-random <see cref="uint"/> value
+		/// in range [<paramref name="min"/>, <paramref name="max"/>).
+		/// </summary>
+		/// <param name="min"></param>
+		/// <param name="max"></param>
+		/// <returns>Generated <see cref="uint"/> value.</returns>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public uint NextUint(uint min, uint max)
 		{
-			return (uint)((max - min) * NextFloat01()) + min;
+			return (uint)((max - min) * NextFloat()) + min;
 		}
 
+		/// <summary>
+		/// Generates a pseudo-random <see cref="long"/> value
+		/// in range (<see cref="long.MinValue"/>, <see cref="long.MaxValue"/>].
+		/// </summary>
+		/// <returns>Generated <see cref="long"/> value.</returns>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public long NextLong()
 		{
 			NextState();
 			long answer = (long)m_state << 32;
 			NextState();
-			return ~(answer | m_state);
+			return (answer | m_state) ^ long.MinValue;
 		}
 
+		/// <summary>
+		/// Generates a pseudo-random <see cref="long"/> value
+		/// in range [<paramref name="min"/>, <paramref name="max"/>).
+		/// </summary>
+		/// <param name="min"></param>
+		/// <param name="max"></param>
+		/// <returns>Generated <see cref="long"/> value.</returns>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public long NextLong(long min, long max)
 		{
-			return (long)((max - min) * NextDouble01()) + min;
+			return (long)((max - min) * NextDouble()) + min;
 		}
 
+		/// <summary>
+		/// Generates a pseudo-random <see cref="ulong"/> value
+		/// in range [<see cref="ulong.MinValue"/>, <see cref="ulong.MaxValue"/>).
+		/// </summary>
+		/// <returns>Generated <see cref="ulong"/> value.</returns>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public ulong NextUlong()
 		{
@@ -162,54 +269,73 @@ namespace Zor.RandomGenerators.RandomEngines
 			return ~(answer | m_state);
 		}
 
+		/// <summary>
+		/// Generates a pseudo-random <see cref="ulong"/> value
+		/// in range [<paramref name="min"/>, <paramref name="max"/>).
+		/// </summary>
+		/// <param name="min"></param>
+		/// <param name="max"></param>
+		/// <returns>Generated <see cref="ulong"/> value.</returns>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public ulong NextUlong(ulong min, ulong max)
 		{
-			return (ulong)((max - min) * NextDouble01()) + min;
+			return (ulong)((max - min) * NextDouble()) + min;
 		}
 
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public float NextFloat01()
-		{
-			NextState();
-			uint answer = (m_state >> 9) | 0x3F800000u;
-			return *(float*)&answer - 1f;
-		}
-
+		/// <summary>
+		/// Generates a pseudo-random <see cref="float"/> value in range [0, 1).
+		/// </summary>
+		/// <returns>Generated <see cref="float"/> value.</returns>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public float NextFloat()
 		{
 			NextState();
-			uint answer = m_state;
-			return *(float*)&answer;
+			// First 9 bits stand for sign and exponent. 0x3F800000u sets exponent for range [1, 2).
+			uint answer = (m_state >> 9) | 0x3F800000u;
+			return *(float*)&answer - 1f;
 		}
 
+		/// <summary>
+		/// Generates a pseudo-random <see cref="float"/> value
+		/// in range [<paramref name="min"/>, <paramref name="max"/>).
+		/// </summary>
+		/// <returns>Generated <see cref="float"/> value.</returns>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public float NextFloat(float min, float max)
 		{
-			return (max - min) * NextFloat01() + min;
+			return (max - min) * NextFloat() + min;
 		}
 
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public double NextDouble01()
-		{
-			ulong answer = (NextUlong() >> 12) | 0x3FF0000000000000UL;
-			return *(double*)&answer - 1D;
-		}
-
+		/// <summary>
+		/// Generates a pseudo-random <see cref="double"/> value in range [0, 1).
+		/// </summary>
+		/// <returns>Generated <see cref="double"/> value.</returns>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public double NextDouble()
 		{
-			ulong answer = NextUlong();
-			return *(double*)&answer;
+			NextState();
+			ulong mantissa = (ulong)m_state << 32;
+			NextState();
+			mantissa |= m_state;
+			// First 12 bits stand for sign and exponent. 0x3FF0000000000000UL sets exponent for range [1, 2).
+			ulong answer = (mantissa >> 12) | 0x3FF0000000000000UL;
+			return *(double*)&answer - 1D;
 		}
 
+		/// <summary>
+		/// Generates a pseudo-random <see cref="double"/> value
+		/// in range [<paramref name="min"/>, <paramref name="max"/>).
+		/// </summary>
+		/// <returns>Generated <see cref="double"/> value.</returns>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public double NextDouble(double min, double max)
 		{
-			return (max - min) * NextDouble01() + min;
+			return (max - min) * NextDouble() + min;
 		}
 
+		/// <summary>
+		/// XorShift32 algorithm.
+		/// </summary>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		private void NextState()
 		{

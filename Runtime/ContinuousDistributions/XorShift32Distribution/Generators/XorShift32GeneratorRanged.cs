@@ -7,16 +7,31 @@ using Zor.RandomGenerators.RandomEngines;
 
 namespace Zor.RandomGenerators.ContinuousDistributions
 {
+	/// <summary>
+	/// XorShift32 distribution generator using <see cref="XorShift32.NextFloat(float,float)"/>.
+	/// </summary>
 	public sealed class XorShift32GeneratorRanged : IXorShift32Generator
 	{
 		private XorShift32 m_randomEngine;
 		private float m_min;
 		private float m_max;
 
+		/// <summary>
+		/// Creates a <see cref="XorShift32GeneratorRanged"/> with the specified min and max
+		/// and <see cref="Environment.TickCount"/> as seed.
+		/// </summary>
+		/// <param name="min"></param>
+		/// <param name="max"></param>
 		public XorShift32GeneratorRanged(float min, float max) : this(Environment.TickCount, min, max)
 		{
 		}
 
+		/// <summary>
+		/// Creates a <see cref="XorShift32GeneratorRanged"/> with the specified parameters.
+		/// </summary>
+		/// <param name="seed">Seed. Must be non-zero.</param>
+		/// <param name="min"></param>
+		/// <param name="max"></param>
 		public XorShift32GeneratorRanged(int seed, float min, float max)
 		{
 			m_randomEngine = new XorShift32(seed);
@@ -24,6 +39,12 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 			m_max = max;
 		}
 
+		/// <summary>
+		/// Creates a <see cref="XorShift32GeneratorRanged"/> with the specified parameters.
+		/// </summary>
+		/// <param name="initialState">Initial state of <see cref="XorShift32"/>. Must be non-zero.</param>
+		/// <param name="min"></param>
+		/// <param name="max"></param>
 		public XorShift32GeneratorRanged(uint initialState, float min, float max)
 		{
 			m_randomEngine = new XorShift32(initialState);
@@ -55,7 +76,8 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 			set => m_max = value;
 		}
 
-		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+		/// <inheritdoc/>
+		[Pure]
 		public float Generate()
 		{
 			return m_randomEngine.NextFloat(m_min, m_max);

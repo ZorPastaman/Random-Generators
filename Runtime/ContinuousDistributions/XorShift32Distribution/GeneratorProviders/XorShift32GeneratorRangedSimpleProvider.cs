@@ -4,23 +4,21 @@ using System;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
-using Zor.RandomGenerators.RandomEngines;
 
 namespace Zor.RandomGenerators.ContinuousDistributions
 {
 	/// <summary>
-	/// Provides <see cref="XorShift32GeneratorRanged"/> with the specified seed.
+	/// Provides <see cref="XorShift32GeneratorRanged"/> with the default seed.
 	/// </summary>
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.XorShift32ContinuousDistributionFolder +
-			"XorShift32 Generator Ranged Provider",
-		fileName = "XorShift32 Generator Ranged Provider",
+			"XorShift32 Generator Ranged Simple Provider",
+		fileName = "XorShift32 Generator Ranged Simple Provider",
 		order = CreateAssetMenuConstants.DistributionOrder
 	)]
-	public sealed class XorShift32GeneratorRangedProvider : ContinuousGeneratorProvider
+	public sealed class XorShift32GeneratorRangedSimpleProvider : ContinuousGeneratorProvider
 	{
 #pragma warning disable CS0649
-		[SerializeField] private uint m_InitialState = XorShift32Defaults.InitialState;
 		[SerializeField] private float m_Min = XorShift32Defaults.DefaultMin;
 		[SerializeField] private float m_Max = XorShift32Defaults.DefaultMax;
 #pragma warning restore CS0649
@@ -33,7 +31,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		public override IContinuousGenerator generator
 		{
 			[Pure]
-			get => new XorShift32GeneratorRanged(m_InitialState, m_Min, m_Max);
+			get => new XorShift32GeneratorRanged(m_Min, m_Max);
 		}
 
 		/// <summary>
@@ -59,7 +57,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		public XorShift32GeneratorRanged xorShift32Generator
 		{
 			[Pure]
-			get => new XorShift32GeneratorRanged(m_InitialState, m_Min, m_Max);
+			get => new XorShift32GeneratorRanged(m_Min, m_Max);
 		}
 
 		/// <summary>
@@ -76,25 +74,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 				}
 
 				return m_sharedGenerator;
-			}
-		}
-
-		/// <summary>
-		/// Initial state of <see cref="XorShift32"/>. Must be non-zero.
-		/// </summary>
-		public uint initialState
-		{
-			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_InitialState;
-			set
-			{
-				if (m_InitialState == value)
-				{
-					return;
-				}
-
-				m_InitialState = value;
-				m_sharedGenerator = null;
 			}
 		}
 

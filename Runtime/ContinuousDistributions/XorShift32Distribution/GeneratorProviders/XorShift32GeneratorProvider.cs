@@ -9,35 +9,32 @@ using Zor.RandomGenerators.RandomEngines;
 namespace Zor.RandomGenerators.ContinuousDistributions
 {
 	/// <summary>
-	/// Provides <see cref="XorShift32GeneratorRanged"/> with the specified seed.
+	/// Provides <see cref="XorShift32Generator"/>.
 	/// </summary>
 	[CreateAssetMenu(
-		menuName = CreateAssetMenuConstants.XorShift32ContinuousDistributionFolder +
-			"XorShift32 Generator Ranged Provider",
-		fileName = "XorShift32 Generator Ranged Provider",
+		menuName = CreateAssetMenuConstants.XorShift32ContinuousDistributionFolder + "XorShift32 Generator Provider",
+		fileName = "XorShift32 Generator Provider",
 		order = CreateAssetMenuConstants.DistributionOrder
 	)]
-	public sealed class XorShift32GeneratorRangedProvider : ContinuousGeneratorProvider
+	public sealed class XorShift32GeneratorProvider : ContinuousGeneratorProvider
 	{
 #pragma warning disable CS0649
 		[SerializeField] private uint m_InitialState = XorShift32Defaults.InitialState;
-		[SerializeField] private float m_Min = XorShift32Defaults.DefaultMin;
-		[SerializeField] private float m_Max = XorShift32Defaults.DefaultMax;
 #pragma warning restore CS0649
 
-		[NonSerialized] private XorShift32GeneratorRanged m_sharedGenerator;
+		[NonSerialized] private XorShift32Generator m_sharedGenerator;
 
 		/// <summary>
-		/// Creates a new <see cref="XorShift32GeneratorRanged"/> and returns it as <see cref="IContinuousGenerator"/>.
+		/// Creates a new <see cref="XorShift32Generator"/> and returns it as <see cref="IContinuousGenerator"/>.
 		/// </summary>
 		public override IContinuousGenerator generator
 		{
 			[Pure]
-			get => new XorShift32GeneratorRanged(m_InitialState, m_Min, m_Max);
+			get => new XorShift32Generator(m_InitialState);
 		}
 
 		/// <summary>
-		/// Returns a shared <see cref="XorShift32GeneratorRanged"/> as <see cref="IContinuousGenerator"/>.
+		/// Returns a shared <see cref="XorShift32Generator"/> as <see cref="IContinuousGenerator"/>.
 		/// </summary>
 		public override IContinuousGenerator sharedGenerator
 		{
@@ -53,20 +50,20 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		}
 
 		/// <summary>
-		/// Creates a new <see cref="XorShift32GeneratorRanged"/> and returns it.
+		/// Creates a new <see cref="XorShift32Generator"/> and returns it.
 		/// </summary>
 		[NotNull]
-		public XorShift32GeneratorRanged xorShift32Generator
+		public XorShift32Generator xorShift32Generator
 		{
 			[Pure]
-			get => new XorShift32GeneratorRanged(m_InitialState, m_Min, m_Max);
+			get => new XorShift32Generator(m_InitialState);
 		}
 
 		/// <summary>
-		/// Returns a shared <see cref="XorShift32GeneratorRanged"/>.
+		/// Returns a shared <see cref="XorShift32Generator"/>.
 		/// </summary>
 		[NotNull]
-		public XorShift32GeneratorRanged sharedXorShift32Generator
+		public XorShift32Generator sharedXorShift32Generator
 		{
 			get
 			{
@@ -94,38 +91,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 				}
 
 				m_InitialState = value;
-				m_sharedGenerator = null;
-			}
-		}
-
-		public float min
-		{
-			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_Min;
-			set
-			{
-				if (m_Min == value)
-				{
-					return;
-				}
-
-				m_Min = value;
-				m_sharedGenerator = null;
-			}
-		}
-
-		public float max
-		{
-			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_Max;
-			set
-			{
-				if (m_Max == value)
-				{
-					return;
-				}
-
-				m_Max = value;
 				m_sharedGenerator = null;
 			}
 		}

@@ -8,7 +8,7 @@ using UnityEngine;
 namespace Zor.RandomGenerators.ContinuousDistributions
 {
 	/// <summary>
-	/// Provides <see cref="XorShift32Generator"/>.
+	/// Provides <see cref="XorShift32Generator"/> with the default seed.
 	/// </summary>
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.XorShift32ContinuousDistributionFolder +

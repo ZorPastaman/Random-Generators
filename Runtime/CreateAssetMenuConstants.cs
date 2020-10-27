@@ -51,6 +51,8 @@ namespace Zor.RandomGenerators
 		public const string SharpDiscreteDistributionFolder = DiscreteDistributionsFolder + "Sharp Distribution/";
 		public const string UnityDiscreteDistributionFolder = DiscreteDistributionsFolder + "Unity Distribution/";
 		public const string WeightedDistributionFolder = DiscreteDistributionsFolder + "Weighted Distribution/";
+		public const string XorShift32DiscreteDistributionFolder = DiscreteDistributionsFolder +
+			"XorShift32 Distribution/";
 
 		public const string DiscreteModificatorsFolder = DiscreteDistributionsFolder + "Modificators/";
 

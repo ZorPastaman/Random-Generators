@@ -7,38 +7,38 @@ using UnityEngine;
 using Zor.RandomGenerators.PropertyDrawerAttributes;
 using Zor.RandomGenerators.RandomEngines;
 
-namespace Zor.RandomGenerators.ContinuousDistributions
+namespace Zor.RandomGenerators.DiscreteDistributions
 {
 	/// <summary>
-	/// Provides <see cref="XorShift32Generator"/> with the specified seed.
+	/// Provides <see cref="BoolXorShift32Generator"/> with the specified seed.
 	/// </summary>
 	[CreateAssetMenu(
-		menuName = CreateAssetMenuConstants.XorShift32ContinuousDistributionFolder + "XorShift32 Generator Provider",
-		fileName = "XorShift32 Generator Provider",
+		menuName = CreateAssetMenuConstants.XorShift32DiscreteDistributionFolder + "Bool XorShift32 Generator Provider",
+		fileName = "Bool XorShift32 Generator Provider",
 		order = CreateAssetMenuConstants.DistributionOrder
 	)]
-	public sealed class XorShift32GeneratorProvider : ContinuousGeneratorProvider
+	public sealed class BoolXorShift32GeneratorProvider : DiscreteGeneratorProvider<bool>
 	{
 #pragma warning disable CS0649
 		[SerializeField, SimpleRangeLong(1u, uint.MaxValue)]
 		private uint m_InitialState = XorShift32Defaults.InitialState;
 #pragma warning restore CS0649
 
-		[NonSerialized] private XorShift32Generator m_sharedGenerator;
+		[NonSerialized] private BoolXorShift32Generator m_sharedGenerator;
 
 		/// <summary>
-		/// Creates a new <see cref="XorShift32Generator"/> and returns it as <see cref="IContinuousGenerator"/>.
+		/// Creates a new <see cref="BoolXorShift32Generator"/> and returns it as <see cref="IDiscreteGenerator{T}"/>.
 		/// </summary>
-		public override IContinuousGenerator generator
+		public override IDiscreteGenerator<bool> generator
 		{
 			[Pure]
-			get => new XorShift32Generator(m_InitialState);
+			get => new BoolXorShift32Generator(m_InitialState);
 		}
 
 		/// <summary>
-		/// Returns a shared <see cref="XorShift32Generator"/> as <see cref="IContinuousGenerator"/>.
+		/// Returns a shared <see cref="BoolXorShift32Generator"/> as <see cref="IDiscreteGenerator{T}"/>.
 		/// </summary>
-		public override IContinuousGenerator sharedGenerator
+		public override IDiscreteGenerator<bool> sharedGenerator
 		{
 			get
 			{
@@ -52,21 +52,22 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		}
 
 		/// <summary>
-		/// Creates a new <see cref="XorShift32Generator"/> and returns it.
+		/// Creates a new <see cref="BoolXorShift32Generator"/> and returns it.
 		/// </summary>
 		[NotNull]
-		public XorShift32Generator xorShift32Generator
+		public BoolXorShift32Generator xorShift32Generator
 		{
 			[Pure]
-			get => new XorShift32Generator(m_InitialState);
+			get => new BoolXorShift32Generator(m_InitialState);
 		}
 
 		/// <summary>
-		/// Returns a shared <see cref="XorShift32Generator"/>.
+		/// Returns a shared <see cref="BoolXorShift32Generator"/>.
 		/// </summary>
 		[NotNull]
-		public XorShift32Generator sharedXorShift32Generator
+		public BoolXorShift32Generator sharedXorShift32Generator
 		{
+			[Pure]
 			get
 			{
 				if (m_sharedGenerator == null)
@@ -97,7 +98,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 			}
 		}
 
-		/// <inheritdoc/>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public override void DropSharedGenerator()
 		{

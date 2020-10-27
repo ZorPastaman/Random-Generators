@@ -7,41 +7,40 @@ using UnityEngine;
 using Zor.RandomGenerators.PropertyDrawerAttributes;
 using Zor.RandomGenerators.RandomEngines;
 
-namespace Zor.RandomGenerators.ContinuousDistributions
+namespace Zor.RandomGenerators.DiscreteDistributions
 {
 	/// <summary>
-	/// Provides <see cref="XorShift32GeneratorRanged"/> with the specified seed.
+	/// Provides <see cref="IntXorShift32Generator"/> with the specified seed.
 	/// </summary>
 	[CreateAssetMenu(
-		menuName = CreateAssetMenuConstants.XorShift32ContinuousDistributionFolder +
-			"XorShift32 Generator Ranged Provider",
-		fileName = "XorShift32 Generator Ranged Provider",
+		menuName = CreateAssetMenuConstants.XorShift32DiscreteDistributionFolder + "Int XorShift32 Generator Provider",
+		fileName = "Int XorShift32 Generator Provider",
 		order = CreateAssetMenuConstants.DistributionOrder
 	)]
-	public sealed class XorShift32GeneratorRangedProvider : ContinuousGeneratorProvider
+	public sealed class IntXorShift32GeneratorProvider : DiscreteGeneratorProvider<int>
 	{
 #pragma warning disable CS0649
 		[SerializeField, SimpleRangeLong(1u, uint.MaxValue)]
 		private uint m_InitialState = XorShift32Defaults.InitialState;
-		[SerializeField] private float m_Min = XorShift32Defaults.DefaultMin;
-		[SerializeField] private float m_Max = XorShift32Defaults.DefaultMax;
+		[SerializeField] private int m_Min = XorShift32Defaults.DefaultMin;
+		[SerializeField] private int m_Max = XorShift32Defaults.DefaultMax;
 #pragma warning restore CS0649
 
-		[NonSerialized] private XorShift32GeneratorRanged m_sharedGenerator;
+		[NonSerialized] private IntXorShift32Generator m_sharedGenerator;
 
 		/// <summary>
-		/// Creates a new <see cref="XorShift32GeneratorRanged"/> and returns it as <see cref="IContinuousGenerator"/>.
+		/// Creates a new <see cref="IntXorShift32Generator"/> and returns it as <see cref="IDiscreteGenerator{T}"/>.
 		/// </summary>
-		public override IContinuousGenerator generator
+		public override IDiscreteGenerator<int> generator
 		{
 			[Pure]
-			get => new XorShift32GeneratorRanged(m_InitialState, m_Min, m_Max);
+			get => new IntXorShift32Generator(m_InitialState, m_Min, m_Max);
 		}
 
 		/// <summary>
-		/// Returns a shared <see cref="XorShift32GeneratorRanged"/> as <see cref="IContinuousGenerator"/>.
+		/// Returns a shared <see cref="IntXorShift32Generator"/> as <see cref="IDiscreteGenerator{T}"/>.
 		/// </summary>
-		public override IContinuousGenerator sharedGenerator
+		public override IDiscreteGenerator<int> sharedGenerator
 		{
 			get
 			{
@@ -55,21 +54,22 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		}
 
 		/// <summary>
-		/// Creates a new <see cref="XorShift32GeneratorRanged"/> and returns it.
+		/// Creates a new <see cref="IntXorShift32Generator"/> and returns it.
 		/// </summary>
 		[NotNull]
-		public XorShift32GeneratorRanged xorShift32Generator
+		public IntXorShift32Generator xorShift32Generator
 		{
 			[Pure]
-			get => new XorShift32GeneratorRanged(m_InitialState, m_Min, m_Max);
+			get => new IntXorShift32Generator(m_InitialState, m_Min, m_Max);
 		}
 
 		/// <summary>
-		/// Returns a shared <see cref="XorShift32GeneratorRanged"/>.
+		/// Returns a shared <see cref="IntXorShift32Generator"/>.
 		/// </summary>
 		[NotNull]
-		public XorShift32GeneratorRanged sharedXorShift32Generator
+		public IntXorShift32Generator sharedXorShift32Generator
 		{
+			[Pure]
 			get
 			{
 				if (m_sharedGenerator == null)
@@ -100,7 +100,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 			}
 		}
 
-		public float min
+		public int min
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_Min;
@@ -116,7 +116,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 			}
 		}
 
-		public float max
+		public int max
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_Max;
@@ -132,7 +132,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 			}
 		}
 
-		/// <inheritdoc/>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public override void DropSharedGenerator()
 		{

@@ -6,7 +6,7 @@ using JetBrains.Annotations;
 namespace Zor.RandomGenerators.RandomEngines
 {
 	/// <summary>
-	/// Pseudo-random number generator using XorShift32 algorithm.
+	/// Pseudo-random number engine using XorShift32 algorithm.
 	/// </summary>
 	public unsafe struct XorShift32
 	{

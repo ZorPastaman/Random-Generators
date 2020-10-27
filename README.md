@@ -1,6 +1,6 @@
 # Random Generators
 Random generators for Unity is a collection of random generators, 
-different distributions, modificators and filters.
+different random engines, distributions, modificators and filters.
 
 The library has a useful infrastructure that makes it easy to expand it and add new
 distributions, modificators, filters and random generators.
@@ -37,25 +37,41 @@ available separately from other parts.
 
 ## Parts
 
-### Distributions
+### Random Engines
+
+Random engines are algorithms in structs that generate pseudo-random values.
+
+##### List of random engines
+
+- [XorShift32](https://github.com/ZorPastaman/Random-Generators/blob/master/Runtime/RandomEngines/XorShift/XorShift32.cs) -
+[Wikipedia](https://en.wikipedia.org/wiki/Xorshift)
+
+### Random Generators
+
+Random generators use random engines (custom or pre-built in Unity)
+to generate pseudo-random values corresponding to a distribution.
+They may simply wrap random engines as well.
+They consist of distributions, generators and generator providers.
+
+#### Distributions
 
 Distributions are just algorithms in static classes that return a random value(s).
 They usually require an independent and identically distributed random generator.
 By default, Unity generator is used as such a generator. 
 Also, the distributions support `Func<float>` and `IContinuousGenerator` as an iid random generator.
 
-### Generators
+#### Generators
 
 Generators are standard c# classes that implement [IContinuousGenerator](https://github.com/ZorPastaman/Random-Generators/blob/master/Runtime/ContinuousDistributions/IContinuousGenerator.cs)
 or [IDiscreteGenerator<T>](https://github.com/ZorPastaman/Random-Generators/blob/master/Runtime/DiscreteDistributions/IDiscreteGenerator.cs)
 and wrap one of the methods of the distributions.
 
-### Generator Providers
+#### Generator Providers
 
 Generator providers are scriptable objects and can be linked to a serialize field in Unity components.
 They wrap generators and provide unique and shared instances of them.
 
-#### List of continuous generator algorithms
+##### List of continuous generator algorithms
 
 - [Bates](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/BatesDistribution) -
 [Wikipedia](https://en.wikipedia.org/wiki/Bates_distribution);
@@ -73,8 +89,9 @@ They wrap generators and provide unique and shared instances of them.
 [Microsoft Docs](https://docs.microsoft.com/en-us/dotnet/api/system.random?view=netframework-4.8);
 - [Unity Random Generator Wrapper](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/UnityDistribution) -
 [Unity Docs](https://docs.unity3d.com/ScriptReference/Random.html).
+- [XorShift32 Random Generator Wrapper](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/XorShift32Distribution)
 
-#### List of discrete generator algorithms
+##### List of discrete generator algorithms
 
 - [Bernoulli](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/DiscreteDistributions/BernoulliDistribution) -
 [Wikipedia](https://en.wikipedia.org/wiki/Bernoulli_distribution);
@@ -90,61 +107,72 @@ They wrap generators and provide unique and shared instances of them.
 [Unity Docs](https://docs.unity3d.com/ScriptReference/Random.html);
 - [Weighted](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/DiscreteDistributions/WeightedDistribution) -
 distribution where every value has a weight and its probability is a ratio of its weight to a sum of all weights.
+- [XorShift32 Random Generator Wrapper](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/DiscreteDistributions/XorShift32Distribution)
 
-### Modificators
+### Random modificators
+
+There are different modificators in this library. They modify results of generators and mimic them.
+Modificators has providers as random generators.
+
+#### Modificators
 
 Modificators are standard c# classes that implement [IContinuousGenerator](https://github.com/ZorPastaman/Random-Generators/blob/master/Runtime/ContinuousDistributions/IContinuousGenerator.cs)
 or [IDiscreteGenerator<T>](https://github.com/ZorPastaman/Random-Generators/blob/master/Runtime/DiscreteDistributions/IDiscreteGenerator.cs)
 but they are not actually generators, they take a generated value from a depended generator, modify it somehow and return a result.
 
-### Modificator Providers
+#### Modificator Providers
 
 Modificator providers are scriptable objects and can be linked to a serialize field in Unity components.
 They wrap modificators and provide unique and shared instances of them.
 
-#### List of continuous modificators
+##### List of continuous modificators
 
 - [Clamp](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/DistributionModificators/Clamp) -
 a continuous value is clamped between specified minimum and maximum values;
 - [Round](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/DistributionModificators/Round) -
 a continuous value is rounded to a nearest integer.
 
-#### List of discrete modificators
+##### List of discrete modificators
 
 - [Clamp](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/DiscreteDistributions/DistributionModificators/Clamp) -
 a discrete value is clamped between specified minimum and maximum values;
 - [Round to Int](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/DiscreteDistributions/DistributionModificators/Round) -
 a continuous value is rounded to a nearest integer and returned as a discrete value.
 
-### Filters
+### Random filters
+
+For usual people random values may look like non-random. Because of that we need to filter results of random generators
+and regenerate them if a filter forbids a new value.
+
+#### Filters
 
 Filters are algorithms in static classes that check if a new generated value corresponds to their rules.
 They usually forbid certain sequences of random generated values.
 
-### Filter Wrappers
+#### Filter Wrappers
 
 Filter wrappers are standard c# classes that implement [IContinuousFilter](https://github.com/ZorPastaman/Random-Generators/blob/master/Runtime/ContinuousDistributions/DistributionFilters/IContinuousFilter.cs)
 or [IDiscreteFilter](https://github.com/ZorPastaman/Random-Generators/blob/master/Runtime/DiscreteDistributions/DistributionFilters/IDiscreteFilter.cs)
 and wrap one of the methods of filters.
 
-### Filter Providers
+#### Filter Providers
 
 Filter providers are scriptable objects and can be linked to a serialize field in Unity components.
 They wrap filter wrappers and provide unique and shared instances of them.
 
-### Filtered Generators
+#### Filtered Generators
 
 Filtered generators are standard c# classes that implement [IContinuousFilter](https://github.com/ZorPastaman/Random-Generators/blob/master/Runtime/ContinuousDistributions/DistributionFilters/IContinuousFilter.cs)
 or [IDiscreteFilter](https://github.com/ZorPastaman/Random-Generators/blob/master/Runtime/DiscreteDistributions/DistributionFilters/IDiscreteFilter.cs).
 They take a generated value from a depended generator and check that value with filters.
 If at least one filter doesn't approve a new value, it's regenerated and checked again.
 
-### Filtered Generator Providers
+#### Filtered Generator Providers
 
 Filtered generator providers are scriptable objects and can be linked to a serialize field in Unity components.
 They wrap filtered generators and provide unique and shared instances of them.
 
-#### List of continuous filters
+##### List of continuous filters
 
 - [Ascendant Sequence](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/DistributionFilters/AscendantSequenceFilters) - 
 checks if a value continues an ascendant sequence and it needs to be regenerated;
@@ -163,7 +191,7 @@ checks if a value continues a sequence where consecutive elements differ by less
 - [Not In Range](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/DistributionFilters/NotInRangeFilters) -
 checks if a value continues a sequence where every value is in range between the minimum and maximum and needs to be regenerated.
 
-#### List of discrete filters
+##### List of discrete filters
 
 - [Ascendant Sequence](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/DiscreteDistributions/DistributionFilters/AscendantSequenceFilters) -
 checks if a value continues an ascendant sequence and it needs to be regenerated;
@@ -190,7 +218,7 @@ References are serializable structs that wrap an access to unique and shared gen
 All the references require a link to a provider. Also, they have a toggle **Shared**. 
 If it's on, a reference returns a shared generator or filter. If it's off, a reference returns a unique generator or filter.
 
-#### List of references
+##### List of references
 
 - [Continuous Generator Provider Reference](https://github.com/ZorPastaman/Random-Generators/blob/master/Runtime/ContinuousDistributions/ContinuousGeneratorProviderReference.cs);
 - [Discrete Generator Provider Reference](https://github.com/ZorPastaman/Random-Generators/blob/master/Runtime/DiscreteDistributions/DiscreteGeneratorProviderReference.cs);

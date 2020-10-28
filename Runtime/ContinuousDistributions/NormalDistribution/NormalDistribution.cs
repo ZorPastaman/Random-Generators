@@ -35,7 +35,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 				u = Random.value * 2f - 1f;
 				v = Random.value * 2f - 1f;
 				s = u * u + v * v;
-			} while (s >= 1f | s <= 0f);
+			} while (s >= 1f | s < NumberConstants.NormalEpsilon);
 
 			s = Mathf.Sqrt(-2f * Mathf.Log(s) / s);
 
@@ -77,7 +77,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 				u = iidFunc() * 2f - 1f;
 				v = iidFunc() * 2f - 1f;
 				s = u * u + v * v;
-			} while (s >= 1f | s <= 0f);
+			} while (s >= 1f | s < NumberConstants.NormalEpsilon);
 
 			s = Mathf.Sqrt(-2f * Mathf.Log(s) / s);
 
@@ -124,7 +124,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 				u = iidGenerator.Generate() * 2f - 1f;
 				v = iidGenerator.Generate() * 2f - 1f;
 				s = u * u + v * v;
-			} while (s >= 1f | s <= 0f);
+			} while (s >= 1f | s < NumberConstants.NormalEpsilon);
 
 			s = Mathf.Sqrt(-2f * Mathf.Log(s) / s);
 

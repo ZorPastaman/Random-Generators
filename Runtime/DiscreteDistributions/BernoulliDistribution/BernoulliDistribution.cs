@@ -23,7 +23,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static bool Generate(float probability)
 		{
-			return probability > 0f & Random.value <= probability;
+			return probability >= NumberConstants.NormalEpsilon & Random.value <= probability;
 		}
 
 		/// <summary>
@@ -37,7 +37,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static bool Generate([NotNull] Func<float> iidFunc, float probability)
 		{
-			return probability > 0f & iidFunc() <= probability;
+			return probability >= NumberConstants.NormalEpsilon & iidFunc() <= probability;
 		}
 
 		/// <summary>
@@ -51,7 +51,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static bool Generate<T>([NotNull] T iidGenerator, float probability) where T : IContinuousGenerator
 		{
-			return probability > 0f & iidGenerator.Generate() <= probability;
+			return probability >= NumberConstants.NormalEpsilon & iidGenerator.Generate() <= probability;
 		}
 	}
 }

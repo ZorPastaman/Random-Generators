@@ -32,7 +32,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 			do
 			{
 				iid = Random.value;
-			} while (iid <= 0f);
+			} while (iid < NumberConstants.NormalEpsilon);
 
 			return -Mathf.Log(iid) / lambda;
 		}
@@ -71,7 +71,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 			do
 			{
 				iid = iidFunc();
-			} while (iid <= 0f);
+			} while (iid < NumberConstants.NormalEpsilon);
 
 			return -Mathf.Log(iid) / lambda;
 		}
@@ -114,7 +114,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 			do
 			{
 				iid = iidGenerator.Generate();
-			} while (iid <= 0f);
+			} while (iid < NumberConstants.NormalEpsilon);
 
 			return -Mathf.Log(iid) / lambda;
 		}

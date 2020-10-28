@@ -16,7 +16,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	{
 #pragma warning disable CS0649
 		[SerializeField] private int m_StartPoint = NegativeBinomialDistribution.DefaultStartPoint;
-		[SerializeField, Range(1.19E-07f , 1f)]
+		[SerializeField, Range(NumberConstants.NormalEpsilon , 1f)]
 		private float m_Probability = NegativeBinomialDistribution.DefaultProbability;
 		[SerializeField, SimpleRangeInt(1, 255)]
 		private byte m_Successes = NegativeBinomialDistribution.DefaultSuccesses;

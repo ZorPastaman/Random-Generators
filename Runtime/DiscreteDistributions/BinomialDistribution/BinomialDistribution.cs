@@ -40,7 +40,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 				do
 				{
 					iid = Random.value;
-				} while (iid <= 0f);
+				} while (iid < NumberConstants.NormalEpsilon);
 
 				float e = -Mathf.Log(iid);
 				sum += e / (upperBound - x);
@@ -86,7 +86,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 				do
 				{
 					iid = iidFunc();
-				} while (iid <= 0f);
+				} while (iid < NumberConstants.NormalEpsilon);
 
 				float e = -Mathf.Log(iid);
 				sum += e / (upperBound - x);
@@ -136,7 +136,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 				do
 				{
 					iid = iidGenerator.Generate();
-				} while (iid <= 0f);
+				} while (iid < NumberConstants.NormalEpsilon);
 
 				float e = -Mathf.Log(iid);
 				sum += e / (upperBound - x);

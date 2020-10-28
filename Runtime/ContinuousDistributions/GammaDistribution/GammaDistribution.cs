@@ -56,7 +56,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 				{
 					x = normalDistributionWrapper.Generate();
 					v = 1f + c * x;
-				} while (v <= 0f);
+				} while (v < NumberConstants.NormalEpsilon);
 
 				v = v * v * v;
 				u = Random.value;
@@ -70,7 +70,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 				do
 				{
 					u = Random.value;
-				} while (u <= 0f);
+				} while (u < NumberConstants.NormalEpsilon);
 
 				result *= Mathf.Pow(u, 1f / (alpha - 1f));
 			}
@@ -132,7 +132,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 				{
 					x = normalDistributionWrapper.Generate(iidFunc);
 					v = 1f + c * x;
-				} while (v <= 0f);
+				} while (v < NumberConstants.NormalEpsilon);
 
 				v = v * v * v;
 				u = iidFunc();
@@ -146,7 +146,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 				do
 				{
 					u = iidFunc();
-				} while (u <= 0f);
+				} while (u < NumberConstants.NormalEpsilon);
 
 				result *= Mathf.Pow(u, 1f / (alpha - 1f));
 			}
@@ -212,7 +212,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 				{
 					x = normalDistributionWrapper.Generate(iidGenerator);
 					v = 1f + c * x;
-				} while (v <= 0f);
+				} while (v < NumberConstants.NormalEpsilon);
 
 				v = v * v * v;
 				u = iidGenerator.Generate();
@@ -226,7 +226,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 				do
 				{
 					u = iidGenerator.Generate();
-				} while (u <= 0f);
+				} while (u < NumberConstants.NormalEpsilon);
 
 				result *= Mathf.Pow(u, 1f / (alpha - 1f));
 			}

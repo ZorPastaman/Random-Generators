@@ -19,7 +19,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 	public sealed class GammaGeneratorProvider : ContinuousGeneratorProvider
 	{
 #pragma warning disable CS0649
-		[SerializeField, SimpleRangeFloat(1.19E-07f, float.MaxValue), Tooltip("Shape.")]
+		[SerializeField, SimpleRangeFloat(NumberConstants.NormalEpsilon, float.MaxValue), Tooltip("Shape.")]
 		private float m_Alpha = GammaDistribution.DefaultAlpha;
 		[SerializeField, Tooltip("Scale.")]
 		private float m_Beta = GammaDistribution.DefaultBeta;

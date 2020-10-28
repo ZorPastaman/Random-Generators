@@ -21,7 +21,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 #pragma warning disable CS0649
 		[SerializeField, Tooltip("Random generator that returns an independent and identically distributed random value in range [0, 1].")]
 		private ContinuousGeneratorProviderReference m_DependedGeneratorProvider;
-		[SerializeField, SimpleRangeFloat(1.19E-07f, float.MaxValue), Tooltip("Shape.")]
+		[SerializeField, SimpleRangeFloat(NumberConstants.NormalEpsilon, float.MaxValue), Tooltip("Shape.")]
 		private float m_Alpha = GammaDistribution.DefaultAlpha;
 		[SerializeField, Tooltip("Scale.")]
 		private float m_Beta = GammaDistribution.DefaultBeta;

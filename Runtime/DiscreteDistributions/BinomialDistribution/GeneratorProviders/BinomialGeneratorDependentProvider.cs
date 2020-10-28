@@ -22,7 +22,8 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[SerializeField, Tooltip("Random generator that returns an independent and identically distributed random value in range [0, 1].")]
 		private ContinuousGeneratorProviderReference m_DependedGeneratorProvider;
 		[SerializeField] private int m_StartPoint = BinomialDistribution.DefaultStartPoint;
-		[SerializeField, Range(0f, 0.999999881f)] private float m_Probability = BinomialDistribution.DefaultProbability;
+		[SerializeField, Range(0f, NumberConstants.SubOne)]
+		private float m_Probability = BinomialDistribution.DefaultProbability;
 		[SerializeField] private byte m_UpperBound = BinomialDistribution.DefaultUpperBound;
 #pragma warning restore CS0649
 

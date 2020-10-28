@@ -10,7 +10,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 
 - Exponential distribution.
-- XorShift32 random engine.
+- XorShift32 random engine and wrappers for it.
+
+### Changed
+
+- Distributions now use normal epsilon because 
+some CPUs don't support standard C# denormal epsilon.
 
 ### Fixed
 

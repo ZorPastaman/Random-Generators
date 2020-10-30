@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Exponential distribution.
 - XorShift32 random engine and wrappers for it.
+- XorShift64 random engine and wrappers for it.
 
 ### Changed
 

@@ -45,6 +45,8 @@ Random engines are algorithms in structs that generate pseudo-random values.
 
 - [XorShift32](https://github.com/ZorPastaman/Random-Generators/blob/master/Runtime/RandomEngines/XorShift/XorShift32.cs) -
 [Wikipedia](https://en.wikipedia.org/wiki/Xorshift)
+- [XorShift64](https://github.com/ZorPastaman/Random-Generators/blob/master/Runtime/RandomEngines/XorShift/XorShift64.cs) -
+[Wikipedia](https://en.wikipedia.org/wiki/Xorshift)
 
 ### Random Generators
 
@@ -90,6 +92,7 @@ They wrap generators and provide unique and shared instances of them.
 - [Unity Random Generator Wrapper](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/UnityDistribution) -
 [Unity Docs](https://docs.unity3d.com/ScriptReference/Random.html).
 - [XorShift32 Random Generator Wrapper](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/XorShift32Distribution)
+- [XorShift64 Random Generator Wrapper](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/XorShift64Distribution)
 
 ##### List of discrete generator algorithms
 
@@ -108,6 +111,7 @@ They wrap generators and provide unique and shared instances of them.
 - [Weighted](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/DiscreteDistributions/WeightedDistribution) -
 distribution where every value has a weight and its probability is a ratio of its weight to a sum of all weights.
 - [XorShift32 Random Generator Wrapper](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/DiscreteDistributions/XorShift32Distribution)
+- [XorShift64 Random Generator Wrapper](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/DiscreteDistributions/XorShift64Distribution)
 
 ### Random modificators
 

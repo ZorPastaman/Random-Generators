@@ -19,6 +19,8 @@ namespace Zor.RandomGenerators
 		public const string UnityContinuousDistributionFolder = ContinuousDistributionsFolder + "Unity Distribution/";
 		public const string XorShift32ContinuousDistributionFolder = ContinuousDistributionsFolder +
 			"XorShift32 Distribution/";
+		public const string XorShift64ContinuousDistributionFolder = ContinuousDistributionsFolder +
+			"XorShift64 Distribution/";
 
 		public const string ContinuousModificatorsFolder = ContinuousDistributionsFolder + "Modificators/";
 
@@ -53,6 +55,8 @@ namespace Zor.RandomGenerators
 		public const string WeightedDistributionFolder = DiscreteDistributionsFolder + "Weighted Distribution/";
 		public const string XorShift32DiscreteDistributionFolder = DiscreteDistributionsFolder +
 			"XorShift32 Distribution/";
+		public const string XorShift64DiscreteDistributionFolder = DiscreteDistributionsFolder +
+			"XorShift64 Distribution/";
 
 		public const string DiscreteModificatorsFolder = DiscreteDistributionsFolder + "Modificators/";
 

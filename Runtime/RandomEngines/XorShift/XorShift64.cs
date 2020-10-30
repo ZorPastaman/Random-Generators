@@ -6,39 +6,39 @@ using JetBrains.Annotations;
 namespace Zor.RandomGenerators.RandomEngines
 {
 	/// <summary>
-	/// Pseudo-random number engine using XorShift32 algorithm.
+	/// Pseudo-random number engine using XorShift64 algorithm.
 	/// </summary>
-	public unsafe struct XorShift32
+	public unsafe struct XorShift64
 	{
-		private uint m_state;
+		private ulong m_state;
 
 		/// <summary>
-		/// Creates a <see cref="XorShift32"/> with the specified initial state.
+		/// Creates a <see cref="XorShift64"/> with the specified initial state.
 		/// </summary>
 		/// <param name="state">Initial state. Must be non-zero.</param>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public XorShift32(uint state)
+		public XorShift64(ulong state)
 		{
 			m_state = state;
 		}
 
 		/// <summary>
-		/// Creates a <see cref="XorShift32"/> with the specified seed.
+		/// Creates a <see cref="XorShift64"/> with the specified seed.
 		/// </summary>
 		/// <param name="seed">Seed. Used as initial state. Must be non-zero.</param>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public XorShift32(int seed)
+		public XorShift64(long seed)
 		{
 			unchecked
 			{
-				m_state = (uint)seed;
+				m_state = (ulong)seed;
 			}
 		}
 
 		/// <summary>
 		/// Current state. Must be non-zero.
 		/// </summary>
-		public uint state
+		public ulong state
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_state;
@@ -54,7 +54,7 @@ namespace Zor.RandomGenerators.RandomEngines
 		public bool NextBool()
 		{
 			NextState();
-			uint answer = m_state & 1u;
+			ulong answer = m_state & 1UL;
 			return *(bool*)&answer;
 		}
 
@@ -176,7 +176,7 @@ namespace Zor.RandomGenerators.RandomEngines
 
 		/// <summary>
 		/// Generates a pseudo-random <see cref="int"/> value
-		/// in range (<see cref="int.MinValue"/>, <see cref="int.MaxValue"/>].
+		/// in range [<see cref="int.MinValue"/>, <see cref="int.MaxValue"/>].
 		/// </summary>
 		/// <returns>Generated <see cref="int"/> value.</returns>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -186,7 +186,7 @@ namespace Zor.RandomGenerators.RandomEngines
 
 			unchecked
 			{
-				return (int)m_state ^ int.MinValue;
+				return (int)m_state;
 			}
 		}
 
@@ -205,14 +205,18 @@ namespace Zor.RandomGenerators.RandomEngines
 
 		/// <summary>
 		/// Generates a pseudo-random <see cref="uint"/> value
-		/// in range [<see cref="uint.MinValue"/>, <see cref="uint.MaxValue"/>).
+		/// in range [<see cref="uint.MinValue"/>, <see cref="uint.MaxValue"/>].
 		/// </summary>
 		/// <returns>Generated <see cref="uint"/> value.</returns>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public uint NextUint()
 		{
 			NextState();
-			return ~m_state;
+
+			unchecked
+			{
+				return (uint)m_state;
+			}
 		}
 
 		/// <summary>
@@ -237,9 +241,11 @@ namespace Zor.RandomGenerators.RandomEngines
 		public long NextLong()
 		{
 			NextState();
-			long answer = (long)m_state << 32;
-			NextState();
-			return (answer | m_state) ^ long.MinValue;
+
+			unchecked
+			{
+				return (long)m_state ^ long.MinValue;
+			}
 		}
 
 		/// <summary>
@@ -264,9 +270,7 @@ namespace Zor.RandomGenerators.RandomEngines
 		public ulong NextUlong()
 		{
 			NextState();
-			ulong answer = (ulong)m_state << 32;
-			NextState();
-			return ~(answer | m_state);
+			return ~m_state;
 		}
 
 		/// <summary>
@@ -290,8 +294,7 @@ namespace Zor.RandomGenerators.RandomEngines
 		public float NextFloat()
 		{
 			NextState();
-			// First 9 bits stand for sign and exponent. 0x3F800000u sets exponent for range [1, 2).
-			uint answer = (m_state >> 9) | 0x3F800000u;
+			uint answer = (uint)(m_state >> 41) | 0x3F800000u;
 			return *(float*)&answer - 1f;
 		}
 
@@ -316,11 +319,7 @@ namespace Zor.RandomGenerators.RandomEngines
 		public double NextDouble()
 		{
 			NextState();
-			ulong mantissa = (ulong)m_state << 32;
-			NextState();
-			mantissa |= m_state;
-			// First 12 bits stand for sign and exponent. 0x3FF0000000000000UL sets exponent for range [1, 2).
-			ulong answer = (mantissa >> 12) | 0x3FF0000000000000UL;
+			ulong answer = (m_state >> 12) | 0x3FF0000000000000UL;
 			return *(double*)&answer - 1D;
 		}
 
@@ -338,14 +337,14 @@ namespace Zor.RandomGenerators.RandomEngines
 		}
 
 		/// <summary>
-		/// XorShift32 algorithm.
+		/// XorShift64 algorithm.
 		/// </summary>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		private void NextState()
 		{
 			m_state ^= m_state << 13;
-			m_state ^= m_state >> 17;
-			m_state ^= m_state << 5;
+			m_state ^= m_state >> 7;
+			m_state ^= m_state << 17;
 		}
 	}
 }

@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.2.0] - 2020-11-01
+
 ### Added
 
 - Exponential distribution.
@@ -105,7 +107,8 @@ some CPUs don't support standard C# denormal epsilon.
 - Default Int Uniform generator provider.
 - Default Marsaglia generator provider.
 
-[unreleased]: https://github.com/ZorPastaman/Random-Generators/compare/v1.1.0...HEAD
+[unreleased]: https://github.com/ZorPastaman/Random-Generators/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/ZorPastaman/Random-Generators/releases/tag/v1.2.0
 [1.1.0]: https://github.com/ZorPastaman/Random-Generators/releases/tag/v1.1.0
 [1.0.1]: https://github.com/ZorPastaman/Random-Generators/releases/tag/v1.0.1
 [1.0.0]: https://github.com/ZorPastaman/Random-Generators/releases/tag/v1.0.0

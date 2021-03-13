@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+
+- Unity 2019.4 is now required.
+
 ## [1.2.0] - 2020-11-01
 
 ### Added

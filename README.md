@@ -43,10 +43,9 @@ Random engines are algorithms in structs that generate pseudo-random values.
 
 ##### List of random engines
 
-- [XorShift32](https://github.com/ZorPastaman/Random-Generators/blob/master/Runtime/RandomEngines/XorShift/XorShift32.cs) -
-[Wikipedia](https://en.wikipedia.org/wiki/Xorshift)
-- [XorShift64](https://github.com/ZorPastaman/Random-Generators/blob/master/Runtime/RandomEngines/XorShift/XorShift64.cs) -
-[Wikipedia](https://en.wikipedia.org/wiki/Xorshift)
+- [XorShift32](Runtime/RandomEngines/XorShift/XorShift32.cs) - [Wikipedia](https://en.wikipedia.org/wiki/Xorshift)
+- [XorShift64](Runtime/RandomEngines/XorShift/XorShift64.cs) - [Wikipedia](https://en.wikipedia.org/wiki/Xorshift)
+- [XorShift128](Runtime/RandomEngines/XorShift/XorShift128.cs) - [Wikipedia](https://en.wikipedia.org/wiki/Xorshift)
 
 ### Random Generators
 
@@ -64,8 +63,9 @@ Also, the distributions support `Func<float>` and `IContinuousGenerator` as an i
 
 #### Generators
 
-Generators are standard c# classes that implement [IContinuousGenerator](https://github.com/ZorPastaman/Random-Generators/blob/master/Runtime/ContinuousDistributions/IContinuousGenerator.cs)
-or [IDiscreteGenerator<T>](https://github.com/ZorPastaman/Random-Generators/blob/master/Runtime/DiscreteDistributions/IDiscreteGenerator.cs)
+Generators are standard c# classes that implement 
+[IContinuousGenerator](Runtime/ContinuousDistributions/IContinuousGenerator.cs)
+or [IDiscreteGenerator<T>](Runtime/DiscreteDistributions/IDiscreteGenerator.cs)
 and wrap one of the methods of the distributions.
 
 #### Generator Providers
@@ -75,43 +75,45 @@ They wrap generators and provide unique and shared instances of them.
 
 ##### List of continuous generator algorithms
 
-- [Bates](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/BatesDistribution) -
+- [Bates](Runtime/ContinuousDistributions/BatesDistribution) -
 [Wikipedia](https://en.wikipedia.org/wiki/Bates_distribution);
-- [Exponential](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/ExponentialDistribution) -
+- [Exponential](Runtime/ContinuousDistributions/ExponentialDistribution) -
 [Wikipedia](https://en.wikipedia.org/wiki/Exponential_distribution);
-- [Gamma](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/GammaDistribution) -
+- [Gamma](Runtime/ContinuousDistributions/GammaDistribution) -
 [Wikipedia](https://en.wikipedia.org/wiki/Gamma_distribution);
-- [Irwin-Hall](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/IrwinHallDistribution) -
+- [Irwin-Hall](Runtime/ContinuousDistributions/IrwinHallDistribution) -
 [Wikipedia](https://en.wikipedia.org/wiki/Irwin%E2%80%93Hall_distribution);
-- [Normal](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/NormalDistribution) -
+- [Normal](Runtime/ContinuousDistributions/NormalDistribution) -
 [Wikipedia](https://en.wikipedia.org/wiki/Normal_distribution);
-- [Rejection](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/RejectionDistribution) -
+- [Rejection](Runtime/ContinuousDistributions/RejectionDistribution) -
 [Wikipedia](https://en.wikipedia.org/wiki/Rejection_sampling);
-- [C# Random Generator Wrapper](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/SharpDistribution) -
-[Microsoft Docs](https://docs.microsoft.com/en-us/dotnet/api/system.random?view=netframework-4.8);
-- [Unity Random Generator Wrapper](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/UnityDistribution) -
+- [C# Random Generator Wrapper](Runtime/ContinuousDistributions/SharpDistribution) -
+[Microsoft Docs](https://docs.microsoft.com/en-us/dotnet/api/system.random);
+- [Unity Random Generator Wrapper](Runtime/ContinuousDistributions/UnityDistribution) -
 [Unity Docs](https://docs.unity3d.com/ScriptReference/Random.html).
-- [XorShift32 Random Generator Wrapper](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/XorShift32Distribution)
-- [XorShift64 Random Generator Wrapper](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/XorShift64Distribution)
+- [XorShift32 Random Generator Wrapper](Runtime/ContinuousDistributions/XorShift32Distribution)
+- [XorShift64 Random Generator Wrapper](Runtime/ContinuousDistributions/XorShift64Distribution)
+- [XorShift128 Random Generator Wrapper](Runtime/ContinuousDistributions/XorShift128Distribution)
 
 ##### List of discrete generator algorithms
 
-- [Bernoulli](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/DiscreteDistributions/BernoulliDistribution) -
+- [Bernoulli](Runtime/DiscreteDistributions/BernoulliDistribution) -
 [Wikipedia](https://en.wikipedia.org/wiki/Bernoulli_distribution);
-- [Binomial](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/DiscreteDistributions/BinomialDistribution) -
+- [Binomial](Runtime/DiscreteDistributions/BinomialDistribution) -
 [Wikipedia](https://en.wikipedia.org/wiki/Binomial_distribution);
-- [Negative Binomial](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/DiscreteDistributions/NegativeBinomialDistribution) -
+- [Negative Binomial](Runtime/DiscreteDistributions/NegativeBinomialDistribution) -
 [Wikipedia](https://en.wikipedia.org/wiki/Negative_binomial_distribution);
-- [Poisson](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/DiscreteDistributions/PoissonDistribution) -
+- [Poisson](Runtime/DiscreteDistributions/PoissonDistribution) -
 [Wikipedia](https://en.wikipedia.org/wiki/Poisson_distribution);
-- [C# Random Generator Wrapper](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/DiscreteDistributions/SharpDistribution) -
-[Microsoft Docs](https://docs.microsoft.com/en-us/dotnet/api/system.random?view=netframework-4.8);
-- [Unity Random Generator Wrapper](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/DiscreteDistributions/UnityDistribution) -
+- [C# Random Generator Wrapper](Runtime/DiscreteDistributions/SharpDistribution) -
+[Microsoft Docs](https://docs.microsoft.com/en-us/dotnet/api/system.random);
+- [Unity Random Generator Wrapper](Runtime/DiscreteDistributions/UnityDistribution) -
 [Unity Docs](https://docs.unity3d.com/ScriptReference/Random.html);
-- [Weighted](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/DiscreteDistributions/WeightedDistribution) -
+- [Weighted](Runtime/DiscreteDistributions/WeightedDistribution) -
 distribution where every value has a weight and its probability is a ratio of its weight to a sum of all weights.
-- [XorShift32 Random Generator Wrapper](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/DiscreteDistributions/XorShift32Distribution)
-- [XorShift64 Random Generator Wrapper](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/DiscreteDistributions/XorShift64Distribution)
+- [XorShift32 Random Generator Wrapper](Runtime/DiscreteDistributions/XorShift32Distribution)
+- [XorShift64 Random Generator Wrapper](Runtime/DiscreteDistributions/XorShift64Distribution)
+- [XorShift128 Random Generator Wrapper](Runtime/DiscreteDistributions/XorShift128Distribution)
 
 ### Random modificators
 
@@ -120,9 +122,11 @@ Modificators has providers as random generators.
 
 #### Modificators
 
-Modificators are standard c# classes that implement [IContinuousGenerator](https://github.com/ZorPastaman/Random-Generators/blob/master/Runtime/ContinuousDistributions/IContinuousGenerator.cs)
-or [IDiscreteGenerator<T>](https://github.com/ZorPastaman/Random-Generators/blob/master/Runtime/DiscreteDistributions/IDiscreteGenerator.cs)
-but they are not actually generators, they take a generated value from a depended generator, modify it somehow and return a result.
+Modificators are standard c# classes that implement 
+[IContinuousGenerator](Runtime/ContinuousDistributions/IContinuousGenerator.cs)
+or [IDiscreteGenerator<T>](Runtime/DiscreteDistributions/IDiscreteGenerator.cs)
+but they are not actually generators, they take a generated value from a depended generator, 
+modify it somehow and return a result.
 
 #### Modificator Providers
 
@@ -131,16 +135,16 @@ They wrap modificators and provide unique and shared instances of them.
 
 ##### List of continuous modificators
 
-- [Clamp](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/DistributionModificators/Clamp) -
+- [Clamp](Runtime/ContinuousDistributions/DistributionModificators/Clamp) -
 a continuous value is clamped between specified minimum and maximum values;
-- [Round](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/DistributionModificators/Round) -
+- [Round](Runtime/ContinuousDistributions/DistributionModificators/Round) -
 a continuous value is rounded to a nearest integer.
 
 ##### List of discrete modificators
 
-- [Clamp](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/DiscreteDistributions/DistributionModificators/Clamp) -
+- [Clamp](Runtime/DiscreteDistributions/DistributionModificators/Clamp) -
 a discrete value is clamped between specified minimum and maximum values;
-- [Round to Int](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/DiscreteDistributions/DistributionModificators/Round) -
+- [Round to Int](Runtime/DiscreteDistributions/DistributionModificators/Round) -
 a continuous value is rounded to a nearest integer and returned as a discrete value.
 
 ### Random filters
@@ -155,8 +159,9 @@ They usually forbid certain sequences of random generated values.
 
 #### Filter Wrappers
 
-Filter wrappers are standard c# classes that implement [IContinuousFilter](https://github.com/ZorPastaman/Random-Generators/blob/master/Runtime/ContinuousDistributions/DistributionFilters/IContinuousFilter.cs)
-or [IDiscreteFilter](https://github.com/ZorPastaman/Random-Generators/blob/master/Runtime/DiscreteDistributions/DistributionFilters/IDiscreteFilter.cs)
+Filter wrappers are standard c# classes that implement 
+[IContinuousFilter](Runtime/ContinuousDistributions/DistributionFilters/IContinuousFilter.cs)
+or [IDiscreteFilter](Runtime/DiscreteDistributions/DistributionFilters/IDiscreteFilter.cs)
 and wrap one of the methods of filters.
 
 #### Filter Providers
@@ -166,8 +171,9 @@ They wrap filter wrappers and provide unique and shared instances of them.
 
 #### Filtered Generators
 
-Filtered generators are standard c# classes that implement [IContinuousFilter](https://github.com/ZorPastaman/Random-Generators/blob/master/Runtime/ContinuousDistributions/DistributionFilters/IContinuousFilter.cs)
-or [IDiscreteFilter](https://github.com/ZorPastaman/Random-Generators/blob/master/Runtime/DiscreteDistributions/DistributionFilters/IDiscreteFilter.cs).
+Filtered generators are standard c# classes that implement 
+[IContinuousFilter](Runtime/ContinuousDistributions/DistributionFilters/IContinuousFilter.cs)
+or [IDiscreteFilter](Runtime/DiscreteDistributions/DistributionFilters/IDiscreteFilter.cs).
 They take a generated value from a depended generator and check that value with filters.
 If at least one filter doesn't approve a new value, it's regenerated and checked again.
 
@@ -178,42 +184,42 @@ They wrap filtered generators and provide unique and shared instances of them.
 
 ##### List of continuous filters
 
-- [Ascendant Sequence](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/DistributionFilters/AscendantSequenceFilters) - 
+- [Ascendant Sequence](Runtime/ContinuousDistributions/DistributionFilters/AscendantSequenceFilters) - 
 checks if a value continues an ascendant sequence and it needs to be regenerated;
-- [Close](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/DistributionFilters/CloseFilters) -
+- [Close](Runtime/ContinuousDistributions/DistributionFilters/CloseFilters) -
 checks if a value continues a sequence where every value is close enough to a reference value and needs to be regenerated;
-- [Descendant Sequence](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/DistributionFilters/DescendantSequenceFilters) -
+- [Descendant Sequence](Runtime/ContinuousDistributions/DistributionFilters/DescendantSequenceFilters) -
 checks if a value continues a descendant sequence and it needs to be regenerated;
-- [Greater](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/DistributionFilters/GreaterFilters) -
+- [Greater](Runtime/ContinuousDistributions/DistributionFilters/GreaterFilters) -
 checks if a value continues a sequence where every value is greater than a reference value and needs to be regenerated;
-- [In Range](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/DistributionFilters/InRangeFilters) -
+- [In Range](Runtime/ContinuousDistributions/DistributionFilters/InRangeFilters) -
 checks if a value continues a sequence where every value is in range between the minimum and maximum and needs to be regenerated;
-- [Less](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/DistributionFilters/LessFilters) -
+- [Less](Runtime/ContinuousDistributions/DistributionFilters/LessFilters) -
 checks if a value continues a sequence where every value is less than a reference value and needs to be regenerated;
-- [Little Difference](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/DistributionFilters/LittleDifferenceFilters) -
+- [Little Difference](Runtime/ContinuousDistributions/DistributionFilters/LittleDifferenceFilters) -
 checks if a value continues a sequence where consecutive elements differ by less than a required difference and needs to be regenerated;
-- [Not In Range](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/ContinuousDistributions/DistributionFilters/NotInRangeFilters) -
+- [Not In Range](Runtime/ContinuousDistributions/DistributionFilters/NotInRangeFilters) -
 checks if a value continues a sequence where every value is in range between the minimum and maximum and needs to be regenerated.
 
 ##### List of discrete filters
 
-- [Ascendant Sequence](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/DiscreteDistributions/DistributionFilters/AscendantSequenceFilters) -
+- [Ascendant Sequence](Runtime/DiscreteDistributions/DistributionFilters/AscendantSequenceFilters) -
 checks if a value continues an ascendant sequence and it needs to be regenerated;
-- [Close](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/DiscreteDistributions/DistributionFilters/CloseFilters) -
+- [Close](Runtime/DiscreteDistributions/DistributionFilters/CloseFilters) -
 checks if a value continues a sequence where every value is close enough to a reference value and needs to be regenerated;
-- [Descendant Sequence](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/DiscreteDistributions/DistributionFilters/DescendantSequenceFilters) -
+- [Descendant Sequence](Runtime/DiscreteDistributions/DistributionFilters/DescendantSequenceFilters) -
 checks if a value continues a descendant sequence and it needs to be regenerated;
-- [Frequent Value](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/DiscreteDistributions/DistributionFilters/FrequentValueFilters) -
+- [Frequent Value](Runtime/DiscreteDistributions/DistributionFilters/FrequentValueFilters) -
 checks if a value is contained in a sequence more than allowed times and needs to be regenerated;
-- [Opposite Pattern](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/DiscreteDistributions/DistributionFilters/OppositePatternFilters) -
+- [Opposite Pattern](Runtime/DiscreteDistributions/DistributionFilters/OppositePatternFilters) -
 checks if a value forms a pattern opposite to a previous pattern and needs to be regenerated;
-- [Pair](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/DiscreteDistributions/DistributionFilters/PairFilters) -
+- [Pair](Runtime/DiscreteDistributions/DistributionFilters/PairFilters) -
 Checks if a value is contained in a sequence some elements before and needs to be regenerated;
-- [Repeating Pattern](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/DiscreteDistributions/DistributionFilters/RepeatingPatternFilters) -
+- [Repeating Pattern](Runtime/DiscreteDistributions/DistributionFilters/RepeatingPatternFilters) -
 checks if a new value forms a pattern the same to a pattern some elements before and needs to be regenerated;
-- [Same Pattern](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/DiscreteDistributions/DistributionFilters/SamePatternFilters) -
+- [Same Pattern](Runtime/DiscreteDistributions/DistributionFilters/SamePatternFilters) -
 checks if a value forms the same pattern in a sequence as a pattern before and needs to be regenerated;
-- [Same Sequence](https://github.com/ZorPastaman/Random-Generators/tree/master/Runtime/DiscreteDistributions/DistributionFilters/SameSequenceFilters) -
+- [Same Sequence](Runtime/DiscreteDistributions/DistributionFilters/SameSequenceFilters) -
 checks if a value continues a sequence where every value is the same and needs to be regenerated.
 
 ### References
@@ -224,16 +230,16 @@ If it's on, a reference returns a shared generator or filter. If it's off, a ref
 
 ##### List of references
 
-- [Continuous Generator Provider Reference](https://github.com/ZorPastaman/Random-Generators/blob/master/Runtime/ContinuousDistributions/ContinuousGeneratorProviderReference.cs);
-- [Discrete Generator Provider Reference](https://github.com/ZorPastaman/Random-Generators/blob/master/Runtime/DiscreteDistributions/DiscreteGeneratorProviderReference.cs);
-- [Continuous Filter Provider Reference](https://github.com/ZorPastaman/Random-Generators/blob/master/Runtime/ContinuousDistributions/DistributionFilters/ContinuousFilterProviderReference.cs);
-- [Discrete Filter Provider Reference](https://github.com/ZorPastaman/Random-Generators/blob/master/Runtime/DiscreteDistributions/DistributionFilters/DiscreteFilterProviderReference.cs).
+- [Continuous Generator Provider Reference](Runtime/ContinuousDistributions/ContinuousGeneratorProviderReference.cs);
+- [Discrete Generator Provider Reference](Runtime/DiscreteDistributions/DiscreteGeneratorProviderReference.cs);
+- [Continuous Filter Provider Reference](Runtime/ContinuousDistributions/DistributionFilters/ContinuousFilterProviderReference.cs);
+- [Discrete Filter Provider Reference](Runtime/DiscreteDistributions/DistributionFilters/DiscreteFilterProviderReference.cs).
 
 ### Property drawers
 
-- [Require Discrete Generator](https://github.com/ZorPastaman/Random-Generators/blob/master/Runtime/PropertyDrawerAttributes/RequireDiscreteGenerator.cs) -
+- [Require Discrete Generator](Runtime/PropertyDrawerAttributes/RequireDiscreteGenerator.cs) -
 doesn't allow to set a generator with a wrong type into 
-[Discrete Generator Provider Reference](https://github.com/ZorPastaman/Random-Generators/blob/master/Runtime/DiscreteDistributions/DiscreteGeneratorProviderReference.cs);
-- [Require Discrete Filter](https://github.com/ZorPastaman/Random-Generators/blob/master/Runtime/PropertyDrawerAttributes/RequireDiscreteFilter.cs) -
+[Discrete Generator Provider Reference](Runtime/DiscreteDistributions/DiscreteGeneratorProviderReference.cs);
+- [Require Discrete Filter](Runtime/PropertyDrawerAttributes/RequireDiscreteFilter.cs) -
 doesn't allow to set a filter with a wrong type into
-[Discrete Filter Provider Reference](https://github.com/ZorPastaman/Random-Generators/blob/master/Runtime/DiscreteDistributions/DistributionFilters/DiscreteFilterProviderReference.cs).
+[Discrete Filter Provider Reference](Runtime/DiscreteDistributions/DistributionFilters/DiscreteFilterProviderReference.cs).

@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- XorShift128 random engine and wrappers for it.
+
 ### Changed
 
 - Unity 2019.4 is now required.

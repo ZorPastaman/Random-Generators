@@ -316,11 +316,11 @@ namespace Zor.RandomGenerators.RandomEngines
 		public double NextDouble()
 		{
 			NextState();
-			ulong mantissa = (ulong)m_state << 32;
+			ulong answer = (ulong)m_state << 32;
 			NextState();
-			mantissa |= m_state;
+			answer |= m_state;
 			// First 12 bits stand for sign and exponent. 0x3FF0000000000000UL sets exponent for range [1, 2).
-			ulong answer = (mantissa >> 12) | 0x3FF0000000000000UL;
+			answer = (answer >> 12) | 0x3FF0000000000000UL;
 			return *(double*)&answer - 1D;
 		}
 

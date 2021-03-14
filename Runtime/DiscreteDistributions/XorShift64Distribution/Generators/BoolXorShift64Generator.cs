@@ -15,8 +15,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		private XorShift64 m_randomEngine;
 
 		/// <summary>
-		/// Creates a <see cref="BoolXorShift64Generator"/> with the specified min and max
-		/// and <see cref="Environment.TickCount"/> as seed.
+		/// Creates a <see cref="BoolXorShift64Generator"/> with <see cref="Environment.TickCount"/> as seed.
 		/// </summary>
 		public BoolXorShift64Generator() : this(Environment.TickCount)
 		{

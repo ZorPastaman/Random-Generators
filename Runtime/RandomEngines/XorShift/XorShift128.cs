@@ -1,4 +1,4 @@
-// Copyright (c) 2020-2021 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
+﻿// Copyright (c) 2020-2021 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
@@ -6,44 +6,94 @@ using JetBrains.Annotations;
 namespace Zor.RandomGenerators.RandomEngines
 {
 	/// <summary>
-	/// Pseudo-random number engine using XorShift64 algorithm.
+	/// Pseudo-random number engine using XorShift128 algorithm.
 	/// </summary>
-	public unsafe struct XorShift64
+	public unsafe struct XorShift128
 	{
-		private ulong m_state;
+		private uint m_a;
+		private uint m_b;
+		private uint m_c;
+		private uint m_d;
 
 		/// <summary>
-		/// Creates a <see cref="XorShift64"/> with the specified initial state.
+		/// Creates a <see cref="XorShift128"/> with the specified initial state.
 		/// </summary>
-		/// <param name="state">Initial state. Must be non-zero.</param>
+		/// <param name="a">Initial state a. Must be non-zero.</param>
+		/// <param name="b">Initial state b. Must be non-zero.</param>
+		/// <param name="c">Initial state c. Must be non-zero.</param>
+		/// <param name="d">Initial state d. Must be non-zero.</param>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public XorShift64(ulong state)
+		public XorShift128(uint a, uint b, uint c, uint d)
 		{
-			m_state = state;
+			m_a = a;
+			m_b = b;
+			m_c = c;
+			m_d = d;
 		}
 
 		/// <summary>
-		/// Creates a <see cref="XorShift64"/> with the specified seed.
+		/// Creates a <see cref="XorShift128"/> with specified seed.
 		/// </summary>
-		/// <param name="seed">Seed. Used as initial state. Must be non-zero.</param>
+		/// <param name="a">Seed a. Must be non-zero.</param>
+		/// <param name="b">Seed b. Must be non-zero.</param>
+		/// <param name="c">Seed c. Must be non-zero.</param>
+		/// <param name="d">Seed d. Must be non-zero.</param>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public XorShift64(long seed)
+		public XorShift128(int a, int b, int c, int d)
 		{
 			unchecked
 			{
-				m_state = (ulong)seed;
+				m_a = (uint)a;
+				m_b = (uint)b;
+				m_c = (uint)c;
+				m_d = (uint)d;
 			}
 		}
 
 		/// <summary>
-		/// Current state. Must be non-zero.
+		/// Creates a <see cref="XorShift128"/> with the specified initial state.
 		/// </summary>
-		public ulong state
+		/// <param name="state">Initial state. Every item must be non-zero.</param>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public XorShift128((uint, uint, uint, uint) state)
+		{
+			m_a = state.Item1;
+			m_b = state.Item2;
+			m_c = state.Item3;
+			m_d = state.Item4;
+		}
+
+		/// <summary>
+		/// Creates a <see cref="XorShift128"/> with the specified seed.
+		/// </summary>
+		/// <param name="seed">Seed. Every item must be non-zero.</param>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public XorShift128((int, int, int, int) seed)
+		{
+			unchecked
+			{
+				m_a = (uint)seed.Item1;
+				m_b = (uint)seed.Item2;
+				m_c = (uint)seed.Item3;
+				m_d = (uint)seed.Item4;
+			}
+		}
+
+		/// <summary>
+		/// Current state. Every item must be non-zero.
+		/// </summary>
+		public (uint, uint, uint, uint) state
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_state;
+			get => (m_a, m_b, m_c, m_d);
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_state = value;
+			set
+			{
+				m_a = value.Item1;
+				m_b = value.Item2;
+				m_c = value.Item3;
+				m_d = value.Item4;
+			}
 		}
 
 		/// <summary>
@@ -54,7 +104,7 @@ namespace Zor.RandomGenerators.RandomEngines
 		public bool NextBool()
 		{
 			NextState();
-			ulong answer = m_state & 1UL;
+			uint answer = m_a & 1u;
 			return *(bool*)&answer;
 		}
 
@@ -70,7 +120,7 @@ namespace Zor.RandomGenerators.RandomEngines
 
 			unchecked
 			{
-				return (byte)m_state;
+				return (byte)m_a;
 			}
 		}
 
@@ -99,7 +149,7 @@ namespace Zor.RandomGenerators.RandomEngines
 
 			unchecked
 			{
-				return (sbyte)m_state;
+				return (sbyte)m_a;
 			}
 		}
 
@@ -128,7 +178,7 @@ namespace Zor.RandomGenerators.RandomEngines
 
 			unchecked
 			{
-				return (short)m_state;
+				return (short)m_a;
 			}
 		}
 
@@ -157,7 +207,7 @@ namespace Zor.RandomGenerators.RandomEngines
 
 			unchecked
 			{
-				return (ushort)m_state;
+				return (ushort)m_a;
 			}
 		}
 
@@ -176,7 +226,7 @@ namespace Zor.RandomGenerators.RandomEngines
 
 		/// <summary>
 		/// Generates a pseudo-random <see cref="int"/> value
-		/// in range [<see cref="int.MinValue"/>, <see cref="int.MaxValue"/>].
+		/// in range (<see cref="int.MinValue"/>, <see cref="int.MaxValue"/>].
 		/// </summary>
 		/// <returns>Generated <see cref="int"/> value.</returns>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -186,7 +236,7 @@ namespace Zor.RandomGenerators.RandomEngines
 
 			unchecked
 			{
-				return (int)m_state;
+				return (int)m_a ^ int.MinValue;
 			}
 		}
 
@@ -205,18 +255,14 @@ namespace Zor.RandomGenerators.RandomEngines
 
 		/// <summary>
 		/// Generates a pseudo-random <see cref="uint"/> value
-		/// in range [<see cref="uint.MinValue"/>, <see cref="uint.MaxValue"/>].
+		/// in range [<see cref="uint.MinValue"/>, <see cref="uint.MaxValue"/>).
 		/// </summary>
 		/// <returns>Generated <see cref="uint"/> value.</returns>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public uint NextUint()
 		{
 			NextState();
-
-			unchecked
-			{
-				return (uint)m_state;
-			}
+			return ~m_a;
 		}
 
 		/// <summary>
@@ -241,11 +287,7 @@ namespace Zor.RandomGenerators.RandomEngines
 		public long NextLong()
 		{
 			NextState();
-
-			unchecked
-			{
-				return (long)m_state ^ long.MinValue;
-			}
+			return ((long)m_a << 32) | m_d ^ long.MinValue;
 		}
 
 		/// <summary>
@@ -270,7 +312,7 @@ namespace Zor.RandomGenerators.RandomEngines
 		public ulong NextUlong()
 		{
 			NextState();
-			return ~m_state;
+			return ~(((ulong)m_a << 32) | m_d);
 		}
 
 		/// <summary>
@@ -294,7 +336,8 @@ namespace Zor.RandomGenerators.RandomEngines
 		public float NextFloat()
 		{
 			NextState();
-			uint answer = (uint)(m_state >> 41) | 0x3F800000u;
+			// First 9 bits stand for sign and exponent. 0x3F800000u sets exponent for range [1, 2).
+			uint answer = (m_a >> 9) | 0x3F800000u;
 			return *(float*)&answer - 1f;
 		}
 
@@ -319,8 +362,9 @@ namespace Zor.RandomGenerators.RandomEngines
 		public double NextDouble()
 		{
 			NextState();
+			ulong answer = ((ulong)m_a << 32) | m_d;
 			// First 12 bits stand for sign and exponent. 0x3FF0000000000000UL sets exponent for range [1, 2).
-			ulong answer = (m_state >> 12) | 0x3FF0000000000000UL;
+			answer = (answer >> 12) | 0x3FF0000000000000UL;
 			return *(double*)&answer - 1D;
 		}
 
@@ -338,14 +382,21 @@ namespace Zor.RandomGenerators.RandomEngines
 		}
 
 		/// <summary>
-		/// XorShift64 algorithm.
+		/// XorShift128 algorithm.
 		/// </summary>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		private void NextState()
 		{
-			m_state ^= m_state << 13;
-			m_state ^= m_state >> 7;
-			m_state ^= m_state << 17;
+			uint t = m_d;
+
+			m_d = m_c;
+			m_c = m_b;
+			m_b = m_a;
+
+			t ^= t << 11;
+			t ^= t >> 8;
+
+			m_a = t ^ m_a ^ (m_a >> 19);
 		}
 	}
 }

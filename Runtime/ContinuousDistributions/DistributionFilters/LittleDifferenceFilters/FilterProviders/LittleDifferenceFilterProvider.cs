@@ -11,7 +11,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 	/// </summary>
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.LittleDifferenceContinuousFiltersFolder + "Little Difference Filter Provider",
-		fileName = "Little Difference Filter Provider",
+		fileName = "LittleDifferenceFilterProvider",
 		order = CreateAssetMenuConstants.FilterOrder
 	)]
 	public sealed class LittleDifferenceFilterProvider : ContinuousFilterProvider

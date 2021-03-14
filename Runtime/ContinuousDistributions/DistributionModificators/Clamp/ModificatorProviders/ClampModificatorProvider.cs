@@ -11,7 +11,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionModificators
 	/// </summary>
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.ContinuousModificatorsFolder + "Clamp Modificator Provider",
-		fileName = "Clamp Modificator Provider",
+		fileName = "ClampModificatorProvider",
 		order = CreateAssetMenuConstants.ModificatorOrder
 		)]
 	public sealed class ClampModificatorProvider : ContinuousGeneratorProvider

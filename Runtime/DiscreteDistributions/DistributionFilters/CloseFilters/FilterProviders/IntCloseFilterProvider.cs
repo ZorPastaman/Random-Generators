@@ -11,7 +11,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 	/// </summary>
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.CloseDiscreteFiltersFolder + "Int Close Filter Provider",
-		fileName = "Int Close Filter Provider",
+		fileName = "IntCloseFilterProvider",
 		order = CreateAssetMenuConstants.FilterOrder
 	)]
 	public sealed class IntCloseFilterProvider : DiscreteFilterProvider<int>

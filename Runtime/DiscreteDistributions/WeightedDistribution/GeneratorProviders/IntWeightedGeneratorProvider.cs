@@ -9,7 +9,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	/// </summary>
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.WeightedDistributionFolder + "Int Weighted Generator Provider",
-		fileName = "Int Weighted Generator Provider",
+		fileName = "IntWeightedGeneratorProvider",
 		order = CreateAssetMenuConstants.DistributionOrder
 	)]
 	public sealed class IntWeightedGeneratorProvider : WeightedGeneratorProvider<int>

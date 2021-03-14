@@ -13,7 +13,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 	/// </summary>
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.GammaDistributionFolder + "Gamma Generator Provider",
-		fileName = "Gamma Generator Provider",
+		fileName = "GammaGeneratorProvider",
 		order = CreateAssetMenuConstants.DistributionOrder
 	)]
 	public sealed class GammaGeneratorProvider : ContinuousGeneratorProvider

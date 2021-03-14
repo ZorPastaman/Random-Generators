@@ -11,7 +11,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionModificators
 	/// </summary>
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.ContinuousModificatorsFolder + "Round Modificator Provider",
-		fileName = "Round Modificator Provider",
+		fileName = "RoundModificatorProvider",
 		order = CreateAssetMenuConstants.ModificatorOrder
 	)]
 	public sealed class RoundModificatorProvider : ContinuousGeneratorProvider

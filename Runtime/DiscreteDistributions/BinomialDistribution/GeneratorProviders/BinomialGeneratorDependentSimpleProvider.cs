@@ -13,7 +13,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	/// </summary>
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.BinomialDistributionFolder + "Binomial Generator Dependent Simple Provider",
-		fileName = "Binomial Generator Dependent Simple Provider",
+		fileName = "BinomialGeneratorDependentSimpleProvider",
 		order = CreateAssetMenuConstants.DistributionOrder
 	)]
 	public sealed class BinomialGeneratorDependentSimpleProvider : DiscreteGeneratorProvider<int>

@@ -13,7 +13,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.XorShift32DiscreteDistributionFolder +
 			"Int XorShift32 Generator Simple Provider",
-		fileName = "Int XorShift32 Generator Simple Provider",
+		fileName = "IntXorShift32GeneratorSimpleProvider",
 		order = CreateAssetMenuConstants.DistributionOrder
 	)]
 	public sealed class IntXorShift32GeneratorSimpleProvider : DiscreteGeneratorProvider<int>

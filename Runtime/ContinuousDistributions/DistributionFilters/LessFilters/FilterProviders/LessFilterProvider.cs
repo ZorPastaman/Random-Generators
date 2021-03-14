@@ -11,7 +11,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 	/// </summary>
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.LessContinuousFiltersFolder + "Less Filter Provider",
-		fileName = "Less Filter Provider",
+		fileName = "LessFilterProvider",
 		order = CreateAssetMenuConstants.FilterOrder
 	)]
 	public sealed class LessFilterProvider : ContinuousFilterProvider

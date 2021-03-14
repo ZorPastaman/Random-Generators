@@ -12,7 +12,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 	/// </summary>
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.IrwinHallDistributionFolder + "Irwin-Hall Generator Dependent Simple Provider",
-		fileName = "Irwin-Hall Generator Dependent Simple Provider",
+		fileName = "IrwinHallGeneratorDependentSimpleProvider",
 		order = CreateAssetMenuConstants.DistributionOrder
 	)]
 	public sealed class IrwinHallGeneratorDependentSimpleProvider :

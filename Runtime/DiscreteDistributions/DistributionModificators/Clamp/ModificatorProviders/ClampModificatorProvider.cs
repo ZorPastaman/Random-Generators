@@ -12,7 +12,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionModificators
 	/// </summary>
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.DiscreteModificatorsFolder + "Clamp Modificator Provider",
-		fileName = "Clamp Modificator Provider",
+		fileName = "ClampModificatorProvider",
 		order = CreateAssetMenuConstants.ModificatorOrder
 		)]
 	public sealed class ClampModificatorProvider : DiscreteGeneratorProvider<int>

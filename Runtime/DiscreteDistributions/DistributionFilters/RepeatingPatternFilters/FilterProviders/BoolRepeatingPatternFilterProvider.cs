@@ -10,7 +10,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.RepeatingPatternDiscreteFiltersFolder +
 			"Bool Repeating Pattern Filter Provider",
-		fileName = "Bool Repeating Pattern Filter Provider",
+		fileName = "BoolRepeatingPatternFilterProvider",
 		order = CreateAssetMenuConstants.FilterOrder
 	)]
 	public sealed class BoolRepeatingPatternFilterProvider : RepeatingPatternFilterProvider<bool>

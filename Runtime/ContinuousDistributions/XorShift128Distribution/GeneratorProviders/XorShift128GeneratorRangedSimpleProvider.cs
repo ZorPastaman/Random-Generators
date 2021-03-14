@@ -13,7 +13,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.XorShift128ContinuousDistributionFolder +
 			"XorShift128 Generator Ranged Simple Provider",
-		fileName = "XorShift128 Generator Ranged Simple Provider",
+		fileName = "XorShift128GeneratorRangedSimpleProvider",
 		order = CreateAssetMenuConstants.DistributionOrder
 	)]
 	public sealed class XorShift128GeneratorRangedSimpleProvider : ContinuousGeneratorProvider

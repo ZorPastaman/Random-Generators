@@ -9,7 +9,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 	/// </summary>
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.DiscreteFilteredGeneratorsFolder + "Float Filtered Generator Provider",
-		fileName = "Float Filtered Generator Provider",
+		fileName = "FloatFilteredGeneratorProvider",
 		order = CreateAssetMenuConstants.FilteredGeneratorOrder
 	)]
 	public sealed class FloatFilteredGeneratorProvider : DiscreteFilteredGeneratorProvider<float>

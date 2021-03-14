@@ -12,7 +12,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 	/// </summary>
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.SharpContinuousDistributionFolder + "Sharp Generator Ranged Provider",
-		fileName = "Sharp Generator Ranged Provider",
+		fileName = "SharpGeneratorRangedProvider",
 		order = CreateAssetMenuConstants.DistributionOrder
 	)]
 	public sealed class SharpGeneratorRangedProvider : ContinuousGeneratorProvider

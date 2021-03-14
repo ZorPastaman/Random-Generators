@@ -11,7 +11,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 	/// </summary>
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.InRangeContinuousFiltersFolder + "In Range Filter Provider",
-		fileName = "In Range Filter Provider",
+		fileName = "InRangeFilterProvider",
 		order = CreateAssetMenuConstants.FilterOrder
 	)]
 	public sealed class InRangeFilterProvider : ContinuousFilterProvider

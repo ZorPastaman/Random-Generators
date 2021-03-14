@@ -12,7 +12,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 	/// </summary>
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.DiscreteFilteredGeneratorsFolder + "Bool Filtered Generator Provider",
-		fileName = "Bool Filtered Generator Provider",
+		fileName = "BoolFilteredGeneratorProvider",
 		order = CreateAssetMenuConstants.FilteredGeneratorOrder
 		)]
 	public sealed class BoolFilteredGeneratorProvider : DiscreteGeneratorProvider<bool>

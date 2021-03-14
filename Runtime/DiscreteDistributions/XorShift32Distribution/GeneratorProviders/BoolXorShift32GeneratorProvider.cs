@@ -14,7 +14,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	/// </summary>
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.XorShift32DiscreteDistributionFolder + "Bool XorShift32 Generator Provider",
-		fileName = "Bool XorShift32 Generator Provider",
+		fileName = "BoolXorShift32GeneratorProvider",
 		order = CreateAssetMenuConstants.DistributionOrder
 	)]
 	public sealed class BoolXorShift32GeneratorProvider : DiscreteGeneratorProvider<bool>

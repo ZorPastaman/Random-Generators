@@ -12,7 +12,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	/// </summary>
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.SharpDiscreteDistributionFolder + "Sharp Generator Provider",
-		fileName = "Sharp Generator Provider",
+		fileName = "SharpGeneratorProvider",
 		order = CreateAssetMenuConstants.DistributionOrder
 	)]
 	public sealed class SharpGeneratorProvider : DiscreteGeneratorProvider<int>

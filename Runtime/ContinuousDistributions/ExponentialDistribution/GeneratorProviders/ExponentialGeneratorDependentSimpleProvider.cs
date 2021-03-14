@@ -13,7 +13,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.ExponentialDistributionFolder +
 			"Exponential Generator Dependent Simple Provider",
-		fileName = "Exponential Generator Dependent Simple Provider",
+		fileName = "ExponentialGeneratorDependentSimpleProvider",
 		order = CreateAssetMenuConstants.DistributionOrder
 	)]
 	public sealed class ExponentialGeneratorDependentSimpleProvider : ContinuousGeneratorProvider

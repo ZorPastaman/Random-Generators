@@ -11,7 +11,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 	/// </summary>
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.CloseContinuousFiltersFolder + "Close Filter Provider",
-		fileName = "Close Filter Provider",
+		fileName = "CloseFilterProvider",
 		order = CreateAssetMenuConstants.FilterOrder
 	)]
 	public sealed class CloseFilterProvider : ContinuousFilterProvider

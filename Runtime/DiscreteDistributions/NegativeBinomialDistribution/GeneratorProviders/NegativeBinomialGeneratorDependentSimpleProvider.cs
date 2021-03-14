@@ -15,7 +15,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.NegativeBinomialDistributionFolder +
 			"Negative Binomial Generator Dependent Simple Provider",
-		fileName = "Negative Binomial Generator Dependent Simple Provider",
+		fileName = "NegativeBinomialGeneratorDependentSimpleProvider",
 		order = CreateAssetMenuConstants.DistributionOrder
 	)]
 	public sealed class NegativeBinomialGeneratorDependentSimpleProvider : DiscreteGeneratorProvider<int>

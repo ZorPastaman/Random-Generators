@@ -9,7 +9,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 	/// </summary>
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.OppositePatterDiscreteFiltersFolder + "Bool Opposite Pattern Filter",
-		fileName = "Bool Opposite Pattern Filter",
+		fileName = "BoolOppositePatternFilter",
 		order = CreateAssetMenuConstants.FilterOrder
 	)]
 	public sealed class BoolOppositePatternFilterProvider : OppositePatternFilterProvider<bool>

@@ -15,7 +15,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.XorShift64ContinuousDistributionFolder +
 			"XorShift64 Generator Ranged Provider",
-		fileName = "XorShift64 Generator Ranged Provider",
+		fileName = "XorShift64GeneratorRangedProvider",
 		order = CreateAssetMenuConstants.DistributionOrder
 	)]
 	public sealed class XorShift64GeneratorRangedProvider : ContinuousGeneratorProvider

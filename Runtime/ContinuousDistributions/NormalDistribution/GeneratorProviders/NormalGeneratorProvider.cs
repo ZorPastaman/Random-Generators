@@ -12,7 +12,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 	/// </summary>
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.NormalDistributionFolder + "Normal Generator Provider",
-		fileName = "Normal Generator Provider",
+		fileName = "NormalGeneratorProvider",
 		order = CreateAssetMenuConstants.DistributionOrder
 	)]
 	public sealed class NormalGeneratorProvider : ContinuousGeneratorProvider

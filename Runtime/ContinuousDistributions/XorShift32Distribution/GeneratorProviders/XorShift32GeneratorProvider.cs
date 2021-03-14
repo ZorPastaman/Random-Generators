@@ -14,7 +14,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 	/// </summary>
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.XorShift32ContinuousDistributionFolder + "XorShift32 Generator Provider",
-		fileName = "XorShift32 Generator Provider",
+		fileName = "XorShift32GeneratorProvider",
 		order = CreateAssetMenuConstants.DistributionOrder
 	)]
 	public sealed class XorShift32GeneratorProvider : ContinuousGeneratorProvider

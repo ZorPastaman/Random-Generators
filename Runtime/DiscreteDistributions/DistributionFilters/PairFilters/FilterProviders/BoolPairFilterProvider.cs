@@ -9,7 +9,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 	/// </summary>
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.PairDiscreteFiltersFolder + "Bool Pair Filter Provider",
-		fileName = "Bool Pair Filter Provider",
+		fileName = "BoolPairFilterProvider",
 		order = CreateAssetMenuConstants.FilterOrder
 		)]
 	public sealed class BoolPairFilterProvider : PairFilterProvider<bool>

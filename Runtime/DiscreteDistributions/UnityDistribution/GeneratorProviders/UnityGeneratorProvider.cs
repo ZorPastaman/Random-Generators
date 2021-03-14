@@ -12,7 +12,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	/// </summary>
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.UnityDiscreteDistributionFolder + "Unity Generator Provider",
-		fileName = "Unity Generator Provider",
+		fileName = "UnityGeneratorProvider",
 		order = CreateAssetMenuConstants.DistributionOrder
 	)]
 	public sealed class UnityGeneratorProvider : DiscreteGeneratorProvider<int>

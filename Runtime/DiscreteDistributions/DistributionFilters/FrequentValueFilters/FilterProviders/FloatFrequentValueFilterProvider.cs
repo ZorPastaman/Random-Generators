@@ -9,7 +9,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 	/// </summary>
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.FrequentValueDiscreteFiltersFolder + "Float Frequent Value Filter Provider",
-		fileName = "Float Frequent Value Filter Provider",
+		fileName = "FloatFrequentValueFilterProvider",
 		order = CreateAssetMenuConstants.FilterOrder
 	)]
 	public sealed class FloatFrequentValueFilterProvider : FrequentValueFilterProvider<float>

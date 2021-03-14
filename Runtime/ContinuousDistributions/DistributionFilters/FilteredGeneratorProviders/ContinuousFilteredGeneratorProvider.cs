@@ -12,7 +12,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.ContinuousFilteredGeneratorsFolder +
 			"Continuous Filtered Generator Provider",
-		fileName = "Continuous Filtered Generator Provider",
+		fileName = "ContinuousFilteredGeneratorProvider",
 		order = CreateAssetMenuConstants.FilteredGeneratorOrder
 	)]
 	public sealed class ContinuousFilteredGeneratorProvider : ContinuousGeneratorProvider

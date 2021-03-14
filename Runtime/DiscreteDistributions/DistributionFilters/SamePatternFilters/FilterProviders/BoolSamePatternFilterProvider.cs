@@ -9,7 +9,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 	/// </summary>
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.SamePatternDiscreteFiltersFolder + "Bool Same Pattern Filter",
-		fileName = "Bool Same Pattern Filter",
+		fileName = "BoolSamePatternFilter",
 		order = CreateAssetMenuConstants.FilterOrder
 	)]
 	public sealed class BoolSamePatternFilterProvider : SamePatterFilterProvider<bool>

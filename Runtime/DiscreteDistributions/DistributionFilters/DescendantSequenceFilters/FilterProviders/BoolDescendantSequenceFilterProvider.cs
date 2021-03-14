@@ -10,7 +10,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.DescendantSequenceDiscreteFiltersFolder +
 			"Bool Descendant Sequence Filter Provider",
-		fileName = "Bool Descendant Sequence Filter Provider",
+		fileName = "BoolDescendantSequenceFilterProvider",
 		order = CreateAssetMenuConstants.FilterOrder
 	)]
 	public sealed class BoolDescendantSequenceFilterProvider : DescendantSequenceFilterProvider<bool>

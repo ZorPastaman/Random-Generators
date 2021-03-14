@@ -11,7 +11,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 	/// </summary>
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.NotInRangeContinuousFiltersFolder + "Not In Range Filter Provider",
-		fileName = "Not In Range Filter Provider",
+		fileName = "NotInRangeFilterProvider",
 		order = CreateAssetMenuConstants.FilterOrder
 	)]
 	public sealed class NotInRangeFilterProvider : ContinuousFilterProvider

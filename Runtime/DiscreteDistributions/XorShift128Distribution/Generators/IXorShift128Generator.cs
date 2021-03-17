@@ -12,5 +12,11 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		XorShift128 randomEngine { get; }
 		T min { get; }
 		T max { get; }
+
+		/// <summary>
+		/// Jumps forward.
+		/// </summary>
+		/// <param name="steps">How many steps to jump.</param>
+		void Forward(int steps);
 	}
 }

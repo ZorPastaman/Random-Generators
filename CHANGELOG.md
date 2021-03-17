@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 
 - Unity 2019.4 is now required.
+- XorShift algorithms can now jump forward.
 
 ## [1.2.0] - 2020-11-01
 

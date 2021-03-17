@@ -87,6 +87,12 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		}
 
 		/// <inheritdoc/>
+		public void Forward(int steps)
+		{
+			m_randomEngine.Forward(steps);
+		}
+
+		/// <inheritdoc/>
 		[Pure]
 		public bool Generate()
 		{

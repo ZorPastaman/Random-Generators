@@ -504,6 +504,18 @@ namespace Zor.RandomGenerators.RandomEngines
 		}
 
 		/// <summary>
+		/// Jumps forward.
+		/// </summary>
+		/// <param name="steps">How many steps to jump.</param>
+		public void Forward(int steps)
+		{
+			for (int i = 0; i < steps; ++i)
+			{
+				NextState();
+			}
+		}
+
+		/// <summary>
 		/// XorShift128 algorithm.
 		/// </summary>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]

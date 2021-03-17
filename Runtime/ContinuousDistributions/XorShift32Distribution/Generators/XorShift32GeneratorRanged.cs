@@ -77,6 +77,12 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		}
 
 		/// <inheritdoc/>
+		public void Forward(int steps)
+		{
+			m_randomEngine.Forward(steps);
+		}
+
+		/// <inheritdoc/>
 		[Pure]
 		public float Generate()
 		{

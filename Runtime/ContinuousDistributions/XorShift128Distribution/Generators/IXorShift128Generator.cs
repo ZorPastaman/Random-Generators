@@ -12,5 +12,11 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		XorShift128 randomEngine { get; }
 		float min { get; }
 		float max { get; }
+
+		/// <summary>
+		/// Jumps forward.
+		/// </summary>
+		/// <param name="steps">How many steps to jump.</param>
+		void Forward(int steps);
 	}
 }

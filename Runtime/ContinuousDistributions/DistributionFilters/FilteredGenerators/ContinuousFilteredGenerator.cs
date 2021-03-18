@@ -50,7 +50,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 			m_regenerateAttempts = other.m_regenerateAttempts;
 		}
 
-		[NotNull]
 		public T filteredGenerator
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
@@ -113,10 +112,17 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		/// <remarks>
 		/// Current sequence of generated values is cleared by this method.
 		/// </remarks>
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public void SetFilters([NotNull] params IContinuousFilter[] filters)
 		{
-			m_filters = filters;
+			int count = filters.Length;
+
+			if (m_filters.Length != count)
+			{
+				m_filters = new IContinuousFilter[count];
+			}
+
+			Array.Copy(filters, 0, m_filters, 0, count);
+
 			InitializeSequence();
 		}
 

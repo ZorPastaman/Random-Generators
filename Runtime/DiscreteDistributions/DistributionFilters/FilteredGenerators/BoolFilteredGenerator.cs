@@ -99,10 +99,17 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		/// <remarks>
 		/// Current sequence of generated values is cleared by this method.
 		/// </remarks>
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public void SetFilters([NotNull] params IDiscreteFilter<bool>[] filters)
 		{
-			m_filters = filters;
+			int count = filters.Length;
+
+			if (m_filters.Length != count)
+			{
+				m_filters = new IDiscreteFilter<bool>[count];
+			}
+
+			Array.Copy(filters, 0, m_filters, 0, count);
+
 			InitializeSequence();
 		}
 

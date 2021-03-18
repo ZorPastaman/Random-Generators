@@ -60,12 +60,14 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		}
 
 		/// <inheritdoc/>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public void Forward(int steps)
 		{
 			m_randomEngine.Forward(steps);
 		}
 
 		/// <inheritdoc/>
+		[Pure]
 		public bool Generate()
 		{
 			return m_randomEngine.NextBool();

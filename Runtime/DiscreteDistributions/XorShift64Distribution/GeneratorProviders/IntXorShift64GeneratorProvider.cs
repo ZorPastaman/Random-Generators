@@ -69,7 +69,6 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[NotNull]
 		public IntXorShift64Generator sharedXorShift64Generator
 		{
-			[Pure]
 			get
 			{
 				if (m_sharedGenerator == null)

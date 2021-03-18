@@ -64,7 +64,6 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 			m_max = other.m_max;
 		}
 
-		[NotNull]
 		public Random random
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]

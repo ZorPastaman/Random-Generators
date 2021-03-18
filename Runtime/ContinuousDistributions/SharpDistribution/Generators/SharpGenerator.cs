@@ -48,7 +48,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 			m_random = other.m_random;
 		}
 
-		[NotNull]
 		public Random random
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]

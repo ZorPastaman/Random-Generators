@@ -58,7 +58,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// <remarks>
 		/// <paramref name="iids"/> must be greater than 0.
 		/// </remarks>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static float Generate(float mean, float deviation, byte iids)
 		{
 			return Modify(Generate(iids), mean, deviation);
@@ -109,7 +109,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// <remarks>
 		/// <paramref name="iids"/> must be greater than 0.
 		/// </remarks>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static float Generate([NotNull] Func<float> iidFunc,
 			float mean, float deviation, byte iids)
 		{
@@ -163,7 +163,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// <remarks>
 		/// <paramref name="iids"/> must be greater than 0.
 		/// </remarks>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static float Generate<T>([NotNull] T iidGenerator, float mean, float deviation, byte iids)
 			where T : IContinuousGenerator
 		{

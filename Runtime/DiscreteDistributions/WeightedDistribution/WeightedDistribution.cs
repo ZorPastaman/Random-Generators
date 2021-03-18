@@ -21,7 +21,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <remarks>
 		/// Count of <paramref name="weights"/> must be greater than 0.
 		/// </remarks>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static int Generate([NotNull] uint[] weights)
 		{
 			int count = weights.Length;
@@ -57,7 +57,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <remarks>
 		/// Count of <paramref name="weights"/> must be greater than 0.
 		/// </remarks>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static int Generate([NotNull] Func<float> iidFunc, [NotNull] uint[] weights)
 		{
 			int count = weights.Length;
@@ -96,7 +96,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <remarks>
 		/// Count of <paramref name="weights"/> must be greater than 0.
 		/// </remarks>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static int Generate<T>([NotNull] T iidGenerator, [NotNull] uint[] weights)
 			where T : IContinuousGenerator
 		{

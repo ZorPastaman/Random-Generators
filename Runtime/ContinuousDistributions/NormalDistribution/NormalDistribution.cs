@@ -51,7 +51,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// <returns>
 		/// Two generated values.
 		/// </returns>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static (float, float) Generate(float mean, float deviation)
 		{
 			(float z0, float z1) = Generate();
@@ -98,7 +98,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// <returns>
 		/// Two generated values.
 		/// </returns>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static (float, float) Generate([NotNull] Func<float> iidFunc, float mean, float deviation)
 		{
 			(float z0, float z1) = Generate(iidFunc);
@@ -145,7 +145,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// <returns>
 		/// Two generated values.
 		/// </returns>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static (float, float) Generate<T>([NotNull] T iidGenerator, float mean, float deviation)
 			where T : IContinuousGenerator
 		{

@@ -1,5 +1,7 @@
 // Copyright (c) 2020-2021 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using JetBrains.Annotations;
+
 namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 {
 	/// <summary>
@@ -8,6 +10,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 	/// <typeparam name="T"></typeparam>
 	public interface IContinuousFilteredGenerator<out T> : IContinuousGenerator where T : IContinuousGenerator
 	{
+		[NotNull]
 		T filteredGenerator { get; }
 
 		/// <summary>
@@ -26,6 +29,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		/// </summary>
 		/// <param name="index"></param>
 		/// <returns><see cref="IContinuousFilter"/> at the index <paramref name="index"/>.</returns>
+		[NotNull]
 		IContinuousFilter GetFilter(int index);
 	}
 }

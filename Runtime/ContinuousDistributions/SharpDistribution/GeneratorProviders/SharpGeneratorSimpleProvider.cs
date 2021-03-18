@@ -33,7 +33,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// </summary>
 		public override IContinuousGenerator sharedGenerator
 		{
-			[Pure]
 			get
 			{
 				if (m_sharedGenerator == null)
@@ -61,7 +60,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		[NotNull]
 		public SharpGenerator sharedSharpGenerator
 		{
-			[Pure]
 			get
 			{
 				if (m_sharedGenerator == null)

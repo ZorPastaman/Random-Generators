@@ -60,6 +60,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		}
 
 		/// <inheritdoc/>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public void Forward(int steps)
 		{
 			m_randomEngine.Forward(steps);

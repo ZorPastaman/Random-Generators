@@ -1,5 +1,6 @@
 // Copyright (c) 2020-2021 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using System;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -161,12 +162,15 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		/// <param name="filterProviders"></param>
 		public void SetFilters([NotNull] ContinuousFilterProviderReference[] filterProviders)
 		{
-			if (m_FilterProviders == filterProviders)
+			int count = filterProviders.Length;
+
+			if (m_FilterProviders.Length != count)
 			{
-				return;
+				m_FilterProviders = new ContinuousFilterProviderReference[count];
 			}
 
-			m_FilterProviders = filterProviders;
+			Array.Copy(filterProviders, 0, m_FilterProviders, 0, count);
+
 			m_sharedFilteredGenerator = null;
 			m_filtersCache = null;
 		}

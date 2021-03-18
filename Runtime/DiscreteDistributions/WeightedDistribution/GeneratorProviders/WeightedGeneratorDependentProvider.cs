@@ -145,11 +145,23 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <remarks>
 		/// Counts of Values and Weights must be the same.
 		/// </remarks>
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public void SetValuesWeights([NotNull] T[] values, [NotNull] uint[] weights)
 		{
-			m_Values = values;
-			m_Weights = weights;
+			int count = Mathf.Min(values.Length, weights.Length);
+
+			if (m_Values.Length != count)
+			{
+				m_Values = new T[count];
+			}
+
+			if (m_Weights.Length != count)
+			{
+				m_Weights = new uint[count];
+			}
+
+			Array.Copy(values, 0, m_Values, 0, count);
+			Array.Copy(weights, 0, m_Weights, 0, count);
+
 			m_sharedGenerator = null;
 		}
 

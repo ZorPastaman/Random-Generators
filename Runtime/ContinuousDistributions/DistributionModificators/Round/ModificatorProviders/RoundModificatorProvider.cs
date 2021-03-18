@@ -36,7 +36,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionModificators
 		/// </summary>
 		public override IContinuousGenerator sharedGenerator
 		{
-			[Pure]
 			get
 			{
 				if (m_sharedModificator == null)
@@ -64,7 +63,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionModificators
 		[NotNull]
 		public RoundModificator<IContinuousGenerator> sharedRoundModificator
 		{
-			[Pure]
 			get
 			{
 				if (m_sharedModificator == null)

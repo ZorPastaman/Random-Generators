@@ -33,6 +33,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// <remarks>
 		/// It's recommended to cache the result.
 		/// </remarks>
+		[NotNull]
 		public IContinuousGenerator generator
 		{
 			[Pure]

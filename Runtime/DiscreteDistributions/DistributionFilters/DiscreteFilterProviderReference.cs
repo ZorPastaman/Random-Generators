@@ -36,6 +36,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		/// <remarks>
 		/// It's recommended to cache the result.
 		/// </remarks>
+		[Pure]
 		public IDiscreteFilter<T> GetFilter<T>()
 		{
 			if (m_FilterProvider is DiscreteFilterProvider<T> typedFilterProvider)

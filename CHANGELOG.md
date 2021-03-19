@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 
 - XorShift128 random engine and wrappers for it.
+- Geometric distribution.
 
 ### Changed
 

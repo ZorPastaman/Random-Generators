@@ -101,6 +101,8 @@ They wrap generators and provide unique and shared instances of them.
 [Wikipedia](https://en.wikipedia.org/wiki/Bernoulli_distribution);
 - [Binomial](Runtime/DiscreteDistributions/BinomialDistribution) -
 [Wikipedia](https://en.wikipedia.org/wiki/Binomial_distribution);
+- [Geometric](Runtime/DiscreteDistributions/GeometricDistribution) -
+[Wikipedia](https://en.wikipedia.org/wiki/Geometric_distribution);
 - [Negative Binomial](Runtime/DiscreteDistributions/NegativeBinomialDistribution) -
 [Wikipedia](https://en.wikipedia.org/wiki/Negative_binomial_distribution);
 - [Poisson](Runtime/DiscreteDistributions/PoissonDistribution) -

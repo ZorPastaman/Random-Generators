@@ -1,16 +1,14 @@
 // Copyright (c) 2020-2021 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
-using System;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
-using Random = UnityEngine.Random;
+using UnityEngine;
 
 namespace Zor.RandomGenerators.ContinuousDistributions
 {
 	/// <summary>
 	/// Unity distribution generator using <see cref="Random.value"/>.
 	/// </summary>
-	[Serializable]
 	public sealed class UnityGeneratorSimple : IUnityGenerator
 	{
 		public float min

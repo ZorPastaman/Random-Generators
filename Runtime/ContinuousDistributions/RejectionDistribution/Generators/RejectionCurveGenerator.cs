@@ -1,6 +1,5 @@
 // Copyright (c) 2020-2021 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
-using System;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -11,26 +10,11 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 	/// Rejection Random Generator using
 	/// <see cref="RejectionDistribution.Generate(AnimationCurve,float,float)"/>.
 	/// </summary>
-	[Serializable]
 	public sealed class RejectionCurveGenerator : IRejectionGenerator
 	{
-#pragma warning disable CS0649
-		[SerializeField,
-		Tooltip("X - generated value\nY - its probability\nAt least one point must have possibility 1.")]
-		private AnimationCurve m_ProbabilityCurve;
-		[SerializeField] private float m_Min = RejectionDistribution.DefaultMin;
-		[SerializeField] private float m_Max = RejectionDistribution.DefaultMax;
-#pragma warning restore CS0649
-
-		/// <summary>
-		/// Creates an <see cref="RejectionCurveGenerator"/> with the default parameters.
-		/// </summary>
-		/// <remarks>
-		/// Probability curve must be set by Unity serialization or via <see cref="probabilityCurve"/>.
-		/// </remarks>
-		public RejectionCurveGenerator()
-		{
-		}
+		private AnimationCurve m_probabilityCurve;
+		private float m_min;
+		private float m_max;
 
 		/// <summary>
 		/// Creates an <see cref="RejectionCurveGenerator"/> with the specified parameters.
@@ -43,9 +27,9 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// <param name="max"></param>
 		public RejectionCurveGenerator([NotNull] AnimationCurve probabilityCurve, float min, float max)
 		{
-			m_ProbabilityCurve = probabilityCurve;
-			m_Min = min;
-			m_Max = max;
+			m_probabilityCurve = probabilityCurve;
+			m_min = min;
+			m_max = max;
 		}
 
 		/// <summary>
@@ -53,9 +37,9 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// </summary>
 		public RejectionCurveGenerator([NotNull] RejectionCurveGenerator other)
 		{
-			m_ProbabilityCurve = other.m_ProbabilityCurve;
-			m_Min = other.m_Min;
-			m_Max = other.m_Max;
+			m_probabilityCurve = other.m_probabilityCurve;
+			m_min = other.m_min;
+			m_max = other.m_max;
 		}
 
 		/// <summary>
@@ -68,32 +52,32 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		public AnimationCurve probabilityCurve
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_ProbabilityCurve;
+			get => m_probabilityCurve;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_ProbabilityCurve = value;
+			set => m_probabilityCurve = value;
 		}
 
 		public float min
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_Min;
+			get => m_min;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_Min = value;
+			set => m_min = value;
 		}
 
 		public float max
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_Max;
+			get => m_max;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_Max = value;
+			set => m_max = value;
 		}
 
 		/// <inheritdoc/>
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public float Generate()
 		{
-			return RejectionDistribution.Generate(m_ProbabilityCurve, m_Min, m_Max);
+			return RejectionDistribution.Generate(m_probabilityCurve, m_min, m_max);
 		}
 	}
 }

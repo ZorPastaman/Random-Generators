@@ -7,11 +7,14 @@ using JetBrains.Annotations;
 namespace Zor.RandomGenerators.DiscreteDistributions
 {
 	/// <summary>
-	/// Geometric Random Generator using <see cref="GeometricDistribution.Generate(Func{float},float)"/>.
+	/// Geometric Random Generator
+	/// using <see cref="GeometricDistribution.Generate(Func{float},GeometricDistribution.Setup)"/>.
 	/// </summary>
 	public sealed class GeometricGeneratorFuncDependentSimple : IGeometricGenerator
 	{
 		[NotNull] private Func<float> m_iidFunc;
+		private GeometricDistribution.Setup m_setup;
+
 		private float m_probability;
 
 		/// <summary>
@@ -25,6 +28,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		{
 			m_iidFunc = iidFunc;
 			m_probability = probability;
+			m_setup = new GeometricDistribution.Setup(m_probability);
 		}
 
 		/// <summary>
@@ -34,6 +38,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		public GeometricGeneratorFuncDependentSimple([NotNull] GeometricGeneratorFuncDependentSimple other)
 		{
 			m_iidFunc = other.m_iidFunc;
+			m_setup = other.m_setup;
 			m_probability = other.m_probability;
 		}
 
@@ -55,7 +60,11 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_probability;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_probability = value;
+			set
+			{
+				m_probability = value;
+				m_setup = new GeometricDistribution.Setup(m_probability);
+			}
 		}
 
 		public int startPoint
@@ -68,7 +77,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public int Generate()
 		{
-			return GeometricDistribution.Generate(m_iidFunc, m_probability);
+			return GeometricDistribution.Generate(m_iidFunc, m_setup);
 		}
 	}
 }

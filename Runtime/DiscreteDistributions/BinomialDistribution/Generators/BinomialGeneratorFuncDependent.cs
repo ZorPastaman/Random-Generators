@@ -7,14 +7,17 @@ using JetBrains.Annotations;
 namespace Zor.RandomGenerators.DiscreteDistributions
 {
 	/// <summary>
-	/// Binomial Random Generator using <see cref="BinomialDistribution.Generate(Func{float},int,float,byte)"/>.
+	/// Binomial Random Generator
+	/// using <see cref="BinomialDistribution.Generate(Func{float},int,BinomialDistribution.Setup,byte)"/>.
 	/// </summary>
 	public sealed class BinomialGeneratorFuncDependent : IBinomialGenerator
 	{
 		[NotNull] private Func<float> m_iidFunc;
 		private int m_startPoint;
-		private float m_probability;
+		private BinomialDistribution.Setup m_setup;
 		private byte m_upperBound;
+
+		private float m_probability;
 
 		/// <summary>
 		/// Creates a <see cref="BinomialGeneratorFuncDependent"/> with the specified parameters.
@@ -31,6 +34,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 			m_iidFunc = iidFunc;
 			m_startPoint = startPoint;
 			m_probability = probability;
+			m_setup = new BinomialDistribution.Setup(m_probability);
 			m_upperBound = upperBound;
 		}
 
@@ -42,8 +46,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		{
 			m_iidFunc = other.m_iidFunc;
 			m_startPoint = other.m_startPoint;
-			m_probability = other.m_probability;
+			m_setup = other.m_setup;
 			m_upperBound = other.m_upperBound;
+			m_probability = other.m_probability;
 		}
 
 		/// <summary>
@@ -72,7 +77,11 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_probability;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_probability = value;
+			set
+			{
+				m_probability = value;
+				m_setup = new BinomialDistribution.Setup(m_probability);
+			}
 		}
 
 		public byte upperBound
@@ -87,7 +96,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public int Generate()
 		{
-			return BinomialDistribution.Generate(m_iidFunc, m_startPoint, m_probability, m_upperBound);
+			return BinomialDistribution.Generate(m_iidFunc, m_startPoint, m_setup, m_upperBound);
 		}
 	}
 }

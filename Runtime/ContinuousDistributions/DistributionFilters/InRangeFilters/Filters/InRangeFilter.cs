@@ -1,31 +1,18 @@
 // Copyright (c) 2020-2021 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
-using System;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
-using UnityEngine;
 
 namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 {
 	/// <summary>
 	/// The filter recommends to regenerate a new value if it continues a sequence where every value is in range.
 	/// </summary>
-	[Serializable]
 	public sealed class InRangeFilter : IInRangeFilter
 	{
-#pragma warning disable CS0649
-		[SerializeField] private float m_Min = InRangeFiltering.DefaultMin;
-		[SerializeField] private float m_Max = InRangeFiltering.DefaultMax;
-		[SerializeField, Tooltip("Allowed in range sequence length.")]
-		private byte m_InRangeSequenceLength = InRangeFiltering.DefaultInRangeSequenceLength;
-#pragma warning restore CS0649
-
-		/// <summary>
-		/// Creates an <see cref="InRangeFilter"/> with the default parameters.
-		/// </summary>
-		public InRangeFilter()
-		{
-		}
+		private float m_min;
+		private float m_max;
+		private byte m_inRangeSequenceLength;
 
 		/// <summary>
 		/// Creates an <see cref="InRangeFilter"/> with the specified parameters.
@@ -35,9 +22,9 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		/// <param name="inRangeSequenceLength">Allowed in range sequence length.</param>
 		public InRangeFilter(float min, float max, byte inRangeSequenceLength)
 		{
-			m_Min = min;
-			m_Max = max;
-			m_InRangeSequenceLength = inRangeSequenceLength;
+			m_min = min;
+			m_max = max;
+			m_inRangeSequenceLength = inRangeSequenceLength;
 		}
 
 		/// <summary>
@@ -46,25 +33,25 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		/// <param name="other"></param>
 		public InRangeFilter([NotNull] InRangeFilter other)
 		{
-			m_Min = other.m_Min;
-			m_Max = other.m_Max;
-			m_InRangeSequenceLength = other.m_InRangeSequenceLength;
+			m_min = other.m_min;
+			m_max = other.m_max;
+			m_inRangeSequenceLength = other.m_inRangeSequenceLength;
 		}
 
 		public float min
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_Min;
+			get => m_min;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_Min = value;
+			set => m_min = value;
 		}
 
 		public float max
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_Max;
+			get => m_max;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_Max = value;
+			set => m_max = value;
 		}
 
 		/// <summary>
@@ -73,24 +60,24 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		public byte inRangeSequenceLength
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_InRangeSequenceLength;
+			get => m_inRangeSequenceLength;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_InRangeSequenceLength = value;
+			set => m_inRangeSequenceLength = value;
 		}
 
 		/// <inheritdoc/>
 		public byte requiredSequenceLength
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_InRangeSequenceLength;
+			get => m_inRangeSequenceLength;
 		}
 
 		/// <inheritdoc/>
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public bool NeedRegenerate(float[] sequence, float newValue, byte sequenceLength)
 		{
-			return InRangeFiltering.NeedRegenerate(sequence, newValue, m_Min, m_Max, sequenceLength,
-				m_InRangeSequenceLength);
+			return InRangeFiltering.NeedRegenerate(sequence, newValue, m_min, m_max, sequenceLength,
+				m_inRangeSequenceLength);
 		}
 	}
 }

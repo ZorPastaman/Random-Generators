@@ -1,32 +1,20 @@
 // Copyright (c) 2020-2021 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
-using System;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
-using UnityEngine;
 
 namespace Zor.RandomGenerators.ContinuousDistributions
 {
 	/// <summary>
 	/// Normal Random Generator using <see cref="NormalDistribution.Generate(float,float)"/>.
 	/// </summary>
-	[Serializable]
 	public sealed class NormalGenerator : INormalGenerator
 	{
-#pragma warning disable CS0649
-		[SerializeField] private float m_Mean = NormalDistribution.DefaultMean;
-		[SerializeField] private float m_Deviation = NormalDistribution.DefaultDeviation;
-#pragma warning restore CS0649
+		private float m_mean;
+		private float m_deviation;
 
 		private float m_spared;
 		private bool m_hasSpared;
-
-		/// <summary>
-		/// Creates a <see cref="NormalGenerator"/> with the default parameters.
-		/// </summary>
-		public NormalGenerator()
-		{
-		}
 
 		/// <summary>
 		/// Creates a <see cref="NormalGenerator"/> with the specified parameters.
@@ -35,8 +23,8 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// <param name="deviation"></param>
 		public NormalGenerator(float mean, float deviation)
 		{
-			m_Mean = mean;
-			m_Deviation = deviation;
+			m_mean = mean;
+			m_deviation = deviation;
 		}
 
 		/// <summary>
@@ -44,18 +32,18 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// </summary>
 		public NormalGenerator([NotNull] NormalGenerator other)
 		{
-			m_Mean = other.m_Mean;
-			m_Deviation = other.m_Deviation;
+			m_mean = other.m_mean;
+			m_deviation = other.m_deviation;
 		}
 
 		public float mean
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_Mean;
+			get => m_mean;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set
 			{
-				m_Mean = value;
+				m_mean = value;
 				m_hasSpared = false;
 			}
 		}
@@ -63,11 +51,11 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		public float deviation
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_Deviation;
+			get => m_deviation;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set
 			{
-				m_Deviation = value;
+				m_deviation = value;
 				m_hasSpared = false;
 			}
 		}
@@ -83,7 +71,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 			}
 
 			float answer;
-			(answer, m_spared) = NormalDistribution.Generate(m_Mean, m_Deviation);
+			(answer, m_spared) = NormalDistribution.Generate(m_mean, m_deviation);
 			m_hasSpared = true;
 
 			return answer;

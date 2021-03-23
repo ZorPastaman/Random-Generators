@@ -7,13 +7,16 @@ using Zor.RandomGenerators.ContinuousDistributions;
 namespace Zor.RandomGenerators.DiscreteDistributions
 {
 	/// <summary>
-	/// Geometric Random Generator using <see cref="GeometricDistribution.Generate{T}(T,float,int)"/>.
+	/// Geometric Random Generator
+	/// using <see cref="GeometricDistribution.Generate{T}(T,GeometricDistribution.Setup,int)"/>.
 	/// </summary>
 	public sealed class GeometricGeneratorDependent<T> : IGeometricGenerator where T : IContinuousGenerator
 	{
 		[NotNull] private T m_iidGenerator;
-		private float m_probability;
+		private GeometricDistribution.Setup m_setup;
 		private int m_startPoint;
+
+		private float m_probability;
 
 		/// <summary>
 		/// Creates a <see cref="GeometricGeneratorDependent{T}"/> with the specified parameters.
@@ -27,6 +30,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		{
 			m_iidGenerator = iidGenerator;
 			m_probability = probability;
+			m_setup = new GeometricDistribution.Setup(m_probability);
 			m_startPoint = startPoint;
 		}
 
@@ -37,8 +41,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		public GeometricGeneratorDependent([NotNull] GeometricGeneratorDependent<T> other)
 		{
 			m_iidGenerator = other.m_iidGenerator;
-			m_probability = other.m_probability;
+			m_setup = other.m_setup;
 			m_startPoint = other.m_startPoint;
+			m_probability = other.m_probability;
 		}
 
 		/// <summary>
@@ -59,7 +64,11 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_probability;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_probability = value;
+			set
+			{
+				m_probability = value;
+				m_setup = new GeometricDistribution.Setup(m_probability);
+			}
 		}
 
 		public int startPoint
@@ -74,7 +83,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public int Generate()
 		{
-			return GeometricDistribution.Generate(m_iidGenerator, m_probability, m_startPoint);
+			return GeometricDistribution.Generate(m_iidGenerator, m_setup, m_startPoint);
 		}
 	}
 }

@@ -1,30 +1,18 @@
 // Copyright (c) 2020-2021 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
-using System;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Zor.RandomGenerators.DiscreteDistributions
 {
 	/// <summary>
 	/// Unity distribution generator using <see cref="Random.Range(int,int)"/>.
 	/// </summary>
-	[Serializable]
 	public sealed class UnityGenerator : IUnityGenerator<int>
 	{
-#pragma warning disable CS0649
-		[SerializeField] private int m_Min = UnityGeneratorDefaults.DefaultMin;
-		[SerializeField] private int m_Max = UnityGeneratorDefaults.DefaultMax;
-#pragma warning restore CS0649
-
-		/// <summary>
-		/// Creates an <see cref="UnityGenerator"/> with the default parameters.
-		/// </summary>
-		public UnityGenerator()
-		{
-		}
+		private int m_min;
+		private int m_max;
 
 		/// <summary>
 		/// Creates an <see cref="UnityGenerator"/> with the specified parameters.
@@ -33,8 +21,8 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="max"></param>
 		public UnityGenerator(int min, int max)
 		{
-			m_Min = min;
-			m_Max = max;
+			m_min = min;
+			m_max = max;
 		}
 
 		/// <summary>
@@ -43,31 +31,31 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="other"></param>
 		public UnityGenerator([NotNull] UnityGenerator other)
 		{
-			m_Min = other.m_Min;
-			m_Max = other.m_Max;
+			m_min = other.m_min;
+			m_max = other.m_max;
 		}
 
 		public int min
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_Min;
+			get => m_min;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_Min = value;
+			set => m_min = value;
 		}
 
 		public int max
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_Max;
+			get => m_max;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_Max = value;
+			set => m_max = value;
 		}
 
 		/// <inheritdoc/>
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public int Generate()
 		{
-			return Random.Range(m_Min, m_Max);
+			return Random.Range(m_min, m_max);
 		}
 	}
 }

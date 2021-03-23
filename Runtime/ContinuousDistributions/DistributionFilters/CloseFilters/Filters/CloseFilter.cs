@@ -1,9 +1,7 @@
 // Copyright (c) 2020-2021 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
-using System;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
-using UnityEngine;
 
 namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 {
@@ -11,24 +9,11 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 	/// The filter recommends to regenerate a new value if it continues a sequence where every value is too close
 	/// to a reference value.
 	/// </summary>
-	[Serializable]
 	public sealed class CloseFilter : ICloseFilter
 	{
-#pragma warning disable CS0649
-		[SerializeField] private float m_ReferenceValue = CloseFiltering.DefaultReferenceValue;
-		[SerializeField,
-		Tooltip("How far from a reference value a value may be to be counted as close enough.")]
-		private float m_Range = CloseFiltering.DefaultRange;
-		[SerializeField, Tooltip("Allowed close sequence length.")]
-		private byte m_CloseSequenceLength = CloseFiltering.DefaultCloseSequenceLength;
-#pragma warning restore CS0649
-
-		/// <summary>
-		/// Creates a new <see cref="CloseFilter"/> with the default parameters.
-		/// </summary>
-		public CloseFilter()
-		{
-		}
+		private float m_referenceValue;
+		private float m_range;
+		private byte m_closeSequenceLength;
 
 		/// <summary>
 		/// Creates a new <see cref="CloseFilter"/> with the specified parameters.
@@ -40,9 +25,9 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		/// <param name="closeSequenceLength">Allowed close sequence length.</param>
 		public CloseFilter(float referenceValue, float range, byte closeSequenceLength)
 		{
-			m_ReferenceValue = referenceValue;
-			m_Range = range;
-			m_CloseSequenceLength = closeSequenceLength;
+			m_referenceValue = referenceValue;
+			m_range = range;
+			m_closeSequenceLength = closeSequenceLength;
 		}
 
 		/// <summary>
@@ -51,17 +36,17 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		/// <param name="other"></param>
 		public CloseFilter([NotNull] CloseFilter other)
 		{
-			m_ReferenceValue = other.m_ReferenceValue;
-			m_Range = other.m_Range;
-			m_CloseSequenceLength = other.m_CloseSequenceLength;
+			m_referenceValue = other.m_referenceValue;
+			m_range = other.m_range;
+			m_closeSequenceLength = other.m_closeSequenceLength;
 		}
 
 		public float referenceValue
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_ReferenceValue;
+			get => m_referenceValue;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_ReferenceValue = value;
+			set => m_referenceValue = value;
 		}
 
 		/// <summary>
@@ -70,9 +55,9 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		public float range
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_Range;
+			get => m_range;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_Range = value;
+			set => m_range = value;
 		}
 
 		/// <summary>
@@ -81,24 +66,24 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		public byte closeSequenceLength
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_CloseSequenceLength;
+			get => m_closeSequenceLength;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_CloseSequenceLength = value;
+			set => m_closeSequenceLength = value;
 		}
 
 		/// <inheritdoc/>
 		public byte requiredSequenceLength
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_CloseSequenceLength;
+			get => m_closeSequenceLength;
 		}
 
 		/// <inheritdoc/>
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public bool NeedRegenerate(float[] sequence, float newValue, byte sequenceLength)
 		{
-			return CloseFiltering.NeedRegenerate(sequence, newValue, m_ReferenceValue, m_Range, sequenceLength,
-				m_CloseSequenceLength);
+			return CloseFiltering.NeedRegenerate(sequence, newValue, m_referenceValue, m_range, sequenceLength,
+				m_closeSequenceLength);
 		}
 	}
 }

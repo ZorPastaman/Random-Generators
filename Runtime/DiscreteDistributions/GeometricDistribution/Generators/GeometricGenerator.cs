@@ -1,30 +1,19 @@
 ﻿// Copyright (c) 2020-2021 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
-using System;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
-using UnityEngine;
 
 namespace Zor.RandomGenerators.DiscreteDistributions
 {
 	/// <summary>
-	/// Geometric Random Generator using <see cref="GeometricDistribution.Generate(float,int)"/>.
+	/// Geometric Random Generator using <see cref="GeometricDistribution.Generate(GeometricDistribution.Setup,int)"/>.
 	/// </summary>
-	[Serializable]
 	public sealed class GeometricGenerator : IGeometricGenerator
 	{
-#pragma warning disable CS0649
-		[SerializeField, Range(NumberConstants.NormalEpsilon, NumberConstants.SubOne)]
-		private float m_Probability = GeometricDistribution.DefaultProbability;
-		[SerializeField] private int m_StartPoint = GeometricDistribution.DefaultStartPoint;
-#pragma warning restore CS0649
+		private GeometricDistribution.Setup m_setup;
+		private int m_startPoint;
 
-		/// <summary>
-		/// Creates a <see cref="GeometricGenerator"/> with the default parameters.
-		/// </summary>
-		public GeometricGenerator()
-		{
-		}
+		private float m_probability;
 
 		/// <summary>
 		/// Creates a <see cref="GeometricGenerator"/> with the specified parameters.
@@ -33,8 +22,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="startPoint"></param>
 		public GeometricGenerator(float probability, int startPoint)
 		{
-			m_Probability = probability;
-			m_StartPoint = startPoint;
+			m_probability = probability;
+			m_setup = new GeometricDistribution.Setup(m_probability);
+			m_startPoint = startPoint;
 		}
 
 		/// <summary>
@@ -43,32 +33,37 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="other"></param>
 		public GeometricGenerator([NotNull] GeometricGenerator other)
 		{
-			m_Probability = other.m_Probability;
-			m_StartPoint = other.m_StartPoint;
+			m_setup = other.m_setup;
+			m_startPoint = other.m_startPoint;
+			m_probability = other.m_probability;
 		}
 
 		/// <inheritdoc/>
 		public float probability
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_Probability;
+			get => m_probability;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_Probability = value;
+			set
+			{
+				m_probability = value;
+				m_setup = new GeometricDistribution.Setup(m_probability);
+			}
 		}
 
 		public int startPoint
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_StartPoint;
+			get => m_startPoint;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_StartPoint = value;
+			set => m_startPoint = value;
 		}
 
 		/// <inheritdoc/>
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public int Generate()
 		{
-			return GeometricDistribution.Generate(m_Probability, m_StartPoint);
+			return GeometricDistribution.Generate(m_setup, m_startPoint);
 		}
 	}
 }

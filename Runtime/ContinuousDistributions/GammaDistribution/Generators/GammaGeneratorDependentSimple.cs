@@ -6,13 +6,15 @@ using JetBrains.Annotations;
 namespace Zor.RandomGenerators.ContinuousDistributions
 {
 	/// <summary>
-	/// Gamma Generator using <see cref="GammaDistribution.Generate{T}(T,float,float)"/>.
+	/// Gamma Generator using <see cref="GammaDistribution.Generate{T}(T,GammaDistribution.Setup,float)"/>.
 	/// </summary>
 	public sealed class GammaGeneratorDependentSimple<T> : IGammaGenerator where T : IContinuousGenerator
 	{
 		[NotNull] private T m_iidGenerator;
-		private float m_alpha;
+		private GammaDistribution.Setup m_setup;
 		private float m_beta;
+
+		private float m_alpha;
 
 		/// <summary>
 		/// Creates a <see cref="GammaGeneratorDependentSimple{T}"/> with the specified parameters.
@@ -29,6 +31,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		{
 			m_iidGenerator = iidGenerator;
 			m_alpha = alpha;
+			m_setup = new GammaDistribution.Setup(m_alpha);
 			m_beta = beta;
 		}
 
@@ -64,7 +67,11 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_alpha;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_alpha = value;
+			set
+			{
+				m_alpha = value;
+				m_setup = new GammaDistribution.Setup(m_alpha);
+			}
 		}
 
 		/// <inheritdoc/>
@@ -86,7 +93,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public float Generate()
 		{
-			return GammaDistribution.Generate(m_iidGenerator, m_alpha, m_beta);
+			return GammaDistribution.Generate(m_iidGenerator, m_setup, m_beta);
 		}
 	}
 }

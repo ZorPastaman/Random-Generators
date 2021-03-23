@@ -1,33 +1,20 @@
 // Copyright (c) 2020-2021 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
-using System;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
-using UnityEngine;
-using Zor.RandomGenerators.PropertyDrawerAttributes;
 
 namespace Zor.RandomGenerators.ContinuousDistributions
 {
 	/// <summary>
-	/// Gamma Generator using <see cref="GammaDistribution.Generate(float,float,float)"/>.
+	/// Gamma Generator using <see cref="GammaDistribution.Generate(GammaDistribution.Setup,float,float)"/>.
 	/// </summary>
-	[Serializable]
 	public sealed class GammaGenerator : IGammaGenerator
 	{
-#pragma warning disable CS0649
-		[SerializeField, SimpleRangeFloat(NumberConstants.NormalEpsilon, float.MaxValue), Tooltip("Shape.")]
-		private float m_Alpha = GammaDistribution.DefaultAlpha;
-		[SerializeField, Tooltip("Scale.")]
-		private float m_Beta = GammaDistribution.DefaultBeta;
-		[SerializeField] private float m_StartPoint = GammaDistribution.DefaultStartPoint;
-#pragma warning restore CS0649
+		private GammaDistribution.Setup m_setup;
+		private float m_beta;
+		private float m_startPoint;
 
-		/// <summary>
-		/// Creates a <see cref="GammaGenerator"/> with the default parameters.
-		/// </summary>
-		public GammaGenerator()
-		{
-		}
+		private float m_alpha;
 
 		/// <summary>
 		/// Creates a <see cref="GammaGenerator"/> with the specified parameters.
@@ -40,9 +27,10 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// </remarks>
 		public GammaGenerator(float alpha, float beta, float startPoint)
 		{
-			m_Alpha = alpha;
-			m_Beta = beta;
-			m_StartPoint = startPoint;
+			m_alpha = alpha;
+			m_setup = new GammaDistribution.Setup(m_alpha);
+			m_beta = beta;
+			m_startPoint = startPoint;
 		}
 
 		/// <summary>
@@ -51,9 +39,10 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// <param name="other"></param>
 		public GammaGenerator([NotNull] GammaGenerator other)
 		{
-			m_Alpha = other.m_Alpha;
-			m_Beta = other.m_Beta;
-			m_StartPoint = other.m_StartPoint;
+			m_setup = other.m_setup;
+			m_beta = other.m_beta;
+			m_startPoint = other.m_startPoint;
+			m_alpha = other.m_alpha;
 		}
 
 		/// <inheritdoc/>
@@ -63,33 +52,37 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		public float alpha
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_Alpha;
+			get => m_alpha;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_Alpha = value;
+			set
+			{
+				m_alpha = value;
+				m_setup = new GammaDistribution.Setup(m_alpha);
+			}
 		}
 
 		/// <inheritdoc/>
 		public float beta
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_Beta;
+			get => m_beta;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_Beta = value;
+			set => m_beta = value;
 		}
 
 		public float startPoint
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_StartPoint;
+			get => m_startPoint;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_StartPoint = value;
+			set => m_startPoint = value;
 		}
 
 		/// <inheritdoc/>
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public float Generate()
 		{
-			return GammaDistribution.Generate(m_Alpha, m_Beta, m_StartPoint);
+			return GammaDistribution.Generate(m_setup, m_beta, m_startPoint);
 		}
 	}
 }

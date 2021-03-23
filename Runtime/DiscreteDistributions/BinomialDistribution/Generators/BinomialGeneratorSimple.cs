@@ -1,30 +1,19 @@
 // Copyright (c) 2020-2021 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
-using System;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
-using UnityEngine;
 
 namespace Zor.RandomGenerators.DiscreteDistributions
 {
 	/// <summary>
-	/// Binomial Random Generator using <see cref="BinomialDistribution.Generate(float,byte)"/>.
+	/// Binomial Random Generator using <see cref="BinomialDistribution.Generate(BinomialDistribution.Setup,byte)"/>.
 	/// </summary>
-	[Serializable]
 	public sealed class BinomialGeneratorSimple : IBinomialGenerator
 	{
-#pragma warning disable CS0649
-		[SerializeField, Range(0f, NumberConstants.SubOne)]
-		private float m_Probability = BinomialDistribution.DefaultProbability;
-		[SerializeField] private byte m_UpperBound = BinomialDistribution.DefaultUpperBound;
-#pragma warning restore CS0649
+		private BinomialDistribution.Setup m_setup;
+		private byte m_upperBound;
 
-		/// <summary>
-		/// Creates a <see cref="BinomialGeneratorSimple"/> with the default parameters.
-		/// </summary>
-		public BinomialGeneratorSimple()
-		{
-		}
+		private float m_probability;
 
 		/// <summary>
 		/// Creates a <see cref="BinomialGeneratorSimple"/> with the specified parameters.
@@ -33,8 +22,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="upperBound"></param>
 		public BinomialGeneratorSimple(float probability, byte upperBound)
 		{
-			m_Probability = probability;
-			m_UpperBound = upperBound;
+			m_probability = probability;
+			m_setup = new BinomialDistribution.Setup(m_probability);
+			m_upperBound = upperBound;
 		}
 
 		/// <summary>
@@ -43,8 +33,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="other"></param>
 		public BinomialGeneratorSimple([NotNull] BinomialGeneratorSimple other)
 		{
-			m_Probability = other.m_Probability;
-			m_UpperBound = other.m_UpperBound;
+			m_setup = other.m_setup;
+			m_upperBound = other.m_upperBound;
+			m_probability = other.m_probability;
 		}
 
 		public int startPoint
@@ -57,24 +48,28 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		public float probability
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_Probability;
+			get => m_probability;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_Probability = value;
+			set
+			{
+				m_probability = value;
+				m_setup = new BinomialDistribution.Setup(m_probability);
+			}
 		}
 
 		public byte upperBound
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_UpperBound;
+			get => m_upperBound;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_UpperBound = value;
+			set => m_upperBound = value;
 		}
 
 		/// <inheritdoc/>
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public int Generate()
 		{
-			return BinomialDistribution.Generate(m_Probability, m_UpperBound);
+			return BinomialDistribution.Generate(m_setup, m_upperBound);
 		}
 	}
 }

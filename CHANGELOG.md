@@ -11,11 +11,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - XorShift128 random engine and wrappers for it.
 - Geometric distribution.
+- Distributions with setup data (Gamma, Binomial, Geometric, Negative Binomial, Poisson, Weighted)
+got special methods and Setup structs that help to compute setup data once and reuse it.
 
 ### Changed
 
 - Unity 2019.4 is now required.
 - XorShift algorithms can now jump forward.
+- Generators and filters are not serialized anymore.
 
 ## [1.2.0] - 2020-11-01
 

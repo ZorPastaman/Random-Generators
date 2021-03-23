@@ -1,6 +1,5 @@
 // Copyright (c) 2020-2021 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
-using System;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 
@@ -9,7 +8,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 	/// <summary>
 	/// Normal Random Generator using <see cref="NormalDistribution.Generate()"/>.
 	/// </summary>
-	[Serializable]
 	public sealed class NormalGeneratorSimple : INormalGenerator
 	{
 		private float m_spared;

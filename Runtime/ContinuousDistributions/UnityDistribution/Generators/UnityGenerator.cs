@@ -1,38 +1,26 @@
 // Copyright (c) 2020-2021 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
-using System;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Zor.RandomGenerators.ContinuousDistributions
 {
 	/// <summary>
 	/// Unity distribution generator using <see cref="Random.Range(float,float)"/>.
 	/// </summary>
-	[Serializable]
 	public sealed class UnityGenerator : IUnityGenerator
 	{
-#pragma warning disable CS0649
-		[SerializeField] private float m_Min = UnityGeneratorDefaults.DefaultMin;
-		[SerializeField] private float m_Max = UnityGeneratorDefaults.DefaultMax;
-#pragma warning restore CS0649
-
-		/// <summary>
-		/// Creates an <see cref="UnityGenerator"/> with the default parameters.
-		/// </summary>
-		public UnityGenerator()
-		{
-		}
+		private float m_min;
+		private float m_max;
 
 		/// <summary>
 		/// Creates an <see cref="UnityGenerator"/> with the specified parameters.
 		/// </summary>
 		public UnityGenerator(float min, float max)
 		{
-			m_Min = min;
-			m_Max = max;
+			m_min = min;
+			m_max = max;
 		}
 
 		/// <summary>
@@ -40,31 +28,31 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// </summary>
 		public UnityGenerator(UnityGenerator other)
 		{
-			m_Min = other.m_Min;
-			m_Max = other.m_Max;
+			m_min = other.m_min;
+			m_max = other.m_max;
 		}
 
 		public float min
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_Min;
+			get => m_min;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_Min = value;
+			set => m_min = value;
 		}
 
 		public float max
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_Max;
+			get => m_max;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_Max = value;
+			set => m_max = value;
 		}
 
 		/// <inheritdoc/>
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public float Generate()
 		{
-			return Random.Range(m_Min, m_Max);
+			return Random.Range(m_min, m_max);
 		}
 	}
 }

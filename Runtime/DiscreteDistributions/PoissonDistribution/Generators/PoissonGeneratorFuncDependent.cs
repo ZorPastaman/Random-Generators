@@ -7,13 +7,16 @@ using JetBrains.Annotations;
 namespace Zor.RandomGenerators.DiscreteDistributions
 {
 	/// <summary>
-	/// Poisson Random Generator using <see cref="PoissonDistribution.Generate(Func{float},float)"/>.
+	/// Poisson Random Generator
+	/// using <see cref="PoissonDistribution.Generate(Func{float},PoissonDistribution.Setup)"/>.
 	/// </summary>
 	public sealed class PoissonGeneratorFuncDependent : IPoissonGenerator
 	{
 		[NotNull] private Func<float> m_iidFunc;
-		private float m_lambda;
+		private PoissonDistribution.Setup m_setup;
 		private int m_startPoint;
+
+		private float m_lambda;
 
 		/// <summary>
 		/// Creates a <see cref="PoissonGeneratorFuncDependentSimple"/> with the specified parameters.
@@ -27,6 +30,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		{
 			m_iidFunc = iidFunc;
 			m_lambda = lambda;
+			m_setup = new PoissonDistribution.Setup(m_lambda);
 			m_startPoint = startPoint;
 		}
 
@@ -37,8 +41,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		public PoissonGeneratorFuncDependent([NotNull] PoissonGeneratorFuncDependent other)
 		{
 			m_iidFunc = other.m_iidFunc;
-			m_lambda = other.m_lambda;
+			m_setup = other.m_setup;
 			m_startPoint = other.m_startPoint;
+			m_lambda = other.m_lambda;
 		}
 
 		/// <summary>
@@ -58,7 +63,11 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_lambda;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_lambda = value;
+			set
+			{
+				m_lambda = value;
+				m_setup = new PoissonDistribution.Setup(m_lambda);
+			}
 		}
 
 		public int startPoint
@@ -73,7 +82,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public int Generate()
 		{
-			return PoissonDistribution.Generate(m_iidFunc, m_lambda, m_startPoint);
+			return PoissonDistribution.Generate(m_iidFunc, m_setup, m_startPoint);
 		}
 	}
 }

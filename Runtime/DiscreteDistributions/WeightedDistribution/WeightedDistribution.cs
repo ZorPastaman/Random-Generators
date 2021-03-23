@@ -27,23 +27,22 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 			int count = weights.Length;
 			uint sum = ComputeSum(weights, count);
 
-			return Generate(weights, sum, count);
+			return Pop(weights, sum, count, Random.value);
 		}
 
 		/// <summary>
 		/// Generates a random value using <see cref="Random.value"/> as an iid source.
 		/// </summary>
 		/// <param name="weights">Weights array.</param>
-		/// <param name="sum">Sum of weights in <paramref name="weights"/>.</param>
-		/// <param name="count">Count of <paramref name="weights"/>.</param>
+		/// <param name="setup">Precomputed data.</param>
 		/// <returns>Index of a gotten value from <paramref name="weights"/>.</returns>
 		/// <remarks>
-		/// <paramref name="count"/> must be greater than 0.
+		/// It's a faster variant using a precomputed <paramref name="setup"/>.
 		/// </remarks>
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-		public static int Generate([NotNull] uint[] weights, uint sum, int count)
+		public static int Generate([NotNull] uint[] weights, Setup setup)
 		{
-			return Pop(weights, sum, count, Random.value);
+			return Pop(weights, setup.sum, setup.count, Random.value);
 		}
 
 		/// <summary>
@@ -63,7 +62,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 			int count = weights.Length;
 			uint sum = ComputeSum(weights, count);
 
-			return Generate(iidFunc, weights, sum, count);
+			return Pop(weights, sum, count, iidFunc());
 		}
 
 		/// <summary>
@@ -73,16 +72,15 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// Function that returns an independent and identically distributed random value in range [0, 1].
 		/// </param>
 		/// <param name="weights">Weights array.</param>
-		/// <param name="sum">Sum of weights in <paramref name="weights"/>.</param>
-		/// <param name="count">Count of <paramref name="weights"/>.</param>
+		/// <param name="setup">Precomputed data.</param>
 		/// <returns>Index of a gotten value from <paramref name="weights"/>.</returns>
 		/// <remarks>
-		/// <paramref name="count"/> must be greater than 0.
+		/// It's a faster variant using a precomputed <paramref name="setup"/>.
 		/// </remarks>
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-		public static int Generate([NotNull] Func<float> iidFunc, [NotNull] uint[] weights, uint sum, int count)
+		public static int Generate([NotNull] Func<float> iidFunc, [NotNull] uint[] weights, Setup setup)
 		{
-			return Pop(weights, sum, count, iidFunc());
+			return Pop(weights, setup.sum, setup.count, iidFunc());
 		}
 
 		/// <summary>
@@ -103,7 +101,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 			int count = weights.Length;
 			uint sum = ComputeSum(weights, count);
 
-			return Generate(iidGenerator, weights, sum, count);
+			return Pop(weights, sum, count, iidGenerator.Generate());
 		}
 
 		/// <summary>
@@ -113,17 +111,16 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// Random generator that returns an independent and identically distributed random value in range [0, 1].
 		/// </param>
 		/// <param name="weights">Weights array.</param>
-		/// <param name="sum">Sum of weights in <paramref name="weights"/>.</param>
-		/// <param name="count">Count of <paramref name="weights"/>.</param>
+		/// <param name="setup">Precomputed data.</param>
 		/// <returns>Index of a gotten value from <paramref name="weights"/>.</returns>
 		/// <remarks>
-		/// <paramref name="count"/> must be greater than 0.
+		/// It's a faster variant using a precomputed <paramref name="setup"/>.
 		/// </remarks>
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-		public static int Generate<T>([NotNull] T iidGenerator, [NotNull] uint[] weights, uint sum, int count)
+		public static int Generate<T>([NotNull] T iidGenerator, [NotNull] uint[] weights, Setup setup)
 			where T : IContinuousGenerator
 		{
-			return Pop(weights, sum, count, iidGenerator.Generate());
+			return Pop(weights, setup.sum, setup.count, iidGenerator.Generate());
 		}
 
 		/// <summary>
@@ -133,7 +130,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="count">How many first elements are summed.</param>
 		/// <returns>Computed sum.</returns>
 		[Pure]
-		public static uint ComputeSum([NotNull] uint[] weights, int count)
+		private static uint ComputeSum([NotNull] uint[] weights, int count)
 		{
 			uint sum = 0u;
 
@@ -169,6 +166,30 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 			}
 
 			return i - 1;
+		}
+
+		/// <summary>
+		/// Precomputed setup data. It's used in optimized methods in <see cref="WeightedDistribution"/>.
+		/// </summary>
+		/// <remarks>
+		/// <para>Never use the default constructor.</para>
+		/// <para>If you change weights, recreate <see cref="Setup"/>.</para>
+		/// </remarks>
+		public readonly struct Setup
+		{
+			public readonly uint sum;
+			public readonly int count;
+
+			/// <summary>
+			/// Creates <see cref="Setup"/> for optimized methods in <see cref="WeightedDistribution"/>.
+			/// </summary>
+			/// <param name="weights">Weights array. Its count must be greater than 0.</param>
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
+			public Setup([NotNull] uint[] weights)
+			{
+				count = weights.Length;
+				sum = ComputeSum(weights, count);
+			}
 		}
 	}
 }

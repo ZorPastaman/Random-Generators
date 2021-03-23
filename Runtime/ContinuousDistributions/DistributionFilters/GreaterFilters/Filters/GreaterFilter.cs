@@ -1,9 +1,7 @@
 // Copyright (c) 2020-2021 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
-using System;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
-using UnityEngine;
 
 namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 {
@@ -11,21 +9,10 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 	/// The filter recommends to regenerate a new value if it continues a sequence where every value is greater
 	/// than the specified reference value.
 	/// </summary>
-	[Serializable]
 	public sealed class GreaterFilter : IGreaterFilter
 	{
-#pragma warning disable CS0649
-		[SerializeField] private float m_ReferenceValue = GreaterFiltering.DefaultReferenceValue;
-		[SerializeField, Tooltip("Allowed greater sequence length.")]
-		private byte m_GreaterSequenceLength = GreaterFiltering.DefaultGreaterSequenceLength;
-#pragma warning restore CS0649
-
-		/// <summary>
-		/// Creates a <see cref="GreaterFilter"/> with the default parameters.
-		/// </summary>
-		public GreaterFilter()
-		{
-		}
+		private float m_referenceValue;
+		private byte m_greaterSequenceLength;
 
 		/// <summary>
 		/// Creates a <see cref="GreaterFilter"/> with the specified parameters.
@@ -34,8 +21,8 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		/// <param name="greaterSequenceLength">Allowed greater sequence length.</param>
 		public GreaterFilter(float referenceValue, byte greaterSequenceLength)
 		{
-			m_ReferenceValue = referenceValue;
-			m_GreaterSequenceLength = greaterSequenceLength;
+			m_referenceValue = referenceValue;
+			m_greaterSequenceLength = greaterSequenceLength;
 		}
 
 		/// <summary>
@@ -44,16 +31,16 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		/// <param name="other"></param>
 		public GreaterFilter([NotNull] GreaterFilter other)
 		{
-			m_ReferenceValue = other.m_ReferenceValue;
-			m_GreaterSequenceLength = other.m_GreaterSequenceLength;
+			m_referenceValue = other.m_referenceValue;
+			m_greaterSequenceLength = other.m_greaterSequenceLength;
 		}
 
 		public float referenceValue
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_ReferenceValue;
+			get => m_referenceValue;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_ReferenceValue = value;
+			set => m_referenceValue = value;
 		}
 
 		/// <summary>
@@ -62,24 +49,24 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		public byte greaterSequenceLength
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_GreaterSequenceLength;
+			get => m_greaterSequenceLength;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_GreaterSequenceLength = value;
+			set => m_greaterSequenceLength = value;
 		}
 
 		/// <inheritdoc/>
 		public byte requiredSequenceLength
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_GreaterSequenceLength;
+			get => m_greaterSequenceLength;
 		}
 
 		/// <inheritdoc/>
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public bool NeedRegenerate(float[] sequence, float newValue, byte sequenceLength)
 		{
-			return GreaterFiltering.NeedRegenerate(sequence, newValue, m_ReferenceValue, sequenceLength,
-				m_GreaterSequenceLength);
+			return GreaterFiltering.NeedRegenerate(sequence, newValue, m_referenceValue, sequenceLength,
+				m_greaterSequenceLength);
 		}
 	}
 }

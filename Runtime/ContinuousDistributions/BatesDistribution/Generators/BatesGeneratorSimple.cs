@@ -1,30 +1,16 @@
 // Copyright (c) 2020-2021 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
-using System;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
-using UnityEngine;
-using Zor.RandomGenerators.PropertyDrawerAttributes;
 
 namespace Zor.RandomGenerators.ContinuousDistributions
 {
 	/// <summary>
 	/// Bates Random Generator using <see cref="BatesDistribution.Generate(byte)"/>.
 	/// </summary>
-	[Serializable]
 	public sealed class BatesGeneratorSimple : IBatesGenerator
 	{
-#pragma warning disable CS0649
-		[SerializeField, SimpleRangeInt(1, 255), Tooltip("How many independent and identically distributed random values are generated.")]
-		private byte m_Iids = BatesDistribution.DefaultIids;
-#pragma warning restore CS0649
-
-		/// <summary>
-		/// Creates a <see cref="BatesGeneratorSimple"/> with the default iids.
-		/// </summary>
-		public BatesGeneratorSimple()
-		{
-		}
+		private byte m_iids;
 
 		/// <summary>
 		/// Creates a <see cref="BatesGeneratorSimple"/> with the specified iids.
@@ -37,7 +23,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// </remarks>
 		public BatesGeneratorSimple(byte iids)
 		{
-			m_Iids = iids;
+			m_iids = iids;
 		}
 
 		/// <summary>
@@ -45,7 +31,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// </summary>
 		public BatesGeneratorSimple([NotNull] BatesGeneratorSimple other)
 		{
-			m_Iids = other.iids;
+			m_iids = other.iids;
 		}
 
 		public float mean
@@ -67,16 +53,16 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		public byte iids
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_Iids;
+			get => m_iids;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_Iids = value;
+			set => m_iids = value;
 		}
 
 		/// <inheritdoc/>
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public float Generate()
 		{
-			return BatesDistribution.Generate(m_Iids);
+			return BatesDistribution.Generate(m_iids);
 		}
 	}
 }

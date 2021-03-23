@@ -1,32 +1,18 @@
 // Copyright (c) 2020-2021 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
-using System;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
-using UnityEngine;
-using Zor.RandomGenerators.PropertyDrawerAttributes;
 
 namespace Zor.RandomGenerators.ContinuousDistributions
 {
 	/// <summary>
 	/// Bates Random Generator using <see cref="BatesDistribution.Generate(float,float,byte)"/>.
 	/// </summary>
-	[Serializable]
 	public sealed class BatesGenerator : IBatesGenerator
 	{
-#pragma warning disable CS0649
-		[SerializeField] private float m_Mean = BatesDistribution.DefaultMean;
-		[SerializeField] private float m_Deviation = BatesDistribution.DefaultDeviation;
-		[SerializeField, SimpleRangeInt(1, 255), Tooltip("How many independent and identically distributed random values are generated.")]
-		private byte m_Iids = BatesDistribution.DefaultIids;
-#pragma warning restore CS0649
-
-		/// <summary>
-		/// Creates a <see cref="BatesGenerator"/> with the default parameters.
-		/// </summary>
-		public BatesGenerator()
-		{
-		}
+		private float m_mean;
+		private float m_deviation;
+		private byte m_iids;
 
 		/// <summary>
 		/// Creates a <see cref="BatesGenerator"/> with the specified parameters.
@@ -41,9 +27,9 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// </remarks>
 		public BatesGenerator(float mean, float deviation, byte iids)
 		{
-			m_Mean = mean;
-			m_Deviation = deviation;
-			m_Iids = iids;
+			m_mean = mean;
+			m_deviation = deviation;
+			m_iids = iids;
 		}
 
 		/// <summary>
@@ -51,25 +37,25 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// </summary>
 		public BatesGenerator([NotNull] BatesGenerator other)
 		{
-			m_Mean = other.m_Mean;
-			m_Deviation = other.m_Deviation;
-			m_Iids = other.m_Iids;
+			m_mean = other.m_mean;
+			m_deviation = other.m_deviation;
+			m_iids = other.m_iids;
 		}
 
 		public float mean
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_Mean;
+			get => m_mean;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_Mean = value;
+			set => m_mean = value;
 		}
 
 		public float deviation
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_Deviation;
+			get => m_deviation;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_Deviation = value;
+			set => m_deviation = value;
 		}
 
 		/// <inheritdoc/>
@@ -79,16 +65,16 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		public byte iids
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_Iids;
+			get => m_iids;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_Iids = value;
+			set => m_iids = value;
 		}
 
 		/// <inheritdoc/>
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public float Generate()
 		{
-			return BatesDistribution.Generate(m_Mean, m_Deviation, m_Iids);
+			return BatesDistribution.Generate(m_mean, m_deviation, m_iids);
 		}
 	}
 }

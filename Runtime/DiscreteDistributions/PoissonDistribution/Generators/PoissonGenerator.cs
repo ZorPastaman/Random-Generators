@@ -1,29 +1,19 @@
 // Copyright (c) 2020-2021 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
-using System;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
-using UnityEngine;
 
 namespace Zor.RandomGenerators.DiscreteDistributions
 {
 	/// <summary>
-	/// Poisson Random Generator using <see cref="PoissonDistribution.Generate(float,int)"/>.
+	/// Poisson Random Generator using <see cref="PoissonDistribution.Generate(PoissonDistribution.Setup,int)"/>.
 	/// </summary>
-	[Serializable]
 	public sealed class PoissonGenerator : IPoissonGenerator
 	{
-#pragma warning disable CS0649
-		[SerializeField] private float m_Lambda = PoissonDistribution.DefaultLambda;
-		[SerializeField] private int m_StartPoint = PoissonDistribution.DefaultStartPoint;
-#pragma warning restore CS0649
+		private PoissonDistribution.Setup m_setup;
+		private int m_startPoint;
 
-		/// <summary>
-		/// Creates a <see cref="PoissonGeneratorSimple"/> with the default parameters.
-		/// </summary>
-		public PoissonGenerator()
-		{
-		}
+		private float m_lambda;
 
 		/// <summary>
 		/// Creates a <see cref="PoissonGeneratorSimple"/> with the specified parameters.
@@ -32,8 +22,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="startPoint"></param>
 		public PoissonGenerator(float lambda, int startPoint)
 		{
-			m_Lambda = lambda;
-			m_StartPoint = startPoint;
+			m_lambda = lambda;
+			m_setup = new PoissonDistribution.Setup(m_lambda);
+			m_startPoint = startPoint;
 		}
 
 		/// <summary>
@@ -42,31 +33,36 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="other"></param>
 		public PoissonGenerator([NotNull] PoissonGenerator other)
 		{
-			m_Lambda = other.m_Lambda;
-			m_StartPoint = other.m_StartPoint;
+			m_setup = other.m_setup;
+			m_startPoint = other.m_startPoint;
+			m_lambda = other.m_lambda;
 		}
 
 		public float lambda
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_Lambda;
+			get => m_lambda;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_Lambda = value;
+			set
+			{
+				m_lambda = value;
+				m_setup = new PoissonDistribution.Setup(m_lambda);
+			}
 		}
 
 		public int startPoint
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_StartPoint;
+			get => m_startPoint;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_StartPoint = value;
+			set => m_startPoint = value;
 		}
 
 		/// <inheritdoc/>
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public int Generate()
 		{
-			return PoissonDistribution.Generate(m_Lambda, m_StartPoint);
+			return PoissonDistribution.Generate(m_setup, m_startPoint);
 		}
 	}
 }

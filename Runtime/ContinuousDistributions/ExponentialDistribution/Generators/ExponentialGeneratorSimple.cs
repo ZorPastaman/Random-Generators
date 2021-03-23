@@ -1,29 +1,16 @@
 // Copyright (c) 2020-2021 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
-using System;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
-using UnityEngine;
 
 namespace Zor.RandomGenerators.ContinuousDistributions
 {
 	/// <summary>
 	/// Exponential Random Generator using <see cref="ExponentialDistribution.Generate(float)"/>.
 	/// </summary>
-	[Serializable]
 	public sealed class ExponentialGeneratorSimple : IExponentialGenerator
 	{
-#pragma warning disable CS0649
-		[SerializeField, Tooltip("Mustn't be zero.")]
-		private float m_Lambda = ExponentialDistribution.DefaultLambda;
-#pragma warning restore CS0649
-
-		/// <summary>
-		/// Creates an <see cref="ExponentialGeneratorSimple"/> with the default parameters.
-		/// </summary>
-		public ExponentialGeneratorSimple()
-		{
-		}
+		private float m_lambda;
 
 		/// <summary>
 		/// Creates an <see cref="ExponentialGeneratorSimple"/> with the specified parameters.
@@ -34,7 +21,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// </remarks>
 		public ExponentialGeneratorSimple(float lambda)
 		{
-			m_Lambda = lambda;
+			m_lambda = lambda;
 		}
 
 		/// <summary>
@@ -43,7 +30,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// <param name="other"></param>
 		public ExponentialGeneratorSimple([NotNull] ExponentialGeneratorSimple other)
 		{
-			m_Lambda = other.m_Lambda;
+			m_lambda = other.m_lambda;
 		}
 
 		/// <summary>
@@ -52,9 +39,9 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		public float lambda
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_Lambda;
+			get => m_lambda;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_Lambda = value;
+			set => m_lambda = value;
 		}
 
 		public float startPoint
@@ -67,7 +54,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public float Generate()
 		{
-			return ExponentialDistribution.Generate(m_Lambda);
+			return ExponentialDistribution.Generate(m_lambda);
 		}
 	}
 }

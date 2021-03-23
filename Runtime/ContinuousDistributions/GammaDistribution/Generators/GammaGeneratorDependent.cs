@@ -6,14 +6,16 @@ using JetBrains.Annotations;
 namespace Zor.RandomGenerators.ContinuousDistributions
 {
 	/// <summary>
-	/// Gamma Generator using <see cref="GammaDistribution.Generate{T}(T,float,float,float)"/>.
+	/// Gamma Generator using <see cref="GammaDistribution.Generate{T}(T,GammaDistribution.Setup,float,float)"/>.
 	/// </summary>
 	public sealed class GammaGeneratorDependent<T> : IGammaGenerator where T : IContinuousGenerator
 	{
 		[NotNull] private T m_iidGenerator;
-		private float m_alpha;
+		private GammaDistribution.Setup m_setup;
 		private float m_beta;
 		private float m_startPoint;
+
+		private float m_alpha;
 
 		/// <summary>
 		/// Creates a <see cref="GammaGeneratorDependent{T}"/> with the specified parameters.
@@ -31,6 +33,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		{
 			m_iidGenerator = iidGenerator;
 			m_alpha = alpha;
+			m_setup = new GammaDistribution.Setup(m_alpha);
 			m_beta = beta;
 			m_startPoint = startPoint;
 		}
@@ -42,9 +45,10 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		public GammaGeneratorDependent([NotNull] GammaGeneratorDependent<T> other)
 		{
 			m_iidGenerator = other.m_iidGenerator;
-			m_alpha = other.m_alpha;
+			m_setup = other.m_setup;
 			m_beta = other.m_beta;
 			m_startPoint = other.m_startPoint;
+			m_alpha = other.m_alpha;
 		}
 
 		/// <summary>
@@ -68,7 +72,11 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_alpha;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_alpha = value;
+			set
+			{
+				m_alpha = value;
+				m_setup = new GammaDistribution.Setup(m_alpha);
+			}
 		}
 
 		/// <inheritdoc/>
@@ -92,7 +100,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public float Generate()
 		{
-			return GammaDistribution.Generate(m_iidGenerator, m_alpha, m_beta, m_startPoint);
+			return GammaDistribution.Generate(m_iidGenerator, m_setup, m_beta, m_startPoint);
 		}
 	}
 }

@@ -1,6 +1,5 @@
 // Copyright (c) 2020-2021 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
-using System;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -11,28 +10,15 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 	/// The filter recommends to regenerate a new value if it continues a sequence where every value is too close
 	/// to a reference value.
 	/// </summary>
-	[Serializable]
 	public sealed class IntCloseFilter : ICloseFilter<int>
 	{
 		public const int DefaultReferenceValue = 0;
 		public const int DefaultRange = 4;
 		public const byte DefaultCloseSequenceLength = 6;
 
-#pragma warning disable CS0649
-		[SerializeField] private int m_ReferenceValue = DefaultReferenceValue;
-		[SerializeField,
-		Tooltip("How far from a reference value a value may be to be counted as close enough.")]
-		private int m_Range = DefaultRange;
-		[SerializeField, Tooltip("Allowed close sequence length.")]
-		private byte m_CloseSequenceLength = DefaultCloseSequenceLength;
-#pragma warning restore CS0649
-
-		/// <summary>
-		/// Creates an <see cref="IntCloseFilter"/> with the default parameters.
-		/// </summary>
-		public IntCloseFilter()
-		{
-		}
+		private int m_referenceValue;
+		private int m_range;
+		private byte m_closeSequenceLength;
 
 		/// <summary>
 		/// Creates an <see cref="IntCloseFilter"/> with the specified parameters.
@@ -44,9 +30,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		/// <param name="closeSequenceLength">Allowed close sequence length.</param>
 		public IntCloseFilter(int referenceValue, int range, byte closeSequenceLength)
 		{
-			m_ReferenceValue = referenceValue;
-			m_Range = range;
-			m_CloseSequenceLength = closeSequenceLength;
+			m_referenceValue = referenceValue;
+			m_range = range;
+			m_closeSequenceLength = closeSequenceLength;
 		}
 
 		/// <summary>
@@ -55,17 +41,17 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		/// <param name="other"></param>
 		public IntCloseFilter([NotNull] IntCloseFilter other)
 		{
-			m_ReferenceValue = other.m_ReferenceValue;
-			m_Range = other.m_Range;
-			m_CloseSequenceLength = other.m_CloseSequenceLength;
+			m_referenceValue = other.m_referenceValue;
+			m_range = other.m_range;
+			m_closeSequenceLength = other.m_closeSequenceLength;
 		}
 
 		public int referenceValue
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_ReferenceValue;
+			get => m_referenceValue;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_ReferenceValue = value;
+			set => m_referenceValue = value;
 		}
 
 		/// <summary>
@@ -74,9 +60,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		public int range
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_Range;
+			get => m_range;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_Range = value;
+			set => m_range = value;
 		}
 
 		/// <summary>
@@ -85,23 +71,23 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		public byte closeSequenceLength
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_CloseSequenceLength;
+			get => m_closeSequenceLength;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_CloseSequenceLength = value;
+			set => m_closeSequenceLength = value;
 		}
 
 		/// <inheritdoc/>
 		public byte requiredSequenceLength
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_CloseSequenceLength;
+			get => m_closeSequenceLength;
 		}
 
 		/// <inheritdoc/>
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public bool NeedRegenerate(int[] sequence, int newValue, byte sequenceLength)
 		{
-			return NeedRegenerate(sequence, newValue, m_ReferenceValue, m_Range, sequenceLength, m_CloseSequenceLength);
+			return NeedRegenerate(sequence, newValue, m_referenceValue, m_range, sequenceLength, m_closeSequenceLength);
 		}
 
 		/// <summary>

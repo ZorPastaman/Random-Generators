@@ -7,13 +7,16 @@ using JetBrains.Annotations;
 namespace Zor.RandomGenerators.DiscreteDistributions
 {
 	/// <summary>
-	/// Geometric Random Generator using <see cref="GeometricDistribution.Generate(Func{float},float,int)"/>.
+	/// Geometric Random Generator
+	/// using <see cref="GeometricDistribution.Generate(Func{float},GeometricDistribution.Setup,int)"/>.
 	/// </summary>
 	public sealed class GeometricGeneratorFuncDependent : IGeometricGenerator
 	{
 		[NotNull] private Func<float> m_iidFunc;
-		private float m_probability;
+		private GeometricDistribution.Setup m_setup;
 		private int m_startPoint;
+
+		private float m_probability;
 
 		/// <summary>
 		/// Creates a <see cref="GeometricGeneratorFuncDependent"/> with the specified parameters.
@@ -27,6 +30,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		{
 			m_iidFunc = iidFunc;
 			m_probability = probability;
+			m_setup = new GeometricDistribution.Setup(m_probability);
 			m_startPoint = startPoint;
 		}
 
@@ -37,8 +41,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		public GeometricGeneratorFuncDependent([NotNull] GeometricGeneratorFuncDependent other)
 		{
 			m_iidFunc = other.m_iidFunc;
-			m_probability = other.m_probability;
+			m_setup = other.m_setup;
 			m_startPoint = other.m_startPoint;
+			m_probability = other.m_probability;
 		}
 
 		/// <summary>
@@ -59,7 +64,11 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_probability;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_probability = value;
+			set
+			{
+				m_probability = value;
+				m_setup = new GeometricDistribution.Setup(m_probability);
+			}
 		}
 
 		public int startPoint
@@ -74,7 +83,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public int Generate()
 		{
-			return GeometricDistribution.Generate(m_iidFunc, m_probability, m_startPoint);
+			return GeometricDistribution.Generate(m_iidFunc, m_setup, m_startPoint);
 		}
 	}
 }

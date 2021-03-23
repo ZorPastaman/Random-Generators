@@ -1,9 +1,7 @@
 // Copyright (c) 2020-2021 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
-using System;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
-using UnityEngine;
 
 namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 {
@@ -11,20 +9,9 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 	/// The filter recommends to regenerate a new value if it continues a descendant sequence
 	/// of the specified length.
 	/// </summary>
-	[Serializable]
 	public sealed class DescendantSequenceFilter : IDescendantSequenceFilter
 	{
-#pragma warning disable CS0649
-		[SerializeField, Tooltip("Allowed descendant sequence length.")]
-		private byte m_DescendantSequenceLength = DescendantSequenceFiltering.DefaultDescendantSequenceLength;
-#pragma warning restore CS0649
-
-		/// <summary>
-		/// Creates a new <see cref="DescendantSequenceFilter"/> with the default parameters.
-		/// </summary>
-		public DescendantSequenceFilter()
-		{
-		}
+		private byte m_descendantSequenceLength;
 
 		/// <summary>
 		/// Creates a new <see cref="DescendantSequenceFilter"/> with the specified parameters.
@@ -34,7 +21,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		/// </param>
 		public DescendantSequenceFilter(byte descendantSequenceLength)
 		{
-			m_DescendantSequenceLength = descendantSequenceLength;
+			m_descendantSequenceLength = descendantSequenceLength;
 		}
 
 		/// <summary>
@@ -43,7 +30,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		/// <param name="other"></param>
 		public DescendantSequenceFilter([NotNull] DescendantSequenceFilter other)
 		{
-			m_DescendantSequenceLength = other.m_DescendantSequenceLength;
+			m_descendantSequenceLength = other.m_descendantSequenceLength;
 		}
 
 		/// <summary>
@@ -52,16 +39,16 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		public byte descendantSequenceLength
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_DescendantSequenceLength;
+			get => m_descendantSequenceLength;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_DescendantSequenceLength = value;
+			set => m_descendantSequenceLength = value;
 		}
 
 		/// <inheritdoc/>
 		public byte requiredSequenceLength
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_DescendantSequenceLength;
+			get => m_descendantSequenceLength;
 		}
 
 		/// <inheritdoc/>

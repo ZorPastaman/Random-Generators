@@ -8,13 +8,15 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 {
 	/// <summary>
 	/// Negative Binomial Random Generator
-	/// using <see cref="NegativeBinomialDistribution.Generate{T}(T,int,float,byte)"/>.
+	/// using <see cref="NegativeBinomialDistribution.Generate{T}(T,NegativeBinomialDistribution.Setup,int)"/>.
 	/// </summary>
 	public sealed class NegativeBinomialGeneratorDependent<T> : INegativeBinomialGenerator
 		where T : IContinuousGenerator
 	{
 		[NotNull] private T m_iidGenerator;
+		private NegativeBinomialDistribution.Setup m_setup;
 		private int m_startPoint;
+
 		private float m_probability;
 		private byte m_successes;
 
@@ -34,9 +36,10 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 			int startPoint, float probability, byte successes)
 		{
 			m_iidGenerator = iidGenerator;
-			m_startPoint = startPoint;
 			m_probability = probability;
 			m_successes = successes;
+			m_setup = new NegativeBinomialDistribution.Setup(m_probability, m_successes);
+			m_startPoint = startPoint;
 		}
 
 		/// <summary>
@@ -46,6 +49,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		public NegativeBinomialGeneratorDependent([NotNull] NegativeBinomialGeneratorDependent<T> other)
 		{
 			m_iidGenerator = other.m_iidGenerator;
+			m_setup = other.m_setup;
 			m_startPoint = other.m_startPoint;
 			m_probability = other.m_probability;
 			m_successes = other.m_successes;
@@ -77,7 +81,11 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_probability;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_probability = value;
+			set
+			{
+				m_probability = value;
+				m_setup = new NegativeBinomialDistribution.Setup(m_probability, m_successes);
+			}
 		}
 
 		/// <remarks>
@@ -88,14 +96,35 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_successes;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_successes = value;
+			set
+			{
+				m_successes = value;
+				m_setup = new NegativeBinomialDistribution.Setup(m_probability, m_successes);
+			}
+		}
+
+		/// <summary>
+		/// Sets probability and successes.
+		/// </summary>
+		/// <param name="newProbability">True threshold in range (0, 1].</param>
+		/// <param name="newSuccesses">Successes. Must be greater than 0.</param>
+		/// <remarks>
+		/// If you need to set <see cref="probability"/> and <see cref="successes"/> at the same time,
+		/// use this method because it recomputes setup data once.
+		/// </remarks>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public void SetProbabilitySuccesses(float newProbability, byte newSuccesses)
+		{
+			m_probability = newProbability;
+			m_successes = newSuccesses;
+			m_setup = new NegativeBinomialDistribution.Setup(m_probability, m_successes);
 		}
 
 		/// <inheritdoc/>
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public int Generate()
 		{
-			return NegativeBinomialDistribution.Generate(m_iidGenerator, m_startPoint, m_probability, m_successes);
+			return NegativeBinomialDistribution.Generate(m_iidGenerator, m_setup, m_startPoint);
 		}
 	}
 }

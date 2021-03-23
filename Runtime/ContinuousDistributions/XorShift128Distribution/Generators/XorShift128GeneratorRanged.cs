@@ -33,12 +33,15 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// <summary>
 		/// Creates a <see cref="XorShift128GeneratorRanged"/> with the specified parameters.
 		/// </summary>
-		/// <param name="a">Seed a. Must be non-zero.</param>
-		/// <param name="b">Seed b. Must be non-zero.</param>
-		/// <param name="c">Seed c. Must be non-zero.</param>
-		/// <param name="d">Seed d. Must be non-zero.</param>
+		/// <param name="a">Seed a.</param>
+		/// <param name="b">Seed b.</param>
+		/// <param name="c">Seed c.</param>
+		/// <param name="d">Seed d.</param>
 		/// <param name="min"></param>
 		/// <param name="max"></param>
+		/// <remarks>
+		/// At least one part of the seed must be non-zero.
+		/// </remarks>
 		public XorShift128GeneratorRanged(int a, int b, int c, int d, float min, float max)
 		{
 			m_randomEngine = new XorShift128(a, b, c, d);
@@ -49,12 +52,15 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// <summary>
 		/// Creates a <see cref="XorShift128GeneratorRanged"/> with the specified parameters.
 		/// </summary>
-		/// <param name="a">Initial state a. Must be non-zero.</param>
-		/// <param name="b">Initial state b. Must be non-zero.</param>
-		/// <param name="c">Initial state c. Must be non-zero.</param>
-		/// <param name="d">Initial state d. Must be non-zero.</param>
+		/// <param name="a">Initial state a.</param>
+		/// <param name="b">Initial state b.</param>
+		/// <param name="c">Initial state c.</param>
+		/// <param name="d">Initial state d.</param>
 		/// <param name="min"></param>
 		/// <param name="max"></param>
+		/// <remarks>
+		/// At least one part of the initial state must be non-zero.
+		/// </remarks>
 		public XorShift128GeneratorRanged(uint a, uint b, uint c, uint d, float min, float max)
 		{
 			m_randomEngine = new XorShift128(a, b, c, d);
@@ -65,7 +71,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// <summary>
 		/// Creates a <see cref="XorShift128GeneratorRanged"/> with the specified parameters.
 		/// </summary>
-		/// <param name="seed">Seed. Every item must be non-zero.</param>
+		/// <param name="seed">Seed. At least one item must be non-zero.</param>
 		/// <param name="min"></param>
 		/// <param name="max"></param>
 		public XorShift128GeneratorRanged((int, int, int, int) seed, float min, float max)
@@ -78,7 +84,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// <summary>
 		/// Creates a <see cref="XorShift128GeneratorRanged"/> with the specified parameters.
 		/// </summary>
-		/// <param name="state">Initial state. Every item must be non-zero.</param>
+		/// <param name="state">Initial state. At least one item must be non-zero.</param>
 		/// <param name="min"></param>
 		/// <param name="max"></param>
 		public XorShift128GeneratorRanged((uint, uint, uint, uint) state, float min, float max)

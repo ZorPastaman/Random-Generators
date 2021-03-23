@@ -27,10 +27,13 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <summary>
 		/// Creates a <see cref="BoolXorShift128Generator"/> with the specified parameters.
 		/// </summary>
-		/// <param name="a">Seed a. Must be non-zero.</param>
-		/// <param name="b">Seed b. Must be non-zero.</param>
-		/// <param name="c">Seed c. Must be non-zero.</param>
-		/// <param name="d">Seed d. Must be non-zero.</param>
+		/// <param name="a">Seed a.</param>
+		/// <param name="b">Seed b.</param>
+		/// <param name="c">Seed c.</param>
+		/// <param name="d">Seed d.</param>
+		/// <remarks>
+		/// At least one parameter must be non-zero.
+		/// </remarks>
 		public BoolXorShift128Generator(int a, int b, int c, int d)
 		{
 			m_randomEngine = new XorShift128(a, b, c, d);
@@ -39,10 +42,13 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <summary>
 		/// Creates a <see cref="BoolXorShift128Generator"/> with the specified parameters.
 		/// </summary>
-		/// <param name="a">Initial state a. Must be non-zero.</param>
-		/// <param name="b">Initial state b. Must be non-zero.</param>
-		/// <param name="c">Initial state c. Must be non-zero.</param>
-		/// <param name="d">Initial state d. Must be non-zero.</param>
+		/// <param name="a">Initial state a.</param>
+		/// <param name="b">Initial state b.</param>
+		/// <param name="c">Initial state c.</param>
+		/// <param name="d">Initial state d.</param>
+		/// <remarks>
+		/// At least one parameter must be non-zero.
+		/// </remarks>
 		public BoolXorShift128Generator(uint a, uint b, uint c, uint d)
 		{
 			m_randomEngine = new XorShift128(a, b, c, d);
@@ -51,7 +57,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <summary>
 		/// Creates a <see cref="BoolXorShift128Generator"/> with the specified parameters.
 		/// </summary>
-		/// <param name="seed">Initial seed. Every item must be non-zero.</param>
+		/// <param name="seed">Initial seed. At least one item must be non-zero.</param>
 		public BoolXorShift128Generator((int, int, int, int) seed)
 		{
 			m_randomEngine = new XorShift128(seed);
@@ -60,7 +66,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <summary>
 		/// Creates a <see cref="BoolXorShift128Generator"/> with the specified parameters.
 		/// </summary>
-		/// <param name="state">Initial state. Every item must be non-zero.</param>
+		/// <param name="state">Initial state. At least one item must be non-zero.</param>
 		public BoolXorShift128Generator((uint, uint, uint, uint) state)
 		{
 			m_randomEngine = new XorShift128(state);

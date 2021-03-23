@@ -18,10 +18,13 @@ namespace Zor.RandomGenerators.RandomEngines
 		/// <summary>
 		/// Creates a <see cref="XorShift128"/> with the specified initial state.
 		/// </summary>
-		/// <param name="a">Initial state a. Must be non-zero.</param>
-		/// <param name="b">Initial state b. Must be non-zero.</param>
-		/// <param name="c">Initial state c. Must be non-zero.</param>
-		/// <param name="d">Initial state d. Must be non-zero.</param>
+		/// <param name="a">Initial state a.</param>
+		/// <param name="b">Initial state b.</param>
+		/// <param name="c">Initial state c.</param>
+		/// <param name="d">Initial state d.</param>
+		/// <remarks>
+		/// At least one parameter must be non-zero.
+		/// </remarks>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public XorShift128(uint a, uint b, uint c, uint d)
 		{
@@ -34,10 +37,13 @@ namespace Zor.RandomGenerators.RandomEngines
 		/// <summary>
 		/// Creates a <see cref="XorShift128"/> with specified seed.
 		/// </summary>
-		/// <param name="a">Seed a. Must be non-zero.</param>
-		/// <param name="b">Seed b. Must be non-zero.</param>
-		/// <param name="c">Seed c. Must be non-zero.</param>
-		/// <param name="d">Seed d. Must be non-zero.</param>
+		/// <param name="a">Seed a.</param>
+		/// <param name="b">Seed b.</param>
+		/// <param name="c">Seed c.</param>
+		/// <param name="d">Seed d.</param>
+		/// <remarks>
+		/// At least one parameter must be non-zero.
+		/// </remarks>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public XorShift128(int a, int b, int c, int d)
 		{
@@ -53,7 +59,7 @@ namespace Zor.RandomGenerators.RandomEngines
 		/// <summary>
 		/// Creates a <see cref="XorShift128"/> with the specified initial state.
 		/// </summary>
-		/// <param name="state">Initial state. Every item must be non-zero.</param>
+		/// <param name="state">Initial state. At least one item must be non-zero.</param>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public XorShift128((uint, uint, uint, uint) state)
 		{
@@ -66,7 +72,7 @@ namespace Zor.RandomGenerators.RandomEngines
 		/// <summary>
 		/// Creates a <see cref="XorShift128"/> with the specified seed.
 		/// </summary>
-		/// <param name="seed">Seed. Every item must be non-zero.</param>
+		/// <param name="seed">Seed. At least one item must be non-zero.</param>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public XorShift128((int, int, int, int) seed)
 		{
@@ -80,7 +86,7 @@ namespace Zor.RandomGenerators.RandomEngines
 		}
 
 		/// <summary>
-		/// Current state. Every item must be non-zero.
+		/// Current state. At least one item must be non-zero.
 		/// </summary>
 		public (uint, uint, uint, uint) state
 		{
@@ -288,7 +294,7 @@ namespace Zor.RandomGenerators.RandomEngines
 
 			unchecked
 			{
-				return (int)m_a ^ int.MinValue;
+				return (int)m_a;
 			}
 		}
 
@@ -327,7 +333,7 @@ namespace Zor.RandomGenerators.RandomEngines
 		public uint NextUint()
 		{
 			NextState();
-			return ~m_a;
+			return m_a;
 		}
 
 		/// <summary>
@@ -365,7 +371,7 @@ namespace Zor.RandomGenerators.RandomEngines
 		public long NextLong()
 		{
 			NextState();
-			return ((long)m_a << 32) | m_d ^ long.MinValue;
+			return ((long)m_a << 32) | m_d;
 		}
 
 		/// <summary>
@@ -401,7 +407,7 @@ namespace Zor.RandomGenerators.RandomEngines
 		public ulong NextUlong()
 		{
 			NextState();
-			return ~(((ulong)m_a << 32) | m_d);
+			return ((ulong)m_a << 32) | m_d;
 		}
 
 		/// <summary>

@@ -1,9 +1,9 @@
 // Copyright (c) 2020-2021 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
 using System;
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Zor.RandomGenerators.ContinuousDistributions
 {
@@ -17,7 +17,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 
 		/// <summary>
 		/// Generates a random value using <paramref name="probabilityCurve"/> as a probability function
-		/// and <see cref="Random.value"/> as a generated value source.
+		/// and <see cref="UnityGeneratorStruct.DefaultInclusive"/> as a generated value source.
 		/// </summary>
 		/// <param name="probabilityCurve">
 		/// Probability function where x is a random value in range [0, 1] and y is its probability in range [0, 1].
@@ -27,22 +27,17 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// It's recommended that <paramref name="probabilityCurve"/> has at least one point with probability 1
 		/// to avoid too many loop cycles.
 		/// </remarks>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static float Generate([NotNull] AnimationCurve probabilityCurve)
 		{
-			float value;
-
-			do
-			{
-				value = Random.value;
-			} while (Random.value > probabilityCurve.Evaluate(value));
-
-			return value;
+			return Generate(UnityGeneratorStruct.DefaultInclusive,
+				UnityGeneratorStruct.DefaultInclusive, probabilityCurve);
 		}
 
 		/// <summary>
 		/// Generates a random value using <paramref name="probabilityCurve"/> as a probability function
-		/// and <see cref="Random.Range(float,float)"/> as a generated value source.
+		/// and <see cref="UnityGeneratorStruct"/> with <paramref name="min"/> and <paramref name="max"/>
+		/// as a generated value source.
 		/// </summary>
 		/// <param name="probabilityCurve">
 		/// Probability function where x is a random value in range [<paramref name="min"/>, <paramref name="max"/>]
@@ -55,22 +50,16 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// It's recommended that <paramref name="probabilityCurve"/> has at least one point with probability 1
 		/// to avoid too many loop cycles.
 		/// </remarks>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static float Generate([NotNull] AnimationCurve probabilityCurve, float min, float max)
 		{
-			float value;
-
-			do
-			{
-				value = Random.Range(min, max);
-			} while (Random.value > probabilityCurve.Evaluate(value));
-
-			return value;
+			return Generate(new UnityGeneratorStruct(min, max),
+				UnityGeneratorStruct.DefaultInclusive, probabilityCurve);
 		}
 
 		/// <summary>
 		/// Generates a random value using <paramref name="probabilityFunc"/> as a probability function
-		/// and <see cref="Random.value"/> as a generated value source.
+		/// and <see cref="UnityGeneratorStruct.DefaultInclusive"/> as a generated value source.
 		/// </summary>
 		/// <param name="probabilityFunc">
 		/// Probability function where the argument is a random value in range [0, 1]
@@ -81,22 +70,17 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// It's recommended that <paramref name="probabilityFunc"/> has at least one point with probability 1
 		/// to avoid too many loop cycles.
 		/// </remarks>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static float Generate([NotNull] Func<float, float> probabilityFunc)
 		{
-			float value;
-
-			do
-			{
-				value = Random.value;
-			} while (Random.value > probabilityFunc(value));
-
-			return value;
+			return Generate(UnityGeneratorStruct.DefaultInclusive,
+				UnityGeneratorStruct.DefaultInclusive, probabilityFunc);
 		}
 
 		/// <summary>
 		/// Generates a random value using <paramref name="probabilityFunc"/> as a probability function
-		/// and <see cref="Random.Range(float,float)"/> as a generated value source.
+		/// and <see cref="UnityGeneratorStruct.DefaultInclusive"/>
+		/// with <paramref name="min"/> and <paramref name="max"/> as a generated value source.
 		/// </summary>
 		/// <param name="probabilityFunc">
 		/// Probability function where the argument is a random value in range
@@ -109,17 +93,11 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// It's recommended that <paramref name="probabilityFunc"/> has at least one point with probability 1
 		/// to avoid too many loop cycles.
 		/// </remarks>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static float Generate([NotNull] Func<float, float> probabilityFunc, float min, float max)
 		{
-			float value;
-
-			do
-			{
-				value = Random.Range(min, max);
-			} while (Random.value > probabilityFunc(value));
-
-			return value;
+			return Generate(new UnityGeneratorStruct(min, max),
+				UnityGeneratorStruct.DefaultInclusive, probabilityFunc);
 		}
 
 		/// <summary>
@@ -135,17 +113,11 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// It's recommended that <paramref name="probabilityCurve"/> has at least one point with probability 1
 		/// to avoid too many loop cycles.
 		/// </remarks>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static float Generate([NotNull] Func<float> valueFunc, [NotNull] AnimationCurve probabilityCurve)
 		{
-			float value;
-
-			do
-			{
-				value = valueFunc();
-			} while (Random.value > probabilityCurve.Evaluate(value));
-
-			return value;
+			return Generate(new FuncGeneratorStruct(valueFunc),
+				UnityGeneratorStruct.DefaultInclusive, probabilityCurve);
 		}
 
 		/// <summary>
@@ -163,18 +135,12 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// It's recommended that <paramref name="probabilityCurve"/> has at least one point with max probability
 		/// to avoid too many loop cycles.
 		/// </remarks>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static float Generate([NotNull] Func<float> valueFunc, [NotNull] Func<float> checkFunc,
 			[NotNull] AnimationCurve probabilityCurve)
 		{
-			float value;
-
-			do
-			{
-				value = valueFunc();
-			} while (checkFunc() > probabilityCurve.Evaluate(value));
-
-			return value;
+			return Generate(new FuncGeneratorStruct(valueFunc),
+				new FuncGeneratorStruct(checkFunc), probabilityCurve);
 		}
 
 		/// <summary>
@@ -190,17 +156,11 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// It's recommended that <paramref name="probabilityFunc"/> has at least one point with probability 1
 		/// to avoid too many loop cycles.
 		/// </remarks>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static float Generate([NotNull] Func<float> valueFunc, [NotNull] Func<float, float> probabilityFunc)
 		{
-			float value;
-
-			do
-			{
-				value = valueFunc();
-			} while (Random.value > probabilityFunc(value));
-
-			return value;
+			return Generate(new FuncGeneratorStruct(valueFunc),
+				UnityGeneratorStruct.DefaultInclusive, probabilityFunc);
 		}
 
 		/// <summary>
@@ -218,18 +178,12 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// It's recommended that <paramref name="probabilityFunc"/> has at least one point with max probability
 		/// to avoid too many loop cycles.
 		/// </remarks>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static float Generate([NotNull] Func<float> valueFunc, [NotNull] Func<float> checkFunc,
 			[NotNull] Func<float, float> probabilityFunc)
 		{
-			float value;
-
-			do
-			{
-				value = valueFunc();
-			} while (checkFunc() > probabilityFunc(value));
-
-			return value;
+			return Generate(new FuncGeneratorStruct(valueFunc),
+				new FuncGeneratorStruct(checkFunc), probabilityFunc);
 		}
 
 		/// <summary>
@@ -245,18 +199,11 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// It's recommended that <paramref name="probabilityCurve"/> has at least one point with probability 1
 		/// to avoid too many loop cycles.
 		/// </remarks>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static float Generate<T>([NotNull] T valueGenerator, [NotNull] AnimationCurve probabilityCurve)
 			where T : IContinuousGenerator
 		{
-			float value;
-
-			do
-			{
-				value = valueGenerator.Generate();
-			} while (Random.value > probabilityCurve.Evaluate(value));
-
-			return value;
+			return Generate(valueGenerator, UnityGeneratorStruct.DefaultInclusive, probabilityCurve);
 		}
 
 		/// <summary>
@@ -302,18 +249,11 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// It's recommended that <paramref name="probabilityFunc"/> has at least one point with max probability
 		/// to avoid too many loop cycles.
 		/// </remarks>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static float Generate<T>([NotNull] T valueGenerator, [NotNull] Func<float, float> probabilityFunc)
 			where T : IContinuousGenerator
 		{
-			float value;
-
-			do
-			{
-				value = valueGenerator.Generate();
-			} while (Random.value > probabilityFunc(value));
-
-			return value;
+			return Generate(valueGenerator, UnityGeneratorStruct.DefaultInclusive, probabilityFunc);
 		}
 
 		/// <summary>

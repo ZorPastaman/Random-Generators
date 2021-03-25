@@ -13,12 +13,25 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Geometric distribution.
 - Distributions with setup data (Gamma, Binomial, Geometric, Negative Binomial, Poisson, Weighted)
 got special methods and Setup structs that help to compute setup data once and reuse it.
+- UnityGeneratorStruct. It's the same thing as UnityGeneratorClass but it's a struct. 
+It's used in distributions to mimic IContinuousGenerator.
+- FuncGeneratorClass and FuncGeneratorStruct. They are wrappers over Func<float>. They are used
+to mimic IContinuousGenerator. The latter is used in distributions.
 
 ### Changed
 
 - Unity 2019.4 is now required.
 - XorShift algorithms can now jump forward.
-- Generators and filters are not serialized anymore.
+- Generators and filters are not serializable anymore.
+- UnityGenerator is renamed to UnityGeneratorClass.
+- All distributions now use the same method for UnityEngine.Random, Func<float> and IContinuousGenerator
+as iid sources.
+- Exponential, Gamma, Bernoulli, Binomial, Geometric, Negative Binomial distributions now require
+iid sources in range [0, 1). All other distributions can work with iid sources in range [0, 1].
+
+### Removed
+
+- UnityGeneratorSimple.
 
 ## [1.2.0] - 2020-11-01
 

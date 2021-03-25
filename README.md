@@ -79,6 +79,7 @@ They wrap generators and provide unique and shared instances of them.
 [Wikipedia](https://en.wikipedia.org/wiki/Bates_distribution);
 - [Exponential](Runtime/ContinuousDistributions/ExponentialDistribution) -
 [Wikipedia](https://en.wikipedia.org/wiki/Exponential_distribution);
+- [Func\<float\> Random Generator Wrapper](Runtime/ContinuousDistributions/FuncDistribution);
 - [Gamma](Runtime/ContinuousDistributions/GammaDistribution) -
 [Wikipedia](https://en.wikipedia.org/wiki/Gamma_distribution);
 - [Irwin-Hall](Runtime/ContinuousDistributions/IrwinHallDistribution) -
@@ -90,10 +91,10 @@ They wrap generators and provide unique and shared instances of them.
 - [C# Random Generator Wrapper](Runtime/ContinuousDistributions/SharpDistribution) -
 [Microsoft Docs](https://docs.microsoft.com/en-us/dotnet/api/system.random);
 - [Unity Random Generator Wrapper](Runtime/ContinuousDistributions/UnityDistribution) -
-[Unity Docs](https://docs.unity3d.com/ScriptReference/Random.html).
-- [XorShift32 Random Generator Wrapper](Runtime/ContinuousDistributions/XorShift32Distribution)
-- [XorShift64 Random Generator Wrapper](Runtime/ContinuousDistributions/XorShift64Distribution)
-- [XorShift128 Random Generator Wrapper](Runtime/ContinuousDistributions/XorShift128Distribution)
+[Unity Docs](https://docs.unity3d.com/ScriptReference/Random.html);
+- [XorShift32 Random Generator Wrapper](Runtime/ContinuousDistributions/XorShift32Distribution);
+- [XorShift64 Random Generator Wrapper](Runtime/ContinuousDistributions/XorShift64Distribution);
+- [XorShift128 Random Generator Wrapper](Runtime/ContinuousDistributions/XorShift128Distribution).
 
 ##### List of discrete generator algorithms
 
@@ -112,10 +113,10 @@ They wrap generators and provide unique and shared instances of them.
 - [Unity Random Generator Wrapper](Runtime/DiscreteDistributions/UnityDistribution) -
 [Unity Docs](https://docs.unity3d.com/ScriptReference/Random.html);
 - [Weighted](Runtime/DiscreteDistributions/WeightedDistribution) -
-distribution where every value has a weight and its probability is a ratio of its weight to a sum of all weights.
-- [XorShift32 Random Generator Wrapper](Runtime/DiscreteDistributions/XorShift32Distribution)
-- [XorShift64 Random Generator Wrapper](Runtime/DiscreteDistributions/XorShift64Distribution)
-- [XorShift128 Random Generator Wrapper](Runtime/DiscreteDistributions/XorShift128Distribution)
+distribution where every value has a weight and its probability is a ratio of its weight to a sum of all weights;
+- [XorShift32 Random Generator Wrapper](Runtime/DiscreteDistributions/XorShift32Distribution);
+- [XorShift64 Random Generator Wrapper](Runtime/DiscreteDistributions/XorShift64Distribution);
+- [XorShift128 Random Generator Wrapper](Runtime/DiscreteDistributions/XorShift128Distribution).
 
 ### Random modificators
 

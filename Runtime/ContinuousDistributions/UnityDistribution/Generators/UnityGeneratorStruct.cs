@@ -1,4 +1,4 @@
-// Copyright (c) 2020-2021 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
+﻿// Copyright (c) 2020-2021 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
@@ -9,27 +9,29 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 	/// <summary>
 	/// Unity distribution generator using <see cref="Random.Range(float,float)"/>.
 	/// </summary>
-	public sealed class UnityGenerator : IUnityGenerator
+	public struct UnityGeneratorStruct : IUnityGenerator
 	{
+		/// <summary>
+		/// Random Generator using using <see cref="Random.Range(float,float)"/> and returning values in range [0, 1).
+		/// </summary>
+		public static readonly UnityGeneratorStruct DefaultExclusive =
+			new UnityGeneratorStruct(0f, NumberConstants.SubOne);
+		/// <summary>
+		/// Random Generator using using <see cref="Random.Range(float,float)"/> and returning values in range [0, 1].
+		/// </summary>
+		public static readonly UnityGeneratorStruct DefaultInclusive = new UnityGeneratorStruct(0f, 1f);
+
 		private float m_min;
 		private float m_max;
 
 		/// <summary>
-		/// Creates an <see cref="UnityGenerator"/> with the specified parameters.
+		/// Creates an <see cref="UnityGeneratorStruct"/> with the specified parameters.
 		/// </summary>
-		public UnityGenerator(float min, float max)
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public UnityGeneratorStruct(float min, float max)
 		{
 			m_min = min;
 			m_max = max;
-		}
-
-		/// <summary>
-		/// Copy constructor.
-		/// </summary>
-		public UnityGenerator(UnityGenerator other)
-		{
-			m_min = other.m_min;
-			m_max = other.m_max;
 		}
 
 		public float min

@@ -21,7 +21,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// Creates a <see cref="GammaGeneratorDependent{T}"/> with the specified parameters.
 		/// </summary>
 		/// <param name="iidGenerator">
-		/// Random generator that returns an independent and identically distributed random value in range [0, 1].
+		/// Random generator that returns an independent and identically distributed random value in range [0, 1).
 		/// </param>
 		/// <param name="alpha">Shape.</param>
 		/// <param name="beta">Scale.</param>
@@ -52,7 +52,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		}
 
 		/// <summary>
-		/// Random generator that returns an independent and identically distributed random value in range [0, 1].
+		/// Random generator that returns an independent and identically distributed random value in range [0, 1).
 		/// </summary>
 		[NotNull]
 		public T iidGenerator

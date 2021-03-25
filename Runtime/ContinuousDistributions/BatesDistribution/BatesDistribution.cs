@@ -3,7 +3,6 @@
 using System;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
-using Random = UnityEngine.Random;
 
 namespace Zor.RandomGenerators.ContinuousDistributions
 {
@@ -20,7 +19,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		public const byte DefaultIids = 3;
 
 		/// <summary>
-		/// Generates a random value using <see cref="Random.value"/> as an iid source.
+		/// Generates a random value using <see cref="UnityGeneratorStruct.DefaultInclusive"/> as an iid source.
 		/// </summary>
 		/// <param name="iids">
 		/// How many independent and identically distributed random values are generated.
@@ -29,21 +28,15 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// <remarks>
 		/// <paramref name="iids"/> must be greater than 0.
 		/// </remarks>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static float Generate(byte iids)
 		{
-			float random = 0f;
-
-			for (byte i = 0; i < iids; ++i)
-			{
-				random += Random.value;
-			}
-
-			return random / iids;
+			return Generate(UnityGeneratorStruct.DefaultInclusive, iids);
 		}
 
 		/// <summary>
-		/// Generates a random value using the specified parameters and <see cref="Random.value"/> as an iid source.
+		/// Generates a random value using the specified parameters
+		/// and <see cref="UnityGeneratorStruct.DefaultInclusive"/> as an iid source.
 		/// </summary>
 		/// <param name="mean"></param>
 		/// <param name="deviation"></param>
@@ -61,7 +54,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static float Generate(float mean, float deviation, byte iids)
 		{
-			return Modify(Generate(iids), mean, deviation);
+			return Generate(UnityGeneratorStruct.DefaultInclusive, mean, deviation, iids);
 		}
 
 		/// <summary>
@@ -77,17 +70,10 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// <remarks>
 		/// <paramref name="iids"/> must be greater than 0.
 		/// </remarks>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static float Generate([NotNull] Func<float> iidFunc, byte iids)
 		{
-			float random = 0f;
-
-			for (byte i = 0; i < iids; ++i)
-			{
-				random += iidFunc();
-			}
-
-			return random / iids;
+			return Generate(new FuncGeneratorStruct(iidFunc), iids);
 		}
 
 		/// <summary>
@@ -113,7 +99,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		public static float Generate([NotNull] Func<float> iidFunc,
 			float mean, float deviation, byte iids)
 		{
-			return Modify(Generate(iidFunc, iids), mean, deviation);
+			return Generate(new FuncGeneratorStruct(iidFunc), mean, deviation, iids);
 		}
 
 		/// <summary>

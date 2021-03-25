@@ -21,7 +21,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// Creates a <see cref="GeometricGeneratorFuncDependentSimple"/> with the specified parameters.
 		/// </summary>
 		/// <param name="iidFunc">
-		/// Function that returns an independent and identically distributed random value in range [0, 1].
+		/// Function that returns an independent and identically distributed random value in range [0, 1).
 		/// </param>
 		/// <param name="probability">True threshold in range (0, 1).</param>
 		public GeometricGeneratorFuncDependentSimple([NotNull] Func<float> iidFunc, float probability)
@@ -43,7 +43,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		}
 
 		/// <summary>
-		/// Function that returns an independent and identically distributed random value in range [0, 1].
+		/// Function that returns an independent and identically distributed random value in range [0, 1).
 		/// </summary>
 		[NotNull]
 		public Func<float> iidFunc

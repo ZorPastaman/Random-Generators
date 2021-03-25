@@ -8,7 +8,7 @@ using UnityEngine;
 namespace Zor.RandomGenerators.ContinuousDistributions
 {
 	/// <summary>
-	/// Provides <see cref="UnityGenerator"/>.
+	/// Provides <see cref="UnityGeneratorClass"/>.
 	/// </summary>
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.UnityContinuousDistributionFolder + "Unity Generator Provider",
@@ -22,19 +22,19 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		[SerializeField] private float m_Max = UnityGeneratorDefaults.DefaultMax;
 #pragma warning restore CS0649
 
-		[NonSerialized] private UnityGenerator m_sharedGenerator;
+		[NonSerialized] private UnityGeneratorClass m_sharedGenerator;
 
 		/// <summary>
-		/// Creates a new <see cref="UnityGenerator"/> and returns it as <see cref="IContinuousGenerator"/>.
+		/// Creates a new <see cref="UnityGeneratorClass"/> and returns it as <see cref="IContinuousGenerator"/>.
 		/// </summary>
 		public override IContinuousGenerator generator
 		{
 			[Pure]
-			get => new UnityGenerator(m_Min, m_Max);
+			get => new UnityGeneratorClass(m_Min, m_Max);
 		}
 
 		/// <summary>
-		/// Returns a shared <see cref="UnityGenerator"/> as <see cref="IContinuousGenerator"/>.
+		/// Returns a shared <see cref="UnityGeneratorClass"/> as <see cref="IContinuousGenerator"/>.
 		/// </summary>
 		public override IContinuousGenerator sharedGenerator
 		{
@@ -50,20 +50,20 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		}
 
 		/// <summary>
-		/// Creates a new <see cref="UnityGenerator"/> and returns it.
+		/// Creates a new <see cref="UnityGeneratorClass"/> and returns it.
 		/// </summary>
 		[NotNull]
-		public UnityGenerator unityGenerator
+		public UnityGeneratorClass unityGenerator
 		{
 			[Pure]
-			get => new UnityGenerator(m_Min, m_Max);
+			get => new UnityGeneratorClass(m_Min, m_Max);
 		}
 
 		/// <summary>
-		/// Returns a shared <see cref="UnityGenerator"/>.
+		/// Returns a shared <see cref="UnityGeneratorClass"/>.
 		/// </summary>
 		[NotNull]
-		public UnityGenerator sharedUnityGenerator
+		public UnityGeneratorClass sharedUnityGenerator
 		{
 			get
 			{

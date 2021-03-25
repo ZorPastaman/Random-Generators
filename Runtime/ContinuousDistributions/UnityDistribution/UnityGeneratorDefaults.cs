@@ -5,6 +5,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 	public static class UnityGeneratorDefaults
 	{
 		public const float DefaultMin = 0f;
-		public const float DefaultMax = 1f;
+		public const float DefaultMax = NumberConstants.SubOne;
 	}
 }

@@ -22,7 +22,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// Creates a <see cref="GeometricGeneratorDependent{T}"/> with the specified parameters.
 		/// </summary>
 		/// <param name="iidGenerator">
-		/// Random generator that returns an independent and identically distributed random value in range [0, 1].
+		/// Random generator that returns an independent and identically distributed random value in range [0, 1).
 		/// </param>
 		/// <param name="probability">True threshold in range (0, 1).</param>
 		/// <param name="startPoint"></param>
@@ -47,7 +47,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		}
 
 		/// <summary>
-		/// Random generator that returns an independent and identically distributed random value in range [0, 1].
+		/// Random generator that returns an independent and identically distributed random value in range [0, 1).
 		/// </summary>
 		[NotNull]
 		public T iidGenerator

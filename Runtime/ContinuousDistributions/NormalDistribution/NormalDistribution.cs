@@ -4,7 +4,6 @@ using System;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Zor.RandomGenerators.ContinuousDistributions
 {
@@ -20,33 +19,19 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		public const float DefaultDeviation = 1f;
 
 		/// <summary>
-		/// Generates a random value using <see cref="Random.value"/> as an iid source.
+		/// Generates a random value using <see cref="UnityGeneratorStruct.DefaultInclusive"/> as an iid source.
 		/// </summary>
 		/// <returns>
 		/// Two generated values.
 		/// </returns>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static (float, float) Generate()
 		{
-			float u, v, s;
-
-			do
-			{
-				u = Random.value * 2f - 1f;
-				v = Random.value * 2f - 1f;
-				s = u * u + v * v;
-			} while (s >= 1f | s < NumberConstants.NormalEpsilon);
-
-			s = Mathf.Sqrt(-2f * Mathf.Log(s) / s);
-
-			float z0 = u * s;
-			float z1 = v * s;
-
-			return (z0, z1);
+			return Generate(UnityGeneratorStruct.DefaultInclusive);
 		}
 
 		/// <summary>
-		/// Generates a random value using <see cref="Random.value"/> as an iid source.
+		/// Generates a random value using <see cref="UnityGeneratorStruct.DefaultInclusive"/> as an iid source.
 		/// </summary>
 		/// <returns>
 		/// Two generated values.
@@ -54,8 +39,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static (float, float) Generate(float mean, float deviation)
 		{
-			(float z0, float z1) = Generate();
-			return Modify(z0, z1, mean, deviation);
+			return Generate(UnityGeneratorStruct.DefaultInclusive, mean, deviation);
 		}
 
 		/// <summary>
@@ -67,24 +51,10 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// <returns>
 		/// Two generated values.
 		/// </returns>
-		[Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static (float, float) Generate([NotNull] Func<float> iidFunc)
 		{
-			float u, v, s;
-
-			do
-			{
-				u = iidFunc() * 2f - 1f;
-				v = iidFunc() * 2f - 1f;
-				s = u * u + v * v;
-			} while (s >= 1f | s < NumberConstants.NormalEpsilon);
-
-			s = Mathf.Sqrt(-2f * Mathf.Log(s) / s);
-
-			float z0 = u * s;
-			float z1 = v * s;
-
-			return (z0, z1);
+			return Generate(new FuncGeneratorStruct(iidFunc));
 		}
 
 		/// <summary>
@@ -101,8 +71,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static (float, float) Generate([NotNull] Func<float> iidFunc, float mean, float deviation)
 		{
-			(float z0, float z1) = Generate(iidFunc);
-			return Modify(z0, z1, mean, deviation);
+			return Generate(new FuncGeneratorStruct(iidFunc), mean, deviation);
 		}
 
 		/// <summary>

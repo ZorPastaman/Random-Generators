@@ -5,7 +5,6 @@ using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 using Zor.RandomGenerators.ContinuousDistributions;
-using Random = UnityEngine.Random;
 
 namespace Zor.RandomGenerators.DiscreteDistributions
 {
@@ -21,18 +20,18 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		public const int DefaultStartPoint = 0;
 
 		/// <summary>
-		/// Generates a random value using <see cref="Random.value"/> as an iid source.
+		/// Generates a random value using <see cref="UnityGeneratorStruct.DefaultInclusive"/> as an iid source.
 		/// </summary>
 		/// <param name="lambda"></param>
 		/// <returns>Generated value.</returns>
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static int Generate(float lambda)
 		{
-			return GenerateByUnity(ComputeE(lambda));
+			return Generate(UnityGeneratorStruct.DefaultInclusive, ComputeE(lambda));
 		}
 
 		/// <summary>
-		/// Generates a random value using <see cref="Random.value"/> as an iid source.
+		/// Generates a random value using <see cref="UnityGeneratorStruct.DefaultInclusive"/> as an iid source.
 		/// </summary>
 		/// <param name="lambda"></param>
 		/// <param name="startPoint"></param>
@@ -40,11 +39,11 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static int Generate(float lambda, int startPoint)
 		{
-			return Generate(lambda) + startPoint;
+			return Generate(UnityGeneratorStruct.DefaultInclusive, lambda, startPoint);
 		}
 
 		/// <summary>
-		/// Generates a random value using <see cref="Random.value"/> as an iid source.
+		/// Generates a random value using <see cref="UnityGeneratorStruct.DefaultInclusive"/> as an iid source.
 		/// </summary>
 		/// <param name="setup"></param>
 		/// <returns>Generated value.</returns>
@@ -54,11 +53,11 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static int Generate(Setup setup)
 		{
-			return GenerateByUnity(setup.e);
+			return Generate(UnityGeneratorStruct.DefaultInclusive, setup);
 		}
 
 		/// <summary>
-		/// Generates a random value using <see cref="Random.value"/> as an iid source.
+		/// Generates a random value using <see cref="UnityGeneratorStruct.DefaultInclusive"/> as an iid source.
 		/// </summary>
 		/// <param name="setup"></param>
 		/// <param name="startPoint"></param>
@@ -69,7 +68,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static int Generate(Setup setup, int startPoint)
 		{
-			return Generate(setup) + startPoint;
+			return Generate(UnityGeneratorStruct.DefaultInclusive, setup, startPoint);
 		}
 
 		/// <summary>
@@ -83,7 +82,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static int Generate([NotNull] Func<float> iidFunc, float lambda)
 		{
-			return GenerateByFunc(iidFunc, ComputeE(lambda));
+			return Generate(new FuncGeneratorStruct(iidFunc), lambda);
 		}
 
 		/// <summary>
@@ -98,7 +97,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static int Generate([NotNull] Func<float> iidFunc, float lambda, int startPoint)
 		{
-			return Generate(iidFunc, lambda) + startPoint;
+			return Generate(new FuncGeneratorStruct(iidFunc), lambda, startPoint);
 		}
 
 		/// <summary>
@@ -115,7 +114,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static int Generate([NotNull] Func<float> iidFunc, Setup setup)
 		{
-			return GenerateByFunc(iidFunc, setup.e);
+			return Generate(new FuncGeneratorStruct(iidFunc), setup);
 		}
 
 		/// <summary>
@@ -133,7 +132,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static int Generate([NotNull] Func<float> iidFunc, Setup setup, int startPoint)
 		{
-			return Generate(iidFunc, setup) + startPoint;
+			return Generate(new FuncGeneratorStruct(iidFunc), setup, startPoint);
 		}
 
 		/// <summary>
@@ -148,7 +147,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static int Generate<T>([NotNull] T iidGenerator, float lambda) where T : IContinuousGenerator
 		{
-			return GenerateByGenerator(iidGenerator, ComputeE(lambda));
+			return GenerateInternal(iidGenerator, ComputeE(lambda));
 		}
 
 		/// <summary>
@@ -183,7 +182,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static int Generate<T>([NotNull] T iidGenerator, Setup setup) where T : IContinuousGenerator
 		{
-			return GenerateByGenerator(iidGenerator, setup.e);
+			return GenerateInternal(iidGenerator, setup.e);
 		}
 
 		/// <summary>
@@ -207,54 +206,13 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		}
 
 		/// <summary>
-		/// Generates a random value using <see cref="Random.value"/> as an iid source.
-		/// </summary>
-		/// <param name="e">Computed in <see cref="ComputeE"/> value.</param>
-		/// <returns>Generated value.</returns>
-		[Pure]
-		private static int GenerateByUnity(float e)
-		{
-			int x = 0;
-			float p = 1f;
-
-			do
-			{
-				++x;
-				p *= Random.value;
-			} while (p > e);
-
-			return x - 1;
-		}
-
-		/// <summary>
-		/// Generates a random value using <paramref name="iidFunc"/> as an iid source.
-		/// </summary>
-		/// <param name="iidFunc"></param>
-		/// <param name="e">Computed in <see cref="ComputeE"/> value.</param>
-		/// <returns>Generated value.</returns>
-		[Pure]
-		private static int GenerateByFunc([NotNull] Func<float> iidFunc, float e)
-		{
-			int x = 0;
-			float p = 1f;
-
-			do
-			{
-				++x;
-				p *= iidFunc();
-			} while (p > e);
-
-			return x - 1;
-		}
-
-		/// <summary>
 		/// Generates a random value using <paramref name="iidGenerator"/> as an iid source.
 		/// </summary>
 		/// <param name="iidGenerator"></param>
 		/// <param name="e">Computed in <see cref="ComputeE"/> value.</param>
 		/// <returns>Generated value.</returns>
 		[Pure]
-		private static int GenerateByGenerator<T>([NotNull] T iidGenerator, float e) where T : IContinuousGenerator
+		private static int GenerateInternal<T>([NotNull] T iidGenerator, float e) where T : IContinuousGenerator
 		{
 			int x = 0;
 			float p = 1f;

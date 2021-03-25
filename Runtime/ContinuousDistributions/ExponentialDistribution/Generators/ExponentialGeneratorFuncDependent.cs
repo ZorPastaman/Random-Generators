@@ -19,7 +19,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// Creates an <see cref="ExponentialGeneratorFuncDependent"/> with the specified parameters.
 		/// </summary>
 		/// <param name="iidFunc">
-		/// Function that returns an independent and identically distributed random value in range [0, 1].
+		/// Function that returns an independent and identically distributed random value in range [0, 1).
 		/// </param>
 		/// <param name="lambda"></param>
 		/// <param name="startPoint"></param>
@@ -45,7 +45,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		}
 
 		/// <summary>
-		/// Function that returns an independent and identically distributed random value in range [0, 1].
+		/// Function that returns an independent and identically distributed random value in range [0, 1).
 		/// </summary>
 		[NotNull]
 		public Func<float> iidFunc

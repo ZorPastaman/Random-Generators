@@ -19,7 +19,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 	public sealed class GammaGeneratorDependentSimpleProvider : ContinuousGeneratorProvider
 	{
 #pragma warning disable CS0649
-		[SerializeField, Tooltip("Random generator that returns an independent and identically distributed random value in range [0, 1].")]
+		[SerializeField, Tooltip("Random generator that returns an independent and identically distributed random value in range [0, 1).")]
 		private ContinuousGeneratorProviderReference m_DependedGeneratorProvider;
 		[SerializeField, SimpleRangeFloat(NumberConstants.NormalEpsilon, float.MaxValue), Tooltip("Shape.")]
 		private float m_Alpha = GammaDistribution.DefaultAlpha;
@@ -85,7 +85,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		}
 
 		/// <summary>
-		/// Random generator that returns an independent and identically distributed random value in range [0, 1].
+		/// Random generator that returns an independent and identically distributed random value in range [0, 1).
 		/// </summary>
 		public ContinuousGeneratorProviderReference dependedGeneratorProvider
 		{

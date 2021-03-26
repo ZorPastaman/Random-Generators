@@ -21,8 +21,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 #pragma warning disable CS0649
 		[SerializeField, Tooltip("Random generator that returns an independent and identically distributed random value in range [0, 1].")]
 		private ContinuousGeneratorProviderReference m_DependedGeneratorProvider;
-		[SerializeField] private float m_Mean = BatesDistribution.DefaultMean;
-		[SerializeField] private float m_Deviation = BatesDistribution.DefaultDeviation;
 		[SerializeField, SimpleRangeInt(1, 255), Tooltip("How many independent and identically distributed random values are generated.")]
 		private byte m_Iids = BatesDistribution.DefaultIids;
 #pragma warning restore CS0649
@@ -36,8 +34,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		public override IContinuousGenerator generator
 		{
 			[Pure]
-			get => new BatesGeneratorDependent<IContinuousGenerator>(
-				m_DependedGeneratorProvider.generator, m_Mean, m_Deviation, m_Iids);
+			get => new BatesGeneratorDependent<IContinuousGenerator>(m_DependedGeneratorProvider.generator, m_Iids);
 		}
 
 		/// <summary>
@@ -64,8 +61,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		public BatesGeneratorDependent<IContinuousGenerator> batesGenerator
 		{
 			[Pure]
-			get => new BatesGeneratorDependent<IContinuousGenerator>(
-				m_DependedGeneratorProvider.generator, m_Mean, m_Deviation, m_Iids);
+			get => new BatesGeneratorDependent<IContinuousGenerator>(m_DependedGeneratorProvider.generator, m_Iids);
 		}
 
 		/// <summary>
@@ -100,38 +96,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 				}
 
 				m_DependedGeneratorProvider = value;
-				m_sharedGenerator = null;
-			}
-		}
-
-		public float mean
-		{
-			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_Mean;
-			set
-			{
-				if (m_Mean == value)
-				{
-					return;
-				}
-
-				m_Mean = value;
-				m_sharedGenerator = null;
-			}
-		}
-
-		public float deviation
-		{
-			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_Deviation;
-			set
-			{
-				if (m_Deviation == value)
-				{
-					return;
-				}
-
-				m_Deviation = value;
 				m_sharedGenerator = null;
 			}
 		}

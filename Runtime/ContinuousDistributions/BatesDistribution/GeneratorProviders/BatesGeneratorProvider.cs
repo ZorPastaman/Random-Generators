@@ -19,8 +19,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 	public sealed class BatesGeneratorProvider : ContinuousGeneratorProvider
 	{
 #pragma warning disable CS0649
-		[SerializeField] private float m_Mean = BatesDistribution.DefaultMean;
-		[SerializeField] private float m_Deviation = BatesDistribution.DefaultDeviation;
 		[SerializeField, SimpleRangeInt(1, 255), Tooltip("How many independent and identically distributed random values are generated.")]
 		private byte m_Iids = BatesDistribution.DefaultIids;
 #pragma warning restore CS0649
@@ -33,7 +31,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		public override IContinuousGenerator generator
 		{
 			[Pure]
-			get => new BatesGenerator(m_Mean, m_Deviation, m_Iids);
+			get => new BatesGenerator(m_Iids);
 		}
 
 		/// <summary>
@@ -59,7 +57,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		public BatesGenerator batesGenerator
 		{
 			[Pure]
-			get => new BatesGenerator(m_Mean, m_Deviation, m_Iids);
+			get => new BatesGenerator(m_Iids);
 		}
 
 		/// <summary>
@@ -76,38 +74,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 				}
 
 				return m_sharedGenerator;
-			}
-		}
-
-		public float mean
-		{
-			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_Mean;
-			set
-			{
-				if (m_Mean == value)
-				{
-					return;
-				}
-
-				m_Mean = value;
-				m_sharedGenerator = null;
-			}
-		}
-
-		public float deviation
-		{
-			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_Deviation;
-			set
-			{
-				if (m_Deviation == value)
-				{
-					return;
-				}
-
-				m_Deviation = value;
-				m_sharedGenerator = null;
 			}
 		}
 

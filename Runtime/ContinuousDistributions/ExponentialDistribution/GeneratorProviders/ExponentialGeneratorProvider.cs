@@ -18,9 +18,8 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 	public sealed class ExponentialGeneratorProvider : ContinuousGeneratorProvider
 	{
 #pragma warning disable CS0649
-		[SerializeField] private float m_Lambda = ExponentialDistribution.DefaultLambda;
-		[SerializeField, Tooltip("Mustn't be zero.")]
-		private float m_StartPoint = ExponentialDistribution.DefaultStartPoint;
+		[SerializeField, Tooltip("Must be non-zero.")]
+		private float m_Lambda = ExponentialDistribution.DefaultLambda;
 #pragma warning restore CS0649
 
 		[NonSerialized] private ExponentialGenerator m_sharedGenerator;
@@ -31,7 +30,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		public override IContinuousGenerator generator
 		{
 			[Pure]
-			get => new ExponentialGenerator(m_Lambda, m_StartPoint);
+			get => new ExponentialGenerator(m_Lambda);
 		}
 
 		/// <summary>
@@ -57,7 +56,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		public ExponentialGenerator exponentialGenerator
 		{
 			[Pure]
-			get => new ExponentialGenerator(m_Lambda, m_StartPoint);
+			get => new ExponentialGenerator(m_Lambda);
 		}
 
 		/// <summary>
@@ -92,22 +91,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 				}
 
 				m_Lambda = value;
-				m_sharedGenerator = null;
-			}
-		}
-
-		public float startPoint
-		{
-			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_StartPoint;
-			set
-			{
-				if (m_StartPoint == value)
-				{
-					return;
-				}
-
-				m_StartPoint = value;
 				m_sharedGenerator = null;
 			}
 		}

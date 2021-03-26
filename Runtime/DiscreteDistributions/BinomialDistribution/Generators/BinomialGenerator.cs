@@ -7,11 +7,10 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 {
 	/// <summary>
 	/// Binomial Random Generator
-	/// using <see cref="BinomialDistribution.Generate(int,BinomialDistribution.Setup,byte)"/>.
+	/// using <see cref="BinomialDistribution.Generate(BinomialDistribution.Setup,byte)"/>.
 	/// </summary>
 	public sealed class BinomialGenerator : IBinomialGenerator
 	{
-		private int m_startPoint;
 		private BinomialDistribution.Setup m_setup;
 		private byte m_upperBound;
 
@@ -20,12 +19,10 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <summary>
 		/// Creates a <see cref="BinomialGenerator"/> with the specified parameters.
 		/// </summary>
-		/// <param name="startPoint"></param>
 		/// <param name="probability">True threshold in range [0, 1).</param>
 		/// <param name="upperBound"></param>
-		public BinomialGenerator(int startPoint, float probability, byte upperBound)
+		public BinomialGenerator(float probability, byte upperBound)
 		{
-			m_startPoint = startPoint;
 			m_probability = probability;
 			m_setup = new BinomialDistribution.Setup(m_probability);
 			m_upperBound = upperBound;
@@ -37,18 +34,9 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="other"></param>
 		public BinomialGenerator([NotNull] BinomialGenerator other)
 		{
-			m_startPoint = other.m_startPoint;
 			m_setup = other.m_setup;
 			m_upperBound = other.m_upperBound;
 			m_probability = other.m_probability;
-		}
-
-		public int startPoint
-		{
-			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_startPoint;
-			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_startPoint = value;
 		}
 
 		/// <inheritdoc/>
@@ -76,7 +64,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public int Generate()
 		{
-			return BinomialDistribution.Generate(m_startPoint, m_setup, m_upperBound);
+			return BinomialDistribution.Generate(m_setup, m_upperBound);
 		}
 	}
 }

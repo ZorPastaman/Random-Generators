@@ -15,7 +15,6 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	/// </remarks>
 	public static class NegativeBinomialDistribution
 	{
-		public const int DefaultStartPoint = 0;
 		public const float DefaultProbability = 0.5f;
 		public const byte DefaultSuccesses = 3;
 
@@ -38,22 +37,6 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <summary>
 		/// Generates a random value using <see cref="UnityGeneratorStruct.DefaultExclusive"/> as an iid source.
 		/// </summary>
-		/// <param name="startPoint"></param>
-		/// <param name="probability">True threshold in range (0, 1].</param>
-		/// <param name="successes"></param>
-		/// <returns>Generated value.</returns>
-		/// <remarks>
-		/// <paramref name="successes"/> must be greater than 0.
-		/// </remarks>
-		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-		public static int Generate(int startPoint, float probability, byte successes)
-		{
-			return Generate(probability, successes) + startPoint;
-		}
-
-		/// <summary>
-		/// Generates a random value using <see cref="UnityGeneratorStruct.DefaultExclusive"/> as an iid source.
-		/// </summary>
 		/// <param name="setup"></param>
 		/// <returns>Generated value.</returns>
 		/// <remarks>
@@ -64,21 +47,6 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		{
 			float lambda = GammaDistribution.Generate(setup.gammaSetup, setup.beta);
 			return PoissonDistribution.Generate(lambda);
-		}
-
-		/// <summary>
-		/// Generates a random value using <see cref="UnityGeneratorStruct.DefaultExclusive"/> as an iid source.
-		/// </summary>
-		/// <param name="setup"></param>
-		/// <param name="startPoint"></param>
-		/// <returns>Generated value.</returns>
-		/// <remarks>
-		/// It's a faster variant using a precomputed <paramref name="setup"/>.
-		/// </remarks>
-		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-		public static int Generate(Setup setup, int startPoint)
-		{
-			return Generate(setup) + startPoint;
 		}
 
 		/// <summary>
@@ -106,25 +74,6 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="iidFunc">
 		/// Function that returns an independent and identically distributed random value in range [0, 1).
 		/// </param>
-		/// <param name="startPoint"></param>
-		/// <param name="probability">True threshold in range (0, 1].</param>
-		/// <param name="successes"></param>
-		/// <returns>Generated value.</returns>
-		/// <remarks>
-		/// <paramref name="successes"/> must be greater than 0.
-		/// </remarks>
-		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-		public static int Generate([NotNull] Func<float> iidFunc, int startPoint, float probability, byte successes)
-		{
-			return Generate(iidFunc, probability, successes) + startPoint;
-		}
-
-		/// <summary>
-		/// Generates a random value using <paramref name="iidFunc"/> as an iid source.
-		/// </summary>
-		/// <param name="iidFunc">
-		/// Function that returns an independent and identically distributed random value in range [0, 1).
-		/// </param>
 		/// <param name="setup"></param>
 		/// <returns>Generated value.</returns>
 		/// <remarks>
@@ -135,24 +84,6 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		{
 			float lambda = GammaDistribution.Generate(iidFunc, setup.gammaSetup, setup.beta);
 			return PoissonDistribution.Generate(iidFunc, lambda);
-		}
-
-		/// <summary>
-		/// Generates a random value using <paramref name="iidFunc"/> as an iid source.
-		/// </summary>
-		/// <param name="iidFunc">
-		/// Function that returns an independent and identically distributed random value in range [0, 1).
-		/// </param>
-		/// <param name="setup"></param>
-		/// <param name="startPoint"></param>
-		/// <returns>Generated value.</returns>
-		/// <remarks>
-		/// It's a faster variant using a precomputed <paramref name="setup"/>.
-		/// </remarks>
-		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-		public static int Generate([NotNull] Func<float> iidFunc, Setup setup, int startPoint)
-		{
-			return Generate(iidFunc, setup) + startPoint;
 		}
 
 		/// <summary>
@@ -181,26 +112,6 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="iidGenerator">
 		/// Random generator that returns an independent and identically distributed random value in range [0, 1).
 		/// </param>
-		/// <param name="startPoint"></param>
-		/// <param name="probability">True threshold in range (0, 1].</param>
-		/// <param name="successes"></param>
-		/// <returns>Generated value.</returns>
-		/// <remarks>
-		/// <paramref name="successes"/> must be greater than 0.
-		/// </remarks>
-		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-		public static int Generate<T>([NotNull] T iidGenerator, int startPoint, float probability, byte successes)
-			where T : IContinuousGenerator
-		{
-			return Generate(iidGenerator, probability, successes) + startPoint;
-		}
-
-		/// <summary>
-		/// Generates a random value using <paramref name="iidGenerator"/> as an iid source.
-		/// </summary>
-		/// <param name="iidGenerator">
-		/// Random generator that returns an independent and identically distributed random value in range [0, 1).
-		/// </param>
 		/// <param name="setup"></param>
 		/// <returns>Generated value.</returns>
 		/// <remarks>
@@ -211,25 +122,6 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		{
 			float lambda = GammaDistribution.Generate(iidGenerator, setup.gammaSetup, setup.beta);
 			return PoissonDistribution.Generate(iidGenerator, lambda);
-		}
-
-		/// <summary>
-		/// Generates a random value using <paramref name="iidGenerator"/> as an iid source.
-		/// </summary>
-		/// <param name="iidGenerator">
-		/// Random generator that returns an independent and identically distributed random value in range [0, 1).
-		/// </param>
-		/// <param name="setup"></param>
-		/// <param name="startPoint"></param>
-		/// <returns>Generated value.</returns>
-		/// <remarks>
-		/// It's a faster variant using a precomputed <paramref name="setup"/>.
-		/// </remarks>
-		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-		public static int Generate<T>([NotNull] T iidGenerator, Setup setup, int startPoint)
-			where T : IContinuousGenerator
-		{
-			return Generate(iidGenerator, setup) + startPoint;
 		}
 
 		/// <summary>

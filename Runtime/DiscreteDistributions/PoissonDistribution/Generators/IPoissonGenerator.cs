@@ -8,7 +8,5 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	public interface IPoissonGenerator : IDiscreteGenerator<int>
 	{
 		float lambda { get; }
-
-		int startPoint { get; }
 	}
 }

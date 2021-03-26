@@ -11,6 +11,5 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// True threshold in range (0, 1).
 		/// </summary>
 		float probability { get; }
-		int startPoint { get; }
 	}
 }

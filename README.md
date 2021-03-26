@@ -138,17 +138,23 @@ They wrap modificators and provide unique and shared instances of them.
 
 ##### List of continuous modificators
 
-- [Clamp](Runtime/ContinuousDistributions/DistributionModificators/Clamp) -
-a continuous value is clamped between specified minimum and maximum values;
+- [Add](Runtime/ContinuousDistributions/DistributionModificators/Add) - 
+sums a generated value and a multiplier and returns the result;
+- [Clamp](Runtime/ContinuousDistributions/DistributionModificators/Clamp) - 
+clamps a generated value between specified minimum and maximum values;
+- [Multiply](Runtime/ContinuousDistributions/DistributionModificators/Multiply) -
+multiplies a generated value and an item and returns the result;
 - [Round](Runtime/ContinuousDistributions/DistributionModificators/Round) -
-a continuous value is rounded to a nearest integer.
+rounds a generated value to a nearest integer.
 
 ##### List of discrete modificators
 
+- [Add](Runtime/DiscreteDistributions/DistributionModificators/Add) -
+  sums a generated value and a multiplier and returns the result;
 - [Clamp](Runtime/DiscreteDistributions/DistributionModificators/Clamp) -
-a discrete value is clamped between specified minimum and maximum values;
+  clamps a generated value between specified minimum and maximum values;
 - [Round to Int](Runtime/DiscreteDistributions/DistributionModificators/Round) -
-a continuous value is rounded to a nearest integer and returned as a discrete value.
+  rounds a generated value to a nearest integer.
 
 ### Random filters
 

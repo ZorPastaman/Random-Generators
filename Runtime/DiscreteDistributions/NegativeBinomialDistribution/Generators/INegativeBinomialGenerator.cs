@@ -7,8 +7,6 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	/// </summary>
 	public interface INegativeBinomialGenerator : IDiscreteGenerator<int>
 	{
-		int startPoint { get; }
-
 		/// <summary>
 		/// True threshold in range (0, 1].
 		/// </summary>

@@ -13,24 +13,21 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	{
 		[NotNull] private T m_iidGenerator;
 		private PoissonDistribution.Setup m_setup;
-		private int m_startPoint;
 
 		private float m_lambda;
 
 		/// <summary>
-		/// Creates a <see cref="PoissonGeneratorDependentSimple{T}"/> with the specified parameters.
+		/// Creates a <see cref="PoissonGeneratorDependent{T}"/> with the specified parameters.
 		/// </summary>
 		/// <param name="iidGenerator">
 		/// Random generator that returns an independent and identically distributed random value in range [0, 1].
 		/// </param>
 		/// <param name="lambda"></param>
-		/// <param name="startPoint"></param>
-		public PoissonGeneratorDependent([NotNull] T iidGenerator, float lambda, int startPoint)
+		public PoissonGeneratorDependent([NotNull] T iidGenerator, float lambda)
 		{
 			m_iidGenerator = iidGenerator;
 			m_lambda = lambda;
 			m_setup = new PoissonDistribution.Setup(m_lambda);
-			m_startPoint = startPoint;
 		}
 
 		/// <summary>
@@ -41,7 +38,6 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		{
 			m_iidGenerator = other.m_iidGenerator;
 			m_setup = other.m_setup;
-			m_startPoint = other.m_startPoint;
 			m_lambda = other.m_lambda;
 		}
 
@@ -69,19 +65,11 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 			}
 		}
 
-		public int startPoint
-		{
-			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_startPoint;
-			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_startPoint = value;
-		}
-
 		/// <inheritdoc/>
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public int Generate()
 		{
-			return PoissonDistribution.Generate(m_iidGenerator, m_setup, m_startPoint);
+			return PoissonDistribution.Generate(m_iidGenerator, m_setup);
 		}
 	}
 }

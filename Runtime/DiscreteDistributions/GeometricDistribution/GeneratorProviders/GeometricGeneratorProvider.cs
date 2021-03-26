@@ -20,7 +20,6 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 #pragma warning disable CS0649
 		[SerializeField, Range(NumberConstants.NormalEpsilon, NumberConstants.SubOne)]
 		private float m_Probability = GeometricDistribution.DefaultProbability;
-		[SerializeField] private int m_StartPoint = GeometricDistribution.DefaultStartPoint;
 #pragma warning restore CS0649
 
 		[NonSerialized] private GeometricGenerator m_sharedGenerator;
@@ -31,7 +30,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		public override IDiscreteGenerator<int> generator
 		{
 			[Pure]
-			get => new GeometricGenerator(m_Probability, m_StartPoint);
+			get => new GeometricGenerator(m_Probability);
 		}
 
 		/// <summary>
@@ -57,7 +56,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		public GeometricGenerator geometricGenerator
 		{
 			[Pure]
-			get => new GeometricGenerator(m_Probability, m_StartPoint);
+			get => new GeometricGenerator(m_Probability);
 		}
 
 		/// <summary>
@@ -92,22 +91,6 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 				}
 
 				m_Probability = value;
-				m_sharedGenerator = null;
-			}
-		}
-
-		public int startPoint
-		{
-			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_StartPoint;
-			set
-			{
-				if (m_StartPoint == value)
-				{
-					return;
-				}
-
-				m_StartPoint = value;
 				m_sharedGenerator = null;
 			}
 		}

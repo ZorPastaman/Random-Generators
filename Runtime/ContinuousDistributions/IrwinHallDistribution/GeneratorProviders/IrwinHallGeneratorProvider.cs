@@ -18,7 +18,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 	public sealed class IrwinHallGeneratorProvider : ContinuousGeneratorProvider
 	{
 #pragma warning disable CS0649
-		[SerializeField] private float m_StartPoint = IrwinHallDistribution.DefaultStartPoint;
 		[SerializeField, Tooltip("How many independent and identically distributed random values are generated.")]
 		private byte m_Iids = IrwinHallDistribution.DefaultIids;
 #pragma warning restore CS0649
@@ -32,7 +31,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		public override IContinuousGenerator generator
 		{
 			[Pure]
-			get => new IrwinHallGenerator(m_StartPoint, m_Iids);
+			get => new IrwinHallGenerator(m_Iids);
 		}
 
 		/// <summary>
@@ -58,7 +57,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		public IrwinHallGenerator irwinHallGenerator
 		{
 			[Pure]
-			get => new IrwinHallGenerator(m_StartPoint, m_Iids);
+			get => new IrwinHallGenerator(m_Iids);
 		}
 
 		/// <summary>
@@ -75,22 +74,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 				}
 
 				return m_sharedGenerator;
-			}
-		}
-
-		public float startPoint
-		{
-			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_StartPoint;
-			set
-			{
-				if (m_StartPoint == value)
-				{
-					return;
-				}
-
-				m_StartPoint = value;
-				m_sharedGenerator = null;
 			}
 		}
 

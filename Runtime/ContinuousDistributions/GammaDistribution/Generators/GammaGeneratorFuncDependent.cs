@@ -7,14 +7,13 @@ using JetBrains.Annotations;
 namespace Zor.RandomGenerators.ContinuousDistributions
 {
 	/// <summary>
-	/// Gamma Generator using <see cref="GammaDistribution.Generate(Func{float},GammaDistribution.Setup,float,float)"/>.
+	/// Gamma Generator using <see cref="GammaDistribution.Generate(Func{float},GammaDistribution.Setup,float)"/>.
 	/// </summary>
 	public sealed class GammaGeneratorFuncDependent : IGammaGenerator
 	{
 		[NotNull] private Func<float> m_iidFunc;
 		private GammaDistribution.Setup m_setup;
 		private float m_beta;
-		private float m_startPoint;
 
 		private float m_alpha;
 
@@ -26,17 +25,15 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// </param>
 		/// <param name="alpha">Shape.</param>
 		/// <param name="beta">Scale.</param>
-		/// <param name="startPoint"></param>
 		/// <remarks>
 		/// <paramref name="alpha"/> must be greater than 0.
 		/// </remarks>
-		public GammaGeneratorFuncDependent([NotNull] Func<float> iidFunc, float alpha, float beta, float startPoint)
+		public GammaGeneratorFuncDependent([NotNull] Func<float> iidFunc, float alpha, float beta)
 		{
 			m_iidFunc = iidFunc;
 			m_alpha = alpha;
 			m_setup = new GammaDistribution.Setup(m_alpha);
 			m_beta = beta;
-			m_startPoint = startPoint;
 		}
 
 		/// <summary>
@@ -48,7 +45,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 			m_iidFunc = other.m_iidFunc;
 			m_setup = other.m_setup;
 			m_beta = other.m_beta;
-			m_startPoint = other.m_startPoint;
 			m_alpha = other.m_alpha;
 		}
 
@@ -89,19 +85,11 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 			set => m_beta = value;
 		}
 
-		public float startPoint
-		{
-			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_startPoint;
-			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_startPoint = value;
-		}
-
 		/// <inheritdoc/>
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public float Generate()
 		{
-			return GammaDistribution.Generate(m_iidFunc, m_setup, m_beta, m_startPoint);
+			return GammaDistribution.Generate(m_iidFunc, m_setup, m_beta);
 		}
 	}
 }

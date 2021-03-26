@@ -14,7 +14,6 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	public static class GeometricDistribution
 	{
 		public const float DefaultProbability = 0.5f;
-		public const int DefaultStartPoint = 0;
 
 		/// <summary>
 		/// Generates a random value using <see cref="UnityGeneratorStruct.DefaultExclusive"/> as an iid source.
@@ -30,18 +29,6 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <summary>
 		/// Generates a random value using <see cref="UnityGeneratorStruct.DefaultExclusive"/> as an iid source.
 		/// </summary>
-		/// <param name="probability">True threshold in range (0, 1).</param>
-		/// <param name="startPoint"></param>
-		/// <returns>Generated value.</returns>
-		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-		public static int Generate(float probability, int startPoint)
-		{
-			return Generate(UnityGeneratorStruct.DefaultExclusive, probability, startPoint);
-		}
-
-		/// <summary>
-		/// Generates a random value using <see cref="UnityGeneratorStruct.DefaultExclusive"/> as an iid source.
-		/// </summary>
 		/// <param name="setup"></param>
 		/// <returns>Generated value.</returns>
 		/// <remarks>
@@ -51,21 +38,6 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		public static int Generate(Setup setup)
 		{
 			return Generate(UnityGeneratorStruct.DefaultExclusive, setup);
-		}
-
-		/// <summary>
-		/// Generates a random value using <see cref="UnityGeneratorStruct.DefaultExclusive"/> as an iid source.
-		/// </summary>
-		/// <param name="setup">.</param>
-		/// <param name="startPoint"></param>
-		/// <returns>Generated value.</returns>
-		/// <remarks>
-		/// It's a faster variant using a precomputed <paramref name="setup"/>.
-		/// </remarks>
-		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-		public static int Generate(Setup setup, int startPoint)
-		{
-			return Generate(UnityGeneratorStruct.DefaultExclusive, setup, startPoint);
 		}
 
 		/// <summary>
@@ -88,21 +60,6 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="iidFunc">
 		/// Function that returns an independent and identically distributed random value in range [0, 1).
 		/// </param>
-		/// <param name="probability">True threshold in range (0, 1).</param>
-		/// <param name="startPoint"></param>
-		/// <returns>Generated value.</returns>
-		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-		public static int Generate([NotNull] Func<float> iidFunc, float probability, int startPoint)
-		{
-			return Generate(new FuncGeneratorStruct(iidFunc), probability, startPoint);
-		}
-
-		/// <summary>
-		/// Generates a random value using <paramref name="iidFunc"/> as an iid source.
-		/// </summary>
-		/// <param name="iidFunc">
-		/// Function that returns an independent and identically distributed random value in range [0, 1).
-		/// </param>
 		/// <param name="setup"></param>
 		/// <returns>Generated value.</returns>
 		/// <remarks>
@@ -112,24 +69,6 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		public static int Generate([NotNull] Func<float> iidFunc, Setup setup)
 		{
 			return Generate(new FuncGeneratorStruct(iidFunc), setup);
-		}
-
-		/// <summary>
-		/// Generates a random value using <paramref name="iidFunc"/> as an iid source.
-		/// </summary>
-		/// <param name="iidFunc">
-		/// Function that returns an independent and identically distributed random value in range [0, 1).
-		/// </param>
-		/// <param name="setup"></param>
-		/// <param name="startPoint"></param>
-		/// <returns>Generated value.</returns>
-		/// <remarks>
-		/// It's a faster variant using a precomputed <paramref name="setup"/>.
-		/// </remarks>
-		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-		public static int Generate([NotNull] Func<float> iidFunc, Setup setup, int startPoint)
-		{
-			return Generate(new FuncGeneratorStruct(iidFunc), setup, startPoint);
 		}
 
 		/// <summary>
@@ -152,22 +91,6 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="iidGenerator">
 		/// Random generator that returns an independent and identically distributed random value in range [0, 1).
 		/// </param>
-		/// <param name="probability">True threshold in range (0, 1).</param>
-		/// <param name="startPoint"></param>
-		/// <returns>Generated value.</returns>
-		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-		public static int Generate<T>([NotNull] T iidGenerator, float probability, int startPoint)
-			where T : IContinuousGenerator
-		{
-			return Generate(iidGenerator, probability) + startPoint;
-		}
-
-		/// <summary>
-		/// Generates a random value using <paramref name="iidGenerator"/> as an iid source.
-		/// </summary>
-		/// <param name="iidGenerator">
-		/// Random generator that returns an independent and identically distributed random value in range [0, 1).
-		/// </param>
 		/// <param name="setup"></param>
 		/// <returns>Generated value.</returns>
 		/// <remarks>
@@ -177,25 +100,6 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		public static int Generate<T>([NotNull] T iidGenerator, Setup setup) where T : IContinuousGenerator
 		{
 			return GenerateInternal(iidGenerator, setup.lambda);
-		}
-
-		/// <summary>
-		/// Generates a random value using <paramref name="iidGenerator"/> as an iid source.
-		/// </summary>
-		/// <param name="iidGenerator">
-		/// Random generator that returns an independent and identically distributed random value in range [0, 1).
-		/// </param>
-		/// <param name="setup"></param>
-		/// <param name="startPoint"></param>
-		/// <returns>Generated value.</returns>
-		/// <remarks>
-		/// It's a faster variant using a precomputed <paramref name="setup"/>.
-		/// </remarks>
-		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-		public static int Generate<T>([NotNull] T iidGenerator, Setup setup, int startPoint)
-			where T : IContinuousGenerator
-		{
-			return Generate(iidGenerator, setup) + startPoint;
 		}
 
 		/// <summary>

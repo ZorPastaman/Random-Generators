@@ -7,8 +7,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 	/// </summary>
 	public interface IIrwinHallGenerator : IContinuousGenerator
 	{
-		float startPoint { get; }
-
 		/// <summary>
 		/// How many independent and identically distributed random values are generated.
 		/// </summary>

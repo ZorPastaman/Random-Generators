@@ -20,7 +20,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 #pragma warning disable CS0649
 		[SerializeField, Tooltip("Random generator that returns an independent and identically distributed random value in range [0, 1].")]
 		private ContinuousGeneratorProviderReference m_DependedGeneratorProvider;
-		[SerializeField] private float m_StartPoint = IrwinHallDistribution.DefaultStartPoint;
 		[SerializeField, Tooltip("How many independent and identically distributed random values are generated.")]
 		private byte m_Iids = IrwinHallDistribution.DefaultIids;
 #pragma warning restore CS0649
@@ -35,7 +34,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		{
 			[Pure]
 			get => new IrwinHallGeneratorDependent<IContinuousGenerator>(
-				m_DependedGeneratorProvider.generator, m_StartPoint, m_Iids);
+				m_DependedGeneratorProvider.generator, m_Iids);
 		}
 
 		/// <summary>
@@ -63,7 +62,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		{
 			[Pure]
 			get => new IrwinHallGeneratorDependent<IContinuousGenerator>(
-				m_DependedGeneratorProvider.generator, m_StartPoint, m_Iids);
+				m_DependedGeneratorProvider.generator, m_Iids);
 		}
 
 		/// <summary>
@@ -98,22 +97,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 				}
 
 				m_DependedGeneratorProvider = value;
-				m_sharedGenerator = null;
-			}
-		}
-
-		public float startPoint
-		{
-			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_StartPoint;
-			set
-			{
-				if (m_StartPoint == value)
-				{
-					return;
-				}
-
-				m_StartPoint = value;
 				m_sharedGenerator = null;
 			}
 		}

@@ -23,7 +23,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		private float m_Alpha = GammaDistribution.DefaultAlpha;
 		[SerializeField, Tooltip("Scale.")]
 		private float m_Beta = GammaDistribution.DefaultBeta;
-		[SerializeField] private float m_StartPoint = GammaDistribution.DefaultStartPoint;
 #pragma warning restore CS0649
 
 		[NonSerialized] private GammaGenerator m_sharedGenerator;
@@ -34,7 +33,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		public override IContinuousGenerator generator
 		{
 			[Pure]
-			get => new GammaGenerator(m_Alpha, m_Beta, m_StartPoint);
+			get => new GammaGenerator(m_Alpha, m_Beta);
 		}
 
 		/// <summary>
@@ -60,7 +59,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		public GammaGenerator gammaGenerator
 		{
 			[Pure]
-			get => new GammaGenerator(m_Alpha, m_Beta, m_StartPoint);
+			get => new GammaGenerator(m_Alpha, m_Beta);
 		}
 
 		/// <summary>
@@ -117,22 +116,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 				}
 
 				m_Beta = value;
-				m_sharedGenerator = null;
-			}
-		}
-
-		public float startPoint
-		{
-			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_StartPoint;
-			set
-			{
-				if (m_StartPoint == value)
-				{
-					return;
-				}
-
-				m_StartPoint = value;
 				m_sharedGenerator = null;
 			}
 		}

@@ -16,7 +16,5 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// Scale.
 		/// </summary>
 		float beta { get; }
-
-		float startPoint { get; }
 	}
 }

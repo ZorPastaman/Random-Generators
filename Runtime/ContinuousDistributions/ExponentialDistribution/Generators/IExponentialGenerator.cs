@@ -8,6 +8,5 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 	public interface IExponentialGenerator : IContinuousGenerator
 	{
 		float lambda { get; }
-		float startPoint { get; }
 	}
 }

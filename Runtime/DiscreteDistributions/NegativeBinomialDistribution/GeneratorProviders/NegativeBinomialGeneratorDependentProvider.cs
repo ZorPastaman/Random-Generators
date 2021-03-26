@@ -23,7 +23,6 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 #pragma warning disable CS0649
 		[SerializeField, Tooltip("Random generator that returns an independent and identically distributed random value in range [0, 1).")]
 		private ContinuousGeneratorProviderReference m_DependedGeneratorProvider;
-		[SerializeField] private int m_StartPoint = NegativeBinomialDistribution.DefaultStartPoint;
 		[SerializeField, Range(NumberConstants.NormalEpsilon, 1f)]
 		private float m_Probability = NegativeBinomialDistribution.DefaultProbability;
 		[SerializeField, SimpleRangeInt(1, 255)]
@@ -40,7 +39,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		{
 			[Pure]
 			get => new NegativeBinomialGeneratorDependent<IContinuousGenerator>(
-				m_DependedGeneratorProvider.generator, m_StartPoint, m_Probability, m_Successes);
+				m_DependedGeneratorProvider.generator, m_Probability, m_Successes);
 		}
 
 		/// <summary>
@@ -67,7 +66,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		{
 			[Pure]
 			get => new NegativeBinomialGeneratorDependent<IContinuousGenerator>(
-				m_DependedGeneratorProvider.generator, m_StartPoint, m_Probability, m_Successes);
+				m_DependedGeneratorProvider.generator, m_Probability, m_Successes);
 		}
 
 		/// <summary>
@@ -102,22 +101,6 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 				}
 
 				m_DependedGeneratorProvider = value;
-				m_sharedGenerator = null;
-			}
-		}
-
-		public int startPoint
-		{
-			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_StartPoint;
-			set
-			{
-				if (m_StartPoint == value)
-				{
-					return;
-				}
-
-				m_StartPoint = value;
 				m_sharedGenerator = null;
 			}
 		}

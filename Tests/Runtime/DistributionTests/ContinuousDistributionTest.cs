@@ -111,7 +111,7 @@ namespace Zor.RandomGenerators.Tests.DistributionTests
 		{
 			for (int i = 0, count = m_generatedCounts.Count; i < count; ++i)
 			{
-				if (Mathf.Abs(m_generatedCounts[i].Item1 - value) + Mathf.Epsilon <= m_StepLength / 2f)
+				if (Mathf.Abs(m_generatedCounts[i].Item1 - value) <= m_StepLength / 2f + m_StepLength / 10f)
 				{
 					return i;
 				}

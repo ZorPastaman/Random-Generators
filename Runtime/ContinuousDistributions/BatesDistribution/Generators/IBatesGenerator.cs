@@ -7,9 +7,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 	/// </summary>
 	public interface IBatesGenerator : IContinuousGenerator
 	{
-		float mean { get; }
-		float deviation { get; }
-
 		/// <summary>
 		/// How many independent and identically distributed random values are generated.
 		/// </summary>

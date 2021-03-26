@@ -6,12 +6,11 @@ using JetBrains.Annotations;
 namespace Zor.RandomGenerators.DiscreteDistributions
 {
 	/// <summary>
-	/// Geometric Random Generator using <see cref="GeometricDistribution.Generate(GeometricDistribution.Setup,int)"/>.
+	/// Geometric Random Generator using <see cref="GeometricDistribution.Generate(GeometricDistribution.Setup)"/>.
 	/// </summary>
 	public sealed class GeometricGenerator : IGeometricGenerator
 	{
 		private GeometricDistribution.Setup m_setup;
-		private int m_startPoint;
 
 		private float m_probability;
 
@@ -19,12 +18,10 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// Creates a <see cref="GeometricGenerator"/> with the specified parameters.
 		/// </summary>
 		/// <param name="probability">True threshold in range (0, 1).</param>
-		/// <param name="startPoint"></param>
-		public GeometricGenerator(float probability, int startPoint)
+		public GeometricGenerator(float probability)
 		{
 			m_probability = probability;
 			m_setup = new GeometricDistribution.Setup(m_probability);
-			m_startPoint = startPoint;
 		}
 
 		/// <summary>
@@ -34,7 +31,6 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		public GeometricGenerator([NotNull] GeometricGenerator other)
 		{
 			m_setup = other.m_setup;
-			m_startPoint = other.m_startPoint;
 			m_probability = other.m_probability;
 		}
 
@@ -51,19 +47,11 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 			}
 		}
 
-		public int startPoint
-		{
-			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_startPoint;
-			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_startPoint = value;
-		}
-
 		/// <inheritdoc/>
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public int Generate()
 		{
-			return GeometricDistribution.Generate(m_setup, m_startPoint);
+			return GeometricDistribution.Generate(m_setup);
 		}
 	}
 }

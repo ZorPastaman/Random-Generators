@@ -6,13 +6,12 @@ using JetBrains.Annotations;
 namespace Zor.RandomGenerators.ContinuousDistributions
 {
 	/// <summary>
-	/// Irwin-Hall Generator using <see cref="IrwinHallDistribution.Generate{T}(T,float,byte)"/>.
+	/// Irwin-Hall Generator using <see cref="IrwinHallDistribution.Generate{T}(T,byte)"/>.
 	/// </summary>
 	public sealed class IrwinHallGeneratorDependent<T> : IIrwinHallGenerator
 		where T : IContinuousGenerator
 	{
 		[NotNull] private T m_dependedGenerator;
-		private float m_startPoint;
 		private byte m_iids;
 
 		/// <summary>
@@ -21,12 +20,10 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// <param name="dependedGenerator">
 		/// Random generator that returns an independent and identically distributed random value in range [0, 1].
 		/// </param>
-		/// <param name="startPoint"></param>
 		/// <param name="iids">How many independent and identically distributed random values are generated.</param>
-		public IrwinHallGeneratorDependent([NotNull] T dependedGenerator, float startPoint, byte iids)
+		public IrwinHallGeneratorDependent([NotNull] T dependedGenerator, byte iids)
 		{
 			m_dependedGenerator = dependedGenerator;
-			m_startPoint = startPoint;
 			m_iids = iids;
 		}
 
@@ -36,7 +33,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		public IrwinHallGeneratorDependent([NotNull] IrwinHallGeneratorDependent<T> other)
 		{
 			m_dependedGenerator = other.m_dependedGenerator;
-			m_startPoint = other.m_startPoint;
 			m_iids = other.m_iids;
 		}
 
@@ -52,14 +48,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 			set => m_dependedGenerator = value;
 		}
 
-		public float startPoint
-		{
-			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_startPoint;
-			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_startPoint = value;
-		}
-
 		/// <inheritdoc/>
 		public byte iids
 		{
@@ -73,7 +61,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public float Generate()
 		{
-			return IrwinHallDistribution.Generate(m_dependedGenerator, m_startPoint, m_iids);
+			return IrwinHallDistribution.Generate(m_dependedGenerator, m_iids);
 		}
 	}
 }

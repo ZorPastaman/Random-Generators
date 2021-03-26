@@ -17,6 +17,8 @@ got special methods and Setup structs that help to compute setup data once and r
 It's used in distributions to mimic IContinuousGenerator.
 - FuncGeneratorClass and FuncGeneratorStruct. They are wrappers over Func<float>. They are used
 to mimic IContinuousGenerator. The latter is used in distributions.
+- AddModificator for continuous and discrete generators.
+- MultiplyModificator for continuous generators.
 
 ### Changed
 
@@ -32,6 +34,10 @@ iid sources in range [0, 1). All other distributions can work with iid sources i
 ### Removed
 
 - UnityGeneratorSimple.
+- All non-standard methods were removed from distributions. Those were methods that modified the result -
+use AddModificator or MultiplyModificator to get such a functionality. It affected Bates, Exponential,
+Gamma, Irwin-Hall, Binomial, Geometric, Negative Binomial and Poisson distributions.
+- Simple generators of mentioned above distributions were removed. Now non-simple generators do the same.
 
 ## [1.2.0] - 2020-11-01
 

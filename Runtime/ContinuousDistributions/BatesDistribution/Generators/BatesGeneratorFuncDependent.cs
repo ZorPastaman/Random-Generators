@@ -7,13 +7,11 @@ using JetBrains.Annotations;
 namespace Zor.RandomGenerators.ContinuousDistributions
 {
 	/// <summary>
-	/// Bates Random Generator using <see cref="BatesDistribution.Generate(Func{float},float,float,byte)"/>.
+	/// Bates Random Generator using <see cref="BatesDistribution.Generate(Func{float},byte)"/>.
 	/// </summary>
 	public sealed class BatesGeneratorFuncDependent : IBatesGenerator
 	{
 		[NotNull] private Func<float> m_iidFunc;
-		private float m_mean;
-		private float m_deviation;
 		private byte m_iids;
 
 		/// <summary>
@@ -30,11 +28,9 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// <remarks>
 		/// <paramref name="iids"/> must be greater than 0.
 		/// </remarks>
-		public BatesGeneratorFuncDependent([NotNull] Func<float> iidFunc, float mean, float deviation, byte iids)
+		public BatesGeneratorFuncDependent([NotNull] Func<float> iidFunc, byte iids)
 		{
 			m_iidFunc = iidFunc;
-			m_mean = mean;
-			m_deviation = deviation;
 			m_iids = iids;
 		}
 
@@ -44,8 +40,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		public BatesGeneratorFuncDependent([NotNull] BatesGeneratorFuncDependent other)
 		{
 			m_iidFunc = other.m_iidFunc;
-			m_mean = other.m_mean;
-			m_deviation = other.m_deviation;
 			m_iids = other.m_iids;
 		}
 
@@ -59,22 +53,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 			get => m_iidFunc;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_iidFunc = value;
-		}
-
-		public float mean
-		{
-			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_mean;
-			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_mean = value;
-		}
-
-		public float deviation
-		{
-			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_deviation;
-			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_deviation = value;
 		}
 
 		/// <inheritdoc/>
@@ -93,7 +71,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public float Generate()
 		{
-			return BatesDistribution.Generate(m_iidFunc, m_mean, m_deviation, m_iids);
+			return BatesDistribution.Generate(m_iidFunc, m_iids);
 		}
 	}
 }

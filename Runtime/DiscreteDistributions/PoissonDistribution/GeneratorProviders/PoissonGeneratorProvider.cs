@@ -19,7 +19,6 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	{
 #pragma warning disable CS0649
 		[SerializeField] private float m_Lambda = PoissonDistribution.DefaultLambda;
-		[SerializeField] private int m_StartPoint = PoissonDistribution.DefaultStartPoint;
 #pragma warning restore CS0649
 
 		[NonSerialized] private PoissonGenerator m_sharedGenerator;
@@ -30,7 +29,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		public override IDiscreteGenerator<int> generator
 		{
 			[Pure]
-			get => new PoissonGenerator(m_Lambda, m_StartPoint);
+			get => new PoissonGenerator(m_Lambda);
 		}
 
 		/// <summary>
@@ -56,7 +55,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		public PoissonGenerator poissonGenerator
 		{
 			[Pure]
-			get => new PoissonGenerator(m_Lambda, m_StartPoint);
+			get => new PoissonGenerator(m_Lambda);
 		}
 
 		/// <summary>
@@ -88,22 +87,6 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 				}
 
 				m_Lambda = value;
-				m_sharedGenerator = null;
-			}
-		}
-
-		public int startPoint
-		{
-			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_StartPoint;
-			set
-			{
-				if (m_StartPoint == value)
-				{
-					return;
-				}
-
-				m_StartPoint = value;
 				m_sharedGenerator = null;
 			}
 		}

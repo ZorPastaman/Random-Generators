@@ -23,7 +23,6 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		private ContinuousGeneratorProviderReference m_DependedGeneratorProvider;
 		[SerializeField, Range(NumberConstants.NormalEpsilon, NumberConstants.SubOne)]
 		private float m_Probability = GeometricDistribution.DefaultProbability;
-		[SerializeField] private int m_StartPoint = GeometricDistribution.DefaultStartPoint;
 #pragma warning restore CS0649
 
 		[NonSerialized] private GeometricGeneratorDependent<IContinuousGenerator> m_sharedGenerator;
@@ -36,7 +35,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		{
 			[Pure]
 			get => new GeometricGeneratorDependent<IContinuousGenerator>(m_DependedGeneratorProvider.generator,
-				m_Probability, m_StartPoint);
+				m_Probability);
 		}
 
 		/// <summary>
@@ -64,7 +63,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		{
 			[Pure]
 			get => new GeometricGeneratorDependent<IContinuousGenerator>(m_DependedGeneratorProvider.generator,
-				m_Probability, m_StartPoint);
+				m_Probability);
 		}
 
 		/// <summary>
@@ -118,22 +117,6 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 				}
 
 				m_Probability = value;
-				m_sharedGenerator = null;
-			}
-		}
-
-		public int startPoint
-		{
-			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_StartPoint;
-			set
-			{
-				if (m_StartPoint == value)
-				{
-					return;
-				}
-
-				m_StartPoint = value;
 				m_sharedGenerator = null;
 			}
 		}

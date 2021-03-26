@@ -18,7 +18,6 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	public sealed class BinomialGeneratorProvider : DiscreteGeneratorProvider<int>
 	{
 #pragma warning disable CS0649
-		[SerializeField] private int m_StartPoint = BinomialDistribution.DefaultStartPoint;
 		[SerializeField, Range(0f, NumberConstants.SubOne)]
 		private float m_Probability = BinomialDistribution.DefaultProbability;
 		[SerializeField] private byte m_UpperBound = BinomialDistribution.DefaultUpperBound;
@@ -32,7 +31,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		public override IDiscreteGenerator<int> generator
 		{
 			[Pure]
-			get => new BinomialGenerator(m_StartPoint, m_Probability, m_UpperBound);
+			get => new BinomialGenerator(m_Probability, m_UpperBound);
 		}
 
 		/// <summary>
@@ -58,7 +57,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		public BinomialGenerator binomialGenerator
 		{
 			[Pure]
-			get => new BinomialGenerator(m_StartPoint, m_Probability, m_UpperBound);
+			get => new BinomialGenerator(m_Probability, m_UpperBound);
 		}
 
 		/// <summary>
@@ -75,22 +74,6 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 				}
 
 				return m_sharedGenerator;
-			}
-		}
-
-		public int startPoint
-		{
-			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_StartPoint;
-			set
-			{
-				if (m_StartPoint == value)
-				{
-					return;
-				}
-
-				m_StartPoint = value;
-				m_sharedGenerator = null;
 			}
 		}
 

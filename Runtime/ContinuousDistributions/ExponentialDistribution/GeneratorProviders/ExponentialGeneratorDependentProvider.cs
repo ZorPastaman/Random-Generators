@@ -20,9 +20,8 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 #pragma warning disable CS0649
 		[SerializeField, Tooltip("Random generator that returns an independent and identically distributed random value in range [0, 1).")]
 		private ContinuousGeneratorProviderReference m_DependedGeneratorProvider;
-		[SerializeField, Tooltip("Mustn't be zero.")]
+		[SerializeField, Tooltip("Must be non-zero.")]
 		private float m_Lambda = ExponentialDistribution.DefaultLambda;
-		[SerializeField] private float m_StartPoint = ExponentialDistribution.DefaultStartPoint;
 #pragma warning restore CS0649
 
 		[NonSerialized] private ExponentialGeneratorDependent<IContinuousGenerator> m_sharedGenerator;
@@ -35,7 +34,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		{
 			[Pure]
 			get => new ExponentialGeneratorDependent<IContinuousGenerator>(
-				m_DependedGeneratorProvider.generator, m_Lambda, m_StartPoint);
+				m_DependedGeneratorProvider.generator, m_Lambda);
 		}
 
 		/// <summary>
@@ -62,7 +61,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		{
 			[Pure]
 			get => new ExponentialGeneratorDependent<IContinuousGenerator>(
-				m_DependedGeneratorProvider.generator, m_Lambda, m_StartPoint);
+				m_DependedGeneratorProvider.generator, m_Lambda);
 		}
 
 		/// <summary>
@@ -116,22 +115,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 				}
 
 				m_Lambda = value;
-				m_sharedGenerator = null;
-			}
-		}
-
-		public float startPoint
-		{
-			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_StartPoint;
-			set
-			{
-				if (m_StartPoint == value)
-				{
-					return;
-				}
-
-				m_StartPoint = value;
 				m_sharedGenerator = null;
 			}
 		}

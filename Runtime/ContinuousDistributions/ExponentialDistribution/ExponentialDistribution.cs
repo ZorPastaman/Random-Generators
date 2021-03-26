@@ -13,7 +13,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 	public static class ExponentialDistribution
 	{
 		public const float DefaultLambda = 1f;
-		public const float DefaultStartPoint = 0f;
 
 		/// <summary>
 		/// Generates a random value using <see cref="UnityGeneratorStruct.DefaultExclusive"/> as an iid source.
@@ -27,21 +26,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		public static float Generate(float lambda)
 		{
 			return Generate(UnityGeneratorStruct.DefaultExclusive, lambda);
-		}
-
-		/// <summary>
-		/// Generates a random value using <see cref="UnityGeneratorStruct.DefaultExclusive"/> as an iid source.
-		/// </summary>
-		/// <param name="lambda"></param>
-		/// <param name="startPoint"></param>
-		/// <returns>Generated value.</returns>
-		/// <remarks>
-		/// <paramref name="lambda"/> mustn't be zero.
-		/// </remarks>
-		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-		public static float Generate(float lambda, float startPoint)
-		{
-			return Generate(UnityGeneratorStruct.DefaultExclusive, lambda, startPoint);
 		}
 
 		/// <summary>
@@ -62,24 +46,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		}
 
 		/// <summary>
-		/// Generates a random value using <paramref name="iidFunc"/> as an iid source.
-		/// </summary>
-		/// <param name="iidFunc">
-		/// Function that returns an independent and identically distributed random value in range [0, 1).
-		/// </param>
-		/// <param name="lambda"></param>
-		/// <param name="startPoint"></param>
-		/// <returns>Generated value.</returns>
-		/// <remarks>
-		/// <paramref name="lambda"/> mustn't be zero.
-		/// </remarks>
-		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-		public static float Generate([NotNull] Func<float> iidFunc, float lambda, float startPoint)
-		{
-			return Generate(new FuncGeneratorStruct(iidFunc), lambda, startPoint);
-		}
-
-		/// <summary>
 		/// Generates a random value using <paramref name="iidGenerator"/> as an iid source.
 		/// </summary>
 		/// <param name="iidGenerator">
@@ -96,26 +62,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		{
 			float iid = 1f - iidGenerator.Generate();
 			return -Mathf.Log(iid) / lambda;
-		}
-
-		/// <summary>
-		/// Generates a random value using <paramref name="iidGenerator"/> as an iid source.
-		/// </summary>
-		/// <param name="iidGenerator">
-		/// Random generator that returns an independent and identically distributed random value in range [0, 1).
-		/// </param>
-		/// <param name="lambda"></param>
-		/// <param name="startPoint"></param>
-		/// <typeparam name="T"></typeparam>
-		/// <returns>Generated value.</returns>
-		/// <remarks>
-		/// <paramref name="lambda"/> mustn't be zero.
-		/// </remarks>
-		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-		public static float Generate<T>([NotNull] T iidGenerator, float lambda, float startPoint)
-			where T : IContinuousGenerator
-		{
-			return Generate(iidGenerator, lambda) + startPoint;
 		}
 	}
 }

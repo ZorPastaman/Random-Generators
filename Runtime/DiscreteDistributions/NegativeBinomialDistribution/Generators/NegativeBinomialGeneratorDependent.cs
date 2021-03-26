@@ -8,14 +8,13 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 {
 	/// <summary>
 	/// Negative Binomial Random Generator
-	/// using <see cref="NegativeBinomialDistribution.Generate{T}(T,NegativeBinomialDistribution.Setup,int)"/>.
+	/// using <see cref="NegativeBinomialDistribution.Generate{T}(T,NegativeBinomialDistribution.Setup)"/>.
 	/// </summary>
 	public sealed class NegativeBinomialGeneratorDependent<T> : INegativeBinomialGenerator
 		where T : IContinuousGenerator
 	{
 		[NotNull] private T m_iidGenerator;
 		private NegativeBinomialDistribution.Setup m_setup;
-		private int m_startPoint;
 
 		private float m_probability;
 		private byte m_successes;
@@ -26,20 +25,17 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <param name="iidGenerator">
 		/// Random generator that returns an independent and identically distributed random value in range [0, 1).
 		/// </param>
-		/// <param name="startPoint"></param>
 		/// <param name="probability">True threshold in range (0, 1].</param>
 		/// <param name="successes"></param>
 		/// <remarks>
 		/// <paramref name="successes"/> must be greater than 0.
 		/// </remarks>
-		public NegativeBinomialGeneratorDependent([NotNull] T iidGenerator,
-			int startPoint, float probability, byte successes)
+		public NegativeBinomialGeneratorDependent([NotNull] T iidGenerator, float probability, byte successes)
 		{
 			m_iidGenerator = iidGenerator;
 			m_probability = probability;
 			m_successes = successes;
 			m_setup = new NegativeBinomialDistribution.Setup(m_probability, m_successes);
-			m_startPoint = startPoint;
 		}
 
 		/// <summary>
@@ -50,7 +46,6 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		{
 			m_iidGenerator = other.m_iidGenerator;
 			m_setup = other.m_setup;
-			m_startPoint = other.m_startPoint;
 			m_probability = other.m_probability;
 			m_successes = other.m_successes;
 		}
@@ -65,14 +60,6 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 			get => m_iidGenerator;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			set => m_iidGenerator = value;
-		}
-
-		public int startPoint
-		{
-			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_startPoint;
-			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_startPoint = value;
 		}
 
 		/// <inheritdoc/>
@@ -124,7 +111,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public int Generate()
 		{
-			return NegativeBinomialDistribution.Generate(m_iidGenerator, m_setup, m_startPoint);
+			return NegativeBinomialDistribution.Generate(m_iidGenerator, m_setup);
 		}
 	}
 }

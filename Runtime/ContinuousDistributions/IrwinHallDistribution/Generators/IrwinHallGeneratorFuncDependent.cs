@@ -7,12 +7,11 @@ using JetBrains.Annotations;
 namespace Zor.RandomGenerators.ContinuousDistributions
 {
 	/// <summary>
-	/// Irwin-Hall Generator using <see cref="IrwinHallDistribution.Generate(Func{float},float,byte)"/>.
+	/// Irwin-Hall Generator using <see cref="IrwinHallDistribution.Generate(Func{float},byte)"/>.
 	/// </summary>
 	public sealed class IrwinHallGeneratorFuncDependent : IIrwinHallGenerator
 	{
 		[NotNull] private Func<float> m_iidFunc;
-		private float m_startPoint;
 		private byte m_iids;
 
 		/// <summary>
@@ -21,12 +20,10 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// <param name="iidFunc">
 		/// Function that returns an independent and identically distributed random value in range [0, 1].
 		/// </param>
-		/// <param name="startPoint"></param>
 		/// <param name="iids">How many independent and identically distributed random values are generated.</param>
-		public IrwinHallGeneratorFuncDependent([NotNull] Func<float> iidFunc, float startPoint, byte iids)
+		public IrwinHallGeneratorFuncDependent([NotNull] Func<float> iidFunc, byte iids)
 		{
 			m_iidFunc = iidFunc;
-			m_startPoint = startPoint;
 			m_iids = iids;
 		}
 
@@ -37,7 +34,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		public IrwinHallGeneratorFuncDependent([NotNull] IrwinHallGeneratorFuncDependent other)
 		{
 			m_iidFunc = other.m_iidFunc;
-			m_startPoint = other.m_startPoint;
 			m_iids = other.m_iids;
 		}
 
@@ -53,14 +49,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 			set => m_iidFunc = value;
 		}
 
-		public float startPoint
-		{
-			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_startPoint;
-			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_startPoint = value;
-		}
-
 		/// <inheritdoc/>
 		public byte iids
 		{
@@ -74,7 +62,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public float Generate()
 		{
-			return IrwinHallDistribution.Generate(m_iidFunc, m_startPoint, m_iids);
+			return IrwinHallDistribution.Generate(m_iidFunc, m_iids);
 		}
 	}
 }

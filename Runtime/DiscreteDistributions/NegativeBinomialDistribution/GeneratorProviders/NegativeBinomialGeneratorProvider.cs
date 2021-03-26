@@ -19,7 +19,6 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	public sealed class NegativeBinomialGeneratorProvider : DiscreteGeneratorProvider<int>
 	{
 #pragma warning disable CS0649
-		[SerializeField] private int m_StartPoint = NegativeBinomialDistribution.DefaultStartPoint;
 		[SerializeField, Range(NumberConstants.NormalEpsilon, 1f)]
 		private float m_Probability = NegativeBinomialDistribution.DefaultProbability;
 		[SerializeField, SimpleRangeInt(1, 255)]
@@ -34,7 +33,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		public override IDiscreteGenerator<int> generator
 		{
 			[Pure]
-			get => new NegativeBinomialGenerator(m_StartPoint, m_Probability, m_Successes);
+			get => new NegativeBinomialGenerator(m_Probability, m_Successes);
 		}
 
 		/// <summary>
@@ -60,7 +59,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		public NegativeBinomialGenerator negativeBinomialGenerator
 		{
 			[Pure]
-			get => new NegativeBinomialGenerator(m_StartPoint, m_Probability, m_Successes);
+			get => new NegativeBinomialGenerator(m_Probability, m_Successes);
 		}
 
 		/// <summary>
@@ -77,22 +76,6 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 				}
 
 				return m_sharedGenerator;
-			}
-		}
-
-		public int startPoint
-		{
-			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_StartPoint;
-			set
-			{
-				if (m_StartPoint == value)
-				{
-					return;
-				}
-
-				m_StartPoint = value;
-				m_sharedGenerator = null;
 			}
 		}
 

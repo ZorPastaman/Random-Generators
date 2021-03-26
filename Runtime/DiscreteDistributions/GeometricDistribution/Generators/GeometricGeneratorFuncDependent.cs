@@ -8,13 +8,12 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 {
 	/// <summary>
 	/// Geometric Random Generator
-	/// using <see cref="GeometricDistribution.Generate(Func{float},GeometricDistribution.Setup,int)"/>.
+	/// using <see cref="GeometricDistribution.Generate(Func{float},GeometricDistribution.Setup)"/>.
 	/// </summary>
 	public sealed class GeometricGeneratorFuncDependent : IGeometricGenerator
 	{
 		[NotNull] private Func<float> m_iidFunc;
 		private GeometricDistribution.Setup m_setup;
-		private int m_startPoint;
 
 		private float m_probability;
 
@@ -25,13 +24,11 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// Function that returns an independent and identically distributed random value in range [0, 1).
 		/// </param>
 		/// <param name="probability">True threshold in range (0, 1).</param>
-		/// <param name="startPoint"></param>
-		public GeometricGeneratorFuncDependent([NotNull] Func<float> iidFunc, float probability, int startPoint)
+		public GeometricGeneratorFuncDependent([NotNull] Func<float> iidFunc, float probability)
 		{
 			m_iidFunc = iidFunc;
 			m_probability = probability;
 			m_setup = new GeometricDistribution.Setup(m_probability);
-			m_startPoint = startPoint;
 		}
 
 		/// <summary>
@@ -42,7 +39,6 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		{
 			m_iidFunc = other.m_iidFunc;
 			m_setup = other.m_setup;
-			m_startPoint = other.m_startPoint;
 			m_probability = other.m_probability;
 		}
 
@@ -71,19 +67,11 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 			}
 		}
 
-		public int startPoint
-		{
-			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_startPoint;
-			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_startPoint = value;
-		}
-
 		/// <inheritdoc/>
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public int Generate()
 		{
-			return GeometricDistribution.Generate(m_iidFunc, m_setup, m_startPoint);
+			return GeometricDistribution.Generate(m_iidFunc, m_setup);
 		}
 	}
 }

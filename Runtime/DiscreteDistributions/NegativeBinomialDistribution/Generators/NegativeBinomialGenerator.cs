@@ -7,12 +7,11 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 {
 	/// <summary>
 	/// Negative Binomial Random Generator
-	/// using <see cref="NegativeBinomialDistribution.Generate(NegativeBinomialDistribution.Setup,int)"/>.
+	/// using <see cref="NegativeBinomialDistribution.Generate(NegativeBinomialDistribution.Setup)"/>.
 	/// </summary>
 	public sealed class NegativeBinomialGenerator : INegativeBinomialGenerator
 	{
 		private NegativeBinomialDistribution.Setup m_setup;
-		private int m_startPoint;
 
 		private float m_probability;
 		private byte m_successes;
@@ -20,18 +19,16 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// <summary>
 		/// Creates a <see cref="NegativeBinomialGenerator"/> with the specified parameters.
 		/// </summary>
-		/// <param name="startPoint"></param>
 		/// <param name="probability">True threshold in range (0, 1].</param>
 		/// <param name="successes"></param>
 		/// <remarks>
 		/// <paramref name="successes"/> must be greater than 0.
 		/// </remarks>
-		public NegativeBinomialGenerator(int startPoint, float probability, byte successes)
+		public NegativeBinomialGenerator(float probability, byte successes)
 		{
 			m_probability = probability;
 			m_successes = successes;
 			m_setup = new NegativeBinomialDistribution.Setup(m_probability, m_successes);
-			m_startPoint = startPoint;
 		}
 
 		/// <summary>
@@ -41,17 +38,8 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		public NegativeBinomialGenerator([NotNull] NegativeBinomialGenerator other)
 		{
 			m_setup = other.m_setup;
-			m_startPoint = other.m_startPoint;
 			m_probability = other.m_probability;
 			m_successes = other.m_successes;
-		}
-
-		public int startPoint
-		{
-			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-			get => m_startPoint;
-			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => m_startPoint = value;
 		}
 
 		/// <inheritdoc/>
@@ -103,7 +91,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public int Generate()
 		{
-			return NegativeBinomialDistribution.Generate(m_setup, m_startPoint);
+			return NegativeBinomialDistribution.Generate(m_setup);
 		}
 	}
 }

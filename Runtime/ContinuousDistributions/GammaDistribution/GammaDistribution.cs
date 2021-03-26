@@ -18,7 +18,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 	{
 		public const float DefaultAlpha = 1f;
 		public const float DefaultBeta = 1f;
-		public const float DefaultStartPoint = 0f;
 
 		/// <summary>
 		/// Generates a random value using <see cref="UnityGeneratorStruct.DefaultExclusive"/> as an iid source.
@@ -38,22 +37,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// <summary>
 		/// Generates a random value using <see cref="UnityGeneratorStruct.DefaultExclusive"/> as an iid source.
 		/// </summary>
-		/// <param name="alpha">Shape.</param>
-		/// <param name="beta">Scale.</param>
-		/// <param name="startPoint"></param>
-		/// <returns>Generated value.</returns>
-		/// <remarks>
-		/// <paramref name="alpha"/> must be greater than 0.
-		/// </remarks>
-		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-		public static float Generate(float alpha, float beta, float startPoint)
-		{
-			return Generate(UnityGeneratorStruct.DefaultExclusive, alpha, beta, startPoint);
-		}
-
-		/// <summary>
-		/// Generates a random value using <see cref="UnityGeneratorStruct.DefaultExclusive"/> as an iid source.
-		/// </summary>
 		/// <param name="setup"></param>
 		/// <param name="beta">Scale.</param>
 		/// <returns>Generated value.</returns>
@@ -64,22 +47,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		public static float Generate(Setup setup, float beta)
 		{
 			return Generate(UnityGeneratorStruct.DefaultExclusive, setup, beta);
-		}
-
-		/// <summary>
-		/// Generates a random value using <see cref="UnityGeneratorStruct.DefaultExclusive"/> as an iid source.
-		/// </summary>
-		/// <param name="setup"></param>
-		/// <param name="beta">Scale.</param>
-		/// <param name="startPoint"></param>
-		/// <returns>Generated value.</returns>
-		/// <remarks>
-		/// It's a faster variant using a precomputed <paramref name="setup"/>.
-		/// </remarks>
-		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-		public static float Generate(Setup setup, float beta, float startPoint)
-		{
-			return Generate(UnityGeneratorStruct.DefaultExclusive, setup, beta, startPoint);
 		}
 
 		/// <summary>
@@ -106,25 +73,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// <param name="iidFunc">
 		/// Function that returns an independent and identically distributed random value in range [0, 1).
 		/// </param>
-		/// <param name="alpha">Shape.</param>
-		/// <param name="beta">Scale.</param>
-		/// <param name="startPoint"></param>
-		/// <returns>Generated value.</returns>
-		/// <remarks>
-		/// <paramref name="alpha"/> must be greater than 0.
-		/// </remarks>
-		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-		public static float Generate([NotNull] Func<float> iidFunc, float alpha, float beta, float startPoint)
-		{
-			return Generate(new FuncGeneratorStruct(iidFunc), alpha, beta, startPoint);
-		}
-
-		/// <summary>
-		/// Generates a random value using <paramref name="iidFunc"/> as an iid source.
-		/// </summary>
-		/// <param name="iidFunc">
-		/// Function that returns an independent and identically distributed random value in range [0, 1).
-		/// </param>
 		/// <param name="setup"></param>
 		/// <param name="beta">Scale.</param>
 		/// <returns>Generated value.</returns>
@@ -135,25 +83,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		public static float Generate([NotNull] Func<float> iidFunc, Setup setup, float beta)
 		{
 			return Generate(new FuncGeneratorStruct(iidFunc), setup, beta);
-		}
-
-		/// <summary>
-		/// Generates a random value using <paramref name="iidFunc"/> as an iid source.
-		/// </summary>
-		/// <param name="iidFunc">
-		/// Function that returns an independent and identically distributed random value in range [0, 1).
-		/// </param>
-		/// <param name="setup"></param>
-		/// <param name="beta">Scale.</param>
-		/// <param name="startPoint"></param>
-		/// <returns>Generated value.</returns>
-		/// <remarks>
-		/// It's a faster variant using a precomputed <paramref name="setup"/>.
-		/// </remarks>
-		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-		public static float Generate([NotNull] Func<float> iidFunc, Setup setup, float beta, float startPoint)
-		{
-			return Generate(new FuncGeneratorStruct(iidFunc), setup, beta, startPoint);
 		}
 
 		/// <summary>
@@ -186,26 +115,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// <param name="iidGenerator">
 		/// Random generator that returns an independent and identically distributed random value in range [0, 1).
 		/// </param>
-		/// <param name="alpha">Shape.</param>
-		/// <param name="beta">Scale.</param>
-		/// <param name="startPoint"></param>
-		/// <returns>Generated value.</returns>
-		/// <remarks>
-		/// <paramref name="alpha"/> must be greater than 0.
-		/// </remarks>
-		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-		public static float Generate<T>([NotNull] T iidGenerator, float alpha, float beta, float startPoint)
-			where T : IContinuousGenerator
-		{
-			return Generate(iidGenerator, alpha, beta) + startPoint;
-		}
-
-		/// <summary>
-		/// Generates a random value using <paramref name="iidGenerator"/> as an iid source.
-		/// </summary>
-		/// <param name="iidGenerator">
-		/// Random generator that returns an independent and identically distributed random value in range [0, 1).
-		/// </param>
 		/// <param name="setup"></param>
 		/// <param name="beta">Scale.</param>
 		/// <returns>Generated value.</returns>
@@ -217,26 +126,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 			where T : IContinuousGenerator
 		{
 			return Generate(iidGenerator, setup.c, setup.d, beta, setup.power, setup.alphaChanged);
-		}
-
-		/// <summary>
-		/// Generates a random value using <paramref name="iidGenerator"/> as an iid source.
-		/// </summary>
-		/// <param name="iidGenerator">
-		/// Random generator that returns an independent and identically distributed random value in range [0, 1).
-		/// </param>
-		/// <param name="setup"></param>
-		/// <param name="beta">Scale.</param>
-		/// <param name="startPoint"></param>
-		/// <returns>Generated value.</returns>
-		/// <remarks>
-		/// It's a faster variant using a precomputed <paramref name="setup"/>.
-		/// </remarks>
-		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-		public static float Generate<T>([NotNull] T iidGenerator, Setup setup, float beta, float startPoint)
-			where T : IContinuousGenerator
-		{
-			return Generate(iidGenerator, setup, beta) + startPoint;
 		}
 
 		/// <summary>

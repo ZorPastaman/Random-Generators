@@ -190,17 +190,12 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// </para>
 		/// <para>Original <paramref name="alpha"/> and <see langword="false"/> otherwise.</para>
 		/// </returns>
-		[Pure]
-		private static (float power, float alpha, bool alphaChanged) ComputeAlpha(float alpha)
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+		private static unsafe (float power, float alpha, bool alphaChanged) ComputeAlpha(float alpha)
 		{
-			float power = 0f;
+			float power = 1f / alpha;
 			bool alphaChanged = alpha < 1f;
-
-			if (alphaChanged)
-			{
-				power = 1f / alpha;
-				alpha += 1f;
-			}
+			alpha += *(byte*)&alphaChanged;
 
 			return (power, alpha, alphaChanged);
 		}
@@ -253,6 +248,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 			private float m_spared;
 			private bool m_hasShared;
 
+			[Pure]
 			public float Generate<T>([NotNull] T iidGenerator) where T : IContinuousGenerator
 			{
 				if (m_hasShared)

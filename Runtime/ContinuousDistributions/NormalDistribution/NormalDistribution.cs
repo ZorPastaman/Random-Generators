@@ -119,19 +119,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 			where T : IContinuousGenerator
 		{
 			(float z0, float z1) = Generate(iidGenerator);
-			return Modify(z0, z1, mean, deviation);
-		}
-
-		/// <summary>
-		/// Modifies <paramref name="z0"/> and <paramref name="z1"/> in range [0, 1]
-		/// so that the distribution corresponds its <paramref name="mean"/> and <paramref name="deviation"/>.
-		/// </summary>
-		/// <returns>
-		/// Two modified generated values.
-		/// </returns>
-		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
-		private static (float, float) Modify(float z0, float z1, float mean, float deviation)
-		{
 			return (z0 * deviation + mean, z1 * deviation + mean);
 		}
 	}

@@ -110,7 +110,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// </param>
 		/// <param name="lambda">Lambda. Must be greater than 0.</param>
 		/// <returns>Generated value.</returns>
-		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+		[Pure]
 		private static int GenerateInternal<T>([NotNull] T iidGenerator, float lambda) where T : IContinuousGenerator
 		{
 			float iid = 1f - iidGenerator.Generate();

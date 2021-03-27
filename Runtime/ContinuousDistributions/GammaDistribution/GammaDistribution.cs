@@ -97,7 +97,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// <remarks>
 		/// <paramref name="alpha"/> must be greater than 0.
 		/// </remarks>
-		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
+		[Pure]
 		public static float Generate<T>([NotNull] T iidGenerator, float alpha, float beta)
 			where T : IContinuousGenerator
 		{
@@ -223,8 +223,8 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// </remarks>
 		public readonly struct Setup
 		{
-			public readonly float d;
 			public readonly float c;
+			public readonly float d;
 			public readonly float power;
 			public readonly bool alphaChanged;
 
@@ -232,7 +232,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 			/// Creates <see cref="Setup"/> for optimized methods in <see cref="GammaDistribution"/>.
 			/// </summary>
 			/// <param name="alpha">Shape. Must be greater than 0.</param>
-			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			public Setup(float alpha)
 			{
 				(power, alpha, alphaChanged) = ComputeAlpha(alpha);

@@ -19,6 +19,7 @@ It's used in distributions to mimic IContinuousGenerator.
 to mimic IContinuousGenerator. The latter is used in distributions.
 - AddModificator for continuous and discrete generators.
 - MultiplyModificator for continuous generators.
+- Weibull distribution.
 
 ### Changed
 

@@ -92,6 +92,8 @@ They wrap generators and provide unique and shared instances of them.
 [Microsoft Docs](https://docs.microsoft.com/en-us/dotnet/api/system.random);
 - [Unity Random Generator Wrapper](Runtime/ContinuousDistributions/UnityDistribution) -
 [Unity Docs](https://docs.unity3d.com/ScriptReference/Random.html);
+- [Weibull](Runtime/ContinuousDistributions/WeibullDistribution) -
+[Wikipedia](https://en.wikipedia.org/wiki/Weibull_distribution);
 - [XorShift32 Random Generator Wrapper](Runtime/ContinuousDistributions/XorShift32Distribution);
 - [XorShift64 Random Generator Wrapper](Runtime/ContinuousDistributions/XorShift64Distribution);
 - [XorShift128 Random Generator Wrapper](Runtime/ContinuousDistributions/XorShift128Distribution).

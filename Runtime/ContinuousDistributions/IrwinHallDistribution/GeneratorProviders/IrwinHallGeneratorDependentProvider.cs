@@ -24,7 +24,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		private byte m_Iids = IrwinHallDistribution.DefaultIids;
 #pragma warning restore CS0649
 
-		[NonSerialized] private IrwinHallGeneratorDependent<IContinuousGenerator> m_sharedGenerator;
+		private IrwinHallGeneratorDependent<IContinuousGenerator> m_sharedGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="IrwinHallGeneratorDependent{T}"/>

@@ -24,7 +24,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		private ulong m_InitialState = XorShift64Defaults.InitialState;
 #pragma warning restore CS0649
 
-		[NonSerialized] private BoolXorShift64Generator m_sharedGenerator;
+		private BoolXorShift64Generator m_sharedGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="BoolXorShift64Generator"/> and returns it as <see cref="IDiscreteGenerator{T}"/>.

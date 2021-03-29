@@ -18,7 +18,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 	)]
 	public sealed class BoolXorShift128GeneratorSimpleProvider : DiscreteGeneratorProvider<bool>
 	{
-		[NonSerialized] private BoolXorShift128Generator m_sharedGenerator;
+		private BoolXorShift128Generator m_sharedGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="BoolXorShift128Generator"/> and returns it as <see cref="IDiscreteGenerator{T}"/>.

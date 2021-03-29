@@ -26,7 +26,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[SerializeField] private byte m_UpperBound = BinomialDistribution.DefaultUpperBound;
 #pragma warning restore CS0649
 
-		[NonSerialized] private BinomialGeneratorDependent<IContinuousGenerator> m_sharedGenerator;
+		private BinomialGeneratorDependent<IContinuousGenerator> m_sharedGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="BinomialGeneratorDependent{IContinuousGenerator}"/>

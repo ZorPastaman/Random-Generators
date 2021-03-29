@@ -22,7 +22,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		private float m_Lambda = ExponentialDistribution.DefaultLambda;
 #pragma warning restore CS0649
 
-		[NonSerialized] private ExponentialGenerator m_sharedGenerator;
+		private ExponentialGenerator m_sharedGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="ExponentialGenerator"/> and returns it as <see cref="IContinuousGenerator"/>.

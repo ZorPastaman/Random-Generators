@@ -23,7 +23,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		private uint[] m_Weights;
 #pragma warning restore CS0649
 
-		[NonSerialized] private WeightedGeneratorDependent<T, IContinuousGenerator> m_sharedGenerator;
+		private WeightedGeneratorDependent<T, IContinuousGenerator> m_sharedGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="WeightedGeneratorDependent{TValue,TGenerator}"/>

@@ -25,7 +25,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		private byte m_Successes = NegativeBinomialDistribution.DefaultSuccesses;
 #pragma warning restore CS0649
 
-		[NonSerialized] private NegativeBinomialGenerator m_sharedGenerator;
+		private NegativeBinomialGenerator m_sharedGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="NegativeBinomialGenerator"/> and returns it as <see cref="IDiscreteGenerator{T}"/>.

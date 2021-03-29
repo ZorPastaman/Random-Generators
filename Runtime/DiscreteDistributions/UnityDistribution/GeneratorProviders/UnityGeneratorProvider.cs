@@ -22,7 +22,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[SerializeField] private int m_Max = UnityGeneratorDefaults.DefaultMax;
 #pragma warning restore CS0649
 
-		[NonSerialized] private UnityGenerator m_sharedGenerator;
+		private UnityGenerator m_sharedGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="UnityGenerator"/> and returns it as <see cref="IDiscreteGenerator{T}"/>.

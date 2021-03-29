@@ -26,7 +26,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		private float m_Beta = WeibullDistribution.DefaultBeta;
 #pragma warning restore CS0649
 
-		[NonSerialized] private WeibullGeneratorDependent<IContinuousGenerator> m_sharedGenerator;
+		private WeibullGeneratorDependent<IContinuousGenerator> m_sharedGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="WeibullGeneratorDependent{T}"/>

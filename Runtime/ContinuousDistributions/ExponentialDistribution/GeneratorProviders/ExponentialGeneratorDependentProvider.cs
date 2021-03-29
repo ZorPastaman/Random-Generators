@@ -24,7 +24,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		private float m_Lambda = ExponentialDistribution.DefaultLambda;
 #pragma warning restore CS0649
 
-		[NonSerialized] private ExponentialGeneratorDependent<IContinuousGenerator> m_sharedGenerator;
+		private ExponentialGeneratorDependent<IContinuousGenerator> m_sharedGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="ExponentialGeneratorDependent{T}"/>

@@ -20,7 +20,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		[SerializeField, Tooltip("If true, the range of the generator is [0, 1]; otherwise, it's [0, 1).")]
 		private bool m_InclusiveOne;
 
-		[NonSerialized] private UnityGeneratorClass m_sharedGenerator;
+		private UnityGeneratorClass m_sharedGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="UnityGeneratorClass"/> and returns it

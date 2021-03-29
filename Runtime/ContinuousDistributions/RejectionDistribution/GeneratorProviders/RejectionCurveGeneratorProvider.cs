@@ -25,7 +25,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		[SerializeField] private float m_Max = RejectionDistribution.DefaultMax;
 #pragma warning restore CS0649
 
-		[NonSerialized] private RejectionCurveGenerator m_sharedGenerator;
+		private RejectionCurveGenerator m_sharedGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="RejectionCurveGenerator"/>

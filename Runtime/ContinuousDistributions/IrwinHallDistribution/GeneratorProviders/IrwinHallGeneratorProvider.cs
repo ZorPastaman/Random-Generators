@@ -22,7 +22,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		private byte m_Iids = IrwinHallDistribution.DefaultIids;
 #pragma warning restore CS0649
 
-		[NonSerialized] private IrwinHallGenerator m_sharedGenerator;
+		private IrwinHallGenerator m_sharedGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="IrwinHallGenerator"/> and returns it

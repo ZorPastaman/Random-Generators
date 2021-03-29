@@ -17,7 +17,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 	)]
 	public sealed class SharpGeneratorSimpleProvider : ContinuousGeneratorProvider
 	{
-		[NonSerialized] private SharpGenerator m_sharedGenerator;
+		private SharpGenerator m_sharedGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="SharpGenerator"/> and returns it as <see cref="IContinuousGenerator"/>.

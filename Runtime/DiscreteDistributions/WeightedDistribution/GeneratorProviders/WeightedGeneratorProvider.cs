@@ -20,7 +20,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		private uint[] m_Weights;
 #pragma warning restore CS0649
 
-		[NonSerialized] private WeightedGenerator<T> m_sharedGenerator;
+		private WeightedGenerator<T> m_sharedGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="WeightedGenerator{T}"/> and returns it

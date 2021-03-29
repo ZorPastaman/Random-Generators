@@ -24,7 +24,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		[SerializeField] private float m_Deviation = NormalDistribution.DefaultDeviation;
 #pragma warning restore CS0649
 
-		[NonSerialized] private NormalGeneratorDependent<IContinuousGenerator> m_sharedGenerator;
+		private NormalGeneratorDependent<IContinuousGenerator> m_sharedGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="NormalGeneratorDependent{T}"/>

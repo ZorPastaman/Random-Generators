@@ -23,7 +23,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		[SerializeField] private float m_Max = XorShift64Defaults.DefaultMax;
 #pragma warning restore CS0649
 
-		[NonSerialized] private XorShift64GeneratorRanged m_sharedGenerator;
+		private XorShift64GeneratorRanged m_sharedGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="XorShift64GeneratorRanged"/> and returns it as <see cref="IContinuousGenerator"/>.

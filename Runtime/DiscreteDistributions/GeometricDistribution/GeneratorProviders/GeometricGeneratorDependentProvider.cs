@@ -25,7 +25,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		private float m_Probability = GeometricDistribution.DefaultProbability;
 #pragma warning restore CS0649
 
-		[NonSerialized] private GeometricGeneratorDependent<IContinuousGenerator> m_sharedGenerator;
+		private GeometricGeneratorDependent<IContinuousGenerator> m_sharedGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="GeometricGeneratorDependent{IContinuousGenerator}"/>

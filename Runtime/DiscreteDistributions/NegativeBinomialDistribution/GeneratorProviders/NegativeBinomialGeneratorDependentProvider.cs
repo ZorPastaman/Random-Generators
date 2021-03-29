@@ -29,7 +29,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		private byte m_Successes = NegativeBinomialDistribution.DefaultSuccesses;
 #pragma warning restore CS0649
 
-		[NonSerialized] private NegativeBinomialGeneratorDependent<IContinuousGenerator> m_sharedGenerator;
+		private NegativeBinomialGeneratorDependent<IContinuousGenerator> m_sharedGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="NegativeBinomialGeneratorDependent{T}"/> and returns it

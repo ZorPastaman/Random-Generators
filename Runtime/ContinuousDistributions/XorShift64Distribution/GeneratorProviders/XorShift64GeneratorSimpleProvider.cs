@@ -18,7 +18,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 	)]
 	public sealed class XorShift64GeneratorSimpleProvider : ContinuousGeneratorProvider
 	{
-		[NonSerialized] private XorShift64Generator m_sharedGenerator;
+		private XorShift64Generator m_sharedGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="XorShift64Generator"/> and returns it as <see cref="IContinuousGenerator"/>.

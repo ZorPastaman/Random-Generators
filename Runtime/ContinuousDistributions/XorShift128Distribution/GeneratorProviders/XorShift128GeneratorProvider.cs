@@ -30,7 +30,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		private uint m_InitialStateD = XorShift128Defaults.InitialStateD;
 #pragma warning restore CS0649
 
-		[NonSerialized] private XorShift128Generator m_sharedGenerator;
+		private XorShift128Generator m_sharedGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="XorShift128Generator"/> and returns it as <see cref="IContinuousGenerator"/>.

@@ -22,7 +22,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		private ContinuousGeneratorProviderReference m_DependedGeneratorProvider;
 #pragma warning restore CS0649
 
-		[NonSerialized] private NormalGeneratorDependentSimple<IContinuousGenerator> m_sharedGenerator;
+		private NormalGeneratorDependentSimple<IContinuousGenerator> m_sharedGenerator;
 
 		/// <summary>
 		/// Creates a new

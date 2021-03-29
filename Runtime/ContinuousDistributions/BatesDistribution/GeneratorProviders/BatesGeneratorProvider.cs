@@ -23,7 +23,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		private byte m_Iids = BatesDistribution.DefaultIids;
 #pragma warning restore CS0649
 
-		[NonSerialized] private BatesGenerator m_sharedGenerator;
+		private BatesGenerator m_sharedGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="BatesGenerator"/> and returns it as <see cref="IContinuousGenerator"/>.

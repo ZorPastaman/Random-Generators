@@ -21,7 +21,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[SerializeField, Range(0f, 1f)] private float m_Probability = BernoulliDistribution.DefaultProbability;
 #pragma warning restore CS0649
 
-		[NonSerialized] private BernoulliGenerator m_sharedGenerator;
+		private BernoulliGenerator m_sharedGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="BernoulliGenerator"/> and returns it as <see cref="IDiscreteGenerator{Boolean}"/>.

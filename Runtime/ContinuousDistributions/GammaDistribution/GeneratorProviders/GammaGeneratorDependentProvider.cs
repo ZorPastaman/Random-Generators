@@ -27,7 +27,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		private float m_Beta = GammaDistribution.DefaultBeta;
 #pragma warning restore CS0649
 
-		[NonSerialized] private GammaGeneratorDependent<IContinuousGenerator> m_sharedGenerator;
+		private GammaGeneratorDependent<IContinuousGenerator> m_sharedGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="GammaGeneratorDependent{T}"/> and returns it as <see cref="IContinuousGenerator"/>.

@@ -24,7 +24,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[SerializeField] private float m_Lambda = PoissonDistribution.DefaultLambda;
 #pragma warning restore CS0649
 
-		[NonSerialized] private PoissonGeneratorDependent<IContinuousGenerator> m_sharedGenerator;
+		private PoissonGeneratorDependent<IContinuousGenerator> m_sharedGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="PoissonGeneratorDependent{T}"/>

@@ -27,7 +27,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		private AnimationCurve m_ProbabilityCurve;
 #pragma warning restore CS0649
 
-		[NonSerialized] private RejectionCurveGeneratorDependent<IContinuousGenerator, IContinuousGenerator>
+		private RejectionCurveGeneratorDependent<IContinuousGenerator, IContinuousGenerator>
 			m_sharedGenerator;
 
 		/// <summary>

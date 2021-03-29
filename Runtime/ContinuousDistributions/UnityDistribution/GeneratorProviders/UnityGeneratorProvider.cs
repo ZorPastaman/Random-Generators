@@ -22,7 +22,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		[SerializeField] private float m_Max = UnityGeneratorDefaults.DefaultMax;
 #pragma warning restore CS0649
 
-		[NonSerialized] private UnityGeneratorClass m_sharedGenerator;
+		private UnityGeneratorClass m_sharedGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="UnityGeneratorClass"/> and returns it as <see cref="IContinuousGenerator"/>.

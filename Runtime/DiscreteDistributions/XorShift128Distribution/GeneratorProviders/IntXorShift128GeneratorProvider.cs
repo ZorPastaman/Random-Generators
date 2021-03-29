@@ -33,7 +33,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[SerializeField] private int m_Max = XorShift128Defaults.DefaultMax;
 #pragma warning restore CS0649
 
-		[NonSerialized] private IntXorShift128Generator m_sharedGenerator;
+		private IntXorShift128Generator m_sharedGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="IntXorShift128Generator"/> and returns it as <see cref="IDiscreteGenerator{T}"/>.

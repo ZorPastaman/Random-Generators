@@ -22,7 +22,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[SerializeField] private int m_Max = SharpGeneratorDefaults.DefaultMax;
 #pragma warning restore CS0649
 
-		[NonSerialized] private SharpGenerator m_sharedGenerator;
+		private SharpGenerator m_sharedGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="SharpGenerator"/> and returns it as <see cref="IDiscreteGenerator{Int32}"/>.

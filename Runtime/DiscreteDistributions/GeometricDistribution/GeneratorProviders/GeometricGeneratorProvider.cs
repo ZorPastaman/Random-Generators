@@ -30,24 +30,13 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		public override IDiscreteGenerator<int> generator
 		{
 			[Pure]
-			get => new GeometricGenerator(m_Probability);
+			get => geometricGenerator;
 		}
 
 		/// <summary>
 		/// Returns a shared <see cref="GeometricGenerator"/> as <see cref="IDiscreteGenerator{Int32}"/>.
 		/// </summary>
-		public override IDiscreteGenerator<int> sharedGenerator
-		{
-			get
-			{
-				if (m_sharedGenerator == null)
-				{
-					m_sharedGenerator = geometricGenerator;
-				}
-
-				return m_sharedGenerator;
-			}
-		}
+		public override IDiscreteGenerator<int> sharedGenerator => sharedGeometricGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="GeometricGenerator"/> and returns it.

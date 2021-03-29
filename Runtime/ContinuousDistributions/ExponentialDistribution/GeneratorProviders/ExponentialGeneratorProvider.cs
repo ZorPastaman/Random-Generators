@@ -30,24 +30,13 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		public override IContinuousGenerator generator
 		{
 			[Pure]
-			get => new ExponentialGenerator(m_Lambda);
+			get => exponentialGenerator;
 		}
 
 		/// <summary>
 		/// Returns a shared <see cref="ExponentialGenerator"/> as <see cref="IContinuousGenerator"/>.
 		/// </summary>
-		public override IContinuousGenerator sharedGenerator
-		{
-			get
-			{
-				if (m_sharedGenerator == null)
-				{
-					m_sharedGenerator = exponentialGenerator;
-				}
-
-				return m_sharedGenerator;
-			}
-		}
+		public override IContinuousGenerator sharedGenerator => sharedExponentialGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="ExponentialGenerator"/> and returns it.

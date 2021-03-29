@@ -35,25 +35,13 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		public override IContinuousGenerator generator
 		{
 			[Pure]
-			get => new GammaGeneratorDependent<IContinuousGenerator>(
-				m_DependedGeneratorProvider.generator, m_Alpha, m_Beta);
+			get => gammaGenerator;
 		}
 
 		/// <summary>
 		/// Returns a shared <see cref="GammaGeneratorDependent{T}"/> as <see cref="IContinuousGenerator"/>.
 		/// </summary>
-		public override IContinuousGenerator sharedGenerator
-		{
-			get
-			{
-				if (m_sharedGenerator == null)
-				{
-					m_sharedGenerator = gammaGenerator;
-				}
-
-				return m_sharedGenerator;
-			}
-		}
+		public override IContinuousGenerator sharedGenerator => sharedGammaGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="GammaGeneratorDependent{T}"/> and returns it.

@@ -32,25 +32,13 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionModificators
 		public override IDiscreteGenerator<int> generator
 		{
 			[Pure]
-			get => new ClampModificator<IDiscreteGenerator<int>>(
-				m_DependedGeneratorProvider.GetGenerator<int>(), m_Min, m_Max);
+			get => clampModificator;
 		}
 
 		/// <summary>
 		/// Returns a shared <see cref="ClampModificator{T}"/> as <see cref="IDiscreteGenerator{Int32}"/>.
 		/// </summary>
-		public override IDiscreteGenerator<int> sharedGenerator
-		{
-			get
-			{
-				if (m_sharedModificator == null)
-				{
-					m_sharedModificator = clampModificator;
-				}
-
-				return m_sharedModificator;
-			}
-		}
+		public override IDiscreteGenerator<int> sharedGenerator => sharedClampModificator;
 
 		/// <summary>
 		/// Creates a new <see cref="ClampModificator{T}"/> and returns it.

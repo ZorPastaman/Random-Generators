@@ -31,24 +31,13 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		public override IContinuousFilter filter
 		{
 			[Pure]
-			get => new NotInRangeFilter(m_Min, m_Max, m_NotInRangeSequenceLength);
+			get => notInRangeFilter;
 		}
 
 		/// <summary>
 		/// Returns a shared <see cref="NotInRangeFilter"/> as <see cref="IContinuousFilter"/>.
 		/// </summary>
-		public override IContinuousFilter sharedFilter
-		{
-			get
-			{
-				if (m_sharedFilter == null)
-				{
-					m_sharedFilter = notInRangeFilter;
-				}
-
-				return m_sharedFilter;
-			}
-		}
+		public override IContinuousFilter sharedFilter => sharedNotInRangeFilter;
 
 		/// <summary>
 		/// Creates a new <see cref="NotInRangeFilter"/> and returns it.

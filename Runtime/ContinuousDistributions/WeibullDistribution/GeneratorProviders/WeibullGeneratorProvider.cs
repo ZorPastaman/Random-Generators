@@ -32,24 +32,13 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		public override IContinuousGenerator generator
 		{
 			[Pure]
-			get => new WeibullGenerator(m_Alpha, m_Beta);
+			get => weibullGenerator;
 		}
 
 		/// <summary>
 		/// Returns a shared <see cref="WeibullGenerator"/> as <see cref="IContinuousGenerator"/>.
 		/// </summary>
-		public override IContinuousGenerator sharedGenerator
-		{
-			get
-			{
-				if (m_sharedGenerator == null)
-				{
-					m_sharedGenerator = weibullGenerator;
-				}
-
-				return m_sharedGenerator;
-			}
-		}
+		public override IContinuousGenerator sharedGenerator => sharedWeibullGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="WeibullGenerator"/> and returns it.

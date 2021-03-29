@@ -32,24 +32,13 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		public override IDiscreteGenerator<bool> generator
 		{
 			[Pure]
-			get => new BoolXorShift32Generator(m_InitialState);
+			get => xorShift32Generator;
 		}
 
 		/// <summary>
 		/// Returns a shared <see cref="BoolXorShift32Generator"/> as <see cref="IDiscreteGenerator{T}"/>.
 		/// </summary>
-		public override IDiscreteGenerator<bool> sharedGenerator
-		{
-			get
-			{
-				if (m_sharedGenerator == null)
-				{
-					m_sharedGenerator = xorShift32Generator;
-				}
-
-				return m_sharedGenerator;
-			}
-		}
+		public override IDiscreteGenerator<bool> sharedGenerator => sharedXorShift32Generator;
 
 		/// <summary>
 		/// Creates a new <see cref="BoolXorShift32Generator"/> and returns it.

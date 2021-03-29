@@ -27,24 +27,13 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		public sealed override IDiscreteFilter<T> filter
 		{
 			[Pure]
-			get => new RepeatingPatternFilter<T>(m_ControlledSequenceLength, m_PatternLength);
+			get => repeatingPatternFilter;
 		}
 
 		/// <summary>
 		/// Returns a shared <see cref="RepeatingPatternFilter{T}"/> as <see cref="IDiscreteFilter{T}"/>.
 		/// </summary>
-		public sealed override IDiscreteFilter<T> sharedFilter
-		{
-			get
-			{
-				if (m_sharedFilter == null)
-				{
-					m_sharedFilter = repeatingPatternFilter;
-				}
-
-				return m_sharedFilter;
-			}
-		}
+		public sealed override IDiscreteFilter<T> sharedFilter => sharedRepeatingPatternFilter;
 
 		/// <summary>
 		/// Creates a new <see cref="RepeatingPatternFilter{T}"/> and returns it.

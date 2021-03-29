@@ -34,24 +34,13 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		public override IDiscreteGenerator<int> generator
 		{
 			[Pure]
-			get => new IntXorShift64Generator(m_InitialState, m_Min, m_Max);
+			get => xorShift64Generator;
 		}
 
 		/// <summary>
 		/// Returns a shared <see cref="IntXorShift64Generator"/> as <see cref="IDiscreteGenerator{T}"/>.
 		/// </summary>
-		public override IDiscreteGenerator<int> sharedGenerator
-		{
-			get
-			{
-				if (m_sharedGenerator == null)
-				{
-					m_sharedGenerator = xorShift64Generator;
-				}
-
-				return m_sharedGenerator;
-			}
-		}
+		public override IDiscreteGenerator<int> sharedGenerator => sharedXorShift64Generator;
 
 		/// <summary>
 		/// Creates a new <see cref="IntXorShift64Generator"/> and returns it.

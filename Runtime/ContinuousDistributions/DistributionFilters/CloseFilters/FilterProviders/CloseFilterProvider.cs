@@ -33,24 +33,13 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		public override IContinuousFilter filter
 		{
 			[Pure]
-			get => new CloseFilter(m_ReferenceValue, m_Range, m_CloseSequenceLength);
+			get => closeFilter;
 		}
 
 		/// <summary>
 		/// Returns a shared <see cref="CloseFilter"/> as <see cref="IContinuousFilter"/>.
 		/// </summary>
-		public override IContinuousFilter sharedFilter
-		{
-			get
-			{
-				if (m_sharedFilter == null)
-				{
-					m_sharedFilter = closeFilter;
-				}
-
-				return m_sharedFilter;
-			}
-		}
+		public override IContinuousFilter sharedFilter => sharedCloseFilter;
 
 		/// <summary>
 		/// Creates a new <see cref="CloseFilter"/> and returns it.

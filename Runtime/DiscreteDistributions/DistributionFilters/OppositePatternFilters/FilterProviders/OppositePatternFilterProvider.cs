@@ -28,24 +28,13 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		public override IDiscreteFilter<T> filter
 		{
 			[Pure]
-			get => new OppositePatternFilter<T>(m_PatternLength);
+			get => oppositePatternFilter;
 		}
 
 		/// <summary>
 		/// Returns a shared <see cref="OppositePatternFilter{T}"/> as <see cref="IDiscreteFilter{T}"/>.
 		/// </summary>
-		public override IDiscreteFilter<T> sharedFilter
-		{
-			get
-			{
-				if (m_sharedFilter == null)
-				{
-					m_sharedFilter = oppositePatternFilter;
-				}
-
-				return m_sharedFilter;
-			}
-		}
+		public override IDiscreteFilter<T> sharedFilter => sharedOppositePatternFilter;
 
 		/// <summary>
 		/// Creates a new <see cref="OppositePatternFilter{T}"/> and returns it.

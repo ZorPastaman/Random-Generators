@@ -32,8 +32,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		public override IContinuousGenerator generator
 		{
 			[Pure]
-			get => new NormalGeneratorDependentSimple<IContinuousGenerator>(
-				m_DependedGeneratorProvider.generator);
+			get => normalGenerator;
 		}
 
 		/// <summary>
@@ -41,18 +40,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// <see cref="NormalGeneratorDependentSimple{T}"/>
 		/// as <see cref="IContinuousGenerator"/>.
 		/// </summary>
-		public override IContinuousGenerator sharedGenerator
-		{
-			get
-			{
-				if (m_sharedGenerator == null)
-				{
-					m_sharedGenerator = normalGenerator;
-				}
-
-				return m_sharedGenerator;
-			}
-		}
+		public override IContinuousGenerator sharedGenerator => sharedNormalGenerator;
 
 		/// <summary>
 		/// Creates a new

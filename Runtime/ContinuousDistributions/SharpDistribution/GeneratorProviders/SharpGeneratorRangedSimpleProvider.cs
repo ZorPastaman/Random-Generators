@@ -31,24 +31,13 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		public override IContinuousGenerator generator
 		{
 			[Pure]
-			get => new SharpGeneratorRanged(m_Min, m_Max);
+			get => sharpGenerator;
 		}
 
 		/// <summary>
 		/// Returns a shared <see cref="SharpGeneratorRanged"/> as <see cref="IContinuousGenerator"/>.
 		/// </summary>
-		public override IContinuousGenerator sharedGenerator
-		{
-			get
-			{
-				if (m_sharedGenerator == null)
-				{
-					m_sharedGenerator = sharpGenerator;
-				}
-
-				return m_sharedGenerator;
-			}
-		}
+		public override IContinuousGenerator sharedGenerator => sharedSharpGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="SharpGeneratorRanged"/> and returns it.

@@ -29,24 +29,13 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		public sealed override IDiscreteGenerator<T> generator
 		{
 			[Pure]
-			get => new WeightedGenerator<T>(m_Values, m_Weights);
+			get => weightedGenerator;
 		}
 
 		/// <summary>
 		/// Returns a shared <see cref="WeightedGenerator{T}"/> as <see cref="IDiscreteGenerator{T}"/>.
 		/// </summary>
-		public sealed override IDiscreteGenerator<T> sharedGenerator
-		{
-			get
-			{
-				if (m_sharedGenerator == null)
-				{
-					m_sharedGenerator = weightedGenerator;
-				}
-
-				return m_sharedGenerator;
-			}
-		}
+		public sealed override IDiscreteGenerator<T> sharedGenerator => sharedWeightedGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="WeightedGenerator{T}"/> and returns it.

@@ -29,24 +29,13 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		public override IDiscreteGenerator<bool> generator
 		{
 			[Pure]
-			get => new BernoulliGenerator(m_Probability);
+			get => bernoulliGenerator;
 		}
 
 		/// <summary>
 		/// Returns a shared <see cref="BernoulliGenerator"/> as <see cref="IDiscreteGenerator{Boolean}"/>.
 		/// </summary>
-		public override IDiscreteGenerator<bool> sharedGenerator
-		{
-			get
-			{
-				if (m_sharedGenerator == null)
-				{
-					m_sharedGenerator = bernoulliGenerator;
-				}
-
-				return m_sharedGenerator;
-			}
-		}
+		public override IDiscreteGenerator<bool> sharedGenerator => sharedBernoulliGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="BernoulliGenerator"/> and returns it.

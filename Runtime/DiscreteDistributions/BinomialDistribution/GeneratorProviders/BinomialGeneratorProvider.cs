@@ -31,24 +31,13 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		public override IDiscreteGenerator<int> generator
 		{
 			[Pure]
-			get => new BinomialGenerator(m_Probability, m_UpperBound);
+			get => binomialGenerator;
 		}
 
 		/// <summary>
 		/// Returns a shared <see cref="BinomialGenerator"/> as <see cref="IDiscreteGenerator{Int32}"/>.
 		/// </summary>
-		public override IDiscreteGenerator<int> sharedGenerator
-		{
-			get
-			{
-				if (m_sharedGenerator == null)
-				{
-					m_sharedGenerator = binomialGenerator;
-				}
-
-				return m_sharedGenerator;
-			}
-		}
+		public override IDiscreteGenerator<int> sharedGenerator => sharedBinomialGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="BinomialGenerator"/> and returns it.

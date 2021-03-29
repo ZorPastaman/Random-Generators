@@ -29,26 +29,14 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		public sealed override IDiscreteGenerator<T> generator
 		{
 			[Pure]
-			get => new DiscreteFilteredGenerator<T, IDiscreteGenerator<T>>(
-				m_FilteredGeneratorProvider.GetGenerator<T>(), filters, m_RegenerateAttempts);
+			get => filteredGenerator;
 		}
 
 		/// <summary>
 		/// Returns a shared <see cref="DiscreteFilteredGenerator{TValue,TGenerator}"/>
 		/// as <see cref="IDiscreteGenerator{T}"/>.
 		/// </summary>
-		public sealed override IDiscreteGenerator<T> sharedGenerator
-		{
-			get
-			{
-				if (m_sharedFilteredGenerator == null)
-				{
-					m_sharedFilteredGenerator = filteredGenerator;
-				}
-
-				return m_sharedFilteredGenerator;
-			}
-		}
+		public sealed override IDiscreteGenerator<T> sharedGenerator => sharedFilteredGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="DiscreteFilteredGenerator{TValue,TGenerator}"/> and returns it.

@@ -30,24 +30,13 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionModificators
 		public override IContinuousGenerator generator
 		{
 			[Pure]
-			get => new ClampModificator<IContinuousGenerator>(m_DependedGeneratorProvider.generator, m_Min, m_Max);
+			get => clampModificator;
 		}
 
 		/// <summary>
 		/// Returns a shared <see cref="ClampModificator{T}"/> as <see cref="IContinuousGenerator"/>.
 		/// </summary>
-		public override IContinuousGenerator sharedGenerator
-		{
-			get
-			{
-				if (m_sharedModificator == null)
-				{
-					m_sharedModificator = clampModificator;
-				}
-
-				return m_sharedModificator;
-			}
-		}
+		public override IContinuousGenerator sharedGenerator => sharedClampModificator;
 
 		/// <summary>
 		/// Creates a new <see cref="ClampModificator{T}"/> and returns it.

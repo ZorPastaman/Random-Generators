@@ -31,24 +31,13 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		public override IContinuousGenerator generator
 		{
 			[Pure]
-			get => new BatesGenerator(m_Iids);
+			get => batesGenerator;
 		}
 
 		/// <summary>
 		/// Returns a shared <see cref="BatesGenerator"/> as <see cref="IContinuousGenerator"/>.
 		/// </summary>
-		public override IContinuousGenerator sharedGenerator
-		{
-			get
-			{
-				if (m_sharedGenerator == null)
-				{
-					m_sharedGenerator = batesGenerator;
-				}
-
-				return m_sharedGenerator;
-			}
-		}
+		public override IContinuousGenerator sharedGenerator => sharedBatesGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="BatesGenerator"/> and returns it.

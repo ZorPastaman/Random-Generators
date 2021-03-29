@@ -30,24 +30,13 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		public override IContinuousFilter filter
 		{
 			[Pure]
-			get => new DescendantSequenceFilter(m_DescendantSequenceLength);
+			get => descendantSequenceFilter;
 		}
 
 		/// <summary>
 		/// Returns a shared <see cref="DescendantSequenceFilter"/> as <see cref="IContinuousFilter"/>.
 		/// </summary>
-		public override IContinuousFilter sharedFilter
-		{
-			get
-			{
-				if (m_sharedFilter == null)
-				{
-					m_sharedFilter = descendantSequenceFilter;
-				}
-
-				return m_sharedFilter;
-			}
-		}
+		public override IContinuousFilter sharedFilter => sharedDescendantSequenceFilter;
 
 		/// <summary>
 		/// Creates a new <see cref="DescendantSequenceFilter"/> and returns it.

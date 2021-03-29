@@ -33,24 +33,13 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		public override IDiscreteGenerator<int> generator
 		{
 			[Pure]
-			get => new NegativeBinomialGenerator(m_Probability, m_Successes);
+			get => negativeBinomialGenerator;
 		}
 
 		/// <summary>
 		/// Returns a shared <see cref="NegativeBinomialGenerator"/> as <see cref="IDiscreteGenerator{T}"/>.
 		/// </summary>
-		public override IDiscreteGenerator<int> sharedGenerator
-		{
-			get
-			{
-				if (m_sharedGenerator == null)
-				{
-					m_sharedGenerator = negativeBinomialGenerator;
-				}
-
-				return m_sharedGenerator;
-			}
-		}
+		public override IDiscreteGenerator<int> sharedGenerator => sharedNegativeBinomialGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="NegativeBinomialGenerator"/> and returns it.

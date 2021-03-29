@@ -33,26 +33,14 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		public override IContinuousGenerator generator
 		{
 			[Pure]
-			get => new IrwinHallGeneratorDependent<IContinuousGenerator>(
-				m_DependedGeneratorProvider.generator, m_Iids);
+			get => irwinHallGenerator;
 		}
 
 		/// <summary>
 		/// Returns a shared <see cref="IrwinHallGeneratorDependent{T}"/>
 		/// as <see cref="IContinuousGenerator"/>.
 		/// </summary>
-		public override IContinuousGenerator sharedGenerator
-		{
-			get
-			{
-				if (m_sharedGenerator == null)
-				{
-					m_sharedGenerator = irwinHallGenerator;
-				}
-
-				return m_sharedGenerator;
-			}
-		}
+		public override IContinuousGenerator sharedGenerator => sharedIrwinHallGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="IrwinHallGeneratorDependent{T}"/> and returns it.

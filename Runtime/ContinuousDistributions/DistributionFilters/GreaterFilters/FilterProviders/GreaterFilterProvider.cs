@@ -30,24 +30,13 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		public override IContinuousFilter filter
 		{
 			[Pure]
-			get => new GreaterFilter(m_ReferenceValue, m_GreaterSequenceLength);
+			get => greaterFilter;
 		}
 
 		/// <summary>
 		/// Returns a shared <see cref="GreaterFilter"/> as <see cref="IContinuousFilter"/>.
 		/// </summary>
-		public override IContinuousFilter sharedFilter
-		{
-			get
-			{
-				if (m_sharedFilter == null)
-				{
-					m_sharedFilter = greaterFilter;
-				}
-
-				return m_sharedFilter;
-			}
-		}
+		public override IContinuousFilter sharedFilter => sharedGreaterFilter;
 
 		/// <summary>
 		/// Creates a new <see cref="GreaterFilter"/> and returns it.

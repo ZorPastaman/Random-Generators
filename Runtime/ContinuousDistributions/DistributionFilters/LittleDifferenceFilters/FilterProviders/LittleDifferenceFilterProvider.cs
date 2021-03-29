@@ -30,24 +30,13 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		public override IContinuousFilter filter
 		{
 			[Pure]
-			get => new LittleDifferenceFilter(m_RequiredDifference, m_LittleDifferenceSequenceLength);
+			get => littleDifferenceFilter;
 		}
 
 		/// <summary>
 		/// Returns a shared <see cref="LittleDifferenceFilter"/> as <see cref="IContinuousFilter"/>.
 		/// </summary>
-		public override IContinuousFilter sharedFilter
-		{
-			get
-			{
-				if (m_sharedFilter == null)
-				{
-					m_sharedFilter = littleDifferenceFilter;
-				}
-
-				return m_sharedFilter;
-			}
-		}
+		public override IContinuousFilter sharedFilter => sharedLittleDifferenceFilter;
 
 		/// <summary>
 		/// Creates a new <see cref="LittleDifferenceFilter"/> and returns it.

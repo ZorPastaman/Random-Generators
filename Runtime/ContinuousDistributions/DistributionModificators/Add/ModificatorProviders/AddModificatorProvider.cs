@@ -29,24 +29,13 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionModificators
 		public override IContinuousGenerator generator
 		{
 			[Pure]
-			get => new AddModificator<IContinuousGenerator>(m_DependedGeneratorProvider.generator, m_Item);
+			get => addModificator;
 		}
 
 		/// <summary>
 		/// Returns a shared <see cref="AddModificator{T}"/> as <see cref="IContinuousGenerator"/>.
 		/// </summary>
-		public override IContinuousGenerator sharedGenerator
-		{
-			get
-			{
-				if (m_sharedModificator == null)
-				{
-					m_sharedModificator = addModificator;
-				}
-
-				return m_sharedModificator;
-			}
-		}
+		public override IContinuousGenerator sharedGenerator => sharedAddModificator;
 
 		/// <summary>
 		/// Creates a new <see cref="AddModificator{T}"/> and returns it.

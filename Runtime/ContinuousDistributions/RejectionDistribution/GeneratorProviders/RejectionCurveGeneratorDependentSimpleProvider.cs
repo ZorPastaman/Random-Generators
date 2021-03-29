@@ -37,8 +37,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		public override IContinuousGenerator generator
 		{
 			[Pure]
-			get => new RejectionCurveGeneratorDependentSimple<IContinuousGenerator>(
-				m_ValueGeneratorProvider.generator, m_ProbabilityCurve);
+			get => rejectionGenerator;
 		}
 
 		/// <summary>
@@ -46,18 +45,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// <see cref="RejectionCurveGeneratorDependentSimple{T}"/>
 		/// as <see cref="IContinuousGenerator"/>.
 		/// </summary>
-		public override IContinuousGenerator sharedGenerator
-		{
-			get
-			{
-				if (m_sharedGenerator == null)
-				{
-					m_sharedGenerator = rejectionGenerator;
-				}
-
-				return m_sharedGenerator;
-			}
-		}
+		public override IContinuousGenerator sharedGenerator => sharedRejectionGenerator;
 
 		/// <summary>
 		/// Creates a new

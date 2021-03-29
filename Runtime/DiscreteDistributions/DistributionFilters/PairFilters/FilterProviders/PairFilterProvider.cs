@@ -25,24 +25,13 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		public sealed override IDiscreteFilter<T> filter
 		{
 			[Pure]
-			get => new PairFilter<T>(m_ElementsBetweenPair);
+			get => pairFilter;
 		}
 
 		/// <summary>
 		/// Returns a shared <see cref="PairFilter{T}"/> as <see cref="IDiscreteFilter{T}"/>.
 		/// </summary>
-		public sealed override IDiscreteFilter<T> sharedFilter
-		{
-			get
-			{
-				if (m_sharedFilter == null)
-				{
-					m_sharedFilter = pairFilter;
-				}
-
-				return m_sharedFilter;
-			}
-		}
+		public sealed override IDiscreteFilter<T> sharedFilter => sharedPairFilter;
 
 		/// <summary>
 		/// Creates a new <see cref="PairFilter{T}"/> and returns it.

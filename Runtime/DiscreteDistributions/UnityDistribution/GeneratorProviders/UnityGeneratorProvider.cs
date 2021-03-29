@@ -30,24 +30,13 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		public override IDiscreteGenerator<int> generator
 		{
 			[Pure]
-			get => new UnityGenerator(m_Min, m_Max);
+			get => unityGenerator;
 		}
 
 		/// <summary>
 		/// Returns a shared <see cref="UnityGenerator"/> as <see cref="IDiscreteGenerator{T}"/>.
 		/// </summary>
-		public override IDiscreteGenerator<int> sharedGenerator
-		{
-			get
-			{
-				if (m_sharedGenerator == null)
-				{
-					m_sharedGenerator = unityGenerator;
-				}
-
-				return m_sharedGenerator;
-			}
-		}
+		public override IDiscreteGenerator<int> sharedGenerator => sharedUnityGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="UnityGenerator"/> and returns it.

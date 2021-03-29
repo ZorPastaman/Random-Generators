@@ -32,24 +32,13 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		public override IContinuousGenerator generator
 		{
 			[Pure]
-			get => new XorShift32Generator(m_InitialState);
+			get => xorShift32Generator;
 		}
 
 		/// <summary>
 		/// Returns a shared <see cref="XorShift32Generator"/> as <see cref="IContinuousGenerator"/>.
 		/// </summary>
-		public override IContinuousGenerator sharedGenerator
-		{
-			get
-			{
-				if (m_sharedGenerator == null)
-				{
-					m_sharedGenerator = xorShift32Generator;
-				}
-
-				return m_sharedGenerator;
-			}
-		}
+		public override IContinuousGenerator sharedGenerator => sharedXorShift32Generator;
 
 		/// <summary>
 		/// Creates a new <see cref="XorShift32Generator"/> and returns it.

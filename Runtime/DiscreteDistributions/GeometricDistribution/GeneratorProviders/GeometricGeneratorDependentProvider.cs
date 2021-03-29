@@ -34,32 +34,20 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		public override IDiscreteGenerator<int> generator
 		{
 			[Pure]
-			get => new GeometricGeneratorDependent<IContinuousGenerator>(m_DependedGeneratorProvider.generator,
-				m_Probability);
+			get => geometricGenerator;
 		}
 
 		/// <summary>
 		/// Returns a shared <see cref="GeometricGeneratorDependent{IContinuousGenerator}"/>
 		/// as <see cref="IDiscreteGenerator{Int32}"/>.
 		/// </summary>
-		public override IDiscreteGenerator<int> sharedGenerator
-		{
-			get
-			{
-				if (m_sharedGenerator == null)
-				{
-					m_sharedGenerator = geometricGeneratorDependent;
-				}
-
-				return m_sharedGenerator;
-			}
-		}
+		public override IDiscreteGenerator<int> sharedGenerator => sharedGeometricGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="GeometricGeneratorDependent{IContinuousGenerator}"/> and returns it.
 		/// </summary>
 		[NotNull]
-		public GeometricGeneratorDependent<IContinuousGenerator> geometricGeneratorDependent
+		public GeometricGeneratorDependent<IContinuousGenerator> geometricGenerator
 		{
 			[Pure]
 			get => new GeometricGeneratorDependent<IContinuousGenerator>(m_DependedGeneratorProvider.generator,
@@ -70,13 +58,13 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// Returns a shared <see cref="GeometricGeneratorDependent{IContinuousGenerator}"/>.
 		/// </summary>
 		[NotNull]
-		public GeometricGeneratorDependent<IContinuousGenerator> sharedGeometricGeneratorDependent
+		public GeometricGeneratorDependent<IContinuousGenerator> sharedGeometricGenerator
 		{
 			get
 			{
 				if (m_sharedGenerator == null)
 				{
-					m_sharedGenerator = geometricGeneratorDependent;
+					m_sharedGenerator = geometricGenerator;
 				}
 
 				return m_sharedGenerator;

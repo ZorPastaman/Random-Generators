@@ -33,26 +33,14 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		public override IDiscreteGenerator<int> generator
 		{
 			[Pure]
-			get => new PoissonGeneratorDependent<IContinuousGenerator>(
-				m_DependentGeneratorProvider.generator, m_Lambda);
+			get => poissonGenerator;
 		}
 
 		/// <summary>
 		/// Returns a shared <see cref="PoissonGeneratorDependent{T}"/>
 		/// as <see cref="IDiscreteGenerator{Int32}"/>.
 		/// </summary>
-		public override IDiscreteGenerator<int> sharedGenerator
-		{
-			get
-			{
-				if (m_sharedGenerator == null)
-				{
-					m_sharedGenerator = poissonGenerator;
-				}
-
-				return m_sharedGenerator;
-			}
-		}
+		public override IDiscreteGenerator<int> sharedGenerator => sharedPoissonGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="PoissonGeneratorDependent{T}"/> and returns it.

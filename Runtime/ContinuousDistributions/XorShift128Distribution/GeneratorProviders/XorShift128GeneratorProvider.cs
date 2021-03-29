@@ -38,24 +38,13 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		public override IContinuousGenerator generator
 		{
 			[Pure]
-			get => new XorShift128Generator(m_InitialStateA, m_InitialStateB, m_InitialStateC, m_InitialStateD);
+			get => xorShift128Generator;
 		}
 
 		/// <summary>
 		/// Returns a shared <see cref="XorShift128Generator"/> as <see cref="IContinuousGenerator"/>.
 		/// </summary>
-		public override IContinuousGenerator sharedGenerator
-		{
-			get
-			{
-				if (m_sharedGenerator == null)
-				{
-					m_sharedGenerator = xorShift128Generator;
-				}
-
-				return m_sharedGenerator;
-			}
-		}
+		public override IContinuousGenerator sharedGenerator => sharedXorShift128Generator;
 
 		/// <summary>
 		/// Creates a new <see cref="XorShift128Generator"/> and returns it.

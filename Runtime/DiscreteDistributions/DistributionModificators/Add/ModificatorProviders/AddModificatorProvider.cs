@@ -31,24 +31,13 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionModificators
 		public override IDiscreteGenerator<int> generator
 		{
 			[Pure]
-			get => new AddModificator<IDiscreteGenerator<int>>(m_DependedGeneratorProvider.GetGenerator<int>(), m_Item);
+			get => addModificator;
 		}
 
 		/// <summary>
 		/// Returns a shared <see cref="AddModificator{T}"/> as <see cref="IDiscreteGenerator{Int32}"/>.
 		/// </summary>
-		public override IDiscreteGenerator<int> sharedGenerator
-		{
-			get
-			{
-				if (m_sharedModificator == null)
-				{
-					m_sharedModificator = addModificator;
-				}
-
-				return m_sharedModificator;
-			}
-		}
+		public override IDiscreteGenerator<int> sharedGenerator => sharedAddModificator;
 
 		/// <summary>
 		/// Creates a new <see cref="AddModificator{T}"/> and returns it.

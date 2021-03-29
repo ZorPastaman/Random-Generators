@@ -26,24 +26,13 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		public sealed override IDiscreteFilter<T> filter
 		{
 			[Pure]
-			get => new AscendantSequenceFilter<T>(m_AscendantSequenceLength);
+			get => ascendantSequenceFilter;
 		}
 
 		/// <summary>
 		/// Returns a shared <see cref="AscendantSequenceFilter{T}"/> as <see cref="IDiscreteFilter{T}"/>.
 		/// </summary>
-		public sealed override IDiscreteFilter<T> sharedFilter
-		{
-			get
-			{
-				if (m_sharedFilter == null)
-				{
-					m_sharedFilter = ascendantSequenceFilter;
-				}
-
-				return m_sharedFilter;
-			}
-		}
+		public sealed override IDiscreteFilter<T> sharedFilter => sharedAscendantSequenceFilter;
 
 		/// <summary>
 		/// Creates a new <see cref="AscendantSequenceFilter{T}"/> and returns it.

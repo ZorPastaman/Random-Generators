@@ -33,24 +33,13 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		public override IDiscreteFilter<int> filter
 		{
 			[Pure]
-			get => new IntCloseFilter(m_ReferenceValue, m_Range, m_CloseSequenceLength);
+			get => closeFilter;
 		}
 
 		/// <summary>
 		/// Returns a shared <see cref="IntCloseFilter"/> as <see cref="IDiscreteFilter{T}"/>.
 		/// </summary>
-		public override IDiscreteFilter<int> sharedFilter
-		{
-			get
-			{
-				if (m_sharedFilter == null)
-				{
-					m_sharedFilter = closeFilter;
-				}
-
-				return m_sharedFilter;
-			}
-		}
+		public override IDiscreteFilter<int> sharedFilter => sharedCloseFilter;
 
 		/// <summary>
 		/// Creates a new <see cref="IntCloseFilter"/> and returns it.

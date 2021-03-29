@@ -35,26 +35,14 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		public override IContinuousGenerator generator
 		{
 			[Pure]
-			get => new ContinuousFilteredGenerator<IContinuousGenerator>(
-				m_FilteredGeneratorProvider.generator, filters, m_RegenerateAttempts);
+			get => filteredGenerator;
 		}
 
 		/// <summary>
 		/// Returns a shared <see cref="ContinuousFilteredGenerator{IContinuousGenerator}"/>
 		/// as <see cref="IContinuousGenerator"/>.
 		/// </summary>
-		public override IContinuousGenerator sharedGenerator
-		{
-			get
-			{
-				if (m_sharedFilteredGenerator == null)
-				{
-					m_sharedFilteredGenerator = filteredGenerator;
-				}
-
-				return m_sharedFilteredGenerator;
-			}
-		}
+		public override IContinuousGenerator sharedGenerator => sharedFilteredGenerator;
 
 		/// <summary>
 		/// Creates a new <see cref="ContinuousFilteredGenerator{IContinuousGenerator}"/> and returns it.

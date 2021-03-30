@@ -1,5 +1,6 @@
 // Copyright (c) 2020-2021 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using System;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -32,27 +33,15 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		public override IDiscreteGenerator<bool> generator
 		{
 			[Pure]
-			get => new BoolFilteredGenerator<IDiscreteGenerator<bool>>(
-				m_FilteredGeneratorProvider.GetGenerator<bool>(), filters);
+			get => filteredGenerator;
 		}
 
 		/// <summary>
 		/// Returns a shared <see cref="BoolFilteredGenerator{T}"/> as <see cref="IDiscreteGenerator{T}"/>.
 		/// </summary>
-		public override IDiscreteGenerator<bool> sharedGenerator
-		{
-			get
-			{
-				if (m_sharedFilteredGenerator == null)
-				{
-					m_sharedFilteredGenerator = filteredGenerator;
-				}
+		public override IDiscreteGenerator<bool> sharedGenerator => sharedFilteredGenerator;
 
-				return m_sharedFilteredGenerator;
-			}
-		}
-
-		/// <summary>
+			/// <summary>
 		/// Creates a new <see cref="BoolFilteredGenerator{T}"/> and returns it.
 		/// </summary>
 		[NotNull]
@@ -139,12 +128,15 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionFilters
 		/// <param name="filterProviders"></param>
 		public void SetFilters([NotNull] DiscreteFilterProviderReference[] filterProviders)
 		{
-			if (m_FilterProviders == filterProviders)
+			int count = filterProviders.Length;
+
+			if (m_FilterProviders.Length != count)
 			{
-				return;
+				m_FilterProviders = new DiscreteFilterProviderReference[count];
 			}
 
-			m_FilterProviders = filterProviders;
+			Array.Copy(filterProviders, 0, m_FilterProviders, 0, count);
+
 			m_sharedFilteredGenerator = null;
 			m_filtersCache = null;
 		}

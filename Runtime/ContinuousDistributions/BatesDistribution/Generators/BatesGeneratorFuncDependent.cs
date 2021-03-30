@@ -20,8 +20,6 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// <param name="iidFunc">
 		/// Function that returns an independent and identically distributed random value in range [0, 1].
 		/// </param>
-		/// <param name="mean"></param>
-		/// <param name="deviation"></param>
 		/// <param name="iids">
 		/// How many independent and identically distributed random values are generated.
 		/// </param>

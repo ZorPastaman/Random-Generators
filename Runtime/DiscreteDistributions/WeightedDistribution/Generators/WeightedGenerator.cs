@@ -86,8 +86,16 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		public void SetValueWeights([NotNull] T[] values, [NotNull] uint[] weights)
 		{
 			int count = Mathf.Min(values.Length, weights.Length);
-			m_values = new T[count];
-			m_weights = new uint[count];
+
+			if (m_values.Length != count)
+			{
+				m_values = new T[count];
+			}
+
+			if (m_weights.Length != count)
+			{
+				m_weights = new uint[count];
+			}
 
 			Array.Copy(values, 0, m_values, 0, count);
 			Array.Copy(weights, 0, m_weights, 0, count);

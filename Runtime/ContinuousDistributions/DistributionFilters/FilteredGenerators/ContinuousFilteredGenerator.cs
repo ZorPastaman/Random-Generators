@@ -84,7 +84,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.DistributionFilters
 		/// </summary>
 		/// <param name="index"></param>
 		/// <returns><see cref="IContinuousFilter"/> at the index <paramref name="index"/>.</returns>
-		[MethodImpl(MethodImplOptions.AggressiveInlining), NotNull, Pure]
+		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public IContinuousFilter GetFilter(int index)
 		{
 			return m_filters[index];

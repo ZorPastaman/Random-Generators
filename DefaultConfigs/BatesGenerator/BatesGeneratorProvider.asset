@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2bf2095088da4267b364ae9e42ad7b90, type: 3}
-  m_Name: BatesGeneratorSimpleProvider
+  m_Name: BatesGeneratorProvider
   m_EditorClassIdentifier: 
   m_Iids: 3

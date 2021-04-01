@@ -11,7 +11,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions.DistributionModificators
 	/// Provides <see cref="AddModificator{T}"/>.
 	/// </summary>
 	[CreateAssetMenu(
-		menuName = CreateAssetMenuConstants.DiscreteDistributionsFolder + "Add Modificator Provider",
+		menuName = CreateAssetMenuConstants.DiscreteModificatorsFolder + "Add Modificator Provider",
 		fileName = "AddModificatorProvider",
 		order = CreateAssetMenuConstants.ModificatorOrder
 		)]

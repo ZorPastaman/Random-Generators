@@ -26,7 +26,7 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 		public static int Generate(float lambda)
 		{
-			return Generate(UnityGeneratorStruct.DefaultInclusive, ComputeE(lambda));
+			return Generate(UnityGeneratorStruct.DefaultInclusive, lambda);
 		}
 
 		/// <summary>

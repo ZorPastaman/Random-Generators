@@ -5,7 +5,7 @@ using Zor.RandomGenerators.DiscreteProviderEditors;
 
 namespace Zor.RandomGenerators.DiscreteDistributions
 {
-	[CustomEditor(typeof(DiscreteGeneratorProvider_Base), true, isFallback = true)]
+	[CustomEditor(typeof(DiscreteGeneratorProvider_Base), true)]
 	public sealed class DiscreteGeneratorProviderEditor : Editor
 	{
 		private DiscreteProviderEditor m_discreteProviderEditor;

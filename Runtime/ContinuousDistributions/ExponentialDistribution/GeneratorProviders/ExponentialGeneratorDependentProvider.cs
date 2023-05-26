@@ -52,7 +52,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		}
 
 		/// <summary>
-		/// Returns a shared <see cref="ExponentialGenerator"/>.
+		/// Returns a shared <see cref="ExponentialGeneratorDependent{T}"/>.
 		/// </summary>
 		[NotNull]
 		public ExponentialGeneratorDependent<IContinuousGenerator> sharedExponentialGenerator

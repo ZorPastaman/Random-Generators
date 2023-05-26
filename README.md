@@ -79,6 +79,8 @@ They wrap generators and provide unique and shared instances of them.
 [Wikipedia](https://en.wikipedia.org/wiki/Bates_distribution);
 - [Exponential](Runtime/ContinuousDistributions/ExponentialDistribution) -
 [Wikipedia](https://en.wikipedia.org/wiki/Exponential_distribution);
+- [Extreme Value](Runtime/ContinuousDistributions/ExtremeValueDistribution) -
+[Wikipedia](https://en.wikipedia.org/wiki/Generalized_extreme_value_distribution);
 - [Func\<float\> Random Generator Wrapper](Runtime/ContinuousDistributions/FuncDistribution);
 - [Gamma](Runtime/ContinuousDistributions/GammaDistribution) -
 [Wikipedia](https://en.wikipedia.org/wiki/Gamma_distribution);

@@ -420,6 +420,40 @@ namespace Zor.RandomGenerators.RandomEngines
 		}
 
 		/// <summary>
+		/// Generates a pseudo-random <see cref="float"/> value in range [0, 1].
+		/// </summary>
+		/// <returns>Generated <see cref="float"/> value.</returns>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public float NextFloatInclusive()
+		{
+			return (float)NextUshort() / ushort.MaxValue;
+		}
+
+		/// <summary>
+		/// Generates a pseudo-random <see cref="float"/> value in range [0, <paramref name="max"/>].
+		/// </summary>
+		/// <param name="max"></param>
+		/// <returns>Generated <see cref="float"/> value.</returns>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public float NextFloatInclusive(float max)
+		{
+			return max * NextFloatInclusive();
+		}
+
+		/// <summary>
+		/// Generates a pseudo-random <see cref="float"/> value
+		/// in range [<paramref name="min"/>, <paramref name="max"/>].
+		/// </summary>
+		/// <param name="min"></param>
+		/// <param name="max"></param>
+		/// <returns>Generated <see cref="float"/> value.</returns>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public float NextFloatInclusive(float min, float max)
+		{
+			return (max - min) * NextFloatInclusive() + min;
+		}
+
+		/// <summary>
 		/// Generates a pseudo-random <see cref="double"/> value in range [0, 1).
 		/// </summary>
 		/// <returns>Generated <see cref="double"/> value.</returns>
@@ -457,6 +491,40 @@ namespace Zor.RandomGenerators.RandomEngines
 		public double NextDouble(double min, double max)
 		{
 			return (max - min) * NextDouble() + min;
+		}
+
+		/// <summary>
+		/// Generates a pseudo-random <see cref="double"/> value in range [0, 1].
+		/// </summary>
+		/// <returns>Generated <see cref="double"/> value.</returns>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public double NextDoubleInclusive()
+		{
+			return (double)NextUshort() / ushort.MaxValue;
+		}
+
+		/// <summary>
+		/// Generates a pseudo-random <see cref="double"/> value in range [0, <paramref name="max"/>].
+		/// </summary>
+		/// <param name="max"></param>
+		/// <returns>Generated <see cref="double"/> value.</returns>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public double NextDoubleInclusive(double max)
+		{
+			return max * NextDoubleInclusive();
+		}
+
+		/// <summary>
+		/// Generates a pseudo-random <see cref="double"/> value
+		/// in range [<paramref name="min"/>, <paramref name="max"/>].
+		/// </summary>
+		/// <param name="min"></param>
+		/// <param name="max"></param>
+		/// <returns>Generated <see cref="double"/> value.</returns>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public double NextDoubleInclusive(double min, double max)
+		{
+			return (max - min) * NextDoubleInclusive() + min;
 		}
 
 		/// <summary>

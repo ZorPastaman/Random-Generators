@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 
 - Extreme Value distribution.
+- Inclusive float and double generation methods to XorShift engines.
 
 ## [1.3.1] - 2021-07-23
 

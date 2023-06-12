@@ -43,9 +43,11 @@ Random engines are algorithms in structs that generate pseudo-random values.
 
 ##### List of random engines
 
-- [XorShift32](Runtime/RandomEngines/XorShift/XorShift32.cs) - [Wikipedia](https://en.wikipedia.org/wiki/Xorshift)
-- [XorShift64](Runtime/RandomEngines/XorShift/XorShift64.cs) - [Wikipedia](https://en.wikipedia.org/wiki/Xorshift)
-- [XorShift128](Runtime/RandomEngines/XorShift/XorShift128.cs) - [Wikipedia](https://en.wikipedia.org/wiki/Xorshift)
+- [LCG32](Runtime/RandomEngines/LCG/LCG32.cs) - [Wikipedia](https://en.wikipedia.org/wiki/Linear_congruential_generator);
+- [LCG64](Runtime/RandomEngines/LCG/LCG64.cs) - [Wikipedia](https://en.wikipedia.org/wiki/Linear_congruential_generator);
+- [XorShift32](Runtime/RandomEngines/XorShift/XorShift32.cs) - [Wikipedia](https://en.wikipedia.org/wiki/Xorshift);
+- [XorShift64](Runtime/RandomEngines/XorShift/XorShift64.cs) - [Wikipedia](https://en.wikipedia.org/wiki/Xorshift);
+- [XorShift128](Runtime/RandomEngines/XorShift/XorShift128.cs) - [Wikipedia](https://en.wikipedia.org/wiki/Xorshift).
 
 ### Random Generators
 
@@ -86,6 +88,8 @@ They wrap generators and provide unique and shared instances of them.
 [Wikipedia](https://en.wikipedia.org/wiki/Gamma_distribution);
 - [Irwin-Hall](Runtime/ContinuousDistributions/IrwinHallDistribution) -
 [Wikipedia](https://en.wikipedia.org/wiki/Irwin%E2%80%93Hall_distribution);
+- [LCG32 Random Generator Wrapper](Runtime/ContinuousDistributions/LCG32Distribution);
+- [LCG64 Random Generator Wrapper](Runtime/ContinuousDistributions/LCG64Distribution);
 - [Normal](Runtime/ContinuousDistributions/NormalDistribution) -
 [Wikipedia](https://en.wikipedia.org/wiki/Normal_distribution);
 - [Rejection](Runtime/ContinuousDistributions/RejectionDistribution) -
@@ -108,6 +112,8 @@ They wrap generators and provide unique and shared instances of them.
 [Wikipedia](https://en.wikipedia.org/wiki/Binomial_distribution);
 - [Geometric](Runtime/DiscreteDistributions/GeometricDistribution) -
 [Wikipedia](https://en.wikipedia.org/wiki/Geometric_distribution);
+- [LCG32 Random Generator Wrapper](Runtime/DiscreteDistributions/LCG32Distribution);
+- [LCG64 Random Generator Wrapper](Runtime/DiscreteDistributions/LCG64Distribution);
 - [Negative Binomial](Runtime/DiscreteDistributions/NegativeBinomialDistribution) -
 [Wikipedia](https://en.wikipedia.org/wiki/Negative_binomial_distribution);
 - [Poisson](Runtime/DiscreteDistributions/PoissonDistribution) -

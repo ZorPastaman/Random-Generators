@@ -14,6 +14,8 @@ namespace Zor.RandomGenerators
 		public const string ExtremeValueDistributionFolder = ContinuousDistributionsFolder + "Extreme Value Distribution/";
 		public const string GammaDistributionFolder = ContinuousDistributionsFolder + "Gamma Distribution/";
 		public const string IrwinHallDistributionFolder = ContinuousDistributionsFolder + "Irwin-Hall Distribution/";
+		public const string LCG32DistributionFolder = ContinuousDistributionsFolder + "LCG32 Distribution/";
+		public const string LCG64DistributionFolder = ContinuousDistributionsFolder + "LCG64 Distribution/";
 		public const string NormalDistributionFolder = ContinuousDistributionsFolder + "Normal Distribution/";
 		public const string RejectionDistributionFolder = ContinuousDistributionsFolder + "Rejection Distribution/";
 		public const string SharpContinuousDistributionFolder = ContinuousDistributionsFolder + "Sharp Distribution/";
@@ -52,6 +54,8 @@ namespace Zor.RandomGenerators
 		public const string BernoulliDistributionFolder = DiscreteDistributionsFolder + "Bernoulli Distribution/";
 		public const string BinomialDistributionFolder = DiscreteDistributionsFolder + "Binomial Distribution/";
 		public const string GeometricDistributionFolder = DiscreteDistributionsFolder + "Geometric Distribution/";
+		public const string LCG32DiscreteDistributionFolder = DiscreteDistributionsFolder + "LCG32 Distribution/";
+		public const string LCG64DiscreteDistributionFolder = DiscreteDistributionsFolder + "LCG64 Distribution/";
 		public const string NegativeBinomialDistributionFolder = DiscreteDistributionsFolder +
 			"Negative Binomial Distribution/";
 		public const string PoissonDistributionFolder = DiscreteDistributionsFolder + "Poisson Distribution/";

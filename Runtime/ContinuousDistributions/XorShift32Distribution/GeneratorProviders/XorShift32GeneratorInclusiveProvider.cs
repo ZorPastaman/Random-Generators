@@ -9,7 +9,7 @@ using Zor.RandomGenerators.RandomEngines;
 namespace Zor.RandomGenerators.ContinuousDistributions
 {
 	/// <summary>
-	/// Provides <see cref="xorShift32Generator"/> with the specified seed.
+	/// Provides <see cref="XorShift32GeneratorInclusive"/> with the specified seed.
 	/// </summary>
 	[CreateAssetMenu(
 		menuName = CreateAssetMenuConstants.XorShift32ContinuousDistributionFolder +

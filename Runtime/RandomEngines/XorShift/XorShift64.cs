@@ -8,7 +8,7 @@ namespace Zor.RandomGenerators.RandomEngines
 	/// <summary>
 	/// Pseudo-random number engine using XorShift64 algorithm.
 	/// </summary>
-	public unsafe struct XorShift64
+	public struct XorShift64
 	{
 		private ulong m_state;
 
@@ -54,8 +54,7 @@ namespace Zor.RandomGenerators.RandomEngines
 		public bool NextBool()
 		{
 			NextState();
-			ulong answer = m_state & 1UL;
-			return *(bool*)&answer;
+			return (m_state & 1UL) == 1UL;
 		}
 
 		/// <summary>
@@ -391,7 +390,7 @@ namespace Zor.RandomGenerators.RandomEngines
 		/// </summary>
 		/// <returns>Generated <see cref="float"/> value.</returns>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public float NextFloat()
+		public unsafe float NextFloat()
 		{
 			// First 9 bits stand for sign and exponent. 0x3F800000u sets exponent for range [1, 2).
 			uint answer = NextUint() >> 9 | 0x3F800000u;
@@ -461,7 +460,7 @@ namespace Zor.RandomGenerators.RandomEngines
 		/// </summary>
 		/// <returns>Generated <see cref="double"/> value.</returns>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public double NextDouble()
+		public unsafe double NextDouble()
 		{
 			NextState();
 			// First 12 bits stand for sign and exponent. 0x3FF0000000000000UL sets exponent for range [1, 2).

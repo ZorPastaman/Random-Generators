@@ -8,7 +8,7 @@ namespace Zor.RandomGenerators.RandomEngines
 	/// <summary>
 	/// Pseudo-random number engine using XorShift32 algorithm.
 	/// </summary>
-	public unsafe struct XorShift32
+	public struct XorShift32
 	{
 		private uint m_state;
 
@@ -54,8 +54,7 @@ namespace Zor.RandomGenerators.RandomEngines
 		public bool NextBool()
 		{
 			NextState();
-			uint answer = m_state & 1u;
-			return *(bool*)&answer;
+			return (m_state & 1u) == 1u;
 		}
 
 		/// <summary>
@@ -311,7 +310,7 @@ namespace Zor.RandomGenerators.RandomEngines
 		/// </summary>
 		/// <returns>Generated <see cref="float"/> value.</returns>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public float NextFloat()
+		public unsafe float NextFloat()
 		{
 			NextState();
 			// First 9 bits stand for sign and exponent. 0x3F800000u sets exponent for range [1, 2).

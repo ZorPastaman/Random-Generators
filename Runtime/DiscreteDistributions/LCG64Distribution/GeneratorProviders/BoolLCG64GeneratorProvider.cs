@@ -28,14 +28,18 @@ namespace Zor.RandomGenerators.DiscreteDistributions
 		/// </summary>
 		public override IDiscreteGenerator<bool> generator
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => LCG64Generator;
 		}
 
 		/// <summary>
 		/// Returns a shared <see cref="BoolLCG64Generator"/> as <see cref="IDiscreteGenerator{T}"/>.
 		/// </summary>
-		public override IDiscreteGenerator<bool> sharedGenerator => sharedLCG64Generator;
+		public override IDiscreteGenerator<bool> sharedGenerator
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
+			get => sharedLCG64Generator;
+		}
 
 		/// <summary>
 		/// Creates a new <see cref="BoolLCG64Generator"/> and returns it.

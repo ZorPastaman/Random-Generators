@@ -27,14 +27,18 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// </summary>
 		public override IContinuousGenerator generator
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => lcg64Generator;
 		}
 
 		/// <summary>
 		/// Returns a shared <see cref="LCG64GeneratorInclusive"/> as <see cref="IContinuousGenerator"/>.
 		/// </summary>
-		public override IContinuousGenerator sharedGenerator => sharedLCG64Generator;
+		public override IContinuousGenerator sharedGenerator
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
+			get => sharedLCG64Generator;
+		}
 
 		/// <summary>
 		/// Creates a new <see cref="LCG64GeneratorInclusive"/> and returns it.

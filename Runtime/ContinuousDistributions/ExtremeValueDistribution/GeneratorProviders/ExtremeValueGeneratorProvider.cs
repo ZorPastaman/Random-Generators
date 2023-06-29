@@ -28,14 +28,18 @@ namespace Zor.RandomGenerators.ContinuousDistributions.GeneratorProviders
 		/// </summary>
 		public override IContinuousGenerator generator
 		{
-			[Pure]
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => extremeValueGenerator;
 		}
 
 		/// <summary>
 		/// Returns a shared <see cref="ExtremeValueGenerator"/> as <see cref="IContinuousGenerator"/>.
 		/// </summary>
-		public override IContinuousGenerator sharedGenerator => sharedExtremeValueGenerator;
+		public override IContinuousGenerator sharedGenerator
+		{
+			[Pure]
+			get => sharedExtremeValueGenerator;
+		}
 
 		/// <summary>
 		/// Creates a new <see cref="ExtremeValueGenerator"/> and returns it.
@@ -87,6 +91,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions.GeneratorProviders
 		}
 
 		/// <inheritdoc/>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public override void DropSharedGenerator()
 		{
 			m_sharedGenerator = null;

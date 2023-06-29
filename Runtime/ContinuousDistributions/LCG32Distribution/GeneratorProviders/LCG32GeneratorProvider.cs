@@ -1,5 +1,7 @@
 ﻿// Copyright (c) 2020-2023 Vladimir Popov zor1994@gmail.com https://github.com/ZorPastaman/Random-Generators
 
+using System.Runtime.CompilerServices;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Zor.RandomGenerators.ContinuousDistributions
@@ -25,29 +27,38 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// </summary>
 		public override IContinuousGenerator generator
 		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => lcg32Generator;
 		}
 
 		/// <summary>
 		/// Returns a shared <see cref="LCG32Generator"/> as <see cref="IContinuousGenerator"/>.
 		/// </summary>
-		public override IContinuousGenerator sharedGenerator => sharedLCG32Generator;
+		public override IContinuousGenerator sharedGenerator
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
+			get => sharedLCG32Generator;
+		}
 
 		/// <summary>
 		/// Creates a new <see cref="LCG32Generator"/> and returns it.
 		/// </summary>
+		[NotNull]
 		public LCG32Generator lcg32Generator
 		{
+			[Pure]
 			get => m_DefaultConstructor ? new LCG32Generator() : new LCG32Generator(m_InitialState);
 		}
 
 		/// <summary>
 		/// Returns a shared <see cref="LCG32Generator"/>.
 		/// </summary>
+		[NotNull]
 		public LCG32Generator sharedLCG32Generator => m_sharedGenerator ??= lcg32Generator;
 
 		public uint initialState
 		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_InitialState;
 			set
 			{
@@ -66,6 +77,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		/// </summary>
 		public bool defaultConstructor
 		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining), Pure]
 			get => m_DefaultConstructor;
 			set
 			{
@@ -80,6 +92,7 @@ namespace Zor.RandomGenerators.ContinuousDistributions
 		}
 
 		/// <inheritdoc/>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public override void DropSharedGenerator()
 		{
 			m_sharedGenerator = null;

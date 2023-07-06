@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Extreme Value distribution.
 - Inclusive float and double generation methods to XorShift engines.
 - LCG32 and LCG64 random engines and their distribution wrappers.
+- Xoroshiro128+ random engine ana its distribution wrapper.
 
 ### Removed
 

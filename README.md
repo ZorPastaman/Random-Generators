@@ -45,6 +45,7 @@ Random engines are algorithms in structs that generate pseudo-random values.
 
 - [LCG32](Runtime/RandomEngines/LCG/LCG32.cs) - [Wikipedia](https://en.wikipedia.org/wiki/Linear_congruential_generator);
 - [LCG64](Runtime/RandomEngines/LCG/LCG64.cs) - [Wikipedia](https://en.wikipedia.org/wiki/Linear_congruential_generator);
+- [Xoroshiro128+](Runtime/RandomEngines/Xoroshiro/Xoroshiro128Plus.cs) - [Wikipedia](https://en.wikipedia.org/wiki/Xoroshiro128%2B);
 - [XorShift32](Runtime/RandomEngines/XorShift/XorShift32.cs) - [Wikipedia](https://en.wikipedia.org/wiki/Xorshift);
 - [XorShift64](Runtime/RandomEngines/XorShift/XorShift64.cs) - [Wikipedia](https://en.wikipedia.org/wiki/Xorshift);
 - [XorShift128](Runtime/RandomEngines/XorShift/XorShift128.cs) - [Wikipedia](https://en.wikipedia.org/wiki/Xorshift).
@@ -100,6 +101,7 @@ They wrap generators and provide unique and shared instances of them.
 [Unity Docs](https://docs.unity3d.com/ScriptReference/Random.html);
 - [Weibull](Runtime/ContinuousDistributions/WeibullDistribution) -
 [Wikipedia](https://en.wikipedia.org/wiki/Weibull_distribution);
+- [Xoroshiro128+ Random Generator Wrapper](Runtime/ContinuousDistributions/Xoroshiro128PlusDistribution);
 - [XorShift32 Random Generator Wrapper](Runtime/ContinuousDistributions/XorShift32Distribution);
 - [XorShift64 Random Generator Wrapper](Runtime/ContinuousDistributions/XorShift64Distribution);
 - [XorShift128 Random Generator Wrapper](Runtime/ContinuousDistributions/XorShift128Distribution).
@@ -124,6 +126,7 @@ They wrap generators and provide unique and shared instances of them.
 [Unity Docs](https://docs.unity3d.com/ScriptReference/Random.html);
 - [Weighted](Runtime/DiscreteDistributions/WeightedDistribution) -
 distribution where every value has a weight and its probability is a ratio of its weight to a sum of all weights;
+- [Xoroshiro128+ Random Generator Wrapper](Runtime/DiscreteDistributions/Xoroshiro128PlusDistribution);
 - [XorShift32 Random Generator Wrapper](Runtime/DiscreteDistributions/XorShift32Distribution);
 - [XorShift64 Random Generator Wrapper](Runtime/DiscreteDistributions/XorShift64Distribution);
 - [XorShift128 Random Generator Wrapper](Runtime/DiscreteDistributions/XorShift128Distribution).

@@ -265,3 +265,8 @@ doesn't allow to set a generator with a wrong type into
 - [Require Discrete Filter](Runtime/PropertyDrawerAttributes/RequireDiscreteFilter.cs) -
 doesn't allow to set a filter with a wrong type into
 [Discrete Filter Provider Reference](Runtime/DiscreteDistributions/DistributionFilters/DiscreteFilterProviderReference.cs).
+
+### Distribution Tests
+
+In Window/Random Generators/ there are different distribution tests where you can test any distribution asset 
+and see probabilities of its values.

@@ -7,47 +7,41 @@ using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.Profiling;
 using UnityEngine.UIElements;
-using Zor.RandomGenerators.ContinuousDistributions;
+using Zor.RandomGenerators.DiscreteDistributions;
 
 namespace Zor.RandomGenerators.DistributionsTests
 {
 	/// <summary>
-	/// Editor window for testing <see cref="IContinuousGenerator"/>.
+	/// Editor window for testing <see cref="IDiscreteGenerator{T}"/> of type <see langword="int"/>.
 	/// </summary>
-	public sealed class ContinuousDistributionTest : EditorWindow
+	public sealed class IntDiscreteDistributionTest : EditorWindow
 	{
-		private ObjectField m_continuousProviderView;
-		private FloatField m_stepLengthView;
+		private ObjectField m_intProviderView;
 		private IntegerField m_generationsPerFrameView;
 		private CurveField m_curveView;
 
-		private float m_stepLength;
 		private uint m_generationsPerFrame;
 
 		private readonly AnimationCurve m_curve = new();
-		private IContinuousGenerator m_generator;
+		private IDiscreteGenerator<int> m_generator;
 
 		private readonly List<(int, uint)> m_generatedCounts = new();
 		private uint m_generations;
 
 		private Keyframe[] m_keyframes;
 
-		[MenuItem("Window/Random Generators/Continuous Distribution Test", priority = 2021)]
+		[MenuItem("Window/Random Generators/Integer Discrete Distribution Test", priority = 2021)]
 		public static void OpenWindow()
 		{
-			var window = GetWindow<ContinuousDistributionTest>("Continuous Distribution Test");
-			window.minSize = new Vector2(1000f, 640f);
+			GetWindow<IntDiscreteDistributionTest>("Integer Discrete Distribution Test");
 		}
 
 		private void CreateGUI()
 		{
 			VisualElement root = rootVisualElement;
 
-			m_continuousProviderView = new ObjectField("Continuous Generator Provider") {objectType = typeof(ContinuousGeneratorProvider)};
-			root.Add(m_continuousProviderView);
-
-			m_stepLengthView = new FloatField("Step Length") {value = 0.1f};
-			root.Add(m_stepLengthView);
+			m_intProviderView = new ObjectField("Int Discrete Generator Provider") {objectType = typeof(DiscreteGeneratorProvider<int>)};
+			root.Add(m_intProviderView);
 
 			m_generationsPerFrameView = new IntegerField("Generators Per Frame") {value = 100};
 			root.Add(m_generationsPerFrameView);
@@ -60,24 +54,17 @@ namespace Zor.RandomGenerators.DistributionsTests
 
 			m_curveView = new CurveField("Curve") { value = m_curve, style = { height = 500f } };
 			root.Add(m_curveView);
-
-			var helpBox =
-				new HelpBox(
-					"Every point value shows probability of numbers around it in radius of half of step length.",
-					HelpBoxMessageType.Info);
-			root.Add(helpBox);
 		}
 
 		private void StartProcess()
 		{
-			var generatorProvider = m_continuousProviderView.value as ContinuousGeneratorProvider;
+			var generatorProvider = m_intProviderView.value as DiscreteGeneratorProvider<int>;
 
 			if (generatorProvider == null)
 			{
 				return;
 			}
 
-			m_stepLength = m_stepLengthView.value;
 			m_generator = generatorProvider.generator;
 			m_generationsPerFrame = (uint)m_generationsPerFrameView.value;
 
@@ -105,14 +92,13 @@ namespace Zor.RandomGenerators.DistributionsTests
 
 			for (uint generation = 0u; generation < m_generationsPerFrame; ++generation)
 			{
-				Profiler.BeginSample("ContinuousTest.Generate");
+				Profiler.BeginSample("IntDiscreteTest.Generate");
 
-				float generatedValue = m_generator.Generate();
+				int generatedValue = m_generator.Generate();
 
 				Profiler.EndSample();
 
-				int pointIndex = FindClosestPointIndex(generatedValue);
-				int index = FindGeneratedIndex(pointIndex);
+				int index = FindGeneratedIndex(generatedValue);
 
 				if (index >= 0)
 				{
@@ -121,7 +107,7 @@ namespace Zor.RandomGenerators.DistributionsTests
 				}
 				else
 				{
-					m_generatedCounts.Add((pointIndex, 1));
+					m_generatedCounts.Add((generatedValue, 1));
 					m_generatedCounts.Sort((lhs, rhs) => lhs.Item1.CompareTo(rhs.Item1));
 				}
 
@@ -135,7 +121,7 @@ namespace Zor.RandomGenerators.DistributionsTests
 			for (int i = 0; i < count; ++i)
 			{
 				(int value, uint generatedCount) = m_generatedCounts[i];
-				m_keyframes[i] = new Keyframe(value * m_stepLength, (float)generatedCount / m_generations);
+				m_keyframes[i] = new Keyframe(value, (float)generatedCount / m_generations);
 
 				if (i > 0)
 				{
@@ -152,17 +138,6 @@ namespace Zor.RandomGenerators.DistributionsTests
 
 			m_curve.keys = m_keyframes;
 			m_curveView.value = m_curve;
-		}
-
-		private int FindClosestPointIndex(float value)
-		{
-			int floorIndex = Mathf.FloorToInt(value / m_stepLength);
-			int ceilingIndex = floorIndex + 1;
-
-			float floor = floorIndex * m_stepLength;
-			float ceiling = ceilingIndex * m_stepLength;
-
-			return Mathf.Abs(value - floor) > Mathf.Abs(ceiling - value) ? ceilingIndex : floorIndex;
 		}
 
 		private int FindGeneratedIndex(int valueIndex)

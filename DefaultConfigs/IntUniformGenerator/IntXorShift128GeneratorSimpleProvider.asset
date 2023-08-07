@@ -9,11 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c64244b387d4aee93616e8efcfdfd3a, type: 3}
-  m_Name: BatesGeneratorProvider
+  m_Script: {fileID: 11500000, guid: 64679bd26059483684f8088d4741cc43, type: 3}
+  m_Name: IntXorShift128GeneratorSimpleProvider
   m_EditorClassIdentifier: 
-  m_DependedGeneratorProvider:
-    m_ContinuousGeneratorProvider: {fileID: 11400000, guid: d7b2bf3927f2c58459247beddfe291c0,
-      type: 2}
-    m_Shared: 1
-  m_Iids: 3
+  m_Min: 0
+  m_Max: 11

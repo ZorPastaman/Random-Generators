@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DefaultIntUniformGeneratorProvider
   m_EditorClassIdentifier: 
   m_FilteredGeneratorProvider:
-    m_DiscreteGeneratorProvider: {fileID: 11400000, guid: 77aa3a832659c8e45acb072d50e75615,
+    m_DiscreteGeneratorProvider: {fileID: 11400000, guid: 3f050b56d5d7dc546b19cb72e28b7783,
       type: 2}
     m_Shared: 1
   m_FilterProviders:

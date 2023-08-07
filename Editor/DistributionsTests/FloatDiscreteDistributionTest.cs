@@ -33,7 +33,8 @@ namespace Zor.RandomGenerators.DistributionsTests
 		[MenuItem("Window/Random Generators/Float Discrete Distribution Test", priority = 2021)]
 		public static void OpenWindow()
 		{
-			GetWindow<FloatDiscreteDistributionTest>("Float Discrete Distribution Test");
+			var window = GetWindow<FloatDiscreteDistributionTest>("Float Discrete Distribution Test");
+			window.minSize = new Vector2(1000f, 580f);
 		}
 
 		private void CreateGUI()

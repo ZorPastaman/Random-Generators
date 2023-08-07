@@ -34,7 +34,8 @@ namespace Zor.RandomGenerators.DistributionsTests
 		[MenuItem("Window/Random Generators/Boolean Discrete Distribution Test", priority = 2021)]
 		public static void OpenWindow()
 		{
-			GetWindow<BoolDiscreteDistributionTest>("Boolean Discrete Distribution Test");
+			var window = GetWindow<BoolDiscreteDistributionTest>("Boolean Discrete Distribution Test");
+			window.minSize = new Vector2(1000f, 620f);
 		}
 
 		private void CreateGUI()
